@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BasicRegionNavigation.Views
+namespace VolleyballScoreSheet.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

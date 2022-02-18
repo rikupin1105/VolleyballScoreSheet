@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reactive.Bindings;
 using Prism.Services.Dialogs;
-using BasicRegionNavigation.Model;
+using VolleyballScoreSheet.Model;
 using System.Data;
 using VolleyballScoreSheet;
 

@@ -1,12 +1,12 @@
 ﻿using System.Windows;
-using BasicRegionNavigation.ViewModels;
-using BasicRegionNavigation.Views;
+using VolleyballScoreSheet.ViewModels;
+using VolleyballScoreSheet.Views;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
 using VolleyballScoreSheet;
 
-namespace BasicRegionNavigation
+namespace VolleyballScoreSheet
 {
     /// <summary>
     /// Interaction logic for App.xaml

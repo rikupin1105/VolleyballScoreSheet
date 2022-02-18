@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BasicRegionNavigation.Model;
+using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet;
 
 namespace VolleyballScoreSheet.ViewModels

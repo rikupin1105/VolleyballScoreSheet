@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BasicRegionNavigation.Views
+namespace VolleyballScoreSheet.Views
 {
     /// <summary>
     /// DialogWindow.xaml の相互作用ロジック
