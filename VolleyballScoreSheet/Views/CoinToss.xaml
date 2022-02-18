@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="BasicRegionNavigation.Views.CoinToss"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BasicRegionNavigation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="0" Text="{Binding LeftTeam.Value}" FontSize="40"></TextBlock>
+            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Text="{Binding RightTeam.Value}" FontSize="40"></TextBlock>
+
+            <TextBlock  Margin="5,0,5,0" Grid.Row="1" Grid.Column="0" Text="{Binding LeftTeamToss.Value}" FontSize="30"></TextBlock>
+            <TextBlock  Margin="5,0,5,0" Grid.Row="1" Grid.Column="1" Text="{Binding RightTeamToss.Value}" FontSize="30"></TextBlock>
+
+
+        </Grid>
+        <Button Margin="5,10,5,0" Command="{Binding SwitchCourtCommand}">Switch Court</Button>
+        <Button  Margin="5,5,5,0" Command="{Binding SwitchServerCommand}">Switch Server</Button>
+        <Button  Margin="5,20,5,0" Command="{Binding NextCommand}">次へ</Button>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="BasicRegionNavigation.Views.Gaming"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:prism="http://prismlibrary.com/"
+      xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="clr-namespace:BasicRegionNavigation.Views"
+      prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="15,5,5,5" FontSize="40" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding LeftSideTeamName.Value}"></TextBlock>
+            <TextBlock Margin="5,5,15,5" FontSize="40" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding RightSideTeamName.Value}"></TextBlock>
+            <TextBlock Margin="5,5,15,5" FontSize="30" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding SetDisplay.Value}"></TextBlock>
+
+            <TextBlock Margin="15,5,5,5" FontSize="30" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding LeftSidePoints.Value}"></TextBlock>
+            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding LeftSideSets.Value}"></TextBlock>
+            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="16:10:11"></TextBlock>
+            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding RightSideSets.Value}"></TextBlock>
+            <TextBlock Margin="5,5,15,5" FontSize="30" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding RightSidePoints.Value}"></TextBlock>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Margin="5" Grid.Column="0" ItemsSource="{Binding LeftTeamPlayer.Value}" IsReadOnly="True"></DataGrid>
+            <DataGrid Margin="5" Grid.Column="2" ItemsSource="{Binding RightTeamPlayer.Value}" IsReadOnly="True" ></DataGrid>
+
+            <Grid Margin="5" Grid.Column="1" Height="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="White"></Grid>
+                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Background="White"></Grid>
+                <Grid Grid.Row="1" Grid.Column="0" Background="White"></Grid>
+                <Grid Grid.Row="1" Grid.Column="2" Background="White"></Grid>
+                <Grid Grid.Row="1" Grid.Column="4" Background="White"></Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1" Background="DarkOrange">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="0" Text="{Binding LeftSideLotation.Value[0]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="1" Text="{Binding LeftSideLotation.Value[1]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="1" Text="{Binding LeftSideLotation.Value[2]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="1" Text="{Binding LeftSideLotation.Value[3]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="0" Text="{Binding LeftSideLotation.Value[4]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="0" Text="{Binding LeftSideLotation.Value[5]}"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="3" Background="DarkOrange">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="1" Text="{Binding RightSideLotation.Value[0]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="0" Text="{Binding RightSideLotation.Value[1]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="0" Text="{Binding RightSideLotation.Value[2]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="0" Text="{Binding RightSideLotation.Value[3]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="1" Text="{Binding RightSideLotation.Value[4]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="1" Text="{Binding RightSideLotation.Value[5]}"></TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" Grid.Column="0" Command="{Binding LeftSidePointAdd}">Point</Button>
+            <Button Margin="5" Grid.Column="1" Command="{Binding RightSidePointAdd}">Point</Button>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" Grid.Column="0" Command="{Binding LeftSideTimeOutCommand}" Content="{Binding LeftSideTimeOutDispley.Value}"></Button>
+            <Button Margin="5" Grid.Column="1" Command="{Binding RightSideTimeOutCommand}" Content="{Binding RightSideTimeOutDispley.Value}"></Button>
+        </Grid>
+        <Button Content="メンバー登録" Command="{Binding MemberRegistrationCommand}"></Button>
+    </StackPanel>
+</UserControl>

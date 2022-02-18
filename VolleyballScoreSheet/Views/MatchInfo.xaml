@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="BasicRegionNavigation.Views.MatchInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:prism="http://prismlibrary.com/"
+      xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="clr-namespace:BasicRegionNavigation.Views"
+      prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <StackPanel>
+        <StackPanel Margin="20">
+            <Label Margin="5,0,5,0">試合名</Label>
+            <TextBox Margin="5,0,5,0" Text="{Binding MatchName.Value}"></TextBox>
+
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">チーム</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding ATeam.Value}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">チーム</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding BTeam.Value}"></TextBox>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">開催地</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding City.Value}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">会場名</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Hall.Value}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0">試合番号</Label>
+                <wpfui:NumberBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding MatchNumber.Value}"></wpfui:NumberBox>
+
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0">性別</Label>
+                <ComboBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0">
+                    <ComboBoxItem>男</ComboBoxItem>
+                    <ComboBoxItem>女</ComboBoxItem>
+                    <ComboBoxItem>未記入</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">試合日</Label>
+                <DatePicker IsTodayHighlighted="True" Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Date.Value}"></DatePicker>
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">試合設定時間</Label>
+            </Grid>
+
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">1st 審判</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstReferee.Value.Name}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">都市</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding FirstReferee.Value.City}"></TextBox>
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0">2nd 審判</Label>
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding SecondReferee.Value.Name}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0">都市</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding SecondReferee.Value.City}"></TextBox>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">スコアラー</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Scorer.Value.Name}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">都市</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Scorer.Value.City}"></TextBox>
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0">アシスタントスコアラー</Label>
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding AssistantScorer.Value.Name}"></TextBox>
+
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0">都市</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding AssistantScorer.Value.City}"></TextBox>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">ラインジャッジ1</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstLineJudge.Value.Name}"></TextBox>
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">ラインジャッジ2</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding SecondLineJudge.Value.Name}"></TextBox>
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0">ラインジャッジ3</Label>
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding ThirdLineJudge.Value.Name}"></TextBox>
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0">ラインジャッジ4</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding FourthLineJudge.Value.Name}"></TextBox>
+            </Grid>
+            
+            <wpfui:Button Margin="5,10,5,0" Command="{Binding NextCommand}">次へ</wpfui:Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
