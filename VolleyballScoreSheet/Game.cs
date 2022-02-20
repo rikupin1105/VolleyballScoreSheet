@@ -32,6 +32,13 @@ namespace VolleyballScoreSheet
         public Referee? ThirdLineJudge { get; set; }
         public Referee? FourthLineJudge { get; set; }
         public CoinToss? CoinToss { get; set; } = new();
+
+        public bool CourtChangeEnable { get; set; } = true;
+        public int SetCount { get; set; } = 5;
+        public int ToWinPoint { get; set; } = 25;
+        public int FinalSetToWinPoint { get; set; } = 25;
+        public int FinalSetCoutChangePoint { get; set; } = 13;
+
         public Set GetCurrentSet()
         {
             return Sets[^1];

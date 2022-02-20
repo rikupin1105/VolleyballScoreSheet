@@ -5,6 +5,7 @@ using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
 using VolleyballScoreSheet;
+using Prism.Modularity;
 
 namespace VolleyballScoreSheet
 {
@@ -29,13 +30,13 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterForNavigation<Gaming>();
 
             containerRegistry.RegisterDialog<Rotation>();
+            containerRegistry.RegisterDialog<NotificationDialog>();
+            containerRegistry.RegisterDialog<Substitution>();
+            containerRegistry.RegisterDialog<ExceptionalSubstitution>();
+
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");
-            //containerRegistry.RegisterForNavigation<Rotation>();
+            containerRegistry.RegisterDialogWindow<AlertWindow>("AlertWindow");
 
-            //containerRegistry.RegisterDialogWindow<Rotation>();
-            //containerRegistry.RegisterDialog<Rotation>();
-
-            //containerRegistry.RegisterSingleton<Prism.Services.Dialogs.IDialogService, StyleableDialogService>();
             containerRegistry.RegisterSingleton<Game>();
         }
     }

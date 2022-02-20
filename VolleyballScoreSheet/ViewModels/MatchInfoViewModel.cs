@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Unity;
 using VolleyballScoreSheet.Model;
@@ -29,19 +30,51 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveProperty<Referee> SecondLineJudge { get; } = new ReactiveProperty<Referee>();
         public ReactiveProperty<Referee> ThirdLineJudge { get; } = new ReactiveProperty<Referee>();
         public ReactiveProperty<Referee> FourthLineJudge { get; } = new ReactiveProperty<Referee>();
+        public ReactiveProperty<int> ToWinPoint { get; } = new(25);
+        public ReactiveProperty<int> SetCount { get; } = new(5);
+        public ReactiveProperty<int> FinalSetToWinPoint { get; } = new(15);
+        public ReactiveProperty<int> FinalSetCourChangePoint { get; } = new(8);
 
 
         private readonly Game _game;
-        public MatchInfoViewModel(IRegionManager regionManager, Game game)
+        private readonly IDialogService _dialogService;
+        public MatchInfoViewModel(IRegionManager regionManager, Game game, IDialogService dialogService)
         {
             _game = game;
             _regionManager = regionManager;
+            _dialogService = dialogService;
             NextCommand.Subscribe(_ => Next());
+        }
+        public void Dialog(string message)
+        {
+            _dialogService.ShowDialog(
+                    "NotificationDialog",
+                    new DialogParameters
+                    {
+                        { "Title", "Alert" },
+                        { "Message", message },
+                        { "ButtonText", "OK" }
+                    }, res =>
+                    {
+
+                    }, "AlertWindow");
         }
         public void Next()
         {
             var flag = true;
-            if (ATeam.Value ==null || BTeam.Value==null) flag=false;
+            if (ATeam.Value ==null || BTeam.Value==null)
+            {
+                flag = false;
+                Dialog("チーム名を入力してください。");
+                return;
+            }
+            if (ATeam.Value==BTeam.Value)
+            {
+                flag = false;
+                Dialog("チーム名が同じです。");
+                return;
+            }
+
             if (flag)
             {
                 _game.MatchName = MatchName.Value;
@@ -59,6 +92,11 @@ namespace VolleyballScoreSheet.ViewModels
                 _game.SecondLineJudge = SecondLineJudge.Value;
                 _game.ThirdLineJudge = ThirdLineJudge.Value;
                 _game.FourthLineJudge = FourthLineJudge.Value;
+                _game.SetCount = SetCount.Value;
+                _game.ToWinPoint = ToWinPoint.Value;
+                _game.FinalSetToWinPoint = FinalSetToWinPoint.Value;
+                _game.FinalSetCoutChangePoint = FinalSetCourChangePoint.Value;
+
                 Navigate("RosterA");
             }
         }

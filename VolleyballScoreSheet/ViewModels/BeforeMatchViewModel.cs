@@ -31,6 +31,9 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveCommand LineUpCommand { get; } = new ReactiveCommand();
         public ReactiveProperty<int[]> LeftSideLotation { get; set; } = new();
         public ReactiveProperty<int[]> RightSideLotation { get; set; } = new();
+        public ReactiveProperty<int> LeftServeBallOpacity { get; } = new(0);
+        public ReactiveProperty<int> RightServeBallOpacity { get; } = new(0);
+
         private void LineUp()
         {
             _dialogService.ShowDialog("Rotation", new DialogParameters(), (result) =>
@@ -50,39 +53,24 @@ namespace VolleyballScoreSheet.ViewModels
                  }
              }, "DialogWindow");
 
+            var set = _game.Sets[^1];
 
-
-            var set = new Set();
-
-            if (_game.CoinToss.ATeamLeftSide)
-            {
-                set.ATeamRotation = LeftSideLotation.Value;
-                set.BTeamRotation = RightSideLotation.Value;
-
-                set.ATeamRightSide = false;
-                LeftSideTeamName.Value=_game.ATeam;
-                RightSideTeamName.Value=_game.BTeam;
-            }
-            else
+            if (set.ATeamRightSide)
             {
                 set.ATeamRotation = RightSideLotation.Value;
                 set.BTeamRotation = LeftSideLotation.Value;
 
-                set.ATeamRightSide = true;
-                LeftSideTeamName.Value=_game.BTeam;
                 RightSideTeamName.Value=_game.ATeam;
-            }
-            if (_game.CoinToss.ATeamServer)
-            {
-                set.ATeamServer = true;
+                LeftSideTeamName.Value=_game.BTeam;
             }
             else
             {
-                set.ATeamServer = false;
+                set.ATeamRotation = LeftSideLotation.Value;
+                set.BTeamRotation = RightSideLotation.Value;
+
+                RightSideTeamName.Value = _game.BTeam;
+                LeftSideTeamName.Value = _game.ATeam;
             }
-
-            _ = _game.CreateSet(set);
-
             Navigate("Gaming");
         }
         private readonly IDialogService _dialogService;
@@ -94,37 +82,91 @@ namespace VolleyballScoreSheet.ViewModels
             _regionManager = regionManager;
             _dialogService = dialogService;
 
+            Set.Value = $"SET {_game.Sets.Count}";
+
             LeftTeamPlayer.Value.Clear();
             LeftTeamPlayer.Value.Columns.Add("Number");
             LeftTeamPlayer.Value.Columns.Add("Name");
 
-            foreach (var item in _game.ATeamPlayers)
-            {
-                var row1 = LeftTeamPlayer.Value.NewRow();
-                row1[0] = item.Id;
-                row1[1] = item.Name;
-                LeftTeamPlayer.Value.Rows.Add(row1);
-            }
-
             RightTeamPlayer.Value.Clear();
             RightTeamPlayer.Value.Columns.Add("Number");
             RightTeamPlayer.Value.Columns.Add("Name");
-            foreach (var item in _game.BTeamPlayers)
+
+            if (_game.Sets[^1].ATeamRightSide)
             {
-                var row2 = RightTeamPlayer.Value.NewRow();
-                row2[0] = item.Id;
-                row2[1] = item.Name;
-                RightTeamPlayer.Value.Rows.Add(row2);
+                RightSideLotation.Value = _game.Sets[^1].ATeamRotation;
+                LeftSideLotation.Value = _game.Sets[^1].BTeamRotation;
+
+                LeftSideTeamName.Value=_game.BTeam;
+                RightSideTeamName.Value=_game.ATeam;
+
+                RightSideSets.Value = _game.ATeamSet;
+                LeftSideSets.Value = _game.BTeamSet;
+
+                if (_game.Sets[^1].ATeamServer)
+                {
+                    RightServeBallOpacity.Value = 100;
+                    LeftServeBallOpacity.Value = 0;
+                }
+                else
+                {
+                    RightServeBallOpacity.Value = 0;
+                    LeftServeBallOpacity.Value = 100;
+                }
+
+                foreach (var item in _game.ATeamPlayers)
+                {
+                    var row1 = RightTeamPlayer.Value.NewRow();
+                    row1[0] = item.Id;
+                    row1[1] = item.Name;
+                    RightTeamPlayer.Value.Rows.Add(row1);
+                }
+                foreach (var item in _game.BTeamPlayers)
+                {
+                    var row2 = LeftTeamPlayer.Value.NewRow();
+                    row2[0] = item.Id;
+                    row2[1] = item.Name;
+                    LeftTeamPlayer.Value.Rows.Add(row2);
+                }
             }
+            else
+            {
+                RightSideLotation.Value = _game.Sets[^1].BTeamRotation;
+                LeftSideLotation.Value = _game.Sets[^1].ATeamRotation;
+
+                LeftSideTeamName.Value=_game.ATeam;
+                RightSideTeamName.Value=_game.BTeam;
+
+                LeftSideSets.Value = _game.ATeamSet;
+                RightSideSets.Value = _game.BTeamSet;
+
+                if (_game.Sets[^1].ATeamServer)
+                {
+                    RightServeBallOpacity.Value = 0;
+                    LeftServeBallOpacity.Value = 100;
+                }
+                else
+                {
+                    RightServeBallOpacity.Value = 100;
+                    LeftServeBallOpacity.Value = 0;
+                }
 
 
-            LeftSideTeamName.Value = _game.ATeam;
-            RightSideTeamName.Value = _game.BTeam;
-
-            Set.Value = $"SET {_game.Sets.Count + 1}";
-
-            LeftSideSets.Value = _game.ATeamSet;
-            RightSideSets.Value = _game.BTeamSet;
+                foreach (var item in _game.ATeamPlayers)
+                {
+                    var row1 = LeftTeamPlayer.Value.NewRow();
+                    row1[0] = item.Id;
+                    row1[1] = item.Name;
+                    LeftTeamPlayer.Value.Rows.Add(row1);
+                }
+                foreach (var item in _game.BTeamPlayers)
+                {
+                    var row2 = RightTeamPlayer.Value.NewRow();
+                    row2[0] = item.Id;
+                    row2[1] = item.Name;
+                    RightTeamPlayer.Value.Rows.Add(row2);
+                }
+            }
 
             LineUpCommand.Subscribe(_ => LineUp());
         }

@@ -137,7 +137,42 @@
                 <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0">ラインジャッジ4</Label>
                 <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding FourthLineJudge.Value.Name}"></TextBox>
             </Grid>
-            
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">セット数</Label>
+                <wpfui:NumberBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding SetCount.Value}"></wpfui:NumberBox>
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">勝利にポイント</Label>
+                <wpfui:NumberBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding ToWinPoint.Value}"></wpfui:NumberBox>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0">最終セットの必要ポイント</Label>
+                <wpfui:NumberBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FinalSetToWinPoint.Value}"></wpfui:NumberBox>
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0">最終セットのコートチェンジポイント</Label>
+                <wpfui:NumberBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding FinalSetCourChangePoint.Value}"></wpfui:NumberBox>
+            </Grid>
+            <Label Margin="5,10,5,0">コートチェンジ for COVID-19</Label>
+            <ComboBox Margin="5,0,5,0">
+                <ComboBoxItem>コートチェンジを行う</ComboBoxItem>
+                <ComboBoxItem>コートチェンジを行わない</ComboBoxItem>
+            </ComboBox>
+
             <wpfui:Button Margin="5,10,5,0" Command="{Binding NextCommand}">次へ</wpfui:Button>
         </StackPanel>
     </StackPanel>

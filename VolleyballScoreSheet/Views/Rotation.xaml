@@ -30,8 +30,8 @@
                 <TextBlock Margin="5" Grid.Column="0" Grid.Row="0" Text="{Binding ATeam.Value}"></TextBlock>
                 <TextBlock Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding BTeam.Value}"></TextBlock>
                 
-                <DataGrid Margin="5" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding LeftTeamPlayer.Value}" IsReadOnly="True"></DataGrid>
-                <DataGrid Margin="5" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RightTeamPlayer.Value}" IsReadOnly="True" ></DataGrid>
+                <DataGrid Margin="5" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ATeamPlayer.Value}" IsReadOnly="True"></DataGrid>
+                <DataGrid Margin="5" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding BTeamPlayer.Value}" IsReadOnly="True" ></DataGrid>
                 
                 
                 <Grid Grid.Column="0" Grid.Row="2">
@@ -52,8 +52,8 @@
                     <wpfui:NumberBox Margin="5" Grid.Column="1" Grid.Row="1" Text="{Binding ATeamRotation.Value[5]}"></wpfui:NumberBox>
                 </Grid>
 
-                
-                
+
+
                 <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>

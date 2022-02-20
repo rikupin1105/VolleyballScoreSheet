@@ -44,27 +44,32 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void Next()
         {
+            var set = new Set();
             if (LeftTeam.Value == _game.ATeam)
             {
-                _game.CoinToss.ATeamLeftSide = true;
-                _game.CoinToss.BTeamLeftSide = false;
+                set.ATeamRightSide = false;
+                if(LeftTeamToss.Value == "Server")
+                {
+                    set.ATeamServer = true;
+                }
+                else
+                {
+                    set.ATeamServer= false;
+                }
             }
             else
             {
-                _game.CoinToss.ATeamLeftSide = false;
-                _game.CoinToss.BTeamLeftSide = true;
+                set.ATeamRightSide = true;
+                if (LeftTeamToss.Value == "Server")
+                {
+                    set.ATeamServer= false;
+                }
+                else
+                {
+                    set.ATeamServer = true;
+                }
             }
-            if (LeftTeamToss.Value == "Server")
-            {
-                _game.CoinToss.ATeamServer=true;
-                _game.CoinToss.BTeamServer=false;
-            }
-            else
-            {
-                _game.CoinToss.ATeamServer=false;
-                _game.CoinToss.BTeamServer=true;
-            }
-
+            _game.CreateSet(set);
             Navigate("BeforeMatch");
         }
         private void Navigate(string navigatePath)

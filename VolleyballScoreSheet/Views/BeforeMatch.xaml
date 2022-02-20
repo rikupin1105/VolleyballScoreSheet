@@ -76,12 +76,13 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="0" Text="{Binding LeftSideLotation.Value[0]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="1" Text="{Binding LeftSideLotation.Value[1]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="1" Text="{Binding LeftSideLotation.Value[2]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="1" Text="{Binding LeftSideLotation.Value[3]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="0" Text="{Binding LeftSideLotation.Value[4]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="0" Text="{Binding LeftSideLotation.Value[5]}"></TextBlock>
+                    <Ellipse Opacity="{Binding LeftServeBallOpacity.Value}" Grid.Column="0" Grid.Row="2" Height="30" Width="30" Fill="Yellow" HorizontalAlignment="Left"></Ellipse>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="{Binding LeftSideLotation.Value[0]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding LeftSideLotation.Value[1]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding LeftSideLotation.Value[2]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding LeftSideLotation.Value[3]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding LeftSideLotation.Value[4]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding LeftSideLotation.Value[5]}"></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="3" Background="DarkOrange">
                     <Grid.ColumnDefinitions>
@@ -93,12 +94,13 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="1" Text="{Binding RightSideLotation.Value[0]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="0" Grid.Column="0" Text="{Binding RightSideLotation.Value[1]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="0" Text="{Binding RightSideLotation.Value[2]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="0" Text="{Binding RightSideLotation.Value[3]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="2" Grid.Column="1" Text="{Binding RightSideLotation.Value[4]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" Grid.Row="1" Grid.Column="1" Text="{Binding RightSideLotation.Value[5]}"></TextBlock>
+                    <Ellipse Opacity="{Binding RightServeBallOpacity.Value}" Grid.Column="1" Grid.Row="0" Height="30" Width="30" Fill="Yellow" HorizontalAlignment="Right"></Ellipse>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding RightSideLotation.Value[0]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding RightSideLotation.Value[1]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding RightSideLotation.Value[2]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="{Binding RightSideLotation.Value[3]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding RightSideLotation.Value[4]}"></TextBlock>
+                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding RightSideLotation.Value[5]}"></TextBlock>
                 </Grid>
             </Grid>
 

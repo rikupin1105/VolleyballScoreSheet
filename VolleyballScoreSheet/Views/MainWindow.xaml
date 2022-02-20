@@ -7,7 +7,9 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Style="{StaticResource UiWindowRounded}"
-        Title="Title" Height="800" Width="1200">
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        Title="Title" Width="1200">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
