@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
@@ -14,7 +10,6 @@ namespace VolleyballScoreSheet.ViewModels
     {
         public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         public ReactiveProperty<DataTable> RightTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
-
         public ReactiveProperty<string> SetDisplay { get; set; } = new();
         public ReactiveProperty<string> LeftSideTeamName { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<string> RightSideTeamName { get; set; } = new ReactiveProperty<string>();
@@ -246,6 +241,29 @@ namespace VolleyballScoreSheet.ViewModels
 
                                LeftSideSubstitutions.Value++;
                                LeftSideSubstitutionDisplay.Value = $"Substitution {LeftSideSubstitutions.Value}";
+
+                               if (LeftSideTeamName.Value == _game.ATeam)
+                               {
+                                   _game.Sets[^1].ATeamSubstitution.Add(new SubstitutionDetail()
+                                   {
+                                       InMember = inMember,
+                                       OutMember = outMember,
+                                       Score = LeftSidePoints.Value,
+                                       OpponentScore = RightSidePoints.Value,
+                                       Set = _game.Sets[^1].GameSet
+                                   });
+                               }
+                               else
+                               {
+                                   _game.Sets[^1].BTeamSubstitution.Add(new SubstitutionDetail()
+                                   {
+                                       InMember = inMember,
+                                       OutMember = outMember,
+                                       Score = LeftSidePoints.Value,
+                                       OpponentScore = RightSidePoints.Value,
+                                       Set = _game.Sets[^1].GameSet
+                                   });
+                               }
                            }
                        }, "AlertWindow");
                     }
@@ -275,6 +293,29 @@ namespace VolleyballScoreSheet.ViewModels
 
                         LeftSideSubstitutions.Value++;
                         LeftSideSubstitutionDisplay.Value = $"Substitution {LeftSideSubstitutions.Value}";
+
+                        if (LeftSideTeamName.Value == _game.ATeam)
+                        {
+                            _game.Sets[^1].ATeamSubstitution.Add(new SubstitutionDetail()
+                            {
+                                InMember = inMember,
+                                OutMember = outMember,
+                                Score = LeftSidePoints.Value,
+                                OpponentScore = RightSidePoints.Value,
+                                Set = _game.Sets[^1].GameSet
+                            });
+                        }
+                        else
+                        {
+                            _game.Sets[^1].BTeamSubstitution.Add(new SubstitutionDetail()
+                            {
+                                InMember = inMember,
+                                OutMember = outMember,
+                                Score = LeftSidePoints.Value,
+                                OpponentScore = RightSidePoints.Value,
+                                Set = _game.Sets[^1].GameSet
+                            });
+                        }
                     }
                 }, "AlertWindow");
             }
@@ -320,6 +361,29 @@ namespace VolleyballScoreSheet.ViewModels
 
                                RightSideSubstitutions.Value++;
                                RightSideSubstitutionDisplay.Value = $"Substitution {RightSideSubstitutions.Value}";
+
+                               if (RightSideTeamName.Value == _game.ATeam)
+                               {
+                                   _game.Sets[^1].ATeamSubstitution.Add(new SubstitutionDetail()
+                                   {
+                                       InMember = inMember,
+                                       OutMember = outMember,
+                                       Score = RightSidePoints.Value,
+                                       OpponentScore = LeftSidePoints.Value,
+                                       Set = _game.Sets[^1].GameSet
+                                   });
+                               }
+                               else
+                               {
+                                   _game.Sets[^1].BTeamSubstitution.Add(new SubstitutionDetail()
+                                   {
+                                       InMember = inMember,
+                                       OutMember = outMember,
+                                       Score = RightSidePoints.Value,
+                                       OpponentScore = LeftSidePoints.Value,
+                                       Set = _game.Sets[^1].GameSet
+                                   });
+                               }
                            }
                        }, "AlertWindow");
                     }
@@ -330,7 +394,7 @@ namespace VolleyballScoreSheet.ViewModels
                 _dialogService.ShowDialog("Substitution", new DialogParameters
                 {
                     {
-                        "Team",LeftSideTeamName.Value
+                        "Team",RightSideTeamName.Value
                     }
                 },
                 (result) =>
@@ -344,11 +408,34 @@ namespace VolleyballScoreSheet.ViewModels
                         result.Parameters.TryGetValue("Out", out int outMember);
                         result.Parameters.TryGetValue("In", out int inMember);
 
-                        LeftSideLotation.Value[Array.IndexOf(LeftSideLotation.Value, outMember)] = inMember;
-                        LeftSideLotation.ForceNotify();
+                        RightSideLotation.Value[Array.IndexOf(RightSideLotation.Value, outMember)] = inMember;
+                        RightSideLotation.ForceNotify();
 
-                        LeftSideSubstitutions.Value++;
-                        LeftSideSubstitutionDisplay.Value = $"Substitution {LeftSideSubstitutions.Value}";
+                        RightSideSubstitutions.Value++;
+                        RightSideSubstitutionDisplay.Value = $"Substitution {RightSideSubstitutions.Value}";
+
+                        if (RightSideTeamName.Value == _game.ATeam)
+                        {
+                            _game.Sets[^1].ATeamSubstitution.Add(new SubstitutionDetail()
+                            {
+                                InMember = inMember,
+                                OutMember = outMember,
+                                Score = RightSidePoints.Value,
+                                OpponentScore = LeftSidePoints.Value,
+                                Set = _game.Sets[^1].GameSet
+                            });
+                        }
+                        else
+                        {
+                            _game.Sets[^1].BTeamSubstitution.Add(new SubstitutionDetail()
+                            {
+                                InMember = inMember,
+                                OutMember = outMember,
+                                Score = RightSidePoints.Value,
+                                OpponentScore = LeftSidePoints.Value,
+                                Set = _game.Sets[^1].GameSet
+                            });
+                        }
                     }
                 }, "AlertWindow");
             }

@@ -13,9 +13,17 @@ namespace VolleyballScoreSheet
         public bool ATeamServer { get; set; }
         public int ATeamTimeOutCount { get; set; }
         public int BTeamTimeOutCount { get; set; }
-        public int ATeamSubstitution { get; set; }
-        public int BTeamSubstitution { get; set; }
+        public List<SubstitutionDetail> ATeamSubstitution { get; set; } = new();
+        public List<SubstitutionDetail> BTeamSubstitution { get; set; } = new();
         public int[] ATeamRotation { get; set; } = new int[6];
         public int[] BTeamRotation { get; set; } = new int[6];
+    }
+    public class SubstitutionDetail
+    {
+        public int InMember { get; set; }
+        public int OutMember { get; set; }
+        public int Set { get; set; }
+        public int Score { get; set; }
+        public int OpponentScore { get; set; }
     }
 }
