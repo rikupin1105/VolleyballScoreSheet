@@ -9,9 +9,8 @@
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
 		<PackageReference Include="Prism.Core" Version="8.1.97" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
-		<PackageReference Include="ReactiveProperty" Version="8.0.3" />
-		<PackageReference Include="ReactiveProperty.WPF" Version="8.0.3" />
-		<PackageReference Include="WPF-UI" Version="1.2.1" />
+		<PackageReference Include="ReactiveProperty" Version="8.2.0" />
+		<PackageReference Include="ReactiveProperty.WPF" Version="8.2.0" />
 	</ItemGroup>
 	<!--<ItemGroup>
 	  <Compile Update="Views\RosterA.xaml.cs">

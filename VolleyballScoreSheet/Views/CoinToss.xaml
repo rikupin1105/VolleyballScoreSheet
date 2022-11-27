@@ -17,8 +17,8 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="0" Text="{Binding LeftTeam.Value}" FontSize="40"></TextBlock>
-            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Text="{Binding RightTeam.Value}" FontSize="40"></TextBlock>
+            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="0" Text="{Binding LeftTeam}" FontSize="40"></TextBlock>
+            <TextBlock  Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Text="{Binding RightTeam}" FontSize="40"></TextBlock>
 
             <TextBlock  Margin="5,0,5,0" Grid.Row="1" Grid.Column="0" Text="{Binding LeftTeamToss.Value}" FontSize="30"></TextBlock>
             <TextBlock  Margin="5,0,5,0" Grid.Row="1" Grid.Column="1" Text="{Binding RightTeamToss.Value}" FontSize="30"></TextBlock>

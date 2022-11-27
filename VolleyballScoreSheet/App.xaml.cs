@@ -22,6 +22,7 @@ namespace VolleyballScoreSheet
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MainWindow>();
+
             containerRegistry.RegisterForNavigation<MatchInfo>();
             containerRegistry.RegisterForNavigation<RosterA>();
             containerRegistry.RegisterForNavigation<RosterB>();

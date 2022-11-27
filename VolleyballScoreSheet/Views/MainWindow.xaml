@@ -1,15 +1,16 @@
-﻿<Window x:Class="VolleyballScoreSheet.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://prismlibrary.com/"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI" xmlns:rp="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        Style="{StaticResource UiWindowRounded}"
-        SizeToContent="Height"
-        WindowStartupLocation="CenterScreen"
-        Title="Title" Width="1200">
+﻿<Window
+    x:Class="VolleyballScoreSheet.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:rp="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
+    Title="Title"
+    Width="1200"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    SizeToContent="Height"
+    WindowStartupLocation="CenterScreen">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -18,10 +19,8 @@
     </i:Interaction.Triggers>
 
     <StackPanel>
-        <wpfui:TitleBar ApplicationNavigation="True" />
-
         <DockPanel LastChildFill="True">
-            <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="5"  />
+            <ContentControl Margin="5" prism:RegionManager.RegionName="ContentRegion" />
         </DockPanel>
     </StackPanel>
 </Window>

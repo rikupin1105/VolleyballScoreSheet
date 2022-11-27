@@ -1,22 +1,37 @@
-﻿using System;
+﻿using Reactive.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VolleyballScoreSheet.Model;
+using VolleyballScoreSheet.ViewModels;
 
 namespace VolleyballScoreSheet
 {
-    public class Set
+    public class Set : BinableBase
     {
-        public int GameSet { get; set; }
-        public bool ATeamRightSide { get; set; }
-        public bool ATeamServer { get; set; }
-        public int ATeamTimeOutCount { get; set; }
-        public int BTeamTimeOutCount { get; set; }
-        public List<SubstitutionDetail> ATeamSubstitution { get; set; } = new();
-        public List<SubstitutionDetail> BTeamSubstitution { get; set; } = new();
-        public int[] ATeamRotation { get; set; } = new int[6];
-        public int[] BTeamRotation { get; set; } = new int[6];
+        public ReactivePropertySlim<int> Point { get; set; } = new();
+        public ReactivePropertySlim<int> GameSet { get; set; } = new();
+        public ReactivePropertySlim<int> TimeOut { get; set; } = new();
+        public ReactivePropertySlim<int> Substitution { get; set; } = new();
+
+        //public List<SubstitutionDetail> ATeamSubstitution { get; set; } = new();
+        //public List<SubstitutionDetail> BTeamSubstitution { get; set; } = new();
+
+        public ReactivePropertySlim<int[]> Rotation { get; set; } = new();
+        public void Rotate()
+        {
+            (Rotation.Value[0], Rotation.Value[1], Rotation.Value[2], Rotation.Value[3], Rotation.Value[4], Rotation.Value[5])
+                = (Rotation.Value[1], Rotation.Value[2], Rotation.Value[3], Rotation.Value[4], Rotation.Value[5], Rotation.Value[0]);
+            Rotation.ForceNotify();
+        }
+        public void RotateReverse()
+        {
+            (Rotation.Value[0], Rotation.Value[1], Rotation.Value[2], Rotation.Value[3], Rotation.Value[4], Rotation.Value[5])
+                = (Rotation.Value[5], Rotation.Value[0], Rotation.Value[1], Rotation.Value[2], Rotation.Value[3], Rotation.Value[4]);
+            Rotation.ForceNotify();
+        }
     }
     public class SubstitutionDetail
     {

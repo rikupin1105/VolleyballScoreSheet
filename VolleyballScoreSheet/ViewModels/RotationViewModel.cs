@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
-using WPFUI.Theme;
 using System.Windows;
 using System.Data;
 using VolleyballScoreSheet;
+using Reactive.Bindings.Extensions;
 
 namespace VolleyballScoreSheet.ViewModels
 {
@@ -22,15 +22,14 @@ namespace VolleyballScoreSheet.ViewModels
         public void OnDialogOpened(IDialogParameters parameters) { }
 
         private readonly IDialogService _dialogService;
-        private readonly Game _game;
         private readonly IRegionManager _regionManager;
-        public RotationViewModel(IRegionManager regionManager, Game game, IDialogService dialogService)
+        private readonly Game _game;
+        public RotationViewModel(Game game, IRegionManager regionManager, IDialogService dialogService)
         {
             _game = game;
             _regionManager = regionManager;
             _dialogService = dialogService;
-            ATeam.Value = _game.ATeam;
-            BTeam.Value = _game.BTeam;
+
             NextCommand.Subscribe(_ => Next());
 
             ATeamPlayer.Value.Clear();
@@ -40,7 +39,7 @@ namespace VolleyballScoreSheet.ViewModels
             BTeamPlayer.Value.Columns.Add("Number");
             BTeamPlayer.Value.Columns.Add("Name");
 
-            foreach (var item in _game.ATeamPlayers)
+            foreach (var item in _game.ATeam.Value.Players)
             {
                 var row1 = ATeamPlayer.Value.NewRow();
                 row1[0] = item.Id;
@@ -48,17 +47,20 @@ namespace VolleyballScoreSheet.ViewModels
                 ATeamPlayer.Value.Rows.Add(row1);
             }
 
-            foreach (var item in _game.BTeamPlayers)
+            foreach (var item in _game.BTeam.Value.Players)
             {
                 var row2 = BTeamPlayer.Value.NewRow();
                 row2[0] = item.Id;
                 row2[1] = item.Name;
                 BTeamPlayer.Value.Rows.Add(row2);
             }
+
+            ATeamName = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value.Name.Value);
+            BTeamName= _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
         }
         public ReactiveCommand NextCommand { get; } = new ReactiveCommand();
-        public ReactiveProperty<string> ATeam { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> BTeam { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<string> ATeamName { get; }
+        public ReactiveProperty<string> BTeamName { get; }
         public ReactiveProperty<int[]> ATeamRotation { get; set; } = new ReactiveProperty<int[]>(new int[6]);
         public ReactiveProperty<int[]> BTeamRotation { get; set; } = new ReactiveProperty<int[]>(new int[6]);
         public ReactiveProperty<DataTable> ATeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
@@ -79,7 +81,7 @@ namespace VolleyballScoreSheet.ViewModels
                     if (ATeamRotation.Value[i] == ATeamRotation.Value[j])
                     {
                         duplicateFlag = true;
-                        duplicateErrorSentence += $"{_game.ATeam} の {ATeamRotation.Value[i]} が重複しています。\n";
+                        duplicateErrorSentence += $"{_game.ATeam.Value.Name} の {ATeamRotation.Value[i]} が重複しています。\n";
                         break;
                     }
                 }
@@ -94,7 +96,7 @@ namespace VolleyballScoreSheet.ViewModels
                     if (BTeamRotation.Value[i] == BTeamRotation.Value[j])
                     {
                         duplicateFlag = true;
-                        duplicateErrorSentence += $"{_game.BTeam} の {BTeamRotation.Value[i]} が重複しています。\n";
+                        duplicateErrorSentence += $"{_game.BTeam.Value.Name.Value} の {BTeamRotation.Value[i]} が重複しています。\n";
                         break;
                     }
                 }
@@ -104,7 +106,7 @@ namespace VolleyballScoreSheet.ViewModels
             for (int i = 0; i < ATeamRotation.Value.Length; i++)
             {
                 var register = false;
-                foreach (var item in _game.ATeamPlayers)
+                foreach (var item in _game.ATeam.Value.Players)
                 {
                     if (ATeamRotation.Value[i] == item.Id)
                     {
@@ -115,7 +117,7 @@ namespace VolleyballScoreSheet.ViewModels
                 if (!register)
                 {
                     unregisteredFlag = true;
-                    unregisteredErrorSentence += $"{_game.ATeam} の {ATeamRotation.Value[i]} は登録されていません。\n";
+                    unregisteredErrorSentence += $"{_game.ATeam.Value.Name} の {ATeamRotation.Value[i]} は登録されていません。\n";
                 }
             }
 
@@ -123,7 +125,7 @@ namespace VolleyballScoreSheet.ViewModels
             for (int i = 0; i < BTeamRotation.Value.Length; i++)
             {
                 var register = false;
-                foreach (var item in _game.BTeamPlayers)
+                foreach (var item in _game.BTeam.Value.Players)
                 {
                     if (BTeamRotation.Value[i] == item.Id)
                     {
@@ -135,7 +137,7 @@ namespace VolleyballScoreSheet.ViewModels
                 if (!register)
                 {
                     unregisteredFlag = true;
-                    unregisteredErrorSentence += $"{_game.BTeam} の {BTeamRotation.Value[i]} は登録されていません。\n";
+                    unregisteredErrorSentence += $"{_game.ATeam.Value.Name} の {BTeamRotation.Value[i]} は登録されていません。\n";
                 }
             }
 

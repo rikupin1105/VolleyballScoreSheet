@@ -1,134 +1,399 @@
-﻿<UserControl x:Class="VolleyballScoreSheet.Views.Gaming"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:prism="http://prismlibrary.com/"
-      xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
-      prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl
+    x:Class="VolleyballScoreSheet.Views.Gaming"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cv="clr-namespace:VolleyballScoreSheet.Converter"
+    xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    Background="#f8f8f8">
 
-    <StackPanel>
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <cv:HiddenOrVissible x:Key="HiddenOrVissible" />
+    </UserControl.Resources>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Margin="15,5,5,5" FontSize="40" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding LeftSideTeamName.Value}"></TextBlock>
-            <TextBlock Margin="5,5,15,5" FontSize="40" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding RightSideTeamName.Value}"></TextBlock>
-            <TextBlock Margin="5,5,15,5" FontSize="30" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding SetDisplay.Value}"></TextBlock>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Margin="15,5,5,5" FontSize="30" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding LeftSidePoints.Value}"></TextBlock>
-            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding LeftSideSets.Value}"></TextBlock>
-            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="16:10:11"></TextBlock>
-            <TextBlock Margin="5,5,5,5" FontSize="30" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding RightSideSets.Value}"></TextBlock>
-            <TextBlock Margin="5,5,15,5" FontSize="30" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding RightSidePoints.Value}"></TextBlock>
-        </Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <StackPanel>
+            <local:SetStatus />
 
-            <DataGrid Margin="5" Grid.Column="0" ItemsSource="{Binding LeftTeamPlayer.Value}" IsReadOnly="True"></DataGrid>
-            <DataGrid Margin="5" Grid.Column="2" ItemsSource="{Binding RightTeamPlayer.Value}" IsReadOnly="True" ></DataGrid>
-
-            <Grid Margin="5" Grid.Column="1" Height="300">
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"></ColumnDefinition>
-                    <ColumnDefinition ></ColumnDefinition>
-                    <ColumnDefinition Width="10"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="White"></Grid>
-                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Background="White"></Grid>
-                <Grid Grid.Row="1" Grid.Column="0" Background="White"></Grid>
-                <Grid Grid.Row="1" Grid.Column="2" Background="White"></Grid>
-                <Grid Grid.Row="1" Grid.Column="4" Background="White"></Grid>
+                <!--  チームの得点  -->
+                <Border
+                    Grid.Column="0"
+                    Background="White"
+                    CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="1" Grid.Column="1" Background="DarkOrange">
+                        <Rectangle
+                            Width="20"
+                            HorizontalAlignment="Left"
+                            Fill="{Binding LeftTeamColor.Value}" />
+
+                        <Rectangle
+                            Grid.Column="1"
+                            Width="1"
+                            HorizontalAlignment="Left"
+                            Fill="#dddddd" />
+
+                        <Grid Grid.Column="0" Margin="30,0,0,0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="40"
+                                FontWeight="Black"
+                                Text="{Binding LeftSideTeamName.Value}" />
+
+                            <Grid Grid.Row="1" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel
+                                    Grid.ColumnSpan="3"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                                    <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
+                                        <TextBlock
+                                            Padding="10,0"
+                                            FontSize="15"
+                                            FontWeight="Bold"
+                                            Text="Timeouts" />
+                                    </Border>
+                                    <Border
+                                        Margin="0,0,10,0"
+                                        Background="#303030"
+                                        CornerRadius="0,5,5,0">
+                                        <TextBlock
+                                            Margin="10,5"
+                                            FontSize="15"
+                                            FontWeight="Black"
+                                            Foreground="White"
+                                            Text="{Binding LeftSideTimeOuts.Value}" />
+                                    </Border>
+
+                                    <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
+                                        <TextBlock
+                                            Padding="10,0"
+                                            FontSize="15"
+                                            FontWeight="Bold"
+                                            Text="Substitution" />
+                                    </Border>
+                                    <Border Background="#303030" CornerRadius="0,5,5,0">
+                                        <TextBlock
+                                            Margin="10,5"
+                                            FontSize="15"
+                                            FontWeight="Black"
+                                            Foreground="White"
+                                            Text="{Binding LeftSideSubstitutions.Value}" />
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+                        <TextBlock
+                            Grid.Column="1"
+                            FontSize="50"
+                            FontWeight="Black"
+                            Text="{Binding LeftSidePoints.Value}" />
+
+                    </Grid>
+                </Border>
+                <Border
+                    Grid.Column="3"
+                    Background="white"
+                    CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle
+                            Grid.Column="1"
+                            Width="20"
+                            HorizontalAlignment="Right"
+                            Fill="{Binding RightTeamColor.Value}" />
+
+                        <Rectangle
+                            Grid.Column="1"
+                            Width="1"
+                            HorizontalAlignment="Left"
+                            Fill="#dddddd" />
+
+                        <TextBlock
+                            FontSize="50"
+                            FontWeight="Black"
+                            Text="{Binding RightSidePoints.Value}" />
+
+                        <Grid Grid.Column="1" Margin="0,0,30,0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="40"
+                                FontWeight="Black"
+                                Text="{Binding RightSideTeamName.Value}" />
+
+                            <Grid Grid.Row="1" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel
+                                    Grid.ColumnSpan="3"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                    <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
+                                        <TextBlock
+                                            Padding="10,0"
+                                            FontSize="15"
+                                            FontWeight="Bold"
+                                            Text="Substitution" />
+                                    </Border>
+                                    <Border
+                                        Margin="0,0,10,0"
+                                        Background="#303030"
+                                        CornerRadius="0,5,5,0">
+                                        <TextBlock
+                                            Margin="10,5"
+                                            FontSize="15"
+                                            FontWeight="Black"
+                                            Foreground="White"
+                                            Text="{Binding RightSideSubstitutions.Value}" />
+                                    </Border>
+
+                                    <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
+                                        <TextBlock
+                                            Padding="10,0"
+                                            FontSize="15"
+                                            FontWeight="Bold"
+                                            Text="Timeouts" />
+                                    </Border>
+                                    <Border Background="#303030" CornerRadius="0,5,5,0">
+                                        <TextBlock
+                                            Margin="10,5"
+                                            FontSize="15"
+                                            FontWeight="Black"
+                                            Foreground="White"
+                                            Text="{Binding RightSideTimeOuts.Value}" />
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!--  中央ボタン  -->
+                <Grid Grid.Column="1" Margin="10,01">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Ellipse Opacity="{Binding LeftServeBallOpacity.Value}" Grid.Column="0" Grid.Row="2" Height="30" Width="30" Fill="Yellow" HorizontalAlignment="Left"></Ellipse>
-                    
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="{Binding LeftSideLotation.Value[0]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding LeftSideLotation.Value[1]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding LeftSideLotation.Value[2]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding LeftSideLotation.Value[3]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding LeftSideLotation.Value[4]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding LeftSideLotation.Value[5]}"></TextBlock>
+
+                    <Button
+                        Grid.ColumnSpan="2"
+                        Margin="0"
+                        Command="{Binding RequestTimeOutCommand}"
+                        Content="TimeOUT"
+                        FontSize="20" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Margin="0"
+                        Command="{Binding UndoCommand}"
+                        Content="Undo"
+                        FontSize="20"
+                        IsEnabled="true" />
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="3" Background="DarkOrange">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Ellipse Opacity="{Binding RightServeBallOpacity.Value}" Grid.Column="1" Grid.Row="0" Height="30" Width="30" Fill="Yellow" HorizontalAlignment="Right"></Ellipse>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding RightSideLotation.Value[0]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding RightSideLotation.Value[1]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding RightSideLotation.Value[2]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="{Binding RightSideLotation.Value[3]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding RightSideLotation.Value[4]}"></TextBlock>
-                    <TextBlock TextAlignment="Center" FontSize="50" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding RightSideLotation.Value[5]}"></TextBlock>
-                </Grid>
+
             </Grid>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Margin="5" Grid.Column="0" Command="{Binding LeftSidePointAdd}">Point</Button>
-            <Button Margin="5" Grid.Column="1" Command="{Binding RightSidePointAdd}">Point</Button>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Margin="5" Grid.Column="0" Command="{Binding LeftSideTimeOutCommand}" Content="{Binding LeftSideTimeOutDispley.Value}"></Button>
-            <Button Margin="5" Grid.Column="1" Command="{Binding RightSideTimeOutCommand}" Content="{Binding RightSideTimeOutDispley.Value}"></Button>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Margin="5" Grid.Column="0" Command="{Binding LeftSideSubstitutionCommand}" Content="{Binding LeftSideSubstitutionDisplay.Value}"></Button>
-            <Button Margin="5" Grid.Column="1" Command="{Binding RightSideSubstitutionCommand}" Content="{Binding RightSideSubstitutionDisplay.Value}"></Button>
-        </Grid>
-    </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <DataGrid
+                    Grid.Column="0"
+                    Margin="5"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding LeftTeamPlayer.Value}" />
+                <DataGrid
+                    Grid.Column="2"
+                    Margin="5"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding RightTeamPlayer.Value}" />
+
+                <!--  コート  -->
+                <local:Court Grid.Column="1" Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
+
+                <!--  タイムアウトリクエスト  -->
+                <TextBlock Text="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:RequestTimeOut Grid.Column="1" Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <!--<local:RequestTimeOut Grid.Column="1" Visibility="Visible" />-->
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="5"
+                    Command="{Binding LeftSidePointAdd}"
+                    Content="POINT" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5"
+                    Command="{Binding RightSidePointAdd}"
+                    Content="POINT" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="5"
+                    Command="{Binding LeftSideTimeOutCommand}"
+                    Content="{Binding LeftSideTimeOutDispley.Value}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5"
+                    Command="{Binding RightSideTimeOutCommand}"
+                    Content="{Binding RightSideTimeOutDispley.Value}" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="5"
+                    Command="{Binding LeftSideSubstitutionCommand}"
+                    Content="{Binding LeftSideSubstitutionDisplay.Value}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5"
+                    Command="{Binding RightSideSubstitutionCommand}"
+                    Content="{Binding RightSideSubstitutionDisplay.Value}" />
+            </Grid>
+        </StackPanel>
+
+        <!--  ランニングスコア  -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="{Binding DebugMessage.Value}" />
+            <Border Background="#eeeeee" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock
+                        Margin="10"
+                        FontSize="20"
+                        Text="SET - 1" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="0*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="10,3,10,3"
+                            Background="#cd1141"
+                            CornerRadius="10">
+                            <TextBlock
+                                Margin="5"
+                                Padding="5"
+                                FontSize="20"
+                                FontWeight="Black"
+                                Foreground="White"
+                                Text="4 SERVE" />
+                        </Border>
+                    </Grid>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="0*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Margin="10,3,10,3"
+                            Background="#0146ae"
+                            CornerRadius="10">
+                            <TextBlock
+                                Margin="5"
+                                Padding="5"
+                                HorizontalAlignment="Right"
+                                FontSize="20"
+                                FontWeight="Black"
+                                Foreground="White"
+                                Text="B POINT" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
 </UserControl>

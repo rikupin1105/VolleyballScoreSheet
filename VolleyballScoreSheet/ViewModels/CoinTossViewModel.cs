@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Regions;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace VolleyballScoreSheet.ViewModels
 {
@@ -21,22 +22,25 @@ namespace VolleyballScoreSheet.ViewModels
 
         private readonly IRegionManager _regionManager;
         private readonly Game _game;
-        public CoinTossViewModel(IRegionManager regionManager, Game game)
+        public CoinTossViewModel(Game game, IRegionManager regionManager)
         {
-            _regionManager = regionManager;
             _game = game;
-            LeftTeam = new ReactiveProperty<string>(_game.ATeam);
-            RightTeam = new ReactiveProperty<string>(_game.BTeam);
+            _regionManager = regionManager;
+
             LeftTeamToss.Value ="Server";
             RightTeamToss.Value ="Reception";
             SwitchCourtCommand.Subscribe(_ => SwitchCourt());
             SwitchServerCommand.Subscribe(_ => SwitchServer());
             NextCommand.Subscribe(_ => Next());
+
+            LeftTeam = _game.ToReactivePropertyAsSynchronized(x => x.LeftTeam.Name.Value);
+            RightTeam = _game.ToReactivePropertyAsSynchronized(x => x.RightTeam.Name.Value);
         }
         public void SwitchCourt()
         {
-            (LeftTeam.Value, RightTeam.Value)=(RightTeam.Value, LeftTeam.Value);
-            (LeftTeamToss.Value, RightTeamToss.Value)=(RightTeamToss.Value, LeftTeamToss.Value);
+            (_game.ATeam, _game.BTeam) = (_game.BTeam, _game.ATeam);
+            (LeftTeam, RightTeam) = (RightTeam, LeftTeam);
+            (LeftTeamToss.Value, RightTeamToss.Value) = (RightTeamToss.Value, LeftTeamToss.Value);
         }
         public void SwitchServer()
         {
@@ -44,32 +48,51 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void Next()
         {
-            var set = new Set();
-            if (LeftTeam.Value == _game.ATeam)
+            if (_game.ATeam.Value.Name.Value == LeftTeam.Value)
             {
-                set.ATeamRightSide = false;
-                if(LeftTeamToss.Value == "Server")
+                _game.CoinToss.ATeamLeftSide = true;
+                _game.CoinToss.BTeamLeftSide = false;
+            }
+            else
+            {
+                _game.CoinToss.ATeamLeftSide = false;
+                _game.CoinToss.BTeamLeftSide = true;
+            }
+
+            if (_game.isATeamLeft.Value)
+            {
+                if (LeftTeamToss.Value == "Server")
                 {
-                    set.ATeamServer = true;
+                    _game.CoinToss.ATeamServer = true;
+                    _game.CoinToss.BTeamServer = false;
+
+                    _game.NextServeTeam(true);
                 }
                 else
                 {
-                    set.ATeamServer= false;
+                    _game.CoinToss.ATeamServer = false;
+                    _game.CoinToss.BTeamServer = true;
+
+                    _game.NextServeTeam(false);
                 }
             }
             else
             {
-                set.ATeamRightSide = true;
                 if (LeftTeamToss.Value == "Server")
                 {
-                    set.ATeamServer= false;
+                    _game.CoinToss.ATeamServer = false;
+                    _game.CoinToss.BTeamServer = true;
+
+                    _game.NextServeTeam(false);
                 }
                 else
                 {
-                    set.ATeamServer = true;
+                    _game.CoinToss.ATeamServer = true;
+                    _game.CoinToss.BTeamServer = false;
+
+                    _game.NextServeTeam(true);
                 }
             }
-            _game.CreateSet(set);
             Navigate("BeforeMatch");
         }
         private void Navigate(string navigatePath)

@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet;
+using Reactive.Bindings.Extensions;
 
 namespace VolleyballScoreSheet.ViewModels
 {
     public class RosterBViewModel
     {
-        public ReactiveProperty<string> Team { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<string> BTeamName { get; } 
         public ReactiveProperty<DataTable> PlayerDataTable { get; } = new ReactiveProperty<DataTable>(new DataTable());
         public ReactiveCommand PlayerAddCommand { get; } = new ReactiveCommand();
         public ReactiveProperty<int?> Id { get; private set; } = new ReactiveProperty<int?>();
@@ -64,7 +65,8 @@ namespace VolleyballScoreSheet.ViewModels
                 for (int i = 0; i < PlayerDataTable.Value.Rows.Count; i++)
                 {
                     var row = PlayerDataTable.Value.Rows[i];
-                    _game.BTeamPlayers.Add(new Player()
+
+                   _game.BTeam.Value.Players.Add(new Player()
                     {
                         Id = int.Parse(row.ItemArray[0].ToString())
                         //Name = (string)row.ItemArray[1]
@@ -75,21 +77,29 @@ namespace VolleyballScoreSheet.ViewModels
         }
 
         private readonly IRegionManager _regionManager;
-        private Game _game;
+        private readonly Game _game;
         public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
-        public RosterBViewModel(IRegionManager regionManager, Game game)
+        public RosterBViewModel(Game game, IRegionManager regionManager)
         {
             _game = game;
-            Team.Value = _game.BTeam;
-
+            _regionManager = regionManager;
 
             PlayerDataTable.Value.Clear();
             PlayerDataTable.Value.Columns.Add("Number");
             PlayerDataTable.Value.Columns.Add("Name");
 
-            _regionManager = regionManager;
             PlayerAddCommand.Subscribe(_ => PlayerAdd());
             NextCommand.Subscribe(_ => Next());
+
+            BTeamName =_game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
+
+            for (int i = 1; i <= 12; i++)
+            {
+                var r = PlayerDataTable.Value.NewRow();
+                r[0] = i;
+                r[1] = "Player_"+i;
+                PlayerDataTable.Value.Rows.Add(r);
+            }
         }
         private void Navigate(string navigatePath)
         {

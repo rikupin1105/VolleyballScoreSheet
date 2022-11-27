@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using Unity;
 using VolleyballScoreSheet.Model;
 
@@ -14,37 +15,60 @@ namespace VolleyballScoreSheet.ViewModels
     public class MatchInfoViewModel
     {
         private readonly IRegionManager _regionManager;
-        public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
-        public ReactiveProperty<string> MatchName { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> ATeam { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> BTeam { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> City { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> Hall { get; } = new ReactiveProperty<string>();
-        public ReactiveProperty<int> MatchNumber { get; } = new ReactiveProperty<int>();
-        public ReactiveProperty<DateTime> Date { get; } = new ReactiveProperty<DateTime>(DateTime.Today);
-        public ReactiveProperty<Referee> FirstReferee { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> SecondReferee { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> Scorer { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> AssistantScorer { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> FirstLineJudge { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> SecondLineJudge { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> ThirdLineJudge { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<Referee> FourthLineJudge { get; } = new ReactiveProperty<Referee>();
-        public ReactiveProperty<int> ToWinPoint { get; } = new(25);
-        public ReactiveProperty<int> SetCount { get; } = new(5);
-        public ReactiveProperty<int> FinalSetToWinPoint { get; } = new(15);
-        public ReactiveProperty<int> FinalSetCourChangePoint { get; } = new(8);
-
-
         private readonly Game _game;
-        private readonly IDialogService _dialogService;
-        public MatchInfoViewModel(IRegionManager regionManager, Game game, IDialogService dialogService)
+        public MatchInfoViewModel(Game game, IRegionManager regionManager, IDialogService dialogService)
         {
             _game = game;
             _regionManager = regionManager;
             _dialogService = dialogService;
             NextCommand.Subscribe(_ => Next());
+
+            MatchName = _game.ToReactivePropertyAsSynchronized(x => x.MatchName)!;
+            ATeamName = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value.Name.Value);
+            BTeamName = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
+            City = _game.ToReactivePropertyAsSynchronized(x => x.City)!;
+            Hall = _game.ToReactivePropertyAsSynchronized(x => x.Hall)!;
+            MatchNumber = _game.ToReactivePropertyAsSynchronized(x => x.MatchNumber)!;
+            Date = _game.ToReactivePropertyAsSynchronized(x => x.Date)!;
+            FirstReferee = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FirstReferee)!;
+            SecondReferee = _game.ToReactivePropertyAsSynchronized(x => x.Referees.SecondReferee)!;
+            Scorer = _game.ToReactivePropertyAsSynchronized(x => x.Referees.Scorer)!;
+            AssistantScorer = _game.ToReactivePropertyAsSynchronized(x => x.Referees.AssistantScorer)!;
+            FirstLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FirstLineJudge)!;
+            SecondLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.SecondLineJudge)!;
+            ThirdLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.ThirdLineJudge)!;
+            FourthLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FourthLineJudge)!;
+
+            SetCount = _game.ToReactivePropertyAsSynchronized(x => x.Rule.SetCount);
+            ToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.ToWinPoint);
+            FinalSetToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetToWinPoint);
+            FinalSetCourtChangePoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetCourtChangePoint);
         }
+        public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
+        public ReactiveProperty<string> MatchName { get; }
+        public ReactiveProperty<string> ATeamName { get; }
+        public ReactiveProperty<string> BTeamName { get; }
+        public ReactiveProperty<string> City { get; } 
+        public ReactiveProperty<string> Hall { get; }
+        public ReactiveProperty<string> MatchNumber { get; }
+        public ReactiveProperty<DateTime> Date { get; }
+
+        public ReactiveProperty<Referee> FirstReferee { get; }
+        public ReactiveProperty<Referee> SecondReferee { get; }
+        public ReactiveProperty<Referee> Scorer { get; }
+        public ReactiveProperty<Referee> AssistantScorer { get; }
+        public ReactiveProperty<Referee> FirstLineJudge { get; } 
+        public ReactiveProperty<Referee> SecondLineJudge { get; }
+        public ReactiveProperty<Referee> ThirdLineJudge { get; } 
+        public ReactiveProperty<Referee> FourthLineJudge { get; }
+
+        public ReactiveProperty<int> SetCount { get; }
+        public ReactiveProperty<int> ToWinPoint { get; }
+        public ReactiveProperty<int> FinalSetToWinPoint { get; }
+        public ReactiveProperty<int> FinalSetCourtChangePoint { get; }
+
+        private readonly IDialogService _dialogService;
+        
         public void Dialog(string message)
         {
             _dialogService.ShowDialog(
@@ -61,44 +85,25 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void Next()
         {
-            var flag = true;
-            if (ATeam.Value ==null || BTeam.Value==null)
+            if (string.IsNullOrEmpty(ATeamName.Value) || string.IsNullOrEmpty(BTeamName.Value))
             {
-                flag = false;
                 Dialog("チーム名を入力してください。");
                 return;
             }
-            if (ATeam.Value==BTeam.Value)
+            if (ATeamName.Value==BTeamName.Value)
             {
-                flag = false;
                 Dialog("チーム名が同じです。");
                 return;
             }
 
-            if (flag)
-            {
-                _game.MatchName = MatchName.Value;
-                _game.ATeam = ATeam.Value ?? throw new();
-                _game.BTeam = BTeam.Value ?? throw new();
-                _game.City = City.Value;
-                _game.Hall = Hall.Value;
-                _game.MatchName = MatchName.Value;
-                _game.Date = Date.Value;
-                _game.FirstReferee = FirstLineJudge.Value;
-                _game.SecondReferee = SecondLineJudge.Value;
-                _game.Scorer = Scorer.Value;
-                _game.AssistantScorer = AssistantScorer.Value;
-                _game.FirstLineJudge = FirstLineJudge.Value;
-                _game.SecondLineJudge = SecondLineJudge.Value;
-                _game.ThirdLineJudge = ThirdLineJudge.Value;
-                _game.FourthLineJudge = FourthLineJudge.Value;
-                _game.SetCount = SetCount.Value;
-                _game.ToWinPoint = ToWinPoint.Value;
-                _game.FinalSetToWinPoint = FinalSetToWinPoint.Value;
-                _game.FinalSetCoutChangePoint = FinalSetCourChangePoint.Value;
 
-                Navigate("RosterA");
-            }
+
+            MatchName.Subscribe(x => { _game.MatchName = x; });
+            ATeamName.Subscribe(x => { _game.ATeam.Value.Name.Value = x; });
+            BTeamName.Subscribe(x => { _game.BTeam.Value.Name.Value = x; });
+
+
+            Navigate("RosterA");
         }
         private void Navigate(string navigatePath)
         {

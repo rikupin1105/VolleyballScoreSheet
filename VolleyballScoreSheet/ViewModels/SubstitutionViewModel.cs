@@ -23,7 +23,7 @@ namespace VolleyballScoreSheet.ViewModels
         public void Substitution()
         {
             var flag = true;
-            if (TeamName.Value == _game.ATeam)
+            if (TeamName.Value == _game.ATeam.Value.Name.Value)
             {
                 //ATeam
             }
@@ -65,55 +65,55 @@ namespace VolleyballScoreSheet.ViewModels
             if (parameters.TryGetValue("Team", out string team))
             {
                 TeamName.Value = team;
-                if (team==_game.ATeam)
+                if (team==_game.ATeam.Value.Name.Value)
                 {
                     //ATeam
-                    var changeble = _game.Sets[^1].ATeamSubstitution.Select(x => x.OutMember);
-                    OnCourtMemberItem.Value = _game.Sets[^1].ATeamRotation
-                        .Where(x => !changeble.Contains(x)).ToArray();
+                    //var changeble = _game.GetCurrentSet().Value.ATeamSubstitution.Select(x => x.OutMember);
+                    //OnCourtMemberItem.Value = _game.GetCurrentSet().Value.ATeamRotation
+                    //    .Where(x => !changeble.Contains(x)).ToArray();
 
-                    //OutCourtMemberItem.Value = _game.ATeamPlayers.Select(x => x.Id).Where(x => !_game.Sets[^1].ATeamRotation.Contains(x)).ToArray();
+                    //OutCourtMemberItem.Value = _game.ATeamPlayers.Select(x => x.Id).Where(x => !_game.GetCurrentSet().Value.ATeamRotation.Contains(x)).ToArray();
                 }
                 else
                 {
                     //BTeam
-                    OnCourtMemberItem.Value = _game.Sets[^1].BTeamRotation;
-                    //OutCourtMemberItem.Value = _game.BTeamPlayers.Select(x => x.Id).Where(x => !_game.Sets[^1].BTeamRotation.Contains(x)).ToArray();
+                    //OnCourtMemberItem.Value = _game.GetCurrentSet().Value.BTeamRotation;
+                    //OutCourtMemberItem.Value = _game.BTeamPlayers.Select(x => x.Id).Where(x => !_game.GetCurrentSet().Value.BTeamRotation.Contains(x)).ToArray();
                 }
             }
         }
         public void SelectionChanged()
         {
-            if (TeamName.Value == _game.ATeam)
+            if (TeamName.Value == _game.ATeam.Value.Name.Value)
             {
                 //入ったことがある人
-                var a = _game.Sets[^1].ATeamSubstitution
-                    .Where(x => x.Set==_game.Sets[^1].GameSet)
-                    .Select(x => x.InMember)
-                    .ToList();
+                //var a = _game.GetCurrentSet().Value.ATeamSubstitution
+                //    .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet)
+                //    .Select(x => x.InMember)
+                //    .ToList();
 
-                if (a.Contains(int.Parse(OutMember)))
-                {
-                    var innable = _game.Sets[^1].ATeamSubstitution
-                        .Where(x => x.Set==_game.Sets[^1].GameSet)
-                        .Where(x => x.InMember==int.Parse(OutMember))
-                        .Select(x => x.OutMember);
+                //if (a.Contains(int.Parse(OutMember)))
+                //{
+                //    var innable = _game.GetCurrentSet().Value.ATeamSubstitution
+                //        .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet)
+                //        .Where(x => x.InMember==int.Parse(OutMember))
+                //        .Select(x => x.OutMember);
 
-                    OutCourtMemberItem.Value = innable.ToArray();
-                }
-                else
-                {
-                    //一度でも出たことがある人
-                    var outmember = _game.Sets[^1].ATeamSubstitution
-                        .Where(x => x.Set==_game.Sets[^1].GameSet
-                        ).Select(x => x.OutMember)
-                        .ToList();
+                //    OutCourtMemberItem.Value = innable.ToArray();
+                //}
+                //else
+                //{
+                //    //一度でも出たことがある人
+                //    var outmember = _game.GetCurrentSet().Value.ATeamSubstitution
+                //        .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet
+                //        ).Select(x => x.OutMember)
+                //        .ToList();
 
-                    OutCourtMemberItem.Value = _game.ATeamPlayers.Select(x => x.Id).Where(x => !_game.Sets[^1].ATeamRotation.Contains(x))
-                        .Where(x => !a.Contains(x))
-                        .Where(x => !outmember.Contains(x))
-                        .ToArray();
-                }
+                //    OutCourtMemberItem.Value = _game.ATeam.Players.Select(x => x.Id).Where(x => _game.GetCurrentSet().Value.ATeamRotation.Contains(x))
+                //        .Where(x => !a.Contains(x))
+                //        .Where(x => !outmember.Contains(x))
+                //        .ToArray();
+                //}
             }
         }
         public ReactiveCommand SelectionChangedCommand { get; } = new();

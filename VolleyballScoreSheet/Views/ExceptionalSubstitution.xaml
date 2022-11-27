@@ -1,16 +1,26 @@
-﻿<UserControl x:Class="VolleyballScoreSheet.Views.ExceptionalSubstitution"
-       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:prism="http://prismlibrary.com/"
-       xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-       xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
-       Width="300"
-       prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl
+    x:Class="VolleyballScoreSheet.Views.ExceptionalSubstitution"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Width="300"
+    prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel Margin="10">
-        <TextBlock Text="選手交代が6回を超えています。"  FontSize="15"></TextBlock>
-        <wpfui:Button Margin="0,5,0,0" Appearance="Caution" Content="例外的な選手交代を行う" Command="{Binding ExceptionalSubstitutionCommand}"></wpfui:Button>
-        <wpfui:Button Margin="0,5,0,0" Appearance="Danger" Content="不当な要求（交代を拒否）" Command="{Binding RejectSubstitutionCommand}"></wpfui:Button>
-        <wpfui:Button Margin="0,5,0,0" Content="閉じる" Command="{Binding CloseCommand}"></wpfui:Button>
+        <TextBlock FontSize="15" Text="選手交代が6回を超えています。" />
+        <Button
+            Margin="0,5,0,0"
+            Command="{Binding ExceptionalSubstitutionCommand}"
+            Content="例外的な選手交代を行う" />
+        <Button
+            Margin="0,5,0,0"
+            Command="{Binding RejectSubstitutionCommand}"
+            Content="不当な要求（交代を拒否）" />
+        <Button
+            Margin="0,5,0,0"
+            Command="{Binding CloseCommand}"
+            Content="閉じる" />
     </StackPanel>
 </UserControl>
