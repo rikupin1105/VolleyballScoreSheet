@@ -219,11 +219,12 @@
                                 </StackPanel>
                             </Grid>
                         </Grid>
+
                     </Grid>
                 </Border>
 
                 <!--  中央ボタン  -->
-                <Grid Grid.Column="1" Margin="10,01">
+                <Grid Grid.Column="1" Margin="10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -236,18 +237,22 @@
 
                     <Button
                         Grid.ColumnSpan="2"
-                        Margin="0"
+                        Margin="0,0,0,5"
                         Command="{Binding RequestTimeOutCommand}"
-                        Content="TimeOUT"
-                        FontSize="20" />
+                        Content="TIMEOUT"
+                        FontSize="20"
+                        IsEnabled="{Binding IsEnableTimeout.Value}"
+                        Style="{StaticResource LightButton}" />
+
                     <Button
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Margin="0"
+                        Margin="0,5,0,0"
                         Command="{Binding UndoCommand}"
-                        Content="Undo"
+                        Content="UNDO"
                         FontSize="20"
-                        IsEnabled="true" />
+                        IsEnabled="{Binding UndoEnable.Value}"
+                        Style="{StaticResource LightButton}" />
                 </Grid>
 
             </Grid>
@@ -278,9 +283,12 @@
                 <local:Court Grid.Column="1" Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
 
                 <!--  タイムアウトリクエスト  -->
-                <TextBlock Text="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
                 <local:RequestTimeOut Grid.Column="1" Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
-                <!--<local:RequestTimeOut Grid.Column="1" Visibility="Visible" />-->
+
+                <local:BeforeMatch Grid.Column="1" Visibility="{Binding DisplayBeforeMatch.Value, Converter={StaticResource HiddenOrVissible}}" />
+
+                <local:CoinToss Grid.Column="1" Visibility="{Binding DisplayCoinToss.Value, Converter={StaticResource HiddenOrVissible}}" />
+
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -290,31 +298,23 @@
                 <Button
                     Grid.Column="0"
                     Margin="5"
+                    Background="{Binding LeftTeamColor.Value}"
                     Command="{Binding LeftSidePointAdd}"
-                    Content="POINT" />
+                    Content="POINT"
+                    FontSize="30"
+                    IsEnabled="{Binding IsEnablePoint.Value}"
+                    Style="{StaticResource ColorButton}" />
                 <Button
                     Grid.Column="1"
                     Margin="5"
+                    Background="{Binding RightTeamColor.Value}"
                     Command="{Binding RightSidePointAdd}"
-                    Content="POINT" />
+                    Content="POINT"
+                    FontSize="30"
+                    IsEnabled="{Binding IsEnablePoint.Value}"
+                    Style="{StaticResource ColorButton}" />
             </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Margin="5"
-                    Command="{Binding LeftSideTimeOutCommand}"
-                    Content="{Binding LeftSideTimeOutDispley.Value}" />
-                <Button
-                    Grid.Column="1"
-                    Margin="5"
-                    Command="{Binding RightSideTimeOutCommand}"
-                    Content="{Binding RightSideTimeOutDispley.Value}" />
-            </Grid>
-            <Grid>
+            <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -329,13 +329,15 @@
                     Margin="5"
                     Command="{Binding RightSideSubstitutionCommand}"
                     Content="{Binding RightSideSubstitutionDisplay.Value}" />
-            </Grid>
+            </Grid>-->
         </StackPanel>
 
         <!--  ランニングスコア  -->
-        <StackPanel Grid.Column="1" Margin="10">
-            <TextBlock Text="{Binding DebugMessage.Value}" />
-            <Border Background="#eeeeee" CornerRadius="10">
+        <ScrollViewer Grid.Column="1">
+
+            <Grid Grid.Column="1" Margin="10">
+                <TextBlock Text="{Binding DebugMessage.Value}" TextWrapping="Wrap" />
+                <!--<Border Background="#eeeeee" CornerRadius="10">
                 <StackPanel>
                     <TextBlock
                         Margin="10"
@@ -393,7 +395,8 @@
                         </Border>
                     </Grid>
                 </StackPanel>
-            </Border>
-        </StackPanel>
+            </Border>-->
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

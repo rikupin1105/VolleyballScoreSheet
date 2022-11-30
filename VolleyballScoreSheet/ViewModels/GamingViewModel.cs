@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -15,13 +16,13 @@ namespace VolleyballScoreSheet.ViewModels
         {
             _game = game;
 
-            LeftSideTeamName = _game.ToReactivePropertyAsSynchronized(x => x.LeftTeam.Name.Value);
-            RightSideTeamName = _game.ToReactivePropertyAsSynchronized(x => x.RightTeam.Name.Value);
+            
+
 
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
             BTeam = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value);
 
-            ATeam.Value.Sets[^1].Point.Subscribe(x =>
+            ATeam.Value.Points.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                 {
@@ -32,7 +33,7 @@ namespace VolleyballScoreSheet.ViewModels
                     RightSidePoints.Value=x;
                 }
             });
-            BTeam.Value.Sets[^1].Point.Subscribe(x =>
+            BTeam.Value.Points.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                 {
@@ -44,14 +45,14 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             });
 
-            ATeam.Value.Sets[^1].TimeOut.Subscribe(x =>
+            ATeam.Value.Timeouts.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                     LeftSideTimeOuts.Value=x;
                 else
                     RightSideTimeOuts.Value=x;
             });
-            BTeam.Value.Sets[^1].TimeOut.Subscribe(x =>
+            BTeam.Value.Timeouts.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                     RightSideTimeOuts.Value=x;
@@ -59,14 +60,14 @@ namespace VolleyballScoreSheet.ViewModels
                     LeftSideTimeOuts.Value=x;
             });
 
-            ATeam.Value.Sets[^1].Substitution.Subscribe(x =>
+            ATeam.Value.Substitutions.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                     LeftSideSubstitutions.Value=x;
                 else
                     RightSideSubstitutions.Value=x;
             });
-            BTeam.Value.Sets[^1].Substitution.Subscribe(x =>
+            BTeam.Value.Substitutions.Subscribe(x =>
             {
                 if (_game.isATeamLeft.Value)
                     RightSideSubstitutions.Value=x;
@@ -74,10 +75,51 @@ namespace VolleyballScoreSheet.ViewModels
                     LeftSideSubstitutions.Value=x;
             });
 
+            ATeam.Value.Name.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftSideTeamName.Value=x;
+                }
+                else
+                {
+                    RightSideTeamName.Value=x;
+                }
+            });
+            BTeam.Value.Name.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightSideTeamName.Value=x;
+                }
+                else
+                {
+                    LeftSideTeamName.Value=x;
+                }
+            });
 
-            ATeam.Value.Sets[^1].Point.Subscribe(x => { LeftSidePoints.Value=x; });
-            //RightSidePoints = _game.ToReactivePropertyAsSynchronized(x => x.GetCurrentSet().Value.RightPoint.Value);
-
+            ATeam.Value.Color.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftTeamColor.Value=x;
+                }
+                else
+                {
+                    RightTeamColor.Value=x;
+                }
+            });
+            BTeam.Value.Color.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightTeamColor.Value=x;
+                }
+                else
+                {
+                    LeftTeamColor.Value=x;
+                }
+            });
 
 
             LeftSidePointAdd.Subscribe(_ => _game.PointAdd(true));
@@ -85,33 +127,59 @@ namespace VolleyballScoreSheet.ViewModels
 
             RequestTimeOutCommand.Subscribe(_ => _game.RequestTimeOut());
             UndoCommand.Subscribe(_ => _game.Undo());
-            
-            RightTeamColor = _game.ToReactivePropertyAsSynchronized(x => x.RightTeam.Color.Value);
-            LeftTeamColor = _game.ToReactivePropertyAsSynchronized(x => x.LeftTeam.Color.Value); ;
+
+            UndoEnable = _game.ToReactivePropertyAsSynchronized(x => x.UndoEnable.Value);
+            IsEnablePoint = _game.ToReactivePropertyAsSynchronized(x => x.IsEnablePoint.Value);
+            IsEnableTimeout = _game.ToReactivePropertyAsSynchronized(x => x.IsEnableTimeout.Value);
+
+            DebugMessage = _game.ToReactivePropertyAsSynchronized(x => x.Debug.Value);
+
+            _game.isATeamLeft.Subscribe(_ =>
+            {
+                ATeam.Value.Points.ForceNotify();
+                BTeam.Value.Points.ForceNotify();
+
+                ATeam.Value.Timeouts.ForceNotify();
+                BTeam.Value.Timeouts.ForceNotify();
+
+                ATeam.Value.Substitutions.ForceNotify();
+                BTeam.Value.Substitutions.ForceNotify();
+
+                ATeam.Value.Name.ForceNotify();
+                BTeam.Value.Name.ForceNotify();
+
+                ATeam.Value.Color.ForceNotify();
+                BTeam.Value.Color.ForceNotify();
+            });
         }
         //public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         //public ReactiveProperty<DataTable> RightTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         //public ReactiveProperty<bool> UndoEnable { get; private set; } = Game.Instance.ObserveProperty(x => x.UndoEnable).ToReactiveProperty();
 
-        
+
 
 
         //コマンド
         public ReactiveCommand UndoCommand { get; set; } = new();
-        
+
+        public ReactiveProperty<bool> UndoEnable { get; set; }
+        public ReactiveProperty<bool> IsEnablePoint { get; set; }
+        public ReactiveProperty<bool> IsEnableTimeout { get; set; }
+
+
         public ReactiveProperty<Team> ATeam { get; set; }
         public ReactiveProperty<Team> BTeam { get; set; }
 
-        ////デバッグ
+        //デバッグ
         public ReactiveProperty<string> DebugMessage { get; private set; }
 
-        ////左右情報
-        public ReactiveProperty<string> LeftSideTeamName { get; set; }
-        public ReactiveProperty<string> RightSideTeamName { get; set; }
+        //左右情報
+        public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();
+        public ReactiveProperty<string> RightSideTeamName { get; set; } = new();
         public ReactiveProperty<int> LeftSidePoints { get; set; } = new();
         public ReactiveProperty<int> RightSidePoints { get; set; } = new();
-        public ReactiveProperty<string> RightTeamColor { get; set; }
-        public ReactiveProperty<string> LeftTeamColor { get; set; }
+        public ReactiveProperty<string> RightTeamColor { get; set; } = new();
+        public ReactiveProperty<string> LeftTeamColor { get; set; } = new();
 
 
         public ReactiveCommand LeftSidePointAdd { get; } = new ReactiveCommand();
@@ -122,8 +190,6 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveCommand RequestTimeOutCommand { get; } = new();
         public ReactiveProperty<int> LeftSideTimeOuts { get; } = new();
         public ReactiveProperty<int> RightSideTimeOuts { get; } = new();
-        //public ReactiveCommand LeftSideTimeOutCommand { get; } = new ReactiveCommand();
-        //public ReactiveCommand RightSideTimeOutCommand { get; } = new ReactiveCommand();
 
         ////サブスティテューション
         //public ReactiveCommand LeftSideSubstitutionCommand { get; } = new();

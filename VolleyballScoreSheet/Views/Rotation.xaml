@@ -30,25 +30,27 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="5"
-                    Text="{Binding ATeamName.Value}" />
+                    FontSize="30"
+                    Text="{Binding LeftSideTeamName.Value}" />
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="1"
                     Margin="5"
-                    Text="{Binding BTeamName.Value}" />
+                    FontSize="30"
+                    Text="{Binding RightSideTeamName.Value}" />
 
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="0"
                     Margin="5"
                     IsReadOnly="True"
-                    ItemsSource="{Binding ATeamPlayer.Value}" />
+                    ItemsSource="{Binding LeftPlayer.Value}" />
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="1"
                     Margin="5"
                     IsReadOnly="True"
-                    ItemsSource="{Binding BTeamPlayer.Value}" />
+                    ItemsSource="{Binding RightPlayer.Value}" />
 
 
                 <Grid Grid.Row="2" Grid.Column="0">
@@ -65,32 +67,32 @@
                         Grid.Row="1"
                         Grid.Column="2"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[0]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[0]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="2"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[1]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[1]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[2]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[2]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[3]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[3]}" />
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="0"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[4]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[4]}" />
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="1"
                         Margin="5"
-                        Text="{Binding ATeamRotation.Value[5]}" />
+                        Text="{Binding LeftTeamRotatiton.Value[5]}" />
                 </Grid>
 
 
@@ -109,32 +111,32 @@
                         Grid.Row="1"
                         Grid.Column="2"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[0]}" />
+                        Text="{Binding RightTeamRotatiton.Value[0]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="2"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[1]}" />
+                        Text="{Binding RightTeamRotatiton.Value[1]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[2]}" />
+                        Text="{Binding RightTeamRotatiton.Value[2]}" />
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[3]}" />
+                        Text="{Binding RightTeamRotatiton.Value[3]}" />
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="0"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[4]}" />
+                        Text="{Binding RightTeamRotatiton.Value[4]}" />
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="1"
                         Margin="5"
-                        Text="{Binding BTeamRotation.Value[5]}" />
+                        Text="{Binding RightTeamRotatiton.Value[5]}" />
                 </Grid>
             </Grid>
             <Button

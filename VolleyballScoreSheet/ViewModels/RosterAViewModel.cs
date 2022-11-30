@@ -120,7 +120,8 @@ namespace VolleyballScoreSheet.ViewModels
 
                     _game.ATeam.Value.Players.Add(new Player()
                     {
-                        Id = int.Parse(row.ItemArray[0].ToString())
+                        Id = int.Parse(row.ItemArray[0].ToString()),
+                        Name = row.ItemArray[1].ToString()
                     });
                 }
                 Navigate("RosterB");

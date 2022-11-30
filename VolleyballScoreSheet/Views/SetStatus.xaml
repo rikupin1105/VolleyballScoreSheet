@@ -10,6 +10,7 @@
             <Setter Property="FontWeight" Value="Black" />
         </Style>
     </UserControl.Resources>
+
     <Border
         Margin="10"
         Background="White"
@@ -19,7 +20,8 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
@@ -36,8 +38,10 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding ATeamName.Value}" />
+                <TextBlock Text="{Binding ATeamName.Value}" />
+
                 <TextBlock Grid.Row="1" Text="{Binding BTeamName.Value}" />
+
 
 
 
@@ -107,22 +111,32 @@
                         Foreground="White"
                         TextAlignment="Center">
                         <Run Text="SET " />
-                        <Run Text="1" />
+                        <Run Text="{Binding SetCount.Value}" />
                     </TextBlock>
                 </Border>
                 <TextBlock
                     Margin="0,0,0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Text="14:02" />
+                    Text="{Binding DataTime.Value}" />
             </StackPanel>
             <Button
                 Grid.Column="2"
                 Padding="15"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Stretch"
                 Command="{Binding EndCommand}"
                 Content="{Binding EndText.Value}"
-                FontSize="20" />
+                FontSize="20"
+                Style="{StaticResource LightButton}" />
+
+            <Button
+                Grid.Column="4"
+                Padding="15"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                Content="得点板(future)"
+                FontSize="20"
+                Style="{StaticResource LightButton}" />
         </Grid>
     </Border>
 </UserControl>

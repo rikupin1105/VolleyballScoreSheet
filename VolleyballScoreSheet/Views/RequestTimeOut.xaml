@@ -8,6 +8,7 @@
     <UserControl.Resources>
         <local:HiddenOrVissible x:Key="HiddenOrVissible" />
     </UserControl.Resources>
+
     <StackPanel>
         <TextBlock
             HorizontalAlignment="Center"
@@ -17,20 +18,31 @@
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button
                 Margin="10"
+                Padding="20,0"
                 Background="{Binding LeftTeamColor.Value}"
+                Command="{Binding LeftCommand}"
                 Content="{Binding LeftTeamName.Value}"
                 FontSize="40"
-                Foreground="White" />
+                Foreground="White"
+                Style="{StaticResource ColorButton}" />
             <Button
                 Margin="10"
+                Padding="20,0"
                 Background="{Binding RightTeamColor.Value}"
+                Command="{Binding RightCommand}"
                 Content="{Binding RightTeamName.Value}"
                 FontSize="40"
-                Foreground="White" />
+                Foreground="White"
+                Style="{StaticResource ColorButton}" />
         </StackPanel>
         <Button
+            Padding="20,10"
             HorizontalAlignment="right"
             VerticalAlignment="Bottom"
-            Content="キャンセル" />
+            VerticalContentAlignment="Bottom"
+            Command="{Binding CancelCommand}"
+            Content="キャンセル"
+            FontSize="20"
+            Style="{StaticResource LightButton}" />
     </StackPanel>
 </UserControl>

@@ -68,11 +68,11 @@ namespace VolleyballScoreSheet.ViewModels
 
                    _game.BTeam.Value.Players.Add(new Player()
                     {
-                        Id = int.Parse(row.ItemArray[0].ToString())
-                        //Name = (string)row.ItemArray[1]
+                        Id = int.Parse(row.ItemArray[0].ToString()),
+                        Name = row.ItemArray[1].ToString()
                     });
                 }
-                Navigate("CoinToss");
+                Navigate("Gaming");
             }
         }
 

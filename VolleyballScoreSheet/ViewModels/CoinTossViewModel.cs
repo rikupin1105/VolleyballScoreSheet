@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 using Prism.Regions;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using VolleyballScoreSheet.Model;
 
 namespace VolleyballScoreSheet.ViewModels
 {
-    public class CoinTossViewModel
+    public class CoinTossViewModel : BinableBase
     {
         public ReactiveCommand SwitchCourtCommand { get; } = new ReactiveCommand();
         public ReactiveCommand SwitchServerCommand { get; } = new ReactiveCommand();
         public ReactiveCommand NextCommand { get; } = new ReactiveCommand();
 
-        public ReactiveProperty<string> LeftTeam { get; private set; }
-        public ReactiveProperty<string> RightTeam { get; private set; }
+        public ReactiveProperty<bool> DisplayCoinToss { get; set; }
+
+
         public ReactiveProperty<string> LeftTeamToss { get; private set; } = new ReactiveProperty<string>();
         public ReactiveProperty<string> RightTeamToss { get; private set; } = new ReactiveProperty<string>();
 
-        private readonly IRegionManager _regionManager;
         private readonly Game _game;
-        public CoinTossViewModel(Game game, IRegionManager regionManager)
+        public CoinTossViewModel(Game game)
         {
             _game = game;
-            _regionManager = regionManager;
 
             LeftTeamToss.Value ="Server";
             RightTeamToss.Value ="Reception";
@@ -33,13 +33,12 @@ namespace VolleyballScoreSheet.ViewModels
             SwitchServerCommand.Subscribe(_ => SwitchServer());
             NextCommand.Subscribe(_ => Next());
 
-            LeftTeam = _game.ToReactivePropertyAsSynchronized(x => x.LeftTeam.Name.Value);
-            RightTeam = _game.ToReactivePropertyAsSynchronized(x => x.RightTeam.Name.Value);
+            DisplayCoinToss = _game.ToReactivePropertyAsSynchronized(x => x.DisplayCoinToss.Value);
         }
         public void SwitchCourt()
         {
-            (_game.ATeam, _game.BTeam) = (_game.BTeam, _game.ATeam);
-            (LeftTeam, RightTeam) = (RightTeam, LeftTeam);
+            _game.CourtChange();
+
             (LeftTeamToss.Value, RightTeamToss.Value) = (RightTeamToss.Value, LeftTeamToss.Value);
         }
         public void SwitchServer()
@@ -48,7 +47,7 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void Next()
         {
-            if (_game.ATeam.Value.Name.Value == LeftTeam.Value)
+            if (_game.isATeamLeft.Value)
             {
                 _game.CoinToss.ATeamLeftSide = true;
                 _game.CoinToss.BTeamLeftSide = false;
@@ -93,12 +92,7 @@ namespace VolleyballScoreSheet.ViewModels
                     _game.NextServeTeam(true);
                 }
             }
-            Navigate("BeforeMatch");
-        }
-        private void Navigate(string navigatePath)
-        {
-            if (navigatePath != null)
-                _regionManager.RequestNavigate("ContentRegion", navigatePath);
+            _game.DisplayMain("BeforeMatch");
         }
     }
 }

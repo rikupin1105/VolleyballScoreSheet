@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     Title="DialogWindow"
-    Width="800"
-    Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    ResizeMode="CanResize"
+    SizeToContent="Manual"
     WindowStartupLocation="CenterOwner">
     <StackPanel />
 </Window>

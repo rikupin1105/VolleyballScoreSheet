@@ -14,8 +14,11 @@
 
         <Style x:Key="LeftMemerBorder" TargetType="Border">
             <Setter Property="Margin" Value="5" />
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
             <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#d0d0d0" />
+
         </Style>
 
         <Style x:Key="LeftMemerColor" TargetType="TextBlock">
@@ -26,9 +29,11 @@
         </Style>
 
         <Style x:Key="RightMemerBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#d0d0d0" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="Background" Value="White" />
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
 
         </Style>
         <Style x:Key="RightMemerColor" TargetType="TextBlock">
@@ -80,12 +85,7 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
 
 
                     <TextBlock FontSize="50" Text="{Binding LeftSideRotation.Value[0]}">
@@ -105,12 +105,6 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Style="{StaticResource LeftMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource LeftMemerColor}"
@@ -121,12 +115,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Style="{StaticResource LeftMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource LeftMemerColor}"
@@ -137,12 +126,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Style="{StaticResource LeftMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource LeftMemerColor}"
@@ -153,12 +137,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Style="{StaticResource LeftMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource LeftMemerColor}"
@@ -169,12 +148,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Style="{StaticResource LeftMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource LeftMemerColor}"
@@ -203,12 +177,7 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock FontSize="50" Text="{Binding RightSideRotation.Value[0]}">
                         <TextBlock.Style>
                             <Style BasedOn="{StaticResource RightMemerColor}" TargetType="TextBlock">
@@ -226,12 +195,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Style="{StaticResource RightMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource RightMemerColor}"
@@ -242,12 +206,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Style="{StaticResource RightMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource RightMemerColor}"
@@ -258,12 +217,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Style="{StaticResource RightMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource RightMemerColor}"
@@ -274,12 +228,7 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Style="{StaticResource RightMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource RightMemerColor}"
@@ -290,12 +239,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Style="{StaticResource RightMemerBorder}">
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="10"
-                            Opacity="0.3"
-                            ShadowDepth="3" />
-                    </Border.Effect>
+
                     <TextBlock
                         FontSize="50"
                         Style="{StaticResource RightMemerColor}"

@@ -8,6 +8,11 @@
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#303030" />
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
         <StackPanel Margin="20">
             <Label Margin="5,0,5,0">試合名</Label>

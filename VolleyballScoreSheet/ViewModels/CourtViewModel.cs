@@ -20,19 +20,63 @@ namespace VolleyballScoreSheet.ViewModels
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
             BTeam = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value);
 
-            LeftTeamColor = _game.ToReactivePropertyAsSynchronized(x=>x.LeftTeam.Color.Value);
-            RightTeamColor = _game.ToReactivePropertyAsSynchronized(x=>x.RightTeam.Color.Value);
-
-            ATeam.Value.Sets[^1].Rotation.Subscribe(x=> 
+            ATeam.Value.Color.Subscribe(x =>
             {
-                LeftSideRotation.Value = x;
-                LeftSideRotation.ForceNotify();
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftTeamColor.Value=x;
+                }
+                else
+                {
+                    RightTeamColor.Value=x;
+                }
+            });
+            BTeam.Value.Color.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightTeamColor.Value=x;
+                }
+                else
+                {
+                    LeftTeamColor.Value=x;
+                }
             });
 
-            BTeam.Value.Sets[^1].Rotation.Subscribe(x =>
+            ATeam.Value.Rotation.Subscribe(x =>
             {
-                RightSideRotation.Value = x;
-                RightSideRotation.ForceNotify();
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftSideRotation.Value = x;
+                    LeftSideRotation.ForceNotify();
+                }
+                else
+                {
+                    RightSideRotation.Value = x;
+                    RightSideRotation.ForceNotify();
+                }
+            });
+            BTeam.Value.Rotation.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightSideRotation.Value = x;
+                    RightSideRotation.ForceNotify();
+                }
+                else
+                {
+                    LeftSideRotation.Value = x;
+                    LeftSideRotation.ForceNotify();
+                }
+            });
+
+            _game.isATeamLeft.Subscribe(_ =>
+            {
+                ATeam.Value.Rotation.ForceNotify();
+                BTeam.Value.Rotation.ForceNotify();
+
+                ATeam.Value.Color.ForceNotify();
+                BTeam.Value.Color.ForceNotify();
             });
 
             isLeftServe = _game.ToReactivePropertyAsSynchronized(x => x.isLeftServe.Value);

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xaml.Behaviors.Media;
 using Prism.Mvvm;
+using Prism.Regions;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,29 +12,167 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolleyballScoreSheet.Model;
+using VolleyballScoreSheet.Views;
 using Windows.Devices.Display.Core;
 
 namespace VolleyballScoreSheet
 {
     public class Game : BindableBase
     {
-        public List<string> History { get; set; } = new List<string>() { "SG", "S1" };
+        public Game()
+        {
+            History.Subscribe(x =>
+            {
+                if (x.Count>1) UndoEnable.Value = true;
+                else UndoEnable.Value = false;
+                Debug.Value = string.Join(" , ", x);
+            });
 
+            ATeam.Value.CreateSet();
+            BTeam.Value.CreateSet();
+        }
+        public ReactiveProperty<List<string>> History { get; } = new(new List<string>() { "SG" });
+        public void HistoryAdd(string s)
+        {
+            History.Value.Add(s);
+            History.ForceNotify();
+        }
+        public void HistoryRemove()
+        {
+            History.Value.RemoveAt(History.Value.Count - 1);
+
+            History.ForceNotify();
+        }
+        public ReactivePropertySlim<int> Set { get; set; } = new(1);
+
+
+        public ReactivePropertySlim<bool> IsEnablePoint { get; set; } = new(false);
+        public ReactivePropertySlim<bool> IsEnableTimeout { get; set; } = new(false);
+
+        public ReactivePropertySlim<bool> DisplayCoinToss { get; set; } = new(true);
+        public ReactivePropertySlim<bool> DisplayBeforeMatch { get; set; } = new(false);
+        public ReactivePropertySlim<bool> DisplayRotation { get; set; } = new(false);
         public ReactivePropertySlim<bool> DisplayRequestTimeOut { get; set; } = new(false);
-        public ReactivePropertySlim<bool> DisplayRotation { get; set; } = new(true);
+
+        public ReactivePropertySlim<string> Debug { get; set; } = new();
+
+        public void DisplayMain(string s)
+        {
+            DisplayRotation.Value = false;
+            DisplayRequestTimeOut.Value = false;
+            DisplayBeforeMatch.Value = false;
+            DisplayCoinToss.Value = false;
+
+            if (s=="Rotation")
+            {
+                IsEnableTimeout.Value=true;
+                IsEnablePoint.Value=true;
+
+                DisplayRotation.Value = true;
+            }
+            else if (s=="TimeOut")
+            {
+                IsEnableTimeout.Value = false;
+                IsEnablePoint.Value = false;
+
+                DisplayRequestTimeOut.Value = true;
+            }
+            else if (s=="BeforeMatch")
+            {
+                DisplayBeforeMatch.Value = true;
+            }
+            else if (s=="CoinToss")
+            {
+                IsEnableTimeout.Value=false;
+                IsEnablePoint.Value=false;
+
+                DisplayCoinToss.Value = true;
+            }
+        }
+
         public void RequestTimeOut()
         {
-            DisplayRotation.Value = !DisplayRotation.Value;
-            DisplayRequestTimeOut.Value = !DisplayRequestTimeOut.Value;
+            DisplayMain("TimeOut");
+        }
+        public void TimeOut(bool isATeam)
+        {
+            if (isATeam)
+            {
+                //タイムアウト可能判定
+                //ヒストリー追加
+                //計測(Feature)
+                if (ATeam.Value.Sets[^1].TimeOut.Value>=2)
+                {
+                    //タイムアウト不可
+                }
+                else
+                {
+                    ATeam.Value.TimeOut();
+                    HistoryAdd("TA");
+                }
+            }
+            else
+            {
+                if (BTeam.Value.Sets[^1].TimeOut.Value>=2)
+                {
+                    //タイムアウト不可
+                }
+                else
+                {
+                    BTeam.Value.TimeOut();
+                    HistoryAdd("TB");
+                }
+            }
+
+            //ローテーション表示に戻す
+            DisplayMain("Rotation");
+        }
+        public void TimeOutSide(bool isLeftTeam)
+        {
+            if (isLeftTeam)
+            {
+                if (isATeamLeft.Value)
+                {
+                    TimeOut(true);
+                }
+                else
+                {
+                    TimeOut(false);
+                }
+            }
+            else
+            {
+                if (isATeamLeft.Value)
+                {
+                    TimeOut(false);
+                }
+                else
+                {
+                    TimeOut(true);
+                }
+            }
+        }
+        public void CancelTimeOut()
+        {
+            DisplayMain("Rotation");
         }
 
         public void Undo()
         {
-            if (History.Count == 1) return;
+            //PA Aチームの得点
+            //PB Bチームの得点
+            //TA Aチームのタイムアウト
+            //TB Bチームのタイムアウト
 
-            var c = History[^1];
+            if (History.Value.Count == 1)
+            {
+                return;
+            }
+
+            var c = History.Value[^1];
             if (c[0] == 'P')
             {
+                HistoryRemove();
                 if (c[1]=='A')
                 {
                     PointRemove(true);
@@ -41,43 +181,95 @@ namespace VolleyballScoreSheet
                 {
                     PointRemove(false);
                 }
+                return;
+            }
+            else if (c[0]=='S')
+            {
+                var set = int.Parse(c[1].ToString());
+                HistoryRemove();
+
+                DisplayMain("BeforeMatch");
+                IsEnableTimeout.Value= false;
+                IsEnablePoint.Value=false;
+
+                return;
+            }
+            else if (c[0]=='G' && c[1]=='S')
+            {
+                HistoryRemove();
+                ATeam.Value.DeleteSet();
+                BTeam.Value.DeleteSet();
+
+                DisplayMain("Rotation");
+
+                IsEnablePoint.Value=false;
+                IsEnableTimeout.Value=false;
+
+                Set.Value--;
+
+                if (History.Value[^1]=="PA")
+                {
+                    ATeam.Value.WinSets.Value--;
+                    NextServeTeam(true);
+                }
+                else if (History.Value[^1]=="PB")
+                {
+                    BTeam.Value.WinSets.Value--;
+                    NextServeTeam(false);
+                }
+
+                if (Rule.CourtChangeEnable)
+                {
+                    CourtChange();
+                }
 
                 return;
             }
 
             else if (c=="TA")
             {
-                ATeam.Value.Sets[^1].TimeOut.Value++;
+                ATeam.Value.TimeOut(-1);
             }
             else if (c=="TB")
             {
-                BTeam.Value.Sets[^1].TimeOut.Value++;
+                BTeam.Value.TimeOut(-1);
             }
 
-            History.RemoveAt(History.Count - 1);
+            HistoryRemove();
         }
         public void EndSet()
         {
-            if (Rule.CourtChangeEnable)
-            {
-                //コートチェンジ
-            }
+            //ATeam.Value.Sets[^1].Point.ForceNotify();
+
+            HistoryAdd("GS"+Set.Value);
+            Set.Value++;
 
             ATeam.Value.CreateSet();
             BTeam.Value.CreateSet();
 
-            ATeam.ForceNotify();
-            BTeam.ForceNotify();
+            if(Set.Value==Rule.SetCount)
+            {
+                //コートチェンジせずにコイントスへ
+                DisplayMain("CoinToss");
+            }
+            else if (Rule.CourtChangeEnable)
+            {
+                //コートチェンジ
+                CourtChange();
+            }
+            
+            DisplayMain("BeforeMatch");
         }
+
         public void Point(bool isATeam)
         {
             if (isATeam)
             {
                 //ポイント追加
-                ATeam.Value.Sets[^1].Point.Value++;
+                ATeam.Value.Point();
 
                 //ヒストリー追加
-                History.Add("PA");
+                HistoryAdd("PA");
 
                 //ファイナルセット終了
                 if (ATeam.Value.Sets[^1].Point.Value == Rule.SetCount &&
@@ -86,11 +278,14 @@ namespace VolleyballScoreSheet
                 {
                     //操作ロック
                     //END GAME
+
+                    IsEnablePoint.Value = false;
+                    IsEnableTimeout.Value = false;
+
+                    EndButtonText.Value = "END GAME";
                 }
-
-
                 //ノーマルセット終了
-                if (ATeam.Value.Sets[^1].Point.Value >= Rule.ToWinPoint &&
+                else if (ATeam.Value.Sets[^1].Point.Value >= Rule.ToWinPoint &&
                     ATeam.Value.Sets[^1].Point.Value - BTeam.Value.Sets[^1].Point.Value>=2)
                 {
                     ATeam.Value.WinSets.Value++;
@@ -100,184 +295,105 @@ namespace VolleyballScoreSheet
                     {
                         //操作ロック
                         //END GAME
+
+                        IsEnablePoint.Value = false;
+                        IsEnableTimeout.Value = false;
+
+                        EndButtonText.Value = "END GAME";
                     }
                     //セット終了
                     else
                     {
                         //操作ロック
                         //END SET
+                        IsEnablePoint.Value = false;
+                        IsEnableTimeout.Value = false;
+
                         EndButtonText.Value = "END SET";
                     }
+                }
+                else
+                {
+                    IsEnablePoint.Value = true;
+                    IsEnableTimeout.Value = true;
                 }
 
                 //ローテーション
                 if (!isLastPointA)
                 {
-                    ATeam.Value.Sets[^1].Rotate();
+                    ATeam.Value.Rotate();
                     NextServeTeam(true);
                 }
             }
             else
             {
-                BTeam.Value.Sets[^1].Point.Value++;
-                History.Add("PB");
+                //ポイント追加
+                BTeam.Value.Point();
+
+                //ヒストリー追加
+                HistoryAdd("PB");
+
+                //ファイナルセット終了
+                if (BTeam.Value.Sets[^1].Point.Value == Rule.SetCount &&
+                    BTeam.Value.Sets[^1].Point.Value >= Rule.FinalSetToWinPoint &&
+                    BTeam.Value.Sets[^1].Point.Value - ATeam.Value.Sets[^1].Point.Value>=2)
+                {
+                    //操作ロック
+                    //END GAME
+
+                    IsEnablePoint.Value = false;
+                    IsEnableTimeout.Value = false;
+
+                    EndButtonText.Value = "END GAME";
+                }
+                //ノーマルセット終了
+                else if (BTeam.Value.Sets[^1].Point.Value >= Rule.ToWinPoint &&
+                    BTeam.Value.Sets[^1].Point.Value - ATeam.Value.Sets[^1].Point.Value>=2)
+                {
+                    BTeam.Value.WinSets.Value++;
+
+                    //ゲーム終了
+                    if (BTeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
+                    {
+                        //操作ロック
+                        //END GAME
+
+                        IsEnablePoint.Value = false;
+                        IsEnableTimeout.Value = false;
+
+                        EndButtonText.Value = "END GAME";
+                    }
+                    //セット終了
+                    else
+                    {
+                        //操作ロック
+                        //END SET
+                        IsEnablePoint.Value = false;
+                        IsEnableTimeout.Value = false;
+
+                        EndButtonText.Value = "END SET";
+                    }
+                }
+                else
+                {
+                    IsEnablePoint.Value = true;
+                    IsEnableTimeout.Value = true;
+                }
 
                 //ローテーション
                 if (isLastPointA)
                 {
-                    BTeam.Value.Sets[^1].Rotate();
+                    BTeam.Value.Rotate();
                     NextServeTeam(false);
                 }
             }
 
             //Debug.Value = string.Join("\n", History);
         }
-        public string Debug { get; set; } = "";
-        public void PointRemove(bool isATeam)
+        public void CourtChange()
         {
-            History.RemoveAt(History.Count - 1);
-            Debug = string.Join("\n", History);
-
-            if (isATeam)
-            {
-                ATeam.Value.Sets[^1].Point.Value--;
-                for (int i = History.Count-1; i >= 0; i--)
-                {
-                    if (History[i]=="PA")
-                    {
-                        //そのまま
-                        return;
-                    }
-                    else if (History[i]=="PB")
-                    {
-                        //ローテーションとサーバーを戻す
-                        ATeam.Value.Sets[^1].RotateReverse();
-                        NextServeTeam(false);
-                        return;
-                    }
-                    else if (History[i][0]=='S')
-                    {
-                        if (History[i][1] == Rule.SetCount)
-                        {
-                            if (FinalSetCoinToss.ATeamServer)
-                            {
-                                NextServeTeam(true);
-                            }
-                            else
-                            {
-                                NextServeTeam(false);
-                            }
-                            return;
-                        }
-                        else if (History[i][1]%2==0)
-                        {
-                            if (CoinToss.ATeamServer)
-                            {
-                                NextServeTeam(false);
-                            }
-                            else
-                            {
-                                NextServeTeam(true);
-                            }
-                            return;
-                        }
-                        else if (History[i][1]%2==1)
-                        {
-                            if (CoinToss.ATeamServer)
-                            {
-                                NextServeTeam(true);
-                            }
-                            else
-                            {
-                                NextServeTeam(false);
-                            }
-                        }
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                BTeam.Value.Sets[^1].Point.Value--;
-                for (int i = History.Count-1; i >= 0; i--)
-                {
-                    if (History[i]=="PB")
-                    {
-                        //そのまま
-                        return;
-                    }
-                    else if (History[i]=="PA")
-                    {
-                        //ローテーションとサーバーを戻す
-                        BTeam.Value.Sets[^1].RotateReverse();
-                        NextServeTeam(true);
-                        return;
-                    }
-                    else if (History[i][0]=='S')
-                    {
-                        if (History[i][1] == Rule.SetCount)
-                        {
-                            if (FinalSetCoinToss.ATeamServer)
-                            {
-                                NextServeTeam(false);
-                            }
-                            else
-                            {
-                                BTeam.Value.Sets[^1].RotateReverse();
-                                NextServeTeam(true);
-                            }
-                            return;
-                        }
-                        else if (History[i][1]%2==0)
-                        {
-                            if (CoinToss.ATeamServer)
-                            {
-                                NextServeTeam(false);
-                            }
-                            else
-                            {
-                                BTeam.Value.Sets[^1].RotateReverse();
-                                NextServeTeam(true);
-                            }
-                            return;
-                        }
-                        else if (History[i][1]%2==1)
-                        {
-                            if (CoinToss.ATeamServer)
-                            {
-                                BTeam.Value.Sets[^1].RotateReverse();
-                                NextServeTeam(true);
-                            }
-                            else
-                            {
-                                NextServeTeam(false);
-                            }
-                        }
-                        return;
-                    }
-                }
-            }
+            isATeamLeft.Value = !isATeamLeft.Value;
         }
-        public void TimeOut(bool isATeam)
-        {
-            if (isATeam)
-            {
-                //タイムアウト可能判定
-                //ヒストリー追加
-                //計測(Feature)
-                History.Add("TA");
-            }
-            else
-            {
-                History.Add("TB");
-            }
-        }
-        public void Substitution(bool isAteam, int In, int Out)
-        {
-            //Feature
-        }
-
-
         public void PointAdd(bool isLeftSide)
         {
             if (isLeftSide)
@@ -303,6 +419,152 @@ namespace VolleyballScoreSheet
                 }
             }
         }
+        public void PointRemove(bool isATeam)
+        {
+            if (isATeam)
+            {
+                ATeam.Value.Point(-1);
+
+                IsEnablePoint.Value = true;
+                IsEnableTimeout.Value = true;
+                for (int i = History.Value.Count-1; i >= 0; i--)
+                {
+                    if (History.Value[i]=="PA")
+                    {
+                        //そのまま
+                        return;
+                    }
+                    else if (History.Value[i]=="PB")
+                    {
+                        //ローテーションとサーバーを戻す
+                        ATeam.Value.RotateReverse();
+                        NextServeTeam(false);
+                        return;
+                    }
+                    else if (History.Value[i][0]=='S')
+                    {
+                        if (History.Value[i][1] == Rule.SetCount)
+                        {
+                            if (FinalSetCoinToss.ATeamServer)
+                            {
+                                NextServeTeam(true);
+                            }
+                            else
+                            {
+                                NextServeTeam(false);
+                            }
+                            return;
+                        }
+                        else if (History.Value[i][1] =='1')
+                        {
+                            UndoEnable.Value = true;
+                            if (CoinToss.ATeamServer)
+                            {
+                                NextServeTeam(true);
+                            }
+                            else
+                            {
+                                NextServeTeam(false);
+                            }
+                        }
+                        else if (History.Value[i][1]%2==0)
+                        {
+                            if (CoinToss.ATeamServer)
+                            {
+                                NextServeTeam(false);
+                            }
+                            else
+                            {
+                                NextServeTeam(true);
+                            }
+                            return;
+                        }
+                        else if (History.Value[i][1]%2==1)
+                        {
+                            if (CoinToss.ATeamServer)
+                            {
+                                NextServeTeam(true);
+                            }
+                            else
+                            {
+                                NextServeTeam(false);
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                BTeam.Value.Point(-1);
+                IsEnablePoint.Value = true;
+                IsEnableTimeout.Value = true;
+
+                for (int i = History.Value.Count-1; i >= 0; i--)
+                {
+                    if (History.Value[i]=="PB")
+                    {
+                        //そのまま
+                        return;
+                    }
+                    else if (History.Value[i]=="PA")
+                    {
+                        //ローテーションとサーバーを戻す
+                        BTeam.Value.RotateReverse();
+                        NextServeTeam(true);
+                        return;
+                    }
+                    else if (History.Value[i][0]=='S')
+                    {
+                        if (History.Value[i][1] == Rule.SetCount)
+                        {
+                            if (FinalSetCoinToss.ATeamServer)
+                            {
+                                NextServeTeam(false);
+                            }
+                            else
+                            {
+                                BTeam.Value.RotateReverse();
+                                NextServeTeam(true);
+                            }
+                            return;
+                        }
+                        else if (History.Value[i][1]%2==0)
+                        {
+                            if (CoinToss.ATeamServer)
+                            {
+                                NextServeTeam(false);
+                            }
+                            else
+                            {
+                                BTeam.Value.RotateReverse();
+                                NextServeTeam(true);
+                            }
+                            return;
+                        }
+                        else if (History.Value[i][1]%2==1)
+                        {
+                            if (CoinToss.ATeamServer)
+                            {
+                                BTeam.Value.RotateReverse();
+                                NextServeTeam(true);
+                            }
+                            else
+                            {
+                                NextServeTeam(false);
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void Substitution(bool isAteam, int In, int Out)
+        {
+            //Feature
+        }
+
         public void NextServeTeam(bool isATeam)
         {
             if (isATeam)
@@ -332,7 +594,7 @@ namespace VolleyballScoreSheet
 
         }
 
-        public bool UndoEnable { get; set; } = false;
+        public ReactivePropertySlim<bool> UndoEnable { get; set; } = new(false);
         public ReactivePropertySlim<bool> isATeamLeft { get; set; } = new(true);
         public ReactivePropertySlim<bool> isLeftServe { get; set; } = new(true);
         public ReactivePropertySlim<string> EndButtonText { get; set; } = new("END GAME");
@@ -379,8 +641,8 @@ namespace VolleyballScoreSheet
 
 
         public Referees Referees { get; set; } = new();
-        public CoinToss? CoinToss { get; set; } = new();
-        public CoinToss? FinalSetCoinToss { get; set; } = new();
+        public Model.CoinToss? CoinToss { get; set; } = new();
+        public Model.CoinToss? FinalSetCoinToss { get; set; } = new();
         public Rule Rule { get; set; } = new();
     }
 }
