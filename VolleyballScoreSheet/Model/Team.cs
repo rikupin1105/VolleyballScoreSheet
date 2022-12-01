@@ -68,6 +68,7 @@ namespace VolleyballScoreSheet.Model
         public ReactivePropertySlim<int> Timeouts { get; } = new();
         public ReactivePropertySlim<int> Substitutions { get; } = new();
         public ReactivePropertySlim<int[]> Rotation { get; } = new();
+        public ReactivePropertySlim<int[]> StartingLineUp { get; } = new();
 
         public ObservableCollection<Set> Sets { get; set; } = new();
         public ReactivePropertySlim<int> WinSets { get; set; } = new(0);

@@ -13,6 +13,7 @@ namespace VolleyballScoreSheet
         //public List<SubstitutionDetail> ATeamSubstitution { get; set; } = new();
         //public List<SubstitutionDetail> BTeamSubstitution { get; set; } = new();
 
+        public ReactivePropertySlim<int[]> StartingLineUp { get; set; } = new();
         public ReactivePropertySlim<int[]> Rotation { get; set; } = new();
     }
     //public class SubstitutionDetail

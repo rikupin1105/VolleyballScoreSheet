@@ -47,15 +47,59 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void Next()
         {
+            if (_game.Set.Value==_game.Rule.SetCount)
+            {
+                //ファイナルセット用コイントス
+                if (_game.isATeamLeft.Value)
+                {
+                    _game.FinalSetCoinToss.ATeamLeftSide = true;
+                }
+                else
+                {
+                    _game.FinalSetCoinToss.ATeamLeftSide = false;
+                }
+
+                if (_game.isATeamLeft.Value)
+                {
+                    if (LeftTeamToss.Value == "Server")
+                    {
+                        _game.FinalSetCoinToss.ATeamServer = true;
+
+                        _game.NextServeTeam(true);
+                    }
+                    else
+                    {
+                        _game.FinalSetCoinToss.ATeamServer = false;
+
+                        _game.NextServeTeam(false);
+                    }
+                }
+                else
+                {
+                    if (LeftTeamToss.Value == "Server")
+                    {
+                        _game.FinalSetCoinToss.ATeamServer = false;
+
+                        _game.NextServeTeam(false);
+                    }
+                    else
+                    {
+                        _game.FinalSetCoinToss.ATeamServer = true;
+
+                        _game.NextServeTeam(true);
+                    }
+                }
+                _game.DisplayMain("BeforeMatch");
+                return;
+            }
+
             if (_game.isATeamLeft.Value)
             {
                 _game.CoinToss.ATeamLeftSide = true;
-                _game.CoinToss.BTeamLeftSide = false;
             }
             else
             {
                 _game.CoinToss.ATeamLeftSide = false;
-                _game.CoinToss.BTeamLeftSide = true;
             }
 
             if (_game.isATeamLeft.Value)
@@ -63,14 +107,12 @@ namespace VolleyballScoreSheet.ViewModels
                 if (LeftTeamToss.Value == "Server")
                 {
                     _game.CoinToss.ATeamServer = true;
-                    _game.CoinToss.BTeamServer = false;
 
                     _game.NextServeTeam(true);
                 }
                 else
                 {
                     _game.CoinToss.ATeamServer = false;
-                    _game.CoinToss.BTeamServer = true;
 
                     _game.NextServeTeam(false);
                 }
@@ -80,14 +122,12 @@ namespace VolleyballScoreSheet.ViewModels
                 if (LeftTeamToss.Value == "Server")
                 {
                     _game.CoinToss.ATeamServer = false;
-                    _game.CoinToss.BTeamServer = true;
 
                     _game.NextServeTeam(false);
                 }
                 else
                 {
                     _game.CoinToss.ATeamServer = true;
-                    _game.CoinToss.BTeamServer = false;
 
                     _game.NextServeTeam(true);
                 }

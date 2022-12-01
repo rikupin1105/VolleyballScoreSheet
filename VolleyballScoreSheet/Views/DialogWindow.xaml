@@ -6,10 +6,11 @@
     xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DialogWindow"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    ResizeMode="CanResize"
-    SizeToContent="Manual"
     WindowStartupLocation="CenterOwner">
-    <StackPanel />
+    <StackPanel>
+        <!--<wpfui:TitleBar CanMaximize="False" />-->
+    </StackPanel>
 </Window>

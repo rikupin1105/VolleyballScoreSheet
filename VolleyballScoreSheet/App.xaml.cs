@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using Prism.Unity;
 using VolleyballScoreSheet;
 using Prism.Modularity;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace VolleyballScoreSheet
 {

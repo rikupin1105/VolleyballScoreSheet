@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Background="#f8f8f8">
 
     <UserControl.Resources>
@@ -95,7 +96,7 @@
                                         Background="#303030"
                                         CornerRadius="0,5,5,0">
                                         <TextBlock
-                                            Margin="10,5"
+                                            Margin="10,0"
                                             FontSize="15"
                                             FontWeight="Black"
                                             Foreground="White"
@@ -237,7 +238,7 @@
 
                     <Button
                         Grid.ColumnSpan="2"
-                        Margin="0,0,0,5"
+                        Margin="0,0,0,2"
                         Command="{Binding RequestTimeOutCommand}"
                         Content="TIMEOUT"
                         FontSize="20"
@@ -247,7 +248,7 @@
                     <Button
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
+                        Margin="0,2,0,0"
                         Command="{Binding UndoCommand}"
                         Content="UNDO"
                         FontSize="20"
@@ -256,11 +257,12 @@
                 </Grid>
 
             </Grid>
+
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
@@ -268,29 +270,309 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
+
+                <Viewbox Grid.Row="0" Grid.Column="0">
+                    <!--  スターティングラインナップ  -->
+                    <Border
+                        Margin="5"
+                        Background="White"
+                        BorderBrush="#303030"
+                        BorderThickness="2"
+                        CornerRadius="5">
+
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="20"
+                                Text="Ⅰ" />
+                            <TextBlock
+                                Grid.Column="1"
+                                FontSize="20"
+                                Text="Ⅱ" />
+                            <TextBlock
+                                Grid.Column="2"
+                                FontSize="20"
+                                Text="Ⅲ" />
+                            <TextBlock
+                                Grid.Column="3"
+                                FontSize="20"
+                                Text="Ⅳ" />
+                            <TextBlock
+                                Grid.Column="4"
+                                FontSize="20"
+                                Text="Ⅴ" />
+                            <TextBlock
+                                Grid.Column="5"
+                                FontSize="20"
+                                Text="Ⅵ" />
+
+                            <Border
+                                Grid.ColumnSpan="6"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,0,2" />
+                            <Border
+                                Grid.Row="1"
+                                Grid.ColumnSpan="6"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,0,2" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="1"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="2"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="3"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="4"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+
+                            <Border
+                                Grid.Row="2"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="1"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="9" />
+                            </Border>
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[0]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[1]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[2]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[3]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[4]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                FontSize="20"
+                                Text="{Binding LeftTeamStartingLineUp.Value[5]}" />
+                        </Grid>
+                    </Border>
+                </Viewbox>
+                <Viewbox Grid.Row="0" Grid.Column="2">
+                    <!--  スターティングラインナップ  -->
+                    <Border
+                        Margin="5"
+                        Background="White"
+                        BorderBrush="#303030"
+                        BorderThickness="2"
+                        CornerRadius="5">
+
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="20"
+                                Text="Ⅰ" />
+                            <TextBlock
+                                Grid.Column="1"
+                                FontSize="20"
+                                Text="Ⅱ" />
+                            <TextBlock
+                                Grid.Column="2"
+                                FontSize="20"
+                                Text="Ⅲ" />
+                            <TextBlock
+                                Grid.Column="3"
+                                FontSize="20"
+                                Text="Ⅳ" />
+                            <TextBlock
+                                Grid.Column="4"
+                                FontSize="20"
+                                Text="Ⅴ" />
+                            <TextBlock
+                                Grid.Column="5"
+                                FontSize="20"
+                                Text="Ⅵ" />
+
+                            <Border
+                                Grid.ColumnSpan="6"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,0,2" />
+                            <Border
+                                Grid.Row="1"
+                                Grid.ColumnSpan="6"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,0,2" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="1"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="2"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="3"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+                            <Border
+                                Grid.RowSpan="3"
+                                Grid.Column="4"
+                                BorderBrush="#303030"
+                                BorderThickness="0,0,2,0" />
+
+                            <Border
+                                Grid.Row="2"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="1"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="9" />
+                            </Border>
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[0]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[1]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[2]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[3]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[4]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                FontSize="20"
+                                Text="{Binding RightTeamStartingLineUp.Value[5]}" />
+                        </Grid>
+                    </Border>
+                </Viewbox>
                 <DataGrid
+                    Grid.Row="1"
                     Grid.Column="0"
                     Margin="5"
                     IsReadOnly="True"
                     ItemsSource="{Binding LeftTeamPlayer.Value}" />
                 <DataGrid
+                    Grid.Row="1"
                     Grid.Column="2"
                     Margin="5"
                     IsReadOnly="True"
                     ItemsSource="{Binding RightTeamPlayer.Value}" />
 
                 <!--  コート  -->
-                <local:Court Grid.Column="1" Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:Court
+                    Grid.RowSpan="3"
+                    Grid.Column="1"
+                    Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
 
                 <!--  タイムアウトリクエスト  -->
-                <local:RequestTimeOut Grid.Column="1" Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:RequestTimeOut
+                    Grid.RowSpan="3"
+                    Grid.Column="1"
+                    Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
 
-                <local:BeforeMatch Grid.Column="1" Visibility="{Binding DisplayBeforeMatch.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:BeforeMatch
+                    Grid.RowSpan="3"
+                    Grid.Column="1"
+                    Visibility="{Binding DisplayBeforeMatch.Value, Converter={StaticResource HiddenOrVissible}}" />
 
-                <local:CoinToss Grid.Column="1" Visibility="{Binding DisplayCoinToss.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:CoinToss
+                    Grid.RowSpan="3"
+                    Grid.Column="1"
+                    Visibility="{Binding DisplayCoinToss.Value, Converter={StaticResource HiddenOrVissible}}" />
 
             </Grid>
+
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -298,6 +580,7 @@
                 <Button
                     Grid.Column="0"
                     Margin="5"
+                    Padding="0,20"
                     Background="{Binding LeftTeamColor.Value}"
                     Command="{Binding LeftSidePointAdd}"
                     Content="POINT"
@@ -307,12 +590,21 @@
                 <Button
                     Grid.Column="1"
                     Margin="5"
+                    Padding="0,20"
                     Background="{Binding RightTeamColor.Value}"
                     Command="{Binding RightSidePointAdd}"
                     Content="POINT"
                     FontSize="30"
                     IsEnabled="{Binding IsEnablePoint.Value}"
                     Style="{StaticResource ColorButton}" />
+
+                <Button
+                    Grid.Row="1"
+                    Padding="0,10"
+                    Command="{Binding LeftSubstitutionCommand}"
+                    Content="選手交代"
+                    FontSize="30"
+                    Style="{StaticResource LightButton}" />
             </Grid>
             <!--<Grid>
                 <Grid.ColumnDefinitions>

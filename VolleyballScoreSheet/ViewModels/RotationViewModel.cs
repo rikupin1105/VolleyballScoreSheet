@@ -106,8 +106,8 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveProperty<string> ATeamName { get; }
         public ReactiveProperty<string> BTeamName { get; }
 
-        public ReactiveProperty<int[]> LeftTeamRotatiton { get; } = new ReactiveProperty<int[]>(new int[6]);
-        public ReactiveProperty<int[]> RightTeamRotatiton { get; } = new ReactiveProperty<int[]>(new int[6]);
+        public ReactiveProperty<int?[]> LeftTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
+        public ReactiveProperty<int?[]> RightTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
         public ReactiveProperty<DataTable> LeftPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         public ReactiveProperty<DataTable> RightPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();
@@ -223,10 +223,15 @@ namespace VolleyballScoreSheet.ViewModels
                 return;
             }
 
+            _game.LeftTeam.Sets[^1].StartingLineUp.Value = LeftTeamRotatiton.Value.Select(x => x!.Value).ToArray();
+            _game.LeftTeam.StartingLineUp.Value = _game.LeftTeam.Sets[^1].StartingLineUp.Value;
+            _game.RightTeam.Sets[^1].StartingLineUp.Value = RightTeamRotatiton.Value.Select(x => x!.Value).ToArray();
+            _game.RightTeam.StartingLineUp.Value = _game.RightTeam.Sets[^1].StartingLineUp.Value;
+
             var param = new DialogParameters
             {
-                { "LeftTeamRotation", LeftTeamRotatiton.Value },
-                { "RightTeamRotation", RightTeamRotatiton.Value }
+                { "LeftTeamRotation", LeftTeamRotatiton.Value.Select(x=>x!.Value).ToArray() },
+                { "RightTeamRotation", RightTeamRotatiton.Value.Select(x=>x!.Value).ToArray() }
             };
 
             RequestClose.Invoke(new DialogResult(ButtonResult.OK, param));

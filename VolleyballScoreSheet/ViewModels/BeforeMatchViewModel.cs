@@ -35,7 +35,7 @@ namespace VolleyballScoreSheet.ViewModels
                  result.Parameters.TryGetValue("LeftTeamRotation", out int[] a);
                  result.Parameters.TryGetValue("RightTeamRotation", out int[] b);
 
-                 if (a is null || b is null)
+                  if (a is null || b is null)
                  {
                      return;
                  }

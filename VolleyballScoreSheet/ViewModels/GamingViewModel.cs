@@ -12,10 +12,11 @@ namespace VolleyballScoreSheet.ViewModels
     public class GamingViewModel : BinableBase
     {
         private readonly Game _game;
-        public GamingViewModel(Game game)
+        private readonly IDialogService _dialogService;
+        public GamingViewModel(Game game, IDialogService dialogService)
         {
             _game = game;
-
+            _dialogService = dialogService;
             
 
 
@@ -121,6 +122,28 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             });
 
+            ATeam.Value.StartingLineUp.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftTeamStartingLineUp.Value=x;
+                }
+                else
+                {
+                    RightTeamStartingLineUp.Value=x;
+                }
+            });
+            BTeam.Value.StartingLineUp.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightTeamStartingLineUp.Value=x;
+                }
+                else
+                {
+                    LeftTeamStartingLineUp.Value=x;
+                }
+            });
 
             LeftSidePointAdd.Subscribe(_ => _game.PointAdd(true));
             RightSidePointAdd.Subscribe(_ => _game.PointAdd(false));
@@ -150,6 +173,35 @@ namespace VolleyballScoreSheet.ViewModels
 
                 ATeam.Value.Color.ForceNotify();
                 BTeam.Value.Color.ForceNotify();
+
+                ATeam.Value.StartingLineUp.ForceNotify();
+                BTeam.Value.StartingLineUp.ForceNotify();
+            });
+
+            _game.FinalSetCourtChangeNotifyCommand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("NotificationDialog", new DialogParameters
+                {
+                    {"Title","通知" },
+                    { "Message",$"コートチェンジを行ってください。"},
+                    {"ButtonText","OK" }
+                }, res =>
+                {
+
+                }, "AlertWindow");
+            });
+
+            LeftSubstitutionCommand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("Substitution", new DialogParameters
+                {
+                    {"Title","通知" },
+                    {"Team","A"},
+                    {"ButtonText","OK" }
+                }, res =>
+                {
+
+                }, "AlertWindow");
             });
         }
         //public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
@@ -158,7 +210,8 @@ namespace VolleyballScoreSheet.ViewModels
 
 
 
-
+        public ReactiveCommand LeftSubstitutionCommand { get; set; } = new();
+        public ReactiveCommand RightSubstitutionCommand { get; set; } = new();
         //コマンド
         public ReactiveCommand UndoCommand { get; set; } = new();
 
@@ -172,6 +225,9 @@ namespace VolleyballScoreSheet.ViewModels
 
         //デバッグ
         public ReactiveProperty<string> DebugMessage { get; private set; }
+
+        public ReactiveProperty<int[]> LeftTeamStartingLineUp { get; set; } = new();
+        public ReactiveProperty<int[]> RightTeamStartingLineUp { get; set; } = new();
 
         //左右情報
         public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();

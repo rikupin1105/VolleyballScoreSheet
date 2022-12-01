@@ -41,6 +41,36 @@
                 <Setter Property="Background" Value="white" />
 
                 <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="#303030"
+                                        Duration="0:0:0.1" />
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="white"
+                                        Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="White"
+                                        Duration="0:0:0.2" />
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="#303030"
+                                        Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
                     <Trigger Property="IsEnabled" Value="False">
                         <Trigger.EnterActions>
                             <BeginStoryboard>
@@ -74,37 +104,6 @@
                             </BeginStoryboard>
                         </Trigger.ExitActions>
                     </Trigger>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="Background.Color"
-                                        To="#303030"
-                                        Duration="0:0:0.1" />
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="Foreground.Color"
-                                        To="white"
-                                        Duration="0:0:0.1" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="Background.Color"
-                                        To="White"
-                                        Duration="0:0:0.2" />
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="Foreground.Color"
-                                        To="#303030"
-                                        Duration="0:0:0.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-
                 </Style.Triggers>
             </Style>
 
@@ -140,7 +139,6 @@
                             </BeginStoryboard>
                         </Trigger.ExitActions>
                     </Trigger>
-
                     <Trigger Property="IsEnabled" Value="False">
                         <Trigger.EnterActions>
                             <BeginStoryboard>

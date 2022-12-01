@@ -64,7 +64,16 @@ namespace VolleyballScoreSheet.ViewModels
         {
             if (parameters.TryGetValue("Team", out string team))
             {
-                TeamName.Value = team;
+                if (team=="A")
+                {
+                    TeamName.Value  = _game.ATeam.Value.Name.Value;
+                    OnCourtMemberItem.Value = _game.ATeam.Value.Sets[^1].Rotation.Value.OrderBy(x => x).ToArray();
+                }
+                else
+                {
+                    TeamName.Value = _game.BTeam.Value.Name.Value;
+                    OnCourtMemberItem.Value =  _game.BTeam.Value.Sets[^1].Rotation.Value.OrderBy(x => x).ToArray(); ;
+                }
                 if (team==_game.ATeam.Value.Name.Value)
                 {
                     //ATeam

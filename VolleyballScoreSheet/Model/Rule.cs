@@ -14,5 +14,6 @@ namespace VolleyballScoreSheet.Model
         public int ToWinPoint { get; set; } = 25;
         public int FinalSetToWinPoint { get; set; } = 25;
         public int FinalSetCourtChangePoint { get; set; } = 13;
+        public bool FinalSetCourtChanged { get; set; } = false;
     }
 }
