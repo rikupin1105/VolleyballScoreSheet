@@ -47,9 +47,21 @@ namespace VolleyballScoreSheet
         }
         public ReactivePropertySlim<int> Set { get; set; } = new(1);
 
-
+        public void LockControl()
+        {
+            IsEnablePoint.Value = false;
+            IsEnableTimeout.Value = false;
+            IsEnableSubstitution.Value = false;
+        }
+        public void UnlockControl()
+        {
+            IsEnablePoint.Value = true;
+            IsEnableTimeout.Value = true;
+            IsEnableSubstitution.Value = true;
+        }
         public ReactivePropertySlim<bool> IsEnablePoint { get; set; } = new(false);
         public ReactivePropertySlim<bool> IsEnableTimeout { get; set; } = new(false);
+        public ReactivePropertySlim<bool> IsEnableSubstitution { get; set; } = new(false);
 
         public ReactivePropertySlim<bool> DisplayCoinToss { get; set; } = new(true);
         public ReactivePropertySlim<bool> DisplayBeforeMatch { get; set; } = new(false);
@@ -67,26 +79,24 @@ namespace VolleyballScoreSheet
 
             if (s=="Rotation")
             {
-                IsEnableTimeout.Value=true;
-                IsEnablePoint.Value=true;
+                UnlockControl();
 
                 DisplayRotation.Value = true;
             }
             else if (s=="TimeOut")
             {
-                IsEnableTimeout.Value = false;
-                IsEnablePoint.Value = false;
+                LockControl();
 
                 DisplayRequestTimeOut.Value = true;
             }
             else if (s=="BeforeMatch")
             {
                 DisplayBeforeMatch.Value = true;
+                LockControl();
             }
             else if (s=="CoinToss")
             {
-                IsEnableTimeout.Value=false;
-                IsEnablePoint.Value=false;
+                LockControl();
 
                 DisplayCoinToss.Value = true;
             }
@@ -107,7 +117,7 @@ namespace VolleyballScoreSheet
                 //タイムアウト可能判定
                 //ヒストリー追加
                 //計測(Feature)
-                if (ATeam.Value.Sets[^1].TimeOut.Value>=2)
+                if (ATeam.Value.Sets[^1].TimeOuts.Value>=2)
                 {
                     //タイムアウト不可
                     TimeoutRejectionCommand.Execute(ATeam.Value.Name.Value);
@@ -125,7 +135,7 @@ namespace VolleyballScoreSheet
             }
             else
             {
-                if (BTeam.Value.Sets[^1].TimeOut.Value>=2)
+                if (BTeam.Value.Sets[^1].TimeOuts.Value>=2)
                 {
                     //タイムアウト不可
                     TimeoutRejectionCommand.Execute(BTeam.Value.Name.Value);
@@ -216,14 +226,50 @@ namespace VolleyballScoreSheet
                 }
                 return;
             }
+            else if (c[0]=='S'&& c[1]=='U'&& c[2]=='B')
+            {
+                HistoryRemove();
+                if (c[3]=='A')
+                {
+                    var In = int.Parse( c.Split(',')[1]);
+                    var Out = int.Parse(c.Split(',')[2]);
+
+                    ATeam.Value.Sets[^1].Substitutions.Value--;
+                    ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                    ATeam.Value.Refresh();
+
+                    var s = ATeam.Value.Sets[^1].SubstitutionDetails
+                        .Where(x => x.In==In)
+                        .Where(x => x.Out ==Out).First();
+
+                    ATeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
+                    ATeam.Value.MedamaRefresh();
+                }
+                else //B
+                {
+                    var In = int.Parse(c.Split(',')[1]);
+                    var Out = int.Parse(c.Split(',')[2]);
+
+                    BTeam.Value.Sets[^1].Substitutions.Value--;
+                    BTeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(BTeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                    BTeam.Value.Refresh();
+
+                    var s = BTeam.Value.Sets[^1].SubstitutionDetails
+                        .Where(x => x.In==In)
+                        .Where(x => x.Out ==Out).First();
+
+                    BTeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
+                    BTeam.Value.MedamaRefresh();
+                }
+                return;
+            }
             else if (c[0]=='S')
             {
                 var set = int.Parse(c[1].ToString());
                 HistoryRemove();
 
                 DisplayMain("BeforeMatch");
-                IsEnableTimeout.Value= false;
-                IsEnablePoint.Value=false;
+                LockControl();
 
                 return;
             }
@@ -234,9 +280,6 @@ namespace VolleyballScoreSheet
                 BTeam.Value.DeleteSet();
 
                 DisplayMain("Rotation");
-
-                IsEnablePoint.Value=false;
-                IsEnableTimeout.Value=false;
 
                 Set.Value--;
 
@@ -256,9 +299,10 @@ namespace VolleyballScoreSheet
                     CourtChange();
                 }
 
+                ATeam.Value.MedamaRefresh();
+                BTeam.Value.MedamaRefresh();
                 return;
             }
-
             else if (c=="TA")
             {
                 ATeam.Value.TimeOut(-1);
@@ -342,7 +386,7 @@ namespace VolleyballScoreSheet
                 {
                     //ファイナルセット
                     if (Rule.CourtChangeEnable &&
-                        Rule.FinalSetCourtChangePoint == ATeam.Value.Sets[^1].Point.Value &&
+                        Rule.FinalSetCourtChangePoint == ATeam.Value.Sets[^1].Points.Value &&
                         Rule.FinalSetCourtChanged == false)
                     {
                         //コートチェンジ到達
@@ -355,55 +399,44 @@ namespace VolleyballScoreSheet
                     }
 
                     //ファイナルセット終了
-                    if (ATeam.Value.Sets[^1].Point.Value >= Rule.FinalSetToWinPoint &&
-                        ATeam.Value.Sets[^1].Point.Value - BTeam.Value.Sets[^1].Point.Value>=2)
+                    if (ATeam.Value.Sets[^1].Points.Value >= Rule.FinalSetToWinPoint &&
+                        ATeam.Value.Sets[^1].Points.Value - BTeam.Value.Sets[^1].Points.Value>=2)
                     {
                         //操作ロック
                         //END GAME
                         HistoryAdd("WSA");
                         ATeam.Value.WinSets.Value++;
 
-
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
+                        LockControl();
 
                         EndButtonText.Value = "END GAME";
                     }
                 }
                 //ノーマルセット終了
-                else if (ATeam.Value.Sets[^1].Point.Value >= Rule.ToWinPoint &&
-                    ATeam.Value.Sets[^1].Point.Value - BTeam.Value.Sets[^1].Point.Value>=2)
+                else if (ATeam.Value.Sets[^1].Points.Value >= Rule.ToWinPoint &&
+                    ATeam.Value.Sets[^1].Points.Value - BTeam.Value.Sets[^1].Points.Value>=2)
                 {
 
                     HistoryAdd("WSA");
                     ATeam.Value.WinSets.Value++;
+                        LockControl();
 
                     //ゲーム終了
                     if (ATeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
                     {
-                        //操作ロック
                         //END GAME
-
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
-
                         EndButtonText.Value = "END GAME";
                     }
                     //セット終了
                     else
                     {
-                        //操作ロック
                         //END SET
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
-
                         EndButtonText.Value = "END SET";
                     }
                 }
                 else
                 {
-                    IsEnablePoint.Value = true;
-                    IsEnableTimeout.Value = true;
+                    UnlockControl();
                 }
 
                 //ローテーション
@@ -425,7 +458,7 @@ namespace VolleyballScoreSheet
                 {
                     //ファイナルセット
                     if (Rule.CourtChangeEnable &&
-                        Rule.FinalSetCourtChangePoint == BTeam.Value.Sets[^1].Point.Value &&
+                        Rule.FinalSetCourtChangePoint == BTeam.Value.Sets[^1].Points.Value &&
                         Rule.FinalSetCourtChanged == false)
                     {
                         //コートチェンジ到達
@@ -439,14 +472,13 @@ namespace VolleyballScoreSheet
 
 
                     //ファイナルセット終了
-                    if (BTeam.Value.Sets[^1].Point.Value >= Rule.FinalSetToWinPoint &&
-                        BTeam.Value.Sets[^1].Point.Value - ATeam.Value.Sets[^1].Point.Value>=2)
+                    if (BTeam.Value.Sets[^1].Points.Value >= Rule.FinalSetToWinPoint &&
+                        BTeam.Value.Sets[^1].Points.Value - ATeam.Value.Sets[^1].Points.Value>=2)
                     {
                         //操作ロック
                         //END GAME
 
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
+                        LockControl();
 
                         HistoryAdd("WSB");
                         BTeam.Value.WinSets.Value++;
@@ -455,38 +487,28 @@ namespace VolleyballScoreSheet
                     }
                 }
                 //ノーマルセット終了
-                else if (BTeam.Value.Sets[^1].Point.Value >= Rule.ToWinPoint &&
-                    BTeam.Value.Sets[^1].Point.Value - ATeam.Value.Sets[^1].Point.Value>=2)
+                else if (BTeam.Value.Sets[^1].Points.Value >= Rule.ToWinPoint &&
+                    BTeam.Value.Sets[^1].Points.Value - ATeam.Value.Sets[^1].Points.Value>=2)
                 {
                     HistoryAdd("WSB");
                     BTeam.Value.WinSets.Value++;
+                        LockControl();
                     //ゲーム終了
                     if (BTeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
                     {
-                        //操作ロック
                         //END GAME
-
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
-
-
                         EndButtonText.Value = "END GAME";
                     }
                     //セット終了
                     else
                     {
-                        //操作ロック
                         //END SET
-                        IsEnablePoint.Value = false;
-                        IsEnableTimeout.Value = false;
-
                         EndButtonText.Value = "END SET";
                     }
                 }
                 else
                 {
-                    IsEnablePoint.Value = true;
-                    IsEnableTimeout.Value = true;
+                    UnlockControl();
                 }
 
                 //ローテーション
@@ -532,8 +554,7 @@ namespace VolleyballScoreSheet
             {
                 ATeam.Value.Point(-1);
 
-                IsEnablePoint.Value = true;
-                IsEnableTimeout.Value = true;
+                UnlockControl();
                 for (int i = History.Value.Count-1; i >= 0; i--)
                 {
                     if (History.Value[i]=="PA")
@@ -605,8 +626,7 @@ namespace VolleyballScoreSheet
             else
             {
                 BTeam.Value.Point(-1);
-                IsEnablePoint.Value = true;
-                IsEnableTimeout.Value = true;
+                UnlockControl();
 
                 for (int i = History.Value.Count-1; i >= 0; i--)
                 {
@@ -672,6 +692,16 @@ namespace VolleyballScoreSheet
         public void Substitution(bool isAteam, int In, int Out)
         {
             //Feature
+            if (isAteam)
+            {
+                ATeam.Value.Substitution(In, Out);
+                HistoryAdd($"SUBA,{In},{Out}");
+            }
+            else
+            {
+                BTeam.Value.Substitution(In, Out);
+                HistoryAdd($"SUBB,{In},{Out}");
+            }
         }
 
         public void NextServeTeam(bool isATeam)

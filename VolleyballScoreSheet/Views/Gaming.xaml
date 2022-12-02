@@ -15,6 +15,7 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
         <cv:HiddenOrVissible x:Key="HiddenOrVissible" />
+        <cv:BoolToThickness x:Key="BoolToThickness" />
     </UserControl.Resources>
 
     <Grid>
@@ -240,7 +241,7 @@
                         Grid.ColumnSpan="2"
                         Margin="0,0,0,2"
                         Command="{Binding RequestTimeOutCommand}"
-                        Content="TIMEOUT"
+                        Content="タイムアウト"
                         FontSize="20"
                         IsEnabled="{Binding IsEnableTimeout.Value}"
                         Style="{StaticResource LightButton}" />
@@ -250,7 +251,7 @@
                         Grid.ColumnSpan="2"
                         Margin="0,2,0,0"
                         Command="{Binding UndoCommand}"
-                        Content="UNDO"
+                        Content="戻す"
                         FontSize="20"
                         IsEnabled="{Binding UndoEnable.Value}"
                         Style="{StaticResource LightButton}" />
@@ -357,15 +358,84 @@
 
                             <Border
                                 Grid.Row="2"
+                                Grid.Column="0"
                                 Margin="3"
                                 BorderBrush="#303030"
-                                BorderThickness="1"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[0], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
                                 <TextBlock
                                     Grid.Column="0"
                                     FontSize="20"
-                                    Text="9" />
+                                    Text="{Binding LeftTeamSubstitutioned.Value[0]}" />
+                            </Border>
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[1], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding LeftTeamSubstitutioned.Value[1]}" />
+                            </Border>
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[2], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding LeftTeamSubstitutioned.Value[2]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[3], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding LeftTeamSubstitutioned.Value[3]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[4], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding LeftTeamSubstitutioned.Value[4]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding LeftTeamIsReturn.Value[5], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding LeftTeamSubstitutioned.Value[5]}" />
                             </Border>
 
                             <TextBlock
@@ -487,15 +557,84 @@
 
                             <Border
                                 Grid.Row="2"
+                                Grid.Column="0"
                                 Margin="3"
                                 BorderBrush="#303030"
-                                BorderThickness="1"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[0], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
                                 <TextBlock
                                     Grid.Column="0"
                                     FontSize="20"
-                                    Text="9" />
+                                    Text="{Binding RightTeamSubstitutioned.Value[0]}" />
+                            </Border>
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[1], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding RightTeamSubstitutioned.Value[1]}" />
+                            </Border>
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[2], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding RightTeamSubstitutioned.Value[2]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[3], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding RightTeamSubstitutioned.Value[3]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[4], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding RightTeamSubstitutioned.Value[4]}" />
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Margin="3"
+                                BorderBrush="#303030"
+                                BorderThickness="{Binding RightTeamIsReturn.Value[5], Converter={StaticResource BoolToThickness}}"
+                                CornerRadius="20">
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Text="{Binding RightTeamSubstitutioned.Value[5]}" />
                             </Border>
 
                             <TextBlock
@@ -600,10 +739,22 @@
 
                 <Button
                     Grid.Row="1"
+                    Margin="5"
                     Padding="0,10"
                     Command="{Binding LeftSubstitutionCommand}"
                     Content="選手交代"
                     FontSize="30"
+                    IsEnabled="{Binding IsEnableSubstitution.Value}"
+                    Style="{StaticResource LightButton}" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5"
+                    Padding="0,10"
+                    Command="{Binding RightSubstitutionCommand}"
+                    Content="選手交代"
+                    FontSize="30"
+                    IsEnabled="{Binding IsEnableSubstitution.Value}"
                     Style="{StaticResource LightButton}" />
             </Grid>
             <!--<Grid>
@@ -628,7 +779,11 @@
         <ScrollViewer Grid.Column="1">
 
             <Grid Grid.Column="1" Margin="10">
-                <TextBlock Text="{Binding DebugMessage.Value}" TextWrapping="Wrap" />
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="デバッグ用" />
+                    <LineBreak />
+                    <Run Text="{Binding DebugMessage.Value}" />
+                </TextBlock>
                 <!--<Border Background="#eeeeee" CornerRadius="10">
                 <StackPanel>
                     <TextBlock

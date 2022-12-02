@@ -145,6 +145,60 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             });
 
+            ATeam.Value.Substitutioned.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftTeamSubstitutioned.Value=x;
+                    LeftTeamSubstitutioned.ForceNotify();
+                }
+                else
+                {
+                    RightTeamSubstitutioned.Value=x;
+                    RightTeamSubstitutioned.ForceNotify();
+                }
+            });
+            BTeam.Value.Substitutioned.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightTeamSubstitutioned.Value=x;
+                    RightTeamSubstitutioned.ForceNotify();
+                }
+                else
+                {
+                    LeftTeamSubstitutioned.Value=x;
+                    LeftTeamSubstitutioned.ForceNotify();
+                }
+            });
+
+            ATeam.Value.isReturn.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    LeftTeamIsReturn.Value=x;
+                    LeftTeamIsReturn.ForceNotify();
+                }
+                else
+                {
+                    RightTeamIsReturn.Value=x;
+                    RightTeamIsReturn.ForceNotify();
+                }
+            });
+            BTeam.Value.isReturn.Subscribe(x =>
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RightTeamIsReturn.Value=x;
+                    RightTeamIsReturn.ForceNotify();
+                }
+                else
+                {
+                    LeftTeamIsReturn.Value=x;
+                    LeftTeamIsReturn.ForceNotify();
+                }
+            });
+
             LeftSidePointAdd.Subscribe(_ => _game.PointAdd(true));
             RightSidePointAdd.Subscribe(_ => _game.PointAdd(false));
 
@@ -154,6 +208,7 @@ namespace VolleyballScoreSheet.ViewModels
             UndoEnable = _game.ToReactivePropertyAsSynchronized(x => x.UndoEnable.Value);
             IsEnablePoint = _game.ToReactivePropertyAsSynchronized(x => x.IsEnablePoint.Value);
             IsEnableTimeout = _game.ToReactivePropertyAsSynchronized(x => x.IsEnableTimeout.Value);
+            IsEnableSubstitution = _game.ToReactivePropertyAsSynchronized(x => x.IsEnableSubstitution.Value);
 
             DebugMessage = _game.ToReactivePropertyAsSynchronized(x => x.Debug.Value);
 
@@ -195,9 +250,18 @@ namespace VolleyballScoreSheet.ViewModels
             {
                 _dialogService.ShowDialog("Substitution", new DialogParameters
                 {
-                    {"Title","通知" },
-                    {"Team","A"},
-                    {"ButtonText","OK" }
+                    {"Team","A"}
+                }, res =>
+                {
+
+                }, "AlertWindow");
+            });
+
+            RightSubstitutionCommand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("Substitution", new DialogParameters
+                {
+                    {"Team","B"}
                 }, res =>
                 {
 
@@ -218,6 +282,7 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveProperty<bool> UndoEnable { get; set; }
         public ReactiveProperty<bool> IsEnablePoint { get; set; }
         public ReactiveProperty<bool> IsEnableTimeout { get; set; }
+        public ReactiveProperty<bool> IsEnableSubstitution { get; set; }
 
 
         public ReactiveProperty<Team> ATeam { get; set; }
@@ -228,6 +293,12 @@ namespace VolleyballScoreSheet.ViewModels
 
         public ReactiveProperty<int[]> LeftTeamStartingLineUp { get; set; } = new();
         public ReactiveProperty<int[]> RightTeamStartingLineUp { get; set; } = new();
+
+        public ReactiveProperty<int?[]> LeftTeamSubstitutioned { get; set; } = new(new int?[6]);
+        public ReactiveProperty<int?[]> RightTeamSubstitutioned { get; set; } = new(new int?[6]);
+
+        public ReactiveProperty<bool[]> LeftTeamIsReturn { get; set; } = new(new bool[6]);
+        public ReactiveProperty<bool[]> RightTeamIsReturn { get; set; } = new(new bool[6]);
 
         //左右情報
         public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();

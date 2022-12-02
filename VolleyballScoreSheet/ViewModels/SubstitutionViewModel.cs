@@ -23,17 +23,20 @@ namespace VolleyballScoreSheet.ViewModels
         public void Substitution()
         {
             var flag = true;
-            if (TeamName.Value == _game.ATeam.Value.Name.Value)
-            {
-                //ATeam
-            }
-            else
-            {
-                //BTeam
-            }
 
             if (flag &&OutMember != null && InMember !=null)
             {
+                if (TeamName.Value == _game.ATeam.Value.Name.Value)
+                {
+                    //ATeam
+                    _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                }
+                else
+                {
+                    //BTeam
+                    _game.Substitution(false, int.Parse(InMember), int.Parse(OutMember));
+                }
+
                 RequestClose.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters
                 {
                     { "Out", int.Parse(OutMember) },
@@ -67,27 +70,28 @@ namespace VolleyballScoreSheet.ViewModels
                 if (team=="A")
                 {
                     TeamName.Value  = _game.ATeam.Value.Name.Value;
-                    OnCourtMemberItem.Value = _game.ATeam.Value.Sets[^1].Rotation.Value.OrderBy(x => x).ToArray();
-                }
-                else
-                {
-                    TeamName.Value = _game.BTeam.Value.Name.Value;
-                    OnCourtMemberItem.Value =  _game.BTeam.Value.Sets[^1].Rotation.Value.OrderBy(x => x).ToArray(); ;
-                }
-                if (team==_game.ATeam.Value.Name.Value)
-                {
-                    //ATeam
-                    //var changeble = _game.GetCurrentSet().Value.ATeamSubstitution.Select(x => x.OutMember);
-                    //OnCourtMemberItem.Value = _game.GetCurrentSet().Value.ATeamRotation
-                    //    .Where(x => !changeble.Contains(x)).ToArray();
 
-                    //OutCourtMemberItem.Value = _game.ATeamPlayers.Select(x => x.Id).Where(x => !_game.GetCurrentSet().Value.ATeamRotation.Contains(x)).ToArray();
+                    var 選手交代で出たことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                    var 選手交代で入ったことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+
+                    var 選手交代で下がれる人リスト = _game.ATeam.Value.Sets[^1].Rotation.Value
+                        .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
+
+
+                    OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
                 }
                 else
                 {
-                    //BTeam
-                    //OnCourtMemberItem.Value = _game.GetCurrentSet().Value.BTeamRotation;
-                    //OutCourtMemberItem.Value = _game.BTeamPlayers.Select(x => x.Id).Where(x => !_game.GetCurrentSet().Value.BTeamRotation.Contains(x)).ToArray();
+                    TeamName.Value  = _game.BTeam.Value.Name.Value;
+
+                    var 選手交代で出たことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                    var 選手交代で入ったことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+
+                    var 選手交代で下がれる人リスト = _game.BTeam.Value.Sets[^1].Rotation.Value
+                        .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
+
+
+                    OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
                 }
             }
         }
@@ -95,34 +99,55 @@ namespace VolleyballScoreSheet.ViewModels
         {
             if (TeamName.Value == _game.ATeam.Value.Name.Value)
             {
-                //入ったことがある人
-                //var a = _game.GetCurrentSet().Value.ATeamSubstitution
-                //    .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet)
-                //    .Select(x => x.InMember)
-                //    .ToList();
+                var 選手交代で出たことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                var 選手交代で入ったことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
 
-                //if (a.Contains(int.Parse(OutMember)))
-                //{
-                //    var innable = _game.GetCurrentSet().Value.ATeamSubstitution
-                //        .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet)
-                //        .Where(x => x.InMember==int.Parse(OutMember))
-                //        .Select(x => x.OutMember);
+                var 選手交代で入れる人リスト = _game.ATeam.Value.Players
+                    .Select(x => x.Id)
+                    .Except(_game.ATeam.Value.Sets[^1].Rotation.Value)
+                    .Except(選手交代で入ったことある人リスト)
+                    .OrderBy(x => x)
+                    .ToArray(); 
 
-                //    OutCourtMemberItem.Value = innable.ToArray();
-                //}
-                //else
-                //{
-                //    //一度でも出たことがある人
-                //    var outmember = _game.GetCurrentSet().Value.ATeamSubstitution
-                //        .Where(x => x.Set==_game.GetCurrentSet().Value.GameSet
-                //        ).Select(x => x.OutMember)
-                //        .ToList();
 
-                //    OutCourtMemberItem.Value = _game.ATeam.Players.Select(x => x.Id).Where(x => _game.GetCurrentSet().Value.ATeamRotation.Contains(x))
-                //        .Where(x => !a.Contains(x))
-                //        .Where(x => !outmember.Contains(x))
-                //        .ToArray();
-                //}
+                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember)))
+                {
+                    //再入場
+                    OutCourtMemberItem.Value = _game.ATeam.Value.Sets[^1].SubstitutionDetails
+                        .Where(x => x.In==int.Parse(OutMember))
+                        .Select(x=>x.Out)
+                        .ToArray();
+                }
+                else
+                {
+                    OutCourtMemberItem.Value = 選手交代で入れる人リスト.Except(選手交代で出たことある人リスト).ToArray();
+                }
+            }
+            else
+            {
+                var 選手交代で出たことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                var 選手交代で入ったことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+
+                var 選手交代で入れる人リスト = _game.BTeam.Value.Players
+                    .Select(x => x.Id)
+                    .Except(_game.BTeam.Value.Sets[^1].Rotation.Value)
+                    .Except(選手交代で入ったことある人リスト)
+                    .OrderBy(x => x)
+                    .ToArray();
+
+
+                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember)))
+                {
+                    //再入場
+                    OutCourtMemberItem.Value = _game.BTeam.Value.Sets[^1].SubstitutionDetails
+                        .Where(x => x.In==int.Parse(OutMember))
+                        .Select(x => x.Out)
+                        .ToArray();
+                }
+                else
+                {
+                    OutCourtMemberItem.Value = 選手交代で入れる人リスト.Except(選手交代で出たことある人リスト).ToArray();
+                }
             }
         }
         public ReactiveCommand SelectionChangedCommand { get; } = new();
