@@ -24,12 +24,43 @@ namespace VolleyballScoreSheet.ViewModels
         {
             var flag = true;
 
-            if (flag &&OutMember != null && InMember !=null)
+            if (OutMember is not null && InMember is not null)
             {
                 if (TeamName.Value == _game.ATeam.Value.Name.Value)
                 {
                     //ATeam
-                    _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                    var 今入った選手 = _game.ATeam.Value.Sets[^1].SubstitutionDetails
+                    .Where(x => x.Point==_game.ATeam.Value.Sets[^1].Points.Value)
+                    .Where(x => x.OpponentPoint==_game.BTeam.Value.Sets[^1].Points.Value).Select(x => x.In).ToArray();
+
+                    if (今入った選手.Contains(int.Parse(OutMember)))
+                    {
+                        //不当な要求
+                        //怪我等の場合は認める
+                        _dialogService.ShowDialog("SameInterruptionSubstitution", new DialogParameters
+                        {
+                            {"Title","注意" },
+                            { "Message",$"同一中断中での選手交代です。\n怪我などやむを得ない場合は承認を、\nそれ以外の場合はセカンドレフェリーに確認し、拒否してください。"},
+                        }, res =>
+                        {
+                            if (res.Result == ButtonResult.OK)
+                            {
+                                _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                            }
+                            else if (res.Result == ButtonResult.Abort)
+                            {
+
+                            }
+                            else
+                            {
+                                flag = false;
+                            }
+                        }, "AlertWindow");
+                    }
+                    else
+                    {
+                        _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                    }
                 }
                 else
                 {
@@ -37,11 +68,10 @@ namespace VolleyballScoreSheet.ViewModels
                     _game.Substitution(false, int.Parse(InMember), int.Parse(OutMember));
                 }
 
-                RequestClose.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters
+                if (flag)
                 {
-                    { "Out", int.Parse(OutMember) },
-                    { "In", int.Parse(InMember) }
-                }));
+                    RequestClose.Invoke(new DialogResult());
+                }
             }
         }
         public string OutMember { get; set; }
@@ -107,7 +137,7 @@ namespace VolleyballScoreSheet.ViewModels
                     .Except(_game.ATeam.Value.Sets[^1].Rotation.Value)
                     .Except(選手交代で入ったことある人リスト)
                     .OrderBy(x => x)
-                    .ToArray(); 
+                    .ToArray();
 
 
                 if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember)))
@@ -115,7 +145,7 @@ namespace VolleyballScoreSheet.ViewModels
                     //再入場
                     OutCourtMemberItem.Value = _game.ATeam.Value.Sets[^1].SubstitutionDetails
                         .Where(x => x.In==int.Parse(OutMember))
-                        .Select(x=>x.Out)
+                        .Select(x => x.Out)
                         .ToArray();
                 }
                 else

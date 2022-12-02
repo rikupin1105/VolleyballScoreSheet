@@ -60,7 +60,6 @@ namespace VolleyballScoreSheet.ViewModels
                         { "ButtonText", "OK" }
                    }, res =>
                    {
-
                    }, "AlertWindow");
 
             }

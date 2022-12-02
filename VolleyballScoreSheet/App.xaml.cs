@@ -35,6 +35,7 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterDialog<NotificationDialog>();
             containerRegistry.RegisterDialog<Substitution>();
             containerRegistry.RegisterDialog<ExceptionalSubstitution>();
+            containerRegistry.RegisterDialog<SameInterruptionSubstitution>();
 
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");
             containerRegistry.RegisterDialogWindow<AlertWindow>("AlertWindow");

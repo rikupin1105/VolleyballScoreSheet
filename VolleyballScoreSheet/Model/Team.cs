@@ -102,18 +102,20 @@ namespace VolleyballScoreSheet.Model
             }
             Refresh();
         }
-        public void Substitution(int In, int Out)
+        public void Substitution(int In, int Out, int Point, int OpponentPoint)
         {
             Sets[^1].SubstitutionDetails.Add(new()
             {
                 In = In,
-                Out = Out
+                Out = Out,
+                Point = Point,
+                OpponentPoint = OpponentPoint
             });
 
             Sets[^1].Substitutions.Value++;
 
 
-            
+
 
             Sets[^1].Rotation.Value[Array.IndexOf(Sets[^1].Rotation.Value, Out)] = In;
 

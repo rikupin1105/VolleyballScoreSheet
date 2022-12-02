@@ -21,5 +21,7 @@ namespace VolleyballScoreSheet
     {
         public int In { get; set; }
         public int Out { get; set; }
+        public int Point { get; set; }
+        public int OpponentPoint { get; set; }
     }
 }

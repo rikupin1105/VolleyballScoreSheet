@@ -53,18 +53,30 @@
                 FontSize="20"
                 ItemsSource="{Binding OutCourtMemberItem.Value}"
                 SelectedValue="{Binding InMember}" />
-            <Button
-                Margin="0,0,0,0"
-                Padding="0,10"
-                Command="{Binding CancelCommand}"
-                Content="キャンセル"
-                Style="{StaticResource LightButton}" />
-            <Button
-                Margin="0,5,0,0"
-                Padding="0,10"
-                Command="{Binding SubstitutionCommand}"
-                Content="交代"
-                Style="{StaticResource LightButton}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Padding="20,10"
+                    HorizontalAlignment="Stretch"
+                    Background="#cd1141"
+                    Command="{Binding CancelCommand}"
+                    Content="キャンセル"
+                    Style="{StaticResource ColorButton}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Padding="20,10"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding SubstitutionCommand}"
+                    Content="交代"
+                    Style="{StaticResource LightButton}" />
+            </Grid>
         </StackPanel>
     </StackPanel>
 </UserControl>

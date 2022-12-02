@@ -693,8 +693,9 @@ namespace VolleyballScoreSheet
             //Feature
             if (isAteam)
             {
-                ATeam.Value.Substitution(In, Out);
+                ATeam.Value.Substitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
                 HistoryAdd($"SUBA,{In},{Out}");
+
                 if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
                     SubstitutionCountNotifyCommand.Execute(5);
@@ -703,10 +704,11 @@ namespace VolleyballScoreSheet
                 {
                     SubstitutionCountNotifyCommand.Execute(6);
                 }
+
             }
             else
             {
-                BTeam.Value.Substitution(In, Out);
+                BTeam.Value.Substitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
                 HistoryAdd($"SUBB,{In},{Out}");
                 if (BTeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
