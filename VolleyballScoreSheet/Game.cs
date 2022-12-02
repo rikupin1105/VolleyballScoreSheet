@@ -686,6 +686,8 @@ namespace VolleyballScoreSheet
             }
         }
 
+
+        public ReactiveCommand SubstitutionCountNotifyCommand { get; } = new();
         public void Substitution(bool isAteam, int In, int Out)
         {
             //Feature
@@ -693,11 +695,27 @@ namespace VolleyballScoreSheet
             {
                 ATeam.Value.Substitution(In, Out);
                 HistoryAdd($"SUBA,{In},{Out}");
+                if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
+                {
+                    SubstitutionCountNotifyCommand.Execute(5);
+                }
+                else if (ATeam.Value.Sets[^1].Substitutions.Value == 6)
+                {
+                    SubstitutionCountNotifyCommand.Execute(6);
+                }
             }
             else
             {
                 BTeam.Value.Substitution(In, Out);
                 HistoryAdd($"SUBB,{In},{Out}");
+                if (BTeam.Value.Sets[^1].Substitutions.Value == 5)
+                {
+                    SubstitutionCountNotifyCommand.Execute(5);
+                }
+                else if (BTeam.Value.Sets[^1].Substitutions.Value == 6)
+                {
+                    SubstitutionCountNotifyCommand.Execute(6);
+                }
             }
         }
 

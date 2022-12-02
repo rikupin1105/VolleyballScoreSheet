@@ -246,6 +246,19 @@ namespace VolleyballScoreSheet.ViewModels
                 }, "AlertWindow");
             });
 
+            _game.SubstitutionCountNotifyCommand.Subscribe(x =>
+            {
+                _dialogService.ShowDialog("NotificationDialog", new DialogParameters
+                {
+                    {"Title","通知" },
+                    { "Message",$"{x}回目の選手交代です。\nセカンドレフェリーに伝えてください。"},
+                    {"ButtonText","OK" }
+                }, res =>
+                {
+
+                }, "AlertWindow");
+            });
+
             LeftSubstitutionCommand.Subscribe(_ =>
             {
                 _dialogService.ShowDialog("Substitution", new DialogParameters
