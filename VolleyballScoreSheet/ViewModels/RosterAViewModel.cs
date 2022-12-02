@@ -10,7 +10,6 @@ using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet;
 using Reactive.Bindings.Extensions;
 using Prism.Services.Dialogs;
-using System.Windows.Forms;
 
 namespace VolleyballScoreSheet.ViewModels
 {

@@ -11,11 +11,8 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.Views;
-using Windows.ApplicationModel.Background;
-using Windows.Devices.Display.Core;
 
 namespace VolleyballScoreSheet
 {
