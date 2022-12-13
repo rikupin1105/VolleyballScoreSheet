@@ -17,7 +17,7 @@ namespace VolleyballScoreSheet.ViewModels
         {
             _game = game;
             _dialogService = dialogService;
-            
+
 
 
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
@@ -261,24 +261,56 @@ namespace VolleyballScoreSheet.ViewModels
 
             LeftSubstitutionCommand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("Substitution", new DialogParameters
+                if (_game.LeftTeam.Sets[^1].Substitutions.Value >= 6)
                 {
-                    {"Team","A"}
-                }, res =>
-                {
+                    //回数超え
+                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
+                    {
+                        {"Title","警告" },
+                        { "Message",$"選手交代回数が6回を超えています。\nセカンドレフェリーに確認してください。"},
+                        {"ButtonText","OK" }
+                    }, res =>
+                    {
 
-                }, "AlertWindow");
+                    }, "AlertWindow");
+                }
+                else
+                {
+                    _dialogService.ShowDialog("Substitution", new DialogParameters
+                    {
+                        {"Side","Left"}
+                    }, res =>
+                    {
+
+                    }, "AlertWindow");
+                }
             });
 
             RightSubstitutionCommand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("Substitution", new DialogParameters
+                if (_game.RightTeam.Sets[^1].Substitutions.Value >= 6)
                 {
-                    {"Team","B"}
-                }, res =>
-                {
+                    //回数超え
+                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
+                    {
+                        {"Title","警告" },
+                        { "Message",$"選手交代回数が6回を超えています。\nセカンドレフェリーに確認してください。"},
+                        {"ButtonText","OK" }
+                    }, res =>
+                    {
 
-                }, "AlertWindow");
+                    }, "AlertWindow");
+                }
+                else
+                {
+                    _dialogService.ShowDialog("Substitution", new DialogParameters
+                    {
+                        {"Side","Right"}
+                    }, res =>
+                    {
+
+                    }, "AlertWindow");
+                }
             });
         }
         //public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());

@@ -91,15 +91,13 @@ namespace VolleyballScoreSheet.ViewModels
                     }, "AlertWindow");
         }
 
-
-
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            if (parameters.TryGetValue("Team", out string team))
+            if (parameters.TryGetValue("Side", out string side))
             {
-                if (team=="A")
+                if (side=="Left")
                 {
-                    TeamName.Value  = _game.ATeam.Value.Name.Value;
+                    TeamName.Value  = _game.LeftTeam.Name.Value;
 
                     var 選手交代で出たことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
                     var 選手交代で入ったことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
