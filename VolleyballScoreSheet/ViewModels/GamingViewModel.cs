@@ -312,6 +312,16 @@ namespace VolleyballScoreSheet.ViewModels
                     }, "AlertWindow");
                 }
             });
+            CardCommand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("Card", new DialogParameters
+                {
+
+                }, res =>
+                {
+
+                }, "AlertWindow");
+            });
         }
         //public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         //public ReactiveProperty<DataTable> RightTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
@@ -323,6 +333,7 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveCommand RightSubstitutionCommand { get; set; } = new();
         //コマンド
         public ReactiveCommand UndoCommand { get; set; } = new();
+        public ReactiveCommand CardCommand { get; set; } = new();
 
         public ReactiveProperty<bool> UndoEnable { get; set; }
         public ReactiveProperty<bool> IsEnablePoint { get; set; }

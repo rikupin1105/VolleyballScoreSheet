@@ -6,12 +6,40 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Asset\DelayPenalty.png" />
+	  <None Remove="Asset\DelayWarning.png" />
+	  <None Remove="Asset\Disqualification.png" />
+	  <None Remove="Asset\Expulsion.png" />
+	  <None Remove="Asset\Red.png" />
+	  <None Remove="Asset\Yellow.png" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
 		<PackageReference Include="Prism.Core" Version="8.1.97" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
 		<PackageReference Include="ReactiveProperty" Version="8.2.0" />
 		<PackageReference Include="ReactiveProperty.WPF" Version="8.2.0" />
 		<PackageReference Include="WPF-UI" Version="2.0.3" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Asset\DelayPenalty.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Asset\DelayWarning.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Asset\Disqualification.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Asset\Expulsion.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Asset\Red.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Asset\Yellow.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 	<!--<ItemGroup>
 	  <Compile Update="Views\RosterA.xaml.cs">

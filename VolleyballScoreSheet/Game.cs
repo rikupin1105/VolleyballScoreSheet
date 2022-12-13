@@ -302,11 +302,15 @@ namespace VolleyballScoreSheet
             }
             else if (c=="TA")
             {
+                HistoryRemove();
                 ATeam.Value.TimeOut(-1);
+                return;
             }
             else if (c=="TB")
             {
+                HistoryRemove();
                 BTeam.Value.TimeOut(-1);
+                return;
             }
             else if (c=="CCF")
             {
@@ -316,7 +320,33 @@ namespace VolleyballScoreSheet
                 Undo();
                 return;
             }
-            HistoryRemove();
+            else if (c=="DWA")
+            {
+                HistoryRemove();
+                ATeam.Value.DelayWarning = null;
+                return;
+            }
+            else if (c=="DWB")
+            {
+                HistoryRemove();
+                BTeam.Value.DelayWarning = null;
+                return;
+            }
+            else if(c=="DPA")
+            {
+                HistoryRemove();
+                ATeam.Value.DelayPenalties.RemoveAt(ATeam.Value.DelayPenalties.Count-1);
+                Undo();
+                return;
+            }
+            else if (c=="DPB")
+            {
+                HistoryRemove();
+                BTeam.Value.DelayPenalties.RemoveAt(BTeam.Value.DelayPenalties.Count-1);
+                Undo();
+                return;
+            }
+            
         }
         public void EndSet()
         {

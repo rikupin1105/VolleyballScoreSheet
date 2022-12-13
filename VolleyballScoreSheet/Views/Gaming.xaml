@@ -757,22 +757,22 @@
                     IsEnabled="{Binding IsEnableSubstitution.Value}"
                     Style="{StaticResource LightButton}" />
             </Grid>
-            <!--<Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+
                 <Button
-                    Grid.Column="0"
                     Margin="5"
-                    Command="{Binding LeftSideSubstitutionCommand}"
-                    Content="{Binding LeftSideSubstitutionDisplay.Value}" />
+                    Padding="10,10"
+                    Content="怪我による選手交代"
+                    Style="{StaticResource LightButton}" />
+
                 <Button
-                    Grid.Column="1"
                     Margin="5"
-                    Command="{Binding RightSideSubstitutionCommand}"
-                    Content="{Binding RightSideSubstitutionDisplay.Value}" />
-            </Grid>-->
+                    Padding="40,10"
+                    Command="{Binding CardCommand}"
+                    Content="カード"
+                    Style="{StaticResource LightButton}" />
+            </StackPanel>
         </StackPanel>
 
         <!--  ランニングスコア  -->
