@@ -18,13 +18,13 @@ namespace VolleyballScoreSheet.ViewModels
             _dialogService = dialogService;
             CancelCommand.Subscribe(_ => RequestClose.Invoke(new DialogResult(ButtonResult.Cancel)));
             SubstitutionCommand.Subscribe(_ => Substitution());
-            SelectionChangedCommand.Subscribe(_ => SelectionChanged());
+            OutSelectionChangedCommand.Subscribe(_ => OutMemberSelectionChanged());
         }
         public void Substitution()
         {
             var flag = true;
 
-            if (OutMember is not null && InMember is not null)
+            if (OutMember.Value is not null && InMember.Value is not null)
             {
                 if (TeamName.Value == _game.ATeam.Value.Name.Value)
                 {
@@ -33,7 +33,7 @@ namespace VolleyballScoreSheet.ViewModels
                     .Where(x => x.Point==_game.ATeam.Value.Sets[^1].Points.Value)
                     .Where(x => x.OpponentPoint==_game.BTeam.Value.Sets[^1].Points.Value).Select(x => x.In).ToArray();
 
-                    if (今入った選手.Contains(int.Parse(OutMember)))
+                    if (今入った選手.Contains(int.Parse(OutMember.Value)))
                     {
                         //不当な要求
                         //怪我等の場合は認める
@@ -45,7 +45,7 @@ namespace VolleyballScoreSheet.ViewModels
                         {
                             if (res.Result == ButtonResult.OK)
                             {
-                                _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                                _game.Substitution(true, int.Parse(InMember.Value), int.Parse(OutMember.Value));
                             }
                             else if (res.Result == ButtonResult.Abort)
                             {
@@ -59,13 +59,13 @@ namespace VolleyballScoreSheet.ViewModels
                     }
                     else
                     {
-                        _game.Substitution(true, int.Parse(InMember), int.Parse(OutMember));
+                        _game.Substitution(true, int.Parse(InMember.Value), int.Parse(OutMember.Value));
                     }
                 }
                 else
                 {
                     //BTeam
-                    _game.Substitution(false, int.Parse(InMember), int.Parse(OutMember));
+                    _game.Substitution(false, int.Parse(InMember.Value), int.Parse(OutMember.Value));
                 }
 
                 if (flag)
@@ -74,8 +74,8 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             }
         }
-        public string OutMember { get; set; }
-        public string InMember { get; set; }
+        public ReactiveProperty<string> OutMember { get; set; } = new();
+        public ReactiveProperty<string> InMember { get; set; } = new();
         public void Dialog(string message)
         {
             _dialogService.ShowDialog(
@@ -99,31 +99,42 @@ namespace VolleyballScoreSheet.ViewModels
                 {
                     TeamName.Value  = _game.LeftTeam.Name.Value;
 
-                    var 選手交代で出たことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                    var 選手交代で入ったことある人リスト = _game.ATeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+                    var 選手交代で出たことある人リスト = _game.LeftTeam.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                    var 選手交代で入ったことある人リスト = _game.LeftTeam.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
 
-                    var 選手交代で下がれる人リスト = _game.ATeam.Value.Sets[^1].Rotation.Value
+                    var 選手交代で下がれる人リスト = _game.LeftTeam.Sets[^1].Rotation.Value
                         .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
 
+                    var コート外の選手 = _game.LeftTeam.Players.Select(x => x.Id)
+                        .Except(_game.LeftTeam.Sets[^1].Rotation.Value).ToArray();
+
+                    var 選手交代で入れる人リスト = コート外の選手.Except(選手交代で入ったことある人リスト).ToArray();
 
                     OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
+                    OutCourtMemberItem.Value = 選手交代で入れる人リスト;
                 }
                 else
                 {
-                    TeamName.Value  = _game.BTeam.Value.Name.Value;
+                    TeamName.Value  = _game.RightTeam.Name.Value;
 
-                    var 選手交代で出たことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                    var 選手交代で入ったことある人リスト = _game.BTeam.Value.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+                    var 選手交代で出たことある人リスト = _game.RightTeam.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                    var 選手交代で入ったことある人リスト = _game.RightTeam.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
 
-                    var 選手交代で下がれる人リスト = _game.BTeam.Value.Sets[^1].Rotation.Value
+                    var 選手交代で下がれる人リスト = _game.RightTeam.Sets[^1].Rotation.Value
                         .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
 
+                    var コート外の選手 = _game.RightTeam.Players.Select(x => x.Id)
+                        .Except(_game.RightTeam.Sets[^1].Rotation.Value).ToArray();
+
+                    var 選手交代で入れる人リスト = コート外の選手.Except(選手交代で入ったことある人リスト).ToArray();
 
                     OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
+                    OutCourtMemberItem.Value = 選手交代で入れる人リスト;
                 }
             }
         }
-        public void SelectionChanged()
+
+        public void OutMemberSelectionChanged()
         {
             if (TeamName.Value == _game.ATeam.Value.Name.Value)
             {
@@ -138,11 +149,11 @@ namespace VolleyballScoreSheet.ViewModels
                     .ToArray();
 
 
-                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember)))
+                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember.Value)))
                 {
                     //再入場
                     OutCourtMemberItem.Value = _game.ATeam.Value.Sets[^1].SubstitutionDetails
-                        .Where(x => x.In==int.Parse(OutMember))
+                        .Where(x => x.In==int.Parse(OutMember.Value))
                         .Select(x => x.Out)
                         .ToArray();
                 }
@@ -164,11 +175,11 @@ namespace VolleyballScoreSheet.ViewModels
                     .ToArray();
 
 
-                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember)))
+                if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember.Value)))
                 {
                     //再入場
                     OutCourtMemberItem.Value = _game.BTeam.Value.Sets[^1].SubstitutionDetails
-                        .Where(x => x.In==int.Parse(OutMember))
+                        .Where(x => x.In==int.Parse(OutMember.Value))
                         .Select(x => x.Out)
                         .ToArray();
                 }
@@ -178,7 +189,7 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             }
         }
-        public ReactiveCommand SelectionChangedCommand { get; } = new();
+        public ReactiveCommand OutSelectionChangedCommand { get; } = new();
         public ReactiveCommand CancelCommand { get; } = new();
         public ReactiveCommand SubstitutionCommand { get; } = new();
         public ReactiveProperty<string> TeamName { get; set; } = new();
