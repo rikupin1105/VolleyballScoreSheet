@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VolleyballScoreSheet.Views
+namespace VolleyballScoreSheet.Views.Dialog
 {
     /// <summary>
     /// NotificationDialog.xaml の相互作用ロジック

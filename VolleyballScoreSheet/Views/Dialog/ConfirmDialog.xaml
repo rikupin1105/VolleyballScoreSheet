@@ -1,10 +1,7 @@
 ﻿<UserControl
-    x:Class="VolleyballScoreSheet.Views.NotificationDialog"
+    x:Class="VolleyballScoreSheet.Views.Dialog.ConfirmDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     prism:ViewModelLocator.AutoWireViewModel="True">
@@ -14,7 +11,7 @@
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="ShowInTaskbar" Value="False" />
-            <Setter Property="Width" Value="400" />
+            <Setter Property="Width" Value="600" />
             <Setter Property="MinHeight" Value="50" />
             <Setter Property="SizeToContent" Value="Height" />
             <Setter Property="WindowStyle" Value="ToolWindow" />
@@ -23,31 +20,40 @@
 
     <StackPanel>
         <wpfui:TitleBar
-            Title="{Binding Title.Value}"
-            CanMaximize="False"
+            Title="確認"
             ShowMaximize="False"
             ShowMinimize="False" />
+
         <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="7*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                FontSize="15"
-                Text="{Binding Message.Value}" />
-
+                Grid.ColumnSpan="2"
+                Margin="5,0,5,5"
+                Text="{Binding Text.Value}" />
             <Button
-                x:Name="OKButton"
                 Grid.Row="1"
-                Margin="0"
-                Padding="30,5"
-                HorizontalAlignment="Right"
-                Command="{Binding CloseDialogCommand}"
-                Content="{Binding ButtonText.Value}"
-                IsDefault="True"
+                Grid.Column="1"
+                Margin="2.5"
+                Padding="5"
+                Command="{Binding OKCommand}"
+                Content="{Binding OK.Value}"
                 Style="{StaticResource LightButton}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="2.5"
+                Padding="5"
+                Background="#cd1141"
+                Command="{Binding CancelCommand}"
+                Content="{Binding Cancel.Value}"
+                Style="{StaticResource ColorButton}" />
         </Grid>
     </StackPanel>
 </UserControl>

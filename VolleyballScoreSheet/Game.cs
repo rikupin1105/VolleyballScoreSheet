@@ -64,6 +64,7 @@ namespace VolleyballScoreSheet
         public ReactivePropertySlim<bool> DisplayBeforeMatch { get; set; } = new(false);
         public ReactivePropertySlim<bool> DisplayRotation { get; set; } = new(false);
         public ReactivePropertySlim<bool> DisplayRequestTimeOut { get; set; } = new(false);
+        public ReactivePropertySlim<List<Sanction>> Sanctions { get; set; } = new(new());
 
         public ReactivePropertySlim<string> Debug { get; set; } = new();
 
@@ -123,7 +124,7 @@ namespace VolleyballScoreSheet
                 else
                 {
                     ATeam.Value.TimeOut();
-                    HistoryAdd("TA");
+                    HistoryAdd("TimeOutA");
                     if (ATeam.Value.Timeouts.Value == 2)
                     {
                         SecondTimeoutCommand.Execute(ATeam.Value.Name.Value);
@@ -141,7 +142,7 @@ namespace VolleyballScoreSheet
                 else
                 {
                     BTeam.Value.TimeOut();
-                    HistoryAdd("TB");
+                    HistoryAdd("TimeOutB");
 
                     if (BTeam.Value.Timeouts.Value == 2)
                     {
@@ -187,8 +188,8 @@ namespace VolleyballScoreSheet
         {
             //PA Aチームの得点
             //PB Bチームの得点
-            //TA Aチームのタイムアウト
-            //TB Bチームのタイムアウト
+            //TimeOutA Aチームのタイムアウト
+            //TimeOutB Bチームのタイムアウト
 
             if (History.Value.Count == 1)
             {
@@ -300,13 +301,13 @@ namespace VolleyballScoreSheet
                 BTeam.Value.MedamaRefresh();
                 return;
             }
-            else if (c=="TA")
+            else if (c=="TimeOutA")
             {
                 HistoryRemove();
                 ATeam.Value.TimeOut(-1);
                 return;
             }
-            else if (c=="TB")
+            else if (c=="TimeOutB")
             {
                 HistoryRemove();
                 BTeam.Value.TimeOut(-1);
@@ -320,31 +321,47 @@ namespace VolleyballScoreSheet
                 Undo();
                 return;
             }
-            else if (c=="DWA")
+            else if (c=="DelayWarningA")
             {
                 HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 ATeam.Value.DelayWarning = null;
                 return;
             }
-            else if (c=="DWB")
+            else if (c=="DelayWarningB")
             {
                 HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 BTeam.Value.DelayWarning = null;
                 return;
             }
-            else if(c=="DPA")
+            else if (c=="DelayPenaltyA")
             {
                 HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 ATeam.Value.DelayPenalties.RemoveAt(ATeam.Value.DelayPenalties.Count-1);
                 Undo();
                 return;
             }
-            else if (c=="DPB")
+            else if (c=="DelayPenaltyB")
             {
                 HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 BTeam.Value.DelayPenalties.RemoveAt(BTeam.Value.DelayPenalties.Count-1);
                 Undo();
                 return;
+            }
+            else if (c=="ImproperRequestsA")
+            {
+                HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
+                ATeam.Value.ImproperRequests.Value = false;
+            }
+            else if (c=="ImproperRequestsB")
+            {
+                HistoryRemove();
+                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
+                BTeam.Value.ImproperRequests.Value = false;
             }
             
         }

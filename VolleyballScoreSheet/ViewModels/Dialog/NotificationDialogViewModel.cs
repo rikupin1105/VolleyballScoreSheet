@@ -7,7 +7,7 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 
-namespace VolleyballScoreSheet.ViewModels
+namespace VolleyballScoreSheet.ViewModels.Dialog
 {
     public class NotificationDialogViewModel : IDialogAware
     {
@@ -37,7 +37,7 @@ namespace VolleyballScoreSheet.ViewModels
 
         public bool CanCloseDialog() => true;
         public void OnDialogClosed() { }
-        public void OnDialogOpened(IDialogParameters parameters) 
+        public void OnDialogOpened(IDialogParameters parameters)
         {
             // Configure parameters
             if (parameters.TryGetValue("Title", out string title))

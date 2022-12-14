@@ -770,7 +770,7 @@
                     Margin="5"
                     Padding="40,10"
                     Command="{Binding CardCommand}"
-                    Content="カード"
+                    Content="罰則"
                     Style="{StaticResource LightButton}" />
             </StackPanel>
         </StackPanel>

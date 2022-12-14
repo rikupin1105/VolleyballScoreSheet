@@ -139,6 +139,7 @@ namespace VolleyballScoreSheet.Model
         public ReactivePropertySlim<string> Color { get; set; }
         public DelayWarning? DelayWarning { get; set; }
         public List<DelayPenalty> DelayPenalties { get; set; } = new();
+        public ReactivePropertySlim<bool> ImproperRequests { get; set; } = new(false);
     }
     public class DelayWarning
     {

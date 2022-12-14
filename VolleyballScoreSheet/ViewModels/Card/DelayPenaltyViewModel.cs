@@ -34,7 +34,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
             {
                 if (_game.LeftTeam.DelayWarning is null)
                 {
-                    //1回目の場合はディレイペナルティ
+                    //1回目の場合はディレイワーニング
                     _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
                     {
                         {"Title","注意" },
@@ -47,25 +47,55 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 }
                 else
                 {
-                    _game.LeftTeam.DelayPenalties.Add(new Model.DelayPenalty()
+                    if (_game.LeftTeam.Sets[^1].Rotation.Value is null)
                     {
-                        Point = _game.LeftTeam.Sets[^1].Points.Value,
-                        OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
-                        Set = _game.Set.Value
-                    });
+                        _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
+                        {
+                            {"Title","注意" },
+                            { "Message",$"セット開始前、セット間に適用された遅延行為は\n各チームのラインアップシート提出後に適用してください。"},
+                            {"ButtonText","OK" }
+                        }, res =>
+                        {
 
-                    if (_game.isATeamLeft.Value)
-                    {
-                        _game.PointAdd(false);
-                        _game.HistoryAdd("DPA");
+                        });
                     }
                     else
                     {
-                        _game.PointAdd(true);
-                        _game.HistoryAdd("DPB");
-                    }
 
-                    RequestClose?.Invoke(new DialogResult());
+                        _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
+                        {
+                            {"Text","ディレイペナルティを適用しますか？" },
+                            {"OK","適用" },
+                            {"Cancel","キャンセル" },
+                        }, res =>
+                        {
+                            if (res.Result == ButtonResult.OK)
+                            {
+                                var dp = new Model.DelayPenalty()
+                                {
+                                    Point = _game.LeftTeam.Sets[^1].Points.Value,
+                                    OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
+                                    Set = _game.Set.Value
+                                };
+
+                                _game.LeftTeam.DelayPenalties.Add(dp);
+
+                                if (_game.isATeamLeft.Value)
+                                {
+                                    _game.Sanctions.Value.Add(new('A', dp));
+                                    _game.PointAdd(false);
+                                    _game.HistoryAdd("DelayPenaltyA");
+                                }
+                                else
+                                {
+                                    _game.Sanctions.Value.Add(new('B', dp));
+                                    _game.PointAdd(true);
+                                    _game.HistoryAdd("DelayPenaltyB");
+                                }
+                            }
+                            RequestClose?.Invoke(new DialogResult(res.Result));
+                        });
+                    }
                 }
             }
             else
@@ -85,24 +115,53 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 }
                 else
                 {
-                    _game.RightTeam.DelayPenalties.Add(new Model.DelayPenalty()
+                    if (_game.LeftTeam.Sets[^1].Rotation.Value is null)
                     {
-                        Point = _game.RightTeam.Sets[^1].Points.Value,
-                        OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
-                        Set = _game.Set.Value
-                    });
+                        _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
+                        {
+                            {"Title","注意" },
+                            { "Message",$"セット開始前、セット間に適用された遅延行為は\n各チームのラインアップシート提出後に適用してください。"},
+                            {"ButtonText","OK" }
+                        }, res =>
+                        {
 
-                    if (_game.isATeamLeft.Value)
-                    {
-                        _game.PointAdd(true);
-                        _game.HistoryAdd("DPB");
+                        });
                     }
                     else
                     {
-                        _game.PointAdd(false);
-                        _game.HistoryAdd("DPA");
+                        _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
+                        {
+                            {"Text","ディレイペナルティを適用しますか？" },
+                            {"OK","適用" },
+                            {"Cancel","キャンセル" },
+                        }, res =>
+                        {
+                            if (res.Result == ButtonResult.OK)
+                            {
+                                var dp = new Model.DelayPenalty()
+                                {
+                                    Point = _game.RightTeam.Sets[^1].Points.Value,
+                                    OpponentPoint = _game.LeftTeam.Sets[^1].Points.Value,
+                                    Set = _game.Set.Value
+                                };
+                                _game.RightTeam.DelayPenalties.Add(dp);
+
+                                if (_game.isATeamLeft.Value)
+                                {
+                                    _game.Sanctions.Value.Add(new('B', dp));
+                                    _game.PointAdd(true);
+                                    _game.HistoryAdd("DelayPenaltyB");
+                                }
+                                else
+                                {
+                                    _game.Sanctions.Value.Add(new('A', dp));
+                                    _game.PointAdd(false);
+                                    _game.HistoryAdd("DelayPenaltyA");
+                                }
+                            }
+                            RequestClose?.Invoke(new DialogResult(res.Result));
+                        });
                     }
-                    RequestClose?.Invoke(new DialogResult());
                 }
             }
         }

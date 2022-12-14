@@ -5,14 +5,15 @@ using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VolleyballScoreSheet.Views;
 
-namespace VolleyballScoreSheet.ViewModels.Card
+namespace VolleyballScoreSheet.ViewModels
 {
-    public class DelayWarningViewModel : BindableBase, IDialogAware
+    public class ImproperRequestsViewModel : BindableBase, IDialogAware
     {
+        private readonly IDialogService _dialogService;
         private readonly Game _game;
-        private readonly DialogService _dialogService;
-        public DelayWarningViewModel(Game game, DialogService dialogService)
+        public ImproperRequestsViewModel(Game game, IDialogService dialogService)
         {
             _game = game;
             _dialogService = dialogService;
@@ -23,20 +24,21 @@ namespace VolleyballScoreSheet.ViewModels.Card
             _game.RightTeam.Color.Subscribe(x => RightTeamColor.Value=x);
 
             CancelCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel)));
-            LeftCommand.Subscribe(_ => DelayWarning(true));
-            RightCommand.Subscribe(_ => DelayWarning(false));
+            LeftCommand.Subscribe(_ => ImproperRequests(true));
+            RightCommand.Subscribe(_ => ImproperRequests(false));
         }
-        private void DelayWarning(bool isLeft)
+
+        public void ImproperRequests(bool isLeft)
         {
             if (isLeft)
             {
-                if (_game.LeftTeam.DelayWarning is not null)
+                if (_game.LeftTeam.ImproperRequests.Value == true)
                 {
-                    //二回目の場合はディレイペナルティ
+                    //二回目 ディレイ
                     _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
                     {
                         {"Title","注意" },
-                        { "Message",$"2回目以降の遅延行為はペナルティが適用されます。\nセカンドレフェリーに遅延行為が2回目以降であることを通知し、\nディレイペナルティ(赤)の適用を勧めてください。"},
+                        { "Message",$"すでに不当な要求が適用されています。\nセカンドレフェリーに2回目以降の不当な要求であることを通知し、\nディレイワーニングまたは、ディレイペナルティを適用を勧めてください。"},
                         {"ButtonText","OK" }
                     }, res =>
                     {
@@ -47,30 +49,21 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 {
                     _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
                     {
-                        {"Text","ディレイワーニングを適用しますか？" },
-                        {"Cancel","キャンセル" },
-                        {"OK" ,"適用"}
+                        { "Text", "不当な要求を適用しますか？" },
+                        { "OK", "適用" },
+                        { "Cancel", "キャンセル" },
                     }, res =>
                     {
                         if (res.Result == ButtonResult.OK)
                         {
-                            var dw = new Model.DelayWarning()
-                            {
-                                Point = _game.LeftTeam.Sets[^1].Points.Value,
-                                OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
-                                Set = _game.Set.Value
-                            };
-                            _game.LeftTeam.DelayWarning = dw;
-
+                            _game.LeftTeam.ImproperRequests.Value = true;
                             if (_game.isATeamLeft.Value)
                             {
-                                _game.Sanctions.Value.Add(new('A', dw));
-                                _game.HistoryAdd("DelayWarningA");
+                                _game.HistoryAdd("ImproperRequestsA");
                             }
                             else
                             {
-                                _game.Sanctions.Value.Add(new('B', dw));
-                                _game.HistoryAdd("DelayWarningB");
+                                _game.HistoryAdd("ImproperRequestsB");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));
@@ -79,13 +72,13 @@ namespace VolleyballScoreSheet.ViewModels.Card
             }
             else
             {
-                if (_game.RightTeam.DelayWarning is not null)
+                if (_game.RightTeam.ImproperRequests.Value == true)
                 {
-                    //二回目の場合はディレイペナルティ
+                    //二回目 ディレイ
                     _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
                     {
                         {"Title","注意" },
-                        { "Message",$"2回目以降の遅延行為はペナルティが適用されます。\nセカンドレフェリーに遅延行為が2回目以降であることを通知し、\nディレイペナルティ(赤)の適用を勧めてください。"},
+                        { "Message",$"すでに不当な要求が適用されています。\nセカンドレフェリーに2回目以降の不当な要求であることを通知し、\nディレイワーニングまたは、ディレイペナルティを適用を勧めてください。"},
                         {"ButtonText","OK" }
                     }, res =>
                     {
@@ -96,42 +89,35 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 {
                     _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
                     {
-                        {"Text","ディレイワーニングを適用しますか？" },
-                        {"Cancel","キャンセル" },
-                        {"OK" ,"適用"}
+                        { "Text", "不当な要求を適用しますか？" },
+                        { "OK", "適用" },
+                        { "Cancel", "キャンセル" },
                     }, res =>
                     {
                         if (res.Result == ButtonResult.OK)
                         {
-                            var dw= new Model.DelayWarning()
-                            {
-                                Point = _game.RightTeam.Sets[^1].Points.Value,
-                                OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
-                                Set = _game.Set.Value
-                            };
-                            _game.RightTeam.DelayWarning = dw;
-
+                            _game.RightTeam.ImproperRequests.Value = true;
                             if (_game.isATeamLeft.Value)
                             {
-                                _game.Sanctions.Value.Add(new('B', dw));
-                                _game.HistoryAdd("DelayWarningB");
+                                _game.HistoryAdd("ImproperRequestsB");
                             }
                             else
                             {
-                                _game.Sanctions.Value.Add(new('A', dw));
-                                _game.HistoryAdd("DelayWarningA");
+                                _game.HistoryAdd("ImproperRequestsA");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));
                     });
-
                 }
             }
         }
+
+
         public ReactiveProperty<string> LeftTeamName { get; set; } = new();
         public ReactiveProperty<string> RightTeamName { get; set; } = new();
         public ReactiveProperty<string> LeftTeamColor { get; set; } = new();
         public ReactiveProperty<string> RightTeamColor { get; set; } = new();
+
 
 
 
@@ -148,6 +134,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
         public void OnDialogClosed()
         {
+
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
