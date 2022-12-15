@@ -23,7 +23,7 @@ namespace VolleyballScoreSheet.ViewModels.Dialog
 
         public string Title => "";
 
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult>?RequestClose;
 
         public bool CanCloseDialog() => true;
 

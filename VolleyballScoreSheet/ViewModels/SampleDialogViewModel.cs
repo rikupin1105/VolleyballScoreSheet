@@ -16,7 +16,7 @@ namespace VolleyballScoreSheet.ViewModels
 
         public string Title => "サンプルダイアログ";
 
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult>?RequestClose;
 
         /// <summary>
         /// コンストラクタ

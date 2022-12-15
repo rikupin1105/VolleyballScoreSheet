@@ -16,7 +16,7 @@ namespace VolleyballScoreSheet.ViewModels
     public class RotationViewModel : IDialogAware, INavigationAware
     {
         public string Title => "";
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult>?RequestClose;
         public bool CanCloseDialog() => true;
         public void OnDialogClosed()
         {

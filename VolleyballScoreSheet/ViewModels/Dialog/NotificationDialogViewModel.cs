@@ -32,7 +32,7 @@ namespace VolleyballScoreSheet.ViewModels.Dialog
             //this.Height = 150;
             CloseDialogCommand.Subscribe(_ => RequestClose.Invoke(new DialogResult()));
         }
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult>?RequestClose;
 
 
         public bool CanCloseDialog() => true;
