@@ -354,13 +354,11 @@ namespace VolleyballScoreSheet
             else if (c=="ImproperRequestsA")
             {
                 HistoryRemove();
-                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 ATeam.Value.ImproperRequests.Value = false;
             }
             else if (c=="ImproperRequestsB")
             {
                 HistoryRemove();
-                Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 BTeam.Value.ImproperRequests.Value = false;
             }
             
