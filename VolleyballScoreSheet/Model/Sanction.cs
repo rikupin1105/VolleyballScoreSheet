@@ -2,6 +2,12 @@
 
 namespace VolleyballScoreSheet.Model
 {
+    public enum SanctionEnum
+    {
+        ImproperRequest,
+        DelayWarning,
+        DelayPenalty
+    }
     public class Sanction
     {
         public Sanction(char team, DelayWarning delayWarning)

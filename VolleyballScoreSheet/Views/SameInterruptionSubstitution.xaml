@@ -42,7 +42,7 @@
                     Padding="30,5"
                     Background="#cd1141"
                     Command="{Binding RejectCommand}"
-                    Content="拒否"
+                    Content="{Binding Sanction.Value}"
                     IsDefault="True"
                     Style="{StaticResource ColorButton}" />
                 <Button

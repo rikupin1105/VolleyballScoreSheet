@@ -16,10 +16,14 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveProperty<string> Message { get; set; } = new("");
         public ReactiveProperty<string> ButtonText { get; set; } = new("OK");
         public ReactiveProperty<string> Title { get; set; } = new("");
+        public ReactiveProperty<string> Sanction { get; set; } = new("");
         string IDialogAware.Title => Title.Value;
 
-        public SameInterruptionSubstitutionViewModel()
+        private readonly IDialogService _dialogService;
+        public SameInterruptionSubstitutionViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
+
             RejectCommand.Subscribe(_ =>
             {
                 RequestClose?.Invoke(new DialogResult(ButtonResult.Abort));
@@ -28,8 +32,9 @@ namespace VolleyballScoreSheet.ViewModels
             {
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
             });
+            _dialogService=dialogService;
         }
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult>? RequestClose;
 
 
         public bool CanCloseDialog() => true;
@@ -43,6 +48,10 @@ namespace VolleyballScoreSheet.ViewModels
             if (parameters.TryGetValue("Message", out string message))
             {
                 Message.Value = message;
+            }
+            if (parameters.TryGetValue("Sanction", out string sanction))
+            {
+                Sanction.Value = $"拒否({sanction})";
             }
         }
     }
