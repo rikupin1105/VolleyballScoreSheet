@@ -87,10 +87,10 @@ namespace VolleyballScoreSheet.ViewModels
                             }
                         }
                         else if (res.Result == ButtonResult.Abort)
+                        {
+                            if (sanction == SanctionEnum.DelayWarning)
                             {
-                                if(sanction == SanctionEnum.DelayWarning)
-                                {
-                                    _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
+                                _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
                                     {
                                         {"Text","ディレイワーニングを適用しますか？" },
                                         {"OK","適用" },
@@ -112,11 +112,11 @@ namespace VolleyballScoreSheet.ViewModels
                                             _game.History.HistoryAdd("DelayWarning"+AorB);
                                         }
                                     });
-                                }
-                                else if(sanction == SanctionEnum.DelayPenalty)
-                                {
-                                    //ディレイペナルティ
-                                    _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
+                            }
+                            else if (sanction == SanctionEnum.DelayPenalty)
+                            {
+                                //ディレイペナルティ
+                                _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
                                     {
                                         {"Text","ディレイペナルティを適用しますか？" },
                                         {"OK","適用" },
@@ -147,11 +147,11 @@ namespace VolleyballScoreSheet.ViewModels
                                             _game.History.HistoryAdd("DelayPenalty"+AorB);
                                         }
                                     });
-                                }
-                                else if(sanction==SanctionEnum.ImproperRequest) 
-                                {
-                                    //不当な要求
-                                    _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
+                            }
+                            else if (sanction==SanctionEnum.ImproperRequest)
+                            {
+                                //不当な要求
+                                _dialogService.ShowDialog("ConfirmDialog", new DialogParameters()
                                     {
                                         { "Text", "不当な要求を適用しますか？" },
                                         { "OK", "適用" },
@@ -164,8 +164,8 @@ namespace VolleyballScoreSheet.ViewModels
                                             _game.History.HistoryAdd("ImproperRequests"+AorB);
                                         }
                                     });
-                                }
                             }
+                        }
                     }, "AlertWindow");
                 }
                 else
@@ -216,47 +216,36 @@ namespace VolleyballScoreSheet.ViewModels
 
                     }, "AlertWindow");
         }
-        
+
         public void OnDialogOpened(IDialogParameters parameters)
         {
             if (parameters.TryGetValue("Side", out string side))
             {
+                Team team;
                 if (side=="Left")
                 {
-                    TeamName.Value  = _game.LeftTeam.Name.Value;
-
-                    var 選手交代で出たことある人リスト = _game.LeftTeam.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                    var 選手交代で入ったことある人リスト = _game.LeftTeam.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
-
-                    var 選手交代で下がれる人リスト = _game.LeftTeam.Sets[^1].Rotation.Value
-                        .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
-
-                    var コート外の選手 = _game.LeftTeam.Players.Select(x => x.Id)
-                        .Except(_game.LeftTeam.Sets[^1].Rotation.Value).ToArray();
-
-                    var 選手交代で入れる人リスト = コート外の選手.Except(選手交代で入ったことある人リスト).ToArray();
-
-                    OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
-                    OutCourtMemberItem.Value = 選手交代で入れる人リスト;
+                    team = _game.LeftTeam;
                 }
                 else
                 {
-                    TeamName.Value  = _game.RightTeam.Name.Value;
-
-                    var 選手交代で出たことある人リスト = _game.RightTeam.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                    var 選手交代で入ったことある人リスト = _game.RightTeam.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
-
-                    var 選手交代で下がれる人リスト = _game.RightTeam.Sets[^1].Rotation.Value
-                        .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
-
-                    var コート外の選手 = _game.RightTeam.Players.Select(x => x.Id)
-                        .Except(_game.RightTeam.Sets[^1].Rotation.Value).ToArray();
-
-                    var 選手交代で入れる人リスト = コート外の選手.Except(選手交代で入ったことある人リスト).ToArray();
-
-                    OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
-                    OutCourtMemberItem.Value = 選手交代で入れる人リスト;
+                    team = _game.RightTeam;
                 }
+
+                TeamName.Value  = _game.LeftTeam.Name.Value;
+
+                var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                var 選手交代で入ったことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
+
+                var 選手交代で下がれる人リスト = team.Sets[^1].Rotation.Value
+                    .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
+
+                var コート外の選手 = team.Players.Select(x => x.Id)
+                    .Except(team.Sets[^1].Rotation.Value).ToArray();
+
+                var 選手交代で入れる人リスト = コート外の選手.Except(選手交代で入ったことある人リスト).ToArray();
+
+                OnCourtMemberItem.Value = 選手交代で下がれる人リスト;
+                OutCourtMemberItem.Value = 選手交代で入れる人リスト;
             }
         }
 
