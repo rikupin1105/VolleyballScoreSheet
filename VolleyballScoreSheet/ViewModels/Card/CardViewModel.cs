@@ -67,6 +67,17 @@ namespace VolleyballScoreSheet.ViewModels.Card
                     }
                 }, "AlertWindow");
             });
+
+            YelloCardCommmand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("YellowCard", new DialogParameters() { }, res =>
+                {
+                    if (res.Result == ButtonResult.OK)
+                    {
+                        RequestClose?.Invoke(new DialogResult(res.Result));
+                    }
+                }, "AlertWindow");
+            });
         }
         public ReactiveProperty<bool> ImproperRequestA { get; set; } = new(false);
         public ReactiveProperty<bool> ImproperRequestB { get; set; } = new(false);
@@ -75,6 +86,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
         public ReactiveCommand DelayWarningCommand { get; set; } = new();
         public ReactiveCommand DelayPenaltyCommand { get; set; } = new();
         public ReactiveCommand ImproperRequestCommmand { get; set; } = new();
+        public ReactiveCommand YelloCardCommmand { get; set; } = new();
 
 
         public string Title => "";

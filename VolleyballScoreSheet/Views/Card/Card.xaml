@@ -91,6 +91,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="5,2.5,2.5,2.5"
+                Command="{Binding YelloCardCommmand}"
                 Style="{StaticResource LightButton}">
                 <Grid>
                     <Grid.ColumnDefinitions>

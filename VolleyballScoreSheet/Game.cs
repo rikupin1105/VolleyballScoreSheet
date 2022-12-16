@@ -354,7 +354,23 @@ namespace VolleyballScoreSheet
                 History.HistoryRemove();
                 BTeam.Value.ImproperRequests.Value = false;
             }
-            
+            else if (c=="YellowCardA")
+            {
+                History.HistoryRemove();
+                var s = Sanctions.Value.Where(x => x.Team=='A')
+                    .Where(x => x.Warning == c2).First();
+                Sanctions.Value.Remove(s);
+                return;
+            }
+            else if (c=="YellowCardB")
+            {
+                History.HistoryRemove();
+                var s = Sanctions.Value.Where(x => x.Team=='B')
+                    .Where(x => x.Warning == c2).First();
+                Sanctions.Value.Remove(s);
+                return;
+            }
+
         }
         public void EndSet()
         {
