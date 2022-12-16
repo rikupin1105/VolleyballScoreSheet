@@ -69,7 +69,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 }, "AlertWindow");
             });
 
-            YelloCardCommmand.Subscribe(_ =>
+            YellowCardCommmand.Subscribe(_ =>
             {
                 _dialogService.ShowDialog("SelectTeam", new DialogParameters() 
                 {
@@ -104,7 +104,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
         public ReactiveCommand DelayWarningCommand { get; set; } = new();
         public ReactiveCommand DelayPenaltyCommand { get; set; } = new();
         public ReactiveCommand ImproperRequestCommmand { get; set; } = new();
-        public ReactiveCommand YelloCardCommmand { get; set; } = new();
+        public ReactiveCommand YellowCardCommmand { get; set; } = new();
         public ReactiveCommand RedCardCommmand { get; set; } = new();
 
 
