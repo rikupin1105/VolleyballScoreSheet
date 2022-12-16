@@ -821,6 +821,17 @@ namespace VolleyballScoreSheet
                     return BTeam.Value;
                 }
             }
+            set
+            {
+                if (isATeamLeft.Value)
+                {
+                    ATeam.Value = value;
+                }
+                else
+                {
+                    BTeam.Value = value;
+                }
+            }
         }
         public Team RightTeam
         {
@@ -833,6 +844,17 @@ namespace VolleyballScoreSheet
                 else
                 {
                     return ATeam.Value;
+                }
+            }
+            set
+            {
+                if (isATeamLeft.Value)
+                {
+                    BTeam.Value = value;
+                }
+                else
+                {
+                    ATeam.Value = value;
                 }
             }
         }
