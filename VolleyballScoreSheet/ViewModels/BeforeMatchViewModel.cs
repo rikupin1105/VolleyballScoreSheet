@@ -46,7 +46,7 @@ namespace VolleyballScoreSheet.ViewModels
                  _game.ATeam.Value.Refresh();
                  _game.BTeam.Value.Refresh();
 
-                 _game.HistoryAdd("S"+_game.Set.Value);
+                 _game.History.HistoryAdd("S"+_game.Set.Value);
                  _game.DisplayMain("Rotation");
 
              }, "DialogWindow");

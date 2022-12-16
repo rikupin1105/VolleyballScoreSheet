@@ -59,11 +59,11 @@ namespace VolleyballScoreSheet.ViewModels
                             _game.LeftTeam.ImproperRequests.Value = true;
                             if (_game.isATeamLeft.Value)
                             {
-                                _game.HistoryAdd("ImproperRequestsA");
+                                _game.History.HistoryAdd("ImproperRequestsA");
                             }
                             else
                             {
-                                _game.HistoryAdd("ImproperRequestsB");
+                                _game.History.HistoryAdd("ImproperRequestsB");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));
@@ -99,11 +99,11 @@ namespace VolleyballScoreSheet.ViewModels
                             _game.RightTeam.ImproperRequests.Value = true;
                             if (_game.isATeamLeft.Value)
                             {
-                                _game.HistoryAdd("ImproperRequestsB");
+                                _game.History.HistoryAdd("ImproperRequestsB");
                             }
                             else
                             {
-                                _game.HistoryAdd("ImproperRequestsA");
+                                _game.History.HistoryAdd("ImproperRequestsA");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));

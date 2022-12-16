@@ -109,7 +109,7 @@ namespace VolleyballScoreSheet.ViewModels
                                             team.DelayWarning = dw;
 
                                             _game.Sanctions.Value.Add(new(AorB, dw));
-                                            _game.HistoryAdd("DelayWarning"+AorB);
+                                            _game.History.HistoryAdd("DelayWarning"+AorB);
                                         }
                                     });
                                 }
@@ -144,7 +144,7 @@ namespace VolleyballScoreSheet.ViewModels
                                                 _game.Point(true);
 
                                             }
-                                            _game.HistoryAdd("DelayPenalty"+AorB);
+                                            _game.History.HistoryAdd("DelayPenalty"+AorB);
                                         }
                                     });
                                 }
@@ -161,7 +161,7 @@ namespace VolleyballScoreSheet.ViewModels
                                         if (res.Result == ButtonResult.OK)
                                         {
                                             team.ImproperRequests.Value = true;
-                                            _game.HistoryAdd("ImproperRequests"+AorB);
+                                            _game.History.HistoryAdd("ImproperRequests"+AorB);
                                         }
                                     });
                                 }

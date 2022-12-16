@@ -20,28 +20,19 @@ namespace VolleyballScoreSheet
     {
         public Game()
         {
-            History.Subscribe(x =>
+            History.Histories.Subscribe(x =>
             {
                 if (x.Count>1) UndoEnable.Value = true;
                 else UndoEnable.Value = false;
-                Debug.Value = string.Join(" , ", x);
+                Debug.Value = string.Join(" , ", x.Select(x => x.Command1));
             });
 
             ATeam.Value.CreateSet();
             BTeam.Value.CreateSet();
         }
-        public ReactiveProperty<List<string>> History { get; } = new(new List<string>() { "SG" });
-        public void HistoryAdd(string s)
-        {
-            History.Value.Add(s);
-            History.ForceNotify();
-        }
-        public void HistoryRemove()
-        {
-            History.Value.RemoveAt(History.Value.Count - 1);
 
-            History.ForceNotify();
-        }
+        public History History { get; set; } = new();
+
         public ReactivePropertySlim<int> Set { get; set; } = new(1);
 
         public void LockControl()
@@ -124,7 +115,7 @@ namespace VolleyballScoreSheet
                 else
                 {
                     ATeam.Value.TimeOut();
-                    HistoryAdd("TimeOutA");
+                    History.HistoryAdd("TimeOutA");
                     if (ATeam.Value.Timeouts.Value == 2)
                     {
                         SecondTimeoutCommand.Execute(ATeam.Value.Name.Value);
@@ -142,7 +133,7 @@ namespace VolleyballScoreSheet
                 else
                 {
                     BTeam.Value.TimeOut();
-                    HistoryAdd("TimeOutB");
+                    History.HistoryAdd("TimeOutB");
 
                     if (BTeam.Value.Timeouts.Value == 2)
                     {
@@ -191,15 +182,17 @@ namespace VolleyballScoreSheet
             //TimeOutA Aチームのタイムアウト
             //TimeOutB Bチームのタイムアウト
 
-            if (History.Value.Count == 1)
+            if (History.Histories.Value.Count == 1)
             {
                 return;
             }
 
-            var c = History.Value[^1];
+            var c = History.Histories.Value[^1].Command1;
+            var c2 = History.Histories.Value[^1].Command2;
+
             if (c[0]=='W'&&c[1]=='S')
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 if (c[2]=='A')
                 {
                     ATeam.Value.WinSets.Value--;
@@ -213,7 +206,7 @@ namespace VolleyballScoreSheet
             }
             if (c[0] == 'P')
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 if (c[1]=='A')
                 {
                     PointRemove(true);
@@ -226,10 +219,10 @@ namespace VolleyballScoreSheet
             }
             else if (c[0]=='S'&& c[1]=='U'&& c[2]=='B')
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 if (c[3]=='A')
                 {
-                    var In = int.Parse( c.Split(',')[1]);
+                    var In = int.Parse(c.Split(',')[1]);
                     var Out = int.Parse(c.Split(',')[2]);
 
                     ATeam.Value.Sets[^1].Substitutions.Value--;
@@ -264,7 +257,7 @@ namespace VolleyballScoreSheet
             else if (c[0]=='S')
             {
                 var set = int.Parse(c[1].ToString());
-                HistoryRemove();
+                History.HistoryRemove();
 
                 DisplayMain("BeforeMatch");
                 LockControl();
@@ -273,7 +266,7 @@ namespace VolleyballScoreSheet
             }
             else if (c[0]=='G' && c[1]=='S')
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 ATeam.Value.DeleteSet();
                 BTeam.Value.DeleteSet();
 
@@ -281,12 +274,12 @@ namespace VolleyballScoreSheet
 
                 Set.Value--;
 
-                if (History.Value[^1]=="PA")
+                if (History.Histories.Value[^1].Command1=="PA")
                 {
                     ATeam.Value.WinSets.Value--;
                     NextServeTeam(true);
                 }
-                else if (History.Value[^1]=="PB")
+                else if (History.Histories.Value[^1].Command1=="PB")
                 {
                     BTeam.Value.WinSets.Value--;
                     NextServeTeam(false);
@@ -303,19 +296,19 @@ namespace VolleyballScoreSheet
             }
             else if (c=="TimeOutA")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 ATeam.Value.TimeOut(-1);
                 return;
             }
             else if (c=="TimeOutB")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 BTeam.Value.TimeOut(-1);
                 return;
             }
             else if (c=="CCF")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 Rule.FinalSetCourtChanged = false;
                 CourtChange();
                 Undo();
@@ -323,21 +316,21 @@ namespace VolleyballScoreSheet
             }
             else if (c=="DelayWarningA")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 ATeam.Value.DelayWarning = null;
                 return;
             }
             else if (c=="DelayWarningB")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 BTeam.Value.DelayWarning = null;
                 return;
             }
             else if (c=="DelayPenaltyA")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 ATeam.Value.DelayPenalties.RemoveAt(ATeam.Value.DelayPenalties.Count-1);
                 Undo();
@@ -345,7 +338,7 @@ namespace VolleyballScoreSheet
             }
             else if (c=="DelayPenaltyB")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 Sanctions.Value.RemoveAt(Sanctions.Value.Count-1);
                 BTeam.Value.DelayPenalties.RemoveAt(BTeam.Value.DelayPenalties.Count-1);
                 Undo();
@@ -353,12 +346,12 @@ namespace VolleyballScoreSheet
             }
             else if (c=="ImproperRequestsA")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 ATeam.Value.ImproperRequests.Value = false;
             }
             else if (c=="ImproperRequestsB")
             {
-                HistoryRemove();
+                History.HistoryRemove();
                 BTeam.Value.ImproperRequests.Value = false;
             }
             
@@ -367,7 +360,7 @@ namespace VolleyballScoreSheet
         {
             //ATeam.Value.Sets[^1].Point.ForceNotify();
 
-            HistoryAdd("GS"+Set.Value);
+            History.HistoryAdd("GS"+Set.Value);
             Set.Value++;
 
             ATeam.Value.CreateSet();
@@ -422,7 +415,7 @@ namespace VolleyballScoreSheet
                 ATeam.Value.Point();
 
                 //ヒストリー追加
-                HistoryAdd("PA");
+                History.HistoryAdd("PA");
 
                 if (Set.Value==Rule.SetCount)
                 {
@@ -435,7 +428,7 @@ namespace VolleyballScoreSheet
                         FinalSetCourtChangeNotifyCommand.Execute();
 
                         CourtChange();
-                        HistoryAdd("CCF");
+                        History.HistoryAdd("CCF");
                         Rule.FinalSetCourtChanged = true;
                         NextServeTeam(true);
                     }
@@ -446,7 +439,7 @@ namespace VolleyballScoreSheet
                     {
                         //操作ロック
                         //END GAME
-                        HistoryAdd("WSA");
+                        History.HistoryAdd("WSA");
                         ATeam.Value.WinSets.Value++;
 
                         LockControl();
@@ -459,9 +452,9 @@ namespace VolleyballScoreSheet
                     ATeam.Value.Sets[^1].Points.Value - BTeam.Value.Sets[^1].Points.Value>=2)
                 {
 
-                    HistoryAdd("WSA");
+                    History.HistoryAdd("WSA");
                     ATeam.Value.WinSets.Value++;
-                        LockControl();
+                    LockControl();
 
                     //ゲーム終了
                     if (ATeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
@@ -494,7 +487,7 @@ namespace VolleyballScoreSheet
                 BTeam.Value.Point();
 
                 //ヒストリー追加
-                HistoryAdd("PB");
+                History.HistoryAdd("PB");
 
                 if (Set.Value == Rule.SetCount)
                 {
@@ -507,7 +500,7 @@ namespace VolleyballScoreSheet
                         FinalSetCourtChangeNotifyCommand.Execute();
 
                         CourtChange();
-                        HistoryAdd("CCF");
+                        History.HistoryAdd("CCF");
                         Rule.FinalSetCourtChanged = true;
                         NextServeTeam(false);
                     }
@@ -522,7 +515,7 @@ namespace VolleyballScoreSheet
 
                         LockControl();
 
-                        HistoryAdd("WSB");
+                        History.HistoryAdd("WSB");
                         BTeam.Value.WinSets.Value++;
 
                         EndButtonText.Value = "END GAME";
@@ -532,9 +525,9 @@ namespace VolleyballScoreSheet
                 else if (BTeam.Value.Sets[^1].Points.Value >= Rule.ToWinPoint &&
                     BTeam.Value.Sets[^1].Points.Value - ATeam.Value.Sets[^1].Points.Value>=2)
                 {
-                    HistoryAdd("WSB");
+                    History.HistoryAdd("WSB");
                     BTeam.Value.WinSets.Value++;
-                        LockControl();
+                    LockControl();
                     //ゲーム終了
                     if (BTeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
                     {
@@ -597,24 +590,24 @@ namespace VolleyballScoreSheet
                 ATeam.Value.Point(-1);
 
                 UnlockControl();
-                for (int i = History.Value.Count-1; i >= 0; i--)
+                for (int i = History.Histories.Value.Count-1; i >= 0; i--)
                 {
-                    if (History.Value[i]=="PA")
+                    if (History.Histories.Value[i].Command1=="PA")
                     {
                         //そのまま
                         NextServeTeam(true);
                         return;
                     }
-                    else if (History.Value[i]=="PB")
+                    else if (History.Histories.Value[i].Command1=="PB")
                     {
                         //ローテーションとサーバーを戻す
                         ATeam.Value.RotateReverse();
                         NextServeTeam(false);
                         return;
                     }
-                    else if (History.Value[i][0]=='S')
+                    else if (History.Histories.Value[i].Command1[0]=='S')
                     {
-                        if (History.Value[i][1] == Rule.SetCount)
+                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount)
                         {
                             if (FinalSetCoinToss.ATeamServer)
                             {
@@ -626,7 +619,7 @@ namespace VolleyballScoreSheet
                             }
                             return;
                         }
-                        else if (History.Value[i][1] =='1')
+                        else if (History.Histories.Value[i].Command1[1] =='1')
                         {
                             UndoEnable.Value = true;
                             if (CoinToss.ATeamServer)
@@ -638,7 +631,7 @@ namespace VolleyballScoreSheet
                                 NextServeTeam(false);
                             }
                         }
-                        else if (History.Value[i][1]%2==0)
+                        else if (History.Histories.Value[i].Command1[1]%2==0)
                         {
                             if (CoinToss.ATeamServer)
                             {
@@ -650,7 +643,7 @@ namespace VolleyballScoreSheet
                             }
                             return;
                         }
-                        else if (History.Value[i][1]%2==1)
+                        else if (History.Histories.Value[i].Command1[1]%2==1)
                         {
                             if (CoinToss.ATeamServer)
                             {
@@ -670,24 +663,24 @@ namespace VolleyballScoreSheet
                 BTeam.Value.Point(-1);
                 UnlockControl();
 
-                for (int i = History.Value.Count-1; i >= 0; i--)
+                for (int i = History.Histories.Value.Count-1; i >= 0; i--)
                 {
-                    if (History.Value[i]=="PB")
+                    if (History.Histories.Value[i].Command1=="PB")
                     {
                         //そのまま
                         NextServeTeam(false);
                         return;
                     }
-                    else if (History.Value[i]=="PA")
+                    else if (History.Histories.Value[i].Command1=="PA")
                     {
                         //ローテーションとサーバーを戻す
                         BTeam.Value.RotateReverse();
                         NextServeTeam(true);
                         return;
                     }
-                    else if (History.Value[i][0]=='S')
+                    else if (History.Histories.Value[i].Command1[0]=='S')
                     {
-                        if (History.Value[i][1] == Rule.SetCount)
+                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount)
                         {
                             if (FinalSetCoinToss.ATeamServer)
                             {
@@ -700,7 +693,7 @@ namespace VolleyballScoreSheet
                             }
                             return;
                         }
-                        else if (History.Value[i][1]%2==0)
+                        else if (History.Histories.Value[i].Command1[1]%2==0)
                         {
                             if (CoinToss.ATeamServer)
                             {
@@ -713,7 +706,7 @@ namespace VolleyballScoreSheet
                             }
                             return;
                         }
-                        else if (History.Value[i][1]%2==1)
+                        else if (History.Histories.Value[i].Command1[1]%2==1)
                         {
                             if (CoinToss.ATeamServer)
                             {
@@ -739,7 +732,7 @@ namespace VolleyballScoreSheet
             if (isAteam)
             {
                 ATeam.Value.Substitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
-                HistoryAdd($"SUBA,{In},{Out}");
+                History.HistoryAdd($"SUBA,{In},{Out}");
 
                 if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
@@ -754,7 +747,7 @@ namespace VolleyballScoreSheet
             else
             {
                 BTeam.Value.Substitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
-                HistoryAdd($"SUBB,{In},{Out}");
+                History.HistoryAdd($"SUBB,{In},{Out}");
                 if (BTeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
                     SubstitutionCountNotifyCommand.Execute(5);

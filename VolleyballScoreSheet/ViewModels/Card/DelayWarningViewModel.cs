@@ -65,12 +65,12 @@ namespace VolleyballScoreSheet.ViewModels.Card
                             if (_game.isATeamLeft.Value)
                             {
                                 _game.Sanctions.Value.Add(new('A', dw));
-                                _game.HistoryAdd("DelayWarningA");
+                                _game.History.HistoryAdd("DelayWarningA");
                             }
                             else
                             {
                                 _game.Sanctions.Value.Add(new('B', dw));
-                                _game.HistoryAdd("DelayWarningB");
+                                _game.History.HistoryAdd("DelayWarningB");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));
@@ -114,12 +114,12 @@ namespace VolleyballScoreSheet.ViewModels.Card
                             if (_game.isATeamLeft.Value)
                             {
                                 _game.Sanctions.Value.Add(new('B', dw));
-                                _game.HistoryAdd("DelayWarningB");
+                                _game.History.HistoryAdd("DelayWarningB");
                             }
                             else
                             {
                                 _game.Sanctions.Value.Add(new('A', dw));
-                                _game.HistoryAdd("DelayWarningA");
+                                _game.History.HistoryAdd("DelayWarningA");
                             }
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));

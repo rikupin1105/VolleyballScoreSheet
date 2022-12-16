@@ -84,13 +84,13 @@ namespace VolleyballScoreSheet.ViewModels.Card
                                 {
                                     _game.Sanctions.Value.Add(new('A', dp));
                                     _game.PointAdd(false);
-                                    _game.HistoryAdd("DelayPenaltyA");
+                                    _game.History.HistoryAdd("DelayPenaltyA");
                                 }
                                 else
                                 {
                                     _game.Sanctions.Value.Add(new('B', dp));
                                     _game.PointAdd(true);
-                                    _game.HistoryAdd("DelayPenaltyB");
+                                    _game.History.HistoryAdd("DelayPenaltyB");
                                 }
                             }
                             RequestClose?.Invoke(new DialogResult(res.Result));
@@ -150,13 +150,13 @@ namespace VolleyballScoreSheet.ViewModels.Card
                                 {
                                     _game.Sanctions.Value.Add(new('B', dp));
                                     _game.PointAdd(true);
-                                    _game.HistoryAdd("DelayPenaltyB");
+                                    _game.History.HistoryAdd("DelayPenaltyB");
                                 }
                                 else
                                 {
                                     _game.Sanctions.Value.Add(new('A', dp));
                                     _game.PointAdd(false);
-                                    _game.HistoryAdd("DelayPenaltyA");
+                                    _game.History.HistoryAdd("DelayPenaltyA");
                                 }
                             }
                             RequestClose?.Invoke(new DialogResult(res.Result));
