@@ -24,7 +24,7 @@ namespace VolleyballScoreSheet
             {
                 if (x.Count>1) UndoEnable.Value = true;
                 else UndoEnable.Value = false;
-                Debug.Value = string.Join(" , ", x.Select(x => x.Command1 + x.Command2));
+                Debug.Value = string.Join("\n", x.Select(x =>x.DateTime.ToString("HH:mm:ss:FF")+" "+ x.Command1 + x.Command2));
             });
 
             ATeam.Value.CreateSet();
