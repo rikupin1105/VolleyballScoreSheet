@@ -3,11 +3,11 @@
 namespace VolleyballScoreSheet.Views.Card
 {
     /// <summary>
-    /// Interaction logic for DelayWarning
+    /// Interaction logic for SelectTeam
     /// </summary>
-    public partial class DelayWarning : UserControl
+    public partial class SelectTeam : UserControl
     {
-        public DelayWarning()
+        public SelectTeam()
         {
             InitializeComponent();
         }

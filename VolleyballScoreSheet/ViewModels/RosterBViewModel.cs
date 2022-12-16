@@ -93,11 +93,27 @@ namespace VolleyballScoreSheet.ViewModels
 
             BTeamName =_game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
 
-            for (int i = 1; i <= 12; i++)
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("3", "深津旭弘");
+            dictionary.Add("4", "大竹壱青");
+            dictionary.Add("11", "富田将馬");
+            dictionary.Add("18", "仲本賢優");
+            dictionary.Add("21", "永露元稀");
+            dictionary.Add("22", "樋口裕希");
+            dictionary.Add("24", "高橋和幸");
+            dictionary.Add("29", "藤中颯志");
+            dictionary.Add("30", "エバダデンラリー");
+            dictionary.Add("37", "藤中謙也");
+            dictionary.Add("38", "小野遥輝");
+            dictionary.Add("39", "小澤宙輝");
+            dictionary.Add("40", "難波尭弘");
+            dictionary.Add("41", "山田大悟");
+
+            foreach (var item in dictionary)
             {
                 var r = PlayerDataTable.Value.NewRow();
-                r[0] = i;
-                r[1] = "Player_"+i;
+                r[0] = item.Key;
+                r[1] =item.Value;
                 PlayerDataTable.Value.Rows.Add(r);
             }
         }

@@ -41,7 +41,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="2.5"
-                Padding="5"
+                Padding="10"
                 Command="{Binding OKCommand}"
                 Content="{Binding OK.Value}"
                 Style="{StaticResource LightButton}" />
@@ -49,7 +49,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="2.5"
-                Padding="5"
+                Padding="10"
                 Background="#cd1141"
                 Command="{Binding CancelCommand}"
                 Content="{Binding Cancel.Value}"

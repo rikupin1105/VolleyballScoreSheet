@@ -62,7 +62,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 }
                 else
                 {
-                    PlayerAndStaff.AddRange(_game.RightTeam.Players.Select(x=>x.Id.ToString()));
+                    PlayerAndStaff.AddRange(_game.RightTeam.Players.Select(x=>x.Id.ToString()+" "+x.Name));
                 }
 
                 PlayerAndStaff.Add("C 監督");

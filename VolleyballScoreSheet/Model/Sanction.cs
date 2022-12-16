@@ -6,7 +6,11 @@ namespace VolleyballScoreSheet.Model
     {
         ImproperRequest,
         DelayWarning,
-        DelayPenalty
+        DelayPenalty,
+        Warning,
+        Penalty,
+        Explusion,
+        Disqualification
     }
     public class Sanction
     {

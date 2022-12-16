@@ -22,15 +22,10 @@ namespace VolleyballScoreSheet.ViewModels.Dialog
 
         string IDialogAware.Title => Title.Value;
 
-        /// <summary>
-        /// Initialize a new instance of the <see cref="NotificationDialogViewModel"/> class.
-        /// </summary>
+
         public NotificationDialogViewModel()
         {
-            //Title.Value = "Notification";
-            //this.Width = 300;
-            //this.Height = 150;
-            CloseDialogCommand.Subscribe(_ => RequestClose.Invoke(new DialogResult()));
+            CloseDialogCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.OK)));
         }
         public event Action<IDialogResult>?RequestClose;
 

@@ -29,7 +29,7 @@ namespace VolleyballScoreSheet.ViewModels
             if (OutMember.Value is not null && InMember.Value is not null)
             {
                 var outMember = int.Parse(OutMember.Value.Split(' ')[0]);
-                var inMember = int.Parse(OutMember.Value.Split(' ')[0]);
+                var inMember = int.Parse(InMember.Value.Split(' ')[0]);
 
                 Model.Team team;
                 Model.Team opponentTeam;
@@ -308,7 +308,9 @@ namespace VolleyballScoreSheet.ViewModels
                     .Where(x => x.In==int.Parse(OutMember.Value.Split(' ')[0]))
                     .Select(x => x.Out)
                     .Select(x => x+" "+team.Players
-                    .Where(y => y.Id == x))
+                    .Where(y => y.Id == x)
+                    .Select(x=>x.Name)
+                    .First())
                     .ToArray();
             }
             else

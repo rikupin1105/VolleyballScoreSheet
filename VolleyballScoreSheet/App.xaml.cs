@@ -9,6 +9,7 @@ using Prism.Modularity;
 using Wpf.Ui.Mvvm.Contracts;
 using VolleyballScoreSheet.Views.Card;
 using VolleyballScoreSheet.Views.Dialog;
+using VolleyballScoreSheet.ViewModels.Card;
 
 namespace VolleyballScoreSheet
 {
@@ -39,12 +40,8 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterDialog<ExceptionalSubstitution>();
             containerRegistry.RegisterDialog<SameInterruptionSubstitution>();
             containerRegistry.RegisterDialog<Card>();
-            containerRegistry.RegisterDialog<DelayWarning>();
-            containerRegistry.RegisterDialog<DelayPenalty>();
-            containerRegistry.RegisterDialog<ImproperRequests>();
+            containerRegistry.RegisterDialog<SelectTeam>();
             containerRegistry.RegisterDialog<ConfirmDialog>();
-            containerRegistry.RegisterDialog<YellowCard>();
-            containerRegistry.RegisterDialog<RedCard>();
             containerRegistry.RegisterDialog<SelectPlayerAndStaff>();
 
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");

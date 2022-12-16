@@ -28,9 +28,9 @@ namespace VolleyballScoreSheet.ViewModels.Card
             CancelCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel)));
             DelayWarningCommand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("DelayWarning", new DialogParameters()
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters()
                 {
-
+                    {"Sanctions", SanctionEnum.DelayWarning }
                 }, res =>
                 {
                     if(res.Result == ButtonResult.OK)
@@ -42,8 +42,9 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
             DelayPenaltyCommand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("DelayPenalty", new DialogParameters()
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters()
                 {
+                    {"Sanctions", SanctionEnum.DelayPenalty }
 
                 }, res =>
                 {
@@ -56,9 +57,9 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
             ImproperRequestCommmand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("ImproperRequests", new DialogParameters()
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters()
                 {
-
+                    {"Sanctions", SanctionEnum.ImproperRequest }
                 }, res =>
                 {
                     if (res.Result == ButtonResult.OK)
@@ -70,7 +71,10 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
             YelloCardCommmand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("YellowCard", new DialogParameters() { }, res =>
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters() 
+                {
+                    {"Sanctions", SanctionEnum.Warning }
+                }, res =>
                 {
                     if (res.Result == ButtonResult.OK)
                     {
@@ -81,7 +85,10 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
             RedCardCommmand.Subscribe(_ =>
             {
-                _dialogService.ShowDialog("RedCard", new DialogParameters() { }, res =>
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters() 
+                {
+                    {"Sanctions", SanctionEnum.Penalty }
+                }, res =>
                 {
                     if (res.Result == ButtonResult.OK)
                     {

@@ -32,11 +32,26 @@ namespace VolleyballScoreSheet.ViewModels
             PlayerAddCommand.Subscribe(_ => PlayerAdd());
             NextCommand.Subscribe(_ => Next());
 
-            for (int i = 1; i <= 12; i++)
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("1", "西田有志");
+            dictionary.Add("2", "小野寺太志");
+            dictionary.Add("5", "大塚達宣");
+            dictionary.Add("7", "高梨健太");
+            dictionary.Add("8", "関田誠大");
+            dictionary.Add("9", "大宅真樹");
+            dictionary.Add("12", "高橋藍");
+            dictionary.Add("13", "小川智大");
+            dictionary.Add("16", "宮浦健人");
+            dictionary.Add("20", "山本智大");
+            dictionary.Add("23", "佐藤駿一郎");
+            dictionary.Add("26", "村山豪");
+            dictionary.Add("43", "デ・アルマスアライン");
+
+            foreach (var item in dictionary)
             {
                 var r = PlayerDataTable.Value.NewRow();
-                r[0] = i;
-                r[1] = "Player_"+i;
+                r[0] = item.Key;
+                r[1] =item.Value;
                 PlayerDataTable.Value.Rows.Add(r);
             }
 
