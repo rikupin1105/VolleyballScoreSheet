@@ -24,7 +24,7 @@ namespace VolleyballScoreSheet
             {
                 if (x.Count>1) UndoEnable.Value = true;
                 else UndoEnable.Value = false;
-                Debug.Value = string.Join(" , ", x.Select(x => x.Command1));
+                Debug.Value = string.Join(" , ", x.Select(x => x.Command1 + x.Command2));
             });
 
             ATeam.Value.CreateSet();
@@ -177,8 +177,8 @@ namespace VolleyballScoreSheet
 
         public void Undo()
         {
-            //PA Aチームの得点
-            //PB Bチームの得点
+            //PointA Aチームの得点
+            //PointB Bチームの得点
             //TimeOutA Aチームのタイムアウト
             //TimeOutB Bチームのタイムアウト
 
@@ -190,107 +190,52 @@ namespace VolleyballScoreSheet
             var c = History.Histories.Value[^1].Command1;
             var c2 = History.Histories.Value[^1].Command2;
 
-            if (c[0]=='W'&&c[1]=='S')
+
+            if (c=="PointA")
             {
                 History.HistoryRemove();
-                if (c[2]=='A')
-                {
-                    ATeam.Value.WinSets.Value--;
-                }
-                else //B
-                {
-                    BTeam.Value.WinSets.Value--;
-                }
-                Undo();
-                return;
-            }
-            if (c[0] == 'P')
-            {
-                History.HistoryRemove();
-                if (c[1]=='A')
-                {
                     PointRemove(true);
-                }
-                else //B
-                {
+                return;
+            }
+            else if(c=="PointB")
+            {
+                History.HistoryRemove();
                     PointRemove(false);
-                }
                 return;
             }
-            else if (c[0]=='S'&& c[1]=='U'&& c[2]=='B')
+            else if (c=="SubstitutionA")
             {
                 History.HistoryRemove();
-                if (c[3]=='A')
-                {
-                    var In = int.Parse(c.Split(',')[1]);
-                    var Out = int.Parse(c.Split(',')[2]);
+                var In = int.Parse(c2.Split(',')[0]);
+                var Out = int.Parse(c2.Split(',')[1]);
 
-                    ATeam.Value.Sets[^1].Substitutions.Value--;
-                    ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
-                    ATeam.Value.Refresh();
+                ATeam.Value.Sets[^1].Substitutions.Value--;
+                ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                ATeam.Value.Refresh();
 
-                    var s = ATeam.Value.Sets[^1].SubstitutionDetails
-                        .Where(x => x.In==In)
-                        .Where(x => x.Out ==Out).First();
+                var s = ATeam.Value.Sets[^1].SubstitutionDetails
+                    .Where(x => x.In==In)
+                    .Where(x => x.Out ==Out).First();
 
-                    ATeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
-                    ATeam.Value.MedamaRefresh();
-                }
-                else //B
-                {
-                    var In = int.Parse(c.Split(',')[1]);
-                    var Out = int.Parse(c.Split(',')[2]);
-
-                    BTeam.Value.Sets[^1].Substitutions.Value--;
-                    BTeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(BTeam.Value.Sets[^1].Rotation.Value, In)] = Out;
-                    BTeam.Value.Refresh();
-
-                    var s = BTeam.Value.Sets[^1].SubstitutionDetails
-                        .Where(x => x.In==In)
-                        .Where(x => x.Out ==Out).First();
-
-                    BTeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
-                    BTeam.Value.MedamaRefresh();
-                }
-                return;
-            }
-            else if (c[0]=='S')
-            {
-                var set = int.Parse(c[1].ToString());
-                History.HistoryRemove();
-
-                DisplayMain("BeforeMatch");
-                LockControl();
-
-                return;
-            }
-            else if (c[0]=='G' && c[1]=='S')
-            {
-                History.HistoryRemove();
-                ATeam.Value.DeleteSet();
-                BTeam.Value.DeleteSet();
-
-                DisplayMain("Rotation");
-
-                Set.Value--;
-
-                if (History.Histories.Value[^1].Command1=="PA")
-                {
-                    ATeam.Value.WinSets.Value--;
-                    NextServeTeam(true);
-                }
-                else if (History.Histories.Value[^1].Command1=="PB")
-                {
-                    BTeam.Value.WinSets.Value--;
-                    NextServeTeam(false);
-                }
-
-                if (Rule.CourtChangeEnable)
-                {
-                    CourtChange();
-                }
-
+                ATeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
                 ATeam.Value.MedamaRefresh();
+                return;
+            }
+            else if (c=="SubstitutionB")
+            {
+                History.HistoryRemove();
+                var In = int.Parse(c2.Split(',')[0]);
+                var Out = int.Parse(c2.Split(',')[1]);
+
+                BTeam.Value.Sets[^1].Substitutions.Value--;
+                BTeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(BTeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                BTeam.Value.Refresh();
+
+                var s = BTeam.Value.Sets[^1].SubstitutionDetails
+                    .Where(x => x.In==In)
+                    .Where(x => x.Out ==Out).First();
+
+                BTeam.Value.Sets[^1].SubstitutionDetails.Remove(s);
                 BTeam.Value.MedamaRefresh();
                 return;
             }
@@ -371,6 +316,62 @@ namespace VolleyballScoreSheet
                 return;
             }
 
+            else if (c[0]=='W'&&c[1]=='S')
+            {
+                History.HistoryRemove();
+                if (c[2]=='A')
+                {
+                    ATeam.Value.WinSets.Value--;
+                }
+                else //B
+                {
+                    BTeam.Value.WinSets.Value--;
+                }
+                Undo();
+                return;
+            }
+
+            else if (c[0]=='S')
+            {
+                var set = int.Parse(c[1].ToString());
+                History.HistoryRemove();
+
+                DisplayMain("BeforeMatch");
+                LockControl();
+
+                return;
+            }
+            else if (c[0]=='G' && c[1]=='S')
+            {
+                History.HistoryRemove();
+                ATeam.Value.DeleteSet();
+                BTeam.Value.DeleteSet();
+
+                DisplayMain("Rotation");
+
+                Set.Value--;
+
+                if (History.Histories.Value[^1].Command1=="PointA")
+                {
+                    ATeam.Value.WinSets.Value--;
+                    NextServeTeam(true);
+                }
+                else if (History.Histories.Value[^1].Command1=="PointB")
+                {
+                    BTeam.Value.WinSets.Value--;
+                    NextServeTeam(false);
+                }
+
+                if (Rule.CourtChangeEnable)
+                {
+                    CourtChange();
+                }
+
+                ATeam.Value.MedamaRefresh();
+                BTeam.Value.MedamaRefresh();
+                return;
+            }
+
         }
         public void EndSet()
         {
@@ -431,7 +432,7 @@ namespace VolleyballScoreSheet
                 ATeam.Value.Point();
 
                 //ヒストリー追加
-                History.HistoryAdd("PA");
+                History.HistoryAdd("PointA");
 
                 if (Set.Value==Rule.SetCount)
                 {
@@ -503,7 +504,7 @@ namespace VolleyballScoreSheet
                 BTeam.Value.Point();
 
                 //ヒストリー追加
-                History.HistoryAdd("PB");
+                History.HistoryAdd("PointB");
 
                 if (Set.Value == Rule.SetCount)
                 {
@@ -608,13 +609,13 @@ namespace VolleyballScoreSheet
                 UnlockControl();
                 for (int i = History.Histories.Value.Count-1; i >= 0; i--)
                 {
-                    if (History.Histories.Value[i].Command1=="PA")
+                    if (History.Histories.Value[i].Command1=="PointA")
                     {
                         //そのまま
                         NextServeTeam(true);
                         return;
                     }
-                    else if (History.Histories.Value[i].Command1=="PB")
+                    else if (History.Histories.Value[i].Command1=="PointB")
                     {
                         //ローテーションとサーバーを戻す
                         ATeam.Value.RotateReverse();
@@ -681,13 +682,13 @@ namespace VolleyballScoreSheet
 
                 for (int i = History.Histories.Value.Count-1; i >= 0; i--)
                 {
-                    if (History.Histories.Value[i].Command1=="PB")
+                    if (History.Histories.Value[i].Command1=="PointB")
                     {
                         //そのまま
                         NextServeTeam(false);
                         return;
                     }
-                    else if (History.Histories.Value[i].Command1=="PA")
+                    else if (History.Histories.Value[i].Command1=="PointA")
                     {
                         //ローテーションとサーバーを戻す
                         BTeam.Value.RotateReverse();
@@ -748,7 +749,8 @@ namespace VolleyballScoreSheet
             if (isAteam)
             {
                 ATeam.Value.Substitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
-                History.HistoryAdd($"SUBA,{In},{Out}");
+                History.HistoryAdd($"SubstitutionA",$"{In},{Out}");
+
 
                 if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
@@ -763,7 +765,7 @@ namespace VolleyballScoreSheet
             else
             {
                 BTeam.Value.Substitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
-                History.HistoryAdd($"SUBB,{In},{Out}");
+                History.HistoryAdd($"SubstitutionB", $"{In},{Out}");
                 if (BTeam.Value.Sets[^1].Substitutions.Value == 5)
                 {
                     SubstitutionCountNotifyCommand.Execute(5);
