@@ -37,18 +37,18 @@
                 Grid.Column="0"
                 Margin="5,5,2.5,2.5"
                 Padding="0,15"
-                Background="{Binding LeftTeamColor.Value}"
+                Background="{Binding LeftTeamColor}"
                 Command="{Binding LeftCommand}"
-                Content="{Binding LeftTeamName.Value}"
+                Content="{Binding LeftTeamName}"
                 FontSize="20"
                 Style="{StaticResource ColorButton}" />
             <Button
                 Grid.Column="1"
                 Margin="2.5,5,5,2.5"
                 Padding="0,15"
-                Background="{Binding RightTeamColor.Value}"
+                Background="{Binding RightTeamColor}"
                 Command="{Binding RightCommand}"
-                Content="{Binding RightTeamName.Value}"
+                Content="{Binding RightTeamName}"
                 FontSize="20"
                 Style="{StaticResource ColorButton}" />
             <Button
