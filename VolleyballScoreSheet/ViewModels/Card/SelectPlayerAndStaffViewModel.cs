@@ -28,11 +28,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 return;
             }
 
-            if (SelectedItem.Value=="監督") mark = "C";
-            else if (SelectedItem.Value=="コーチ") mark = "AC";
-            else if (SelectedItem.Value=="マネージャー") mark = "M";
-            else if (SelectedItem.Value=="部長") mark = "H";
-            else mark = SelectedItem.Value;
+            else mark = SelectedItem.Value.Split(' ')[0];
 
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Mark", mark } }));
         }
@@ -40,6 +36,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
         public ReactiveCommand CancelCommand { get; set; } = new();
         public ReactiveCommand SubmitCommand { get; set; } = new();
         public List<string> PlayerAndStaff { get; set; } = new();
+        public ReactiveProperty<string> Message { get; set; } = new();
 
         public string Title => "";
 
@@ -53,21 +50,25 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            if(parameters.TryGetValue("Message", out string message))
+            {
+                Message.Value = message;
+            }
             if (parameters.TryGetValue("isLeft", out bool isLeft))
             {
                 if (isLeft)
                 {
-                    PlayerAndStaff.AddRange(_game.LeftTeam.Players.Select(x=>x.Id.ToString()));
+                    PlayerAndStaff.AddRange(_game.LeftTeam.Players.Select(x=>x.Id.ToString()+" "+x.Name));
                 }
                 else
                 {
                     PlayerAndStaff.AddRange(_game.RightTeam.Players.Select(x=>x.Id.ToString()));
                 }
 
-                PlayerAndStaff.Add("監督");
-                PlayerAndStaff.Add("マネージャー");
-                PlayerAndStaff.Add("コーチ");
-                PlayerAndStaff.Add("部長");
+                PlayerAndStaff.Add("C 監督");
+                PlayerAndStaff.Add("M マネージャー");
+                PlayerAndStaff.Add("AC コーチ");
+                PlayerAndStaff.Add("H 部長");
             }
         }
     }

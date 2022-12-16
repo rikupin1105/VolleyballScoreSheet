@@ -44,6 +44,7 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterDialog<ImproperRequests>();
             containerRegistry.RegisterDialog<ConfirmDialog>();
             containerRegistry.RegisterDialog<YellowCard>();
+            containerRegistry.RegisterDialog<RedCard>();
             containerRegistry.RegisterDialog<SelectPlayerAndStaff>();
 
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");
