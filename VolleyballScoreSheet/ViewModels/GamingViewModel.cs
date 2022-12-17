@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using VolleyballScoreSheet.Model;
+using VolleyballScoreSheet.ViewModels.Card;
 
 namespace VolleyballScoreSheet.ViewModels
 {
@@ -322,6 +324,49 @@ namespace VolleyballScoreSheet.ViewModels
 
                 }, "AlertWindow");
             });
+
+            ExceptionalSubstitutionCommand.Subscribe(_ =>
+            {
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters
+                {
+                    { "ExceptionalSubstitution", true}
+                }, res =>
+                {
+                    if (res.Parameters.TryGetValue("Team", out char team))
+                    {
+                        bool isA;
+                        if (team == 'A')
+                        {
+                            isA=true;
+                        }
+                        else if(team =='B')
+                        {
+                            isA=false;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                        
+                        _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters
+                        {
+                            {"Message","交代する選手を選択してください。" },
+                            {"isA" , isA },
+                            {"SelectEnum",SelectEnum.OnCourtPlayer }
+                        }, res =>
+                        {
+                            if (res.Parameters.TryGetValue("Mark", out string mark))
+                            {
+                                var outMember = int.Parse(mark);
+
+                            }
+                        }, "AlertWindow");
+                    }
+
+                }, "AlertWindow");
+
+
+            });
         }
         //public ReactiveProperty<DataTable> LeftTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
         //public ReactiveProperty<DataTable> RightTeamPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
@@ -334,6 +379,7 @@ namespace VolleyballScoreSheet.ViewModels
         //コマンド
         public ReactiveCommand UndoCommand { get; set; } = new();
         public ReactiveCommand CardCommand { get; set; } = new();
+        public ReactiveCommand ExceptionalSubstitutionCommand { get; set; } = new();
 
         public ReactiveProperty<bool> UndoEnable { get; set; }
         public ReactiveProperty<bool> IsEnablePoint { get; set; }
