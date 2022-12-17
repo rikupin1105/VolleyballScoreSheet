@@ -5,10 +5,19 @@ using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.Views.Card;
 
 namespace VolleyballScoreSheet.ViewModels.Card
 {
+    public enum SelectEnum
+    {
+        Player,
+        OnCourtPlayer,
+        Staff,
+        Libero,
+        All
+    }
     public class SelectPlayerAndStaffViewModel : BindableBase, IDialogAware
     {
         private readonly Game _game;
@@ -23,7 +32,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
         {
             var mark = "";
 
-            if(string.IsNullOrEmpty(SelectedItem.Value))
+            if (string.IsNullOrEmpty(SelectedItem.Value))
             {
                 return;
             }
@@ -47,28 +56,72 @@ namespace VolleyballScoreSheet.ViewModels.Card
         public void OnDialogClosed()
         {
         }
-
+        public void AAA(SelectEnum selectEnum,Team team)
+        {
+            switch (selectEnum)
+            {
+                case SelectEnum.Player:
+                    PlayerAndStaff.AddRange(team.Players.Select(x => x.Id.ToString()+" "+x.Name));
+                    break;
+                case SelectEnum.Staff:
+                    PlayerAndStaff.Add("C 監督");
+                    PlayerAndStaff.Add("M マネージャー");
+                    PlayerAndStaff.Add("AC コーチ");
+                    PlayerAndStaff.Add("H 部長");
+                    break;
+                case SelectEnum.Libero:
+                    break;
+                case SelectEnum.All:
+                    PlayerAndStaff.AddRange(team.Players.Select(x => x.Id.ToString()+" "+x.Name));
+                    PlayerAndStaff.Add("C 監督");
+                    PlayerAndStaff.Add("M マネージャー");
+                    PlayerAndStaff.Add("AC コーチ");
+                    PlayerAndStaff.Add("H 部長");
+                    break;
+                case SelectEnum.OnCourtPlayer:
+                    PlayerAndStaff.AddRange(team.Sets[^1].Rotation.Value.OrderBy(x=>x).Select(x => x +" "+team.Players.Where(_=>_.Id==x).Select(x=>x.Name).First()));
+                    break;
+            }
+        }
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            if(parameters.TryGetValue("Message", out string message))
+            if (parameters.TryGetValue("Message", out string message))
             {
                 Message.Value = message;
+            }
+            if (parameters.TryGetValue("SelectEnum", out SelectEnum selectEnum))
+            {
+
             }
             if (parameters.TryGetValue("isLeft", out bool isLeft))
             {
                 if (isLeft)
                 {
-                    PlayerAndStaff.AddRange(_game.LeftTeam.Players.Select(x=>x.Id.ToString()+" "+x.Name));
+                    PlayerAndStaff.AddRange(_game.LeftTeam.Players.Select(x => x.Id.ToString()+" "+x.Name));
                 }
                 else
                 {
-                    PlayerAndStaff.AddRange(_game.RightTeam.Players.Select(x=>x.Id.ToString()+" "+x.Name));
+                    PlayerAndStaff.AddRange(_game.RightTeam.Players.Select(x => x.Id.ToString()+" "+x.Name));
                 }
+
 
                 PlayerAndStaff.Add("C 監督");
                 PlayerAndStaff.Add("M マネージャー");
                 PlayerAndStaff.Add("AC コーチ");
                 PlayerAndStaff.Add("H 部長");
+            }
+            else if (parameters.TryGetValue("isA", out bool isA))
+            {
+                if (isA)
+                {
+                    AAA(selectEnum, _game.ATeam.Value);
+                }
+                else
+                {
+                    AAA(selectEnum, _game.BTeam.Value);
+                }
+
+                
             }
         }
     }
