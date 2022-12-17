@@ -27,8 +27,8 @@
             ShowMinimize="False" />
         <StackPanel Margin="10">
 
-            <TextBlock Margin="5" FontSize="20">スターティングラインナップを入力してください。</TextBlock>
 
+            <TextBlock Margin="5" FontSize="20">スターティングラインアップを入力してください。</TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
