@@ -29,6 +29,7 @@
 
 
             <TextBlock Margin="5" FontSize="20">スターティングラインアップを入力してください。</TextBlock>
+            <TextBlock Margin="5">リベロ、失格になった選手を含めることはできません。</TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -51,6 +52,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Margin="5"
+                    HorizontalAlignment="Right"
                     FontSize="30"
                     Text="{Binding RightSideTeamName.Value}" />
 
