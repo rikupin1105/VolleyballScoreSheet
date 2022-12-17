@@ -287,6 +287,31 @@ namespace VolleyballScoreSheet.ViewModels.Card
 
             BBB(isLeft);
         }
+        private void ChooseTeam(bool isLeft)
+        {
+            if (isLeft)
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "A" } }));
+                }
+                else
+                {
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "B" } }));
+                }
+            }
+            else
+            {
+                if (_game.isATeamLeft.Value)
+                {
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "B" } }));
+                }
+                else
+                {
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "A" } }));
+                }
+            }
+        }
 
         public ReactiveCommand CancelCommand { get; set; } = new();
         public ReactiveCommand LeftCommand { get; set; } = new();
@@ -351,6 +376,13 @@ namespace VolleyballScoreSheet.ViewModels.Card
                     case SanctionEnum.Disqualification:
                         break;
                 }
+            }
+            else if (parameters.TryGetValue("ExceptionalSubstitution", out bool exceptionalSubstitution))
+            {
+                LeftCommand.Subscribe(_ => ChooseTeam(true));
+                RightCommand.Subscribe(_ => ChooseTeam(false));
+                Message.Value = "例外的な選手交代をするチームを選択してください。";
+                Title.Value = "例外的な選手交代";
             }
 
         }
