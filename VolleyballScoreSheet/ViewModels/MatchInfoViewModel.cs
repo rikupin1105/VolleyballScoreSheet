@@ -103,7 +103,7 @@ namespace VolleyballScoreSheet.ViewModels
             BTeamName.Subscribe(x => { _game.BTeam.Value.Name.Value = x; });
 
 
-            Navigate("RosterA");
+            Navigate("Roster");
         }
         private void Navigate(string navigatePath)
         {
