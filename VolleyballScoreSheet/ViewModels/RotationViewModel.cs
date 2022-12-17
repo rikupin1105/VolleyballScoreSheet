@@ -10,13 +10,16 @@ using System.Windows;
 using System.Data;
 using VolleyballScoreSheet;
 using Reactive.Bindings.Extensions;
+using System.Reactive.Linq;
+using VolleyballScoreSheet.Model;
+using System.Collections.ObjectModel;
 
 namespace VolleyballScoreSheet.ViewModels
 {
     public class RotationViewModel : IDialogAware, INavigationAware
     {
         public string Title => "";
-        public event Action<IDialogResult>?RequestClose;
+        public event Action<IDialogResult>? RequestClose;
         public bool CanCloseDialog() => true;
         public void OnDialogClosed()
         {
@@ -35,72 +38,11 @@ namespace VolleyballScoreSheet.ViewModels
 
             NextCommand.Subscribe(_ => Next());
 
-            LeftPlayer.Value.Clear();
-            RightPlayer.Value.Clear();
-            LeftPlayer.Value.Columns.Add("Number");
-            LeftPlayer.Value.Columns.Add("Name");
-            RightPlayer.Value.Columns.Add("Number");
-            RightPlayer.Value.Columns.Add("Name");
+            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x=>x.IsLibero));
+            RightPlayer.AddRange(_game.RightTeam.Players.OrderBy(x => x.IsLibero));
 
-            foreach (var item in _game.ATeam.Value.Players)
-            {
-                if (_game.isATeamLeft.Value)
-                {
-                    var row = LeftPlayer.Value.NewRow();
-                    row[0] = item.Id;
-                    row[1] = item.Name;
-                    LeftPlayer.Value.Rows.Add(row);
-                }
-                else
-                {
-                    var row = RightPlayer.Value.NewRow();
-                    row[0] = item.Id;
-                    row[1] = item.Name;
-                    RightPlayer.Value.Rows.Add(row);
-                }
-            }
-
-            foreach (var item in _game.BTeam.Value.Players)
-            {
-                if (_game.isATeamLeft.Value)
-                {
-                    var row = RightPlayer.Value.NewRow();
-                    row[0] = item.Id;
-                    row[1] = item.Name;
-                    RightPlayer.Value.Rows.Add(row);
-                }
-                else
-                {
-                    var row = LeftPlayer.Value.NewRow();
-                    row[0] = item.Id;
-                    row[1] = item.Name;
-                    LeftPlayer.Value.Rows.Add(row);
-                }
-            }
-
-
-            _game.ATeam.Value.Name.Subscribe(x =>
-            {
-                if (_game.isATeamLeft.Value)
-                {
-                    LeftSideTeamName.Value=x;
-                }
-                else
-                {
-                    RightSideTeamName.Value=x;
-                }
-            });
-            _game.BTeam.Value.Name.Subscribe(x =>
-            {
-                if (_game.isATeamLeft.Value)
-                {
-                    RightSideTeamName.Value=x;
-                }
-                else
-                {
-                    LeftSideTeamName.Value=x;
-                }
-            });
+            _game.LeftTeam.Name.Subscribe(x => {LeftSideTeamName.Value=x;});
+            _game.RightTeam.Name.Subscribe(x => {RightSideTeamName.Value=x;});
         }
         public ReactiveCommand NextCommand { get; } = new ReactiveCommand();
         public ReactiveProperty<string> ATeamName { get; }
@@ -108,8 +50,8 @@ namespace VolleyballScoreSheet.ViewModels
 
         public ReactiveProperty<int?[]> LeftTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
         public ReactiveProperty<int?[]> RightTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
-        public ReactiveProperty<DataTable> LeftPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
-        public ReactiveProperty<DataTable> RightPlayer { get; set; } = new ReactiveProperty<DataTable>(new DataTable());
+        public ReactiveCollection<Player> LeftPlayer { get; set; } = new ReactiveCollection<Player>();
+        public ReactiveCollection<Player> RightPlayer { get; set; } = new ReactiveCollection<Player>();
         public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();
         public ReactiveProperty<string> RightSideTeamName { get; set; } = new();
 
@@ -117,104 +59,110 @@ namespace VolleyballScoreSheet.ViewModels
 
         private void Next()
         {
-            var duplicateFlag = false;
-            var duplicateErrorSentence = string.Empty;
+            var errorMessageFlag = false;
+            var errorMessage = string.Empty;
 
-            var unregisteredFlag = false;
-            var unregisteredErrorSentence = string.Empty;
-
-            //重複チェック
-            for (int i = 0; i < LeftTeamRotatiton.Value.Length; i++)
+            //未入力
+            if (LeftTeamRotatiton.Value.Any(x => x == null))
             {
-                for (int j = i + 1; j < LeftTeamRotatiton.Value.Length; j++)
-                {
-                    if (LeftTeamRotatiton.Value[i] == LeftTeamRotatiton.Value[j])
-                    {
-                        duplicateFlag = true;
-                        duplicateErrorSentence += $"{LeftSideTeamName.Value} の {LeftTeamRotatiton.Value[i]} が重複しています。\n";
-                        break;
-                    }
-                }
-
+                return;
             }
-
-            //重複チェック
-            for (int i = 0; i<RightTeamRotatiton.Value.Length; i++)
+            if (RightTeamRotatiton.Value.Any(x => x == null))
             {
-                for (int j = i + 1; j<RightTeamRotatiton.Value.Length; j++)
-                {
-                    if (RightTeamRotatiton.Value[i] == RightTeamRotatiton.Value[j])
-                    {
-                        duplicateFlag = true;
-                        duplicateErrorSentence += $"{RightSideTeamName.Value} の {RightTeamRotatiton.Value[i]} が重複しています。\n";
-                        break;
-                    }
-                }
-            }
-
-            //未登録チェック
-            for (int i = 0; i < LeftTeamRotatiton.Value.Length; i++)
-            {
-                var register = false;
-                foreach (var item in _game.LeftTeam.Players)
-                {
-                    if (LeftTeamRotatiton.Value[i] == item.Id)
-                    {
-                        register = true;
-                        break;
-                    }
-                }
-                if (!register)
-                {
-                    unregisteredFlag = true;
-                    unregisteredErrorSentence += $"{LeftSideTeamName.Value} の {LeftTeamRotatiton.Value[i]} は登録されていません。\n";
-                }
-            }
-
-            //未登録チェック
-            for (int i = 0; i < RightTeamRotatiton.Value.Length; i++)
-            {
-                var register = false;
-                foreach (var item in _game.RightTeam.Players)
-                {
-                    if (RightTeamRotatiton.Value[i] == item.Id)
-                    {
-                        register = true;
-                        break;
-                    }
-
-                }
-                if (!register)
-                {
-                    unregisteredFlag = true;
-                    unregisteredErrorSentence += $"{RightSideTeamName.Value} の {RightTeamRotatiton.Value[i]} は登録されていません。\n";
-                }
-            }
-
-            if (duplicateFlag)
-            {
-                _dialogService.ShowDialog(
-                     "NotificationDialog",
-                     new DialogParameters
-                     {
-                         { "Title", "Alert" },
-                         { "Message", duplicateErrorSentence},
-                         { "ButtonText", "OK" }
-                     }, res =>
-                     {
-
-                     }, "AlertWindow");
                 return;
             }
 
-            if (unregisteredFlag)
+            //リベロチェック
+            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x=>x.Id).ToList().Contains((int)x)).Count() != 0)
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.LeftTeam.Name.Value}にリベロが含まれています。\n";
+            }
+            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Count() != 0)
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.RightTeam.Name.Value}にリベロが含まれています。\n";
+            }
+
+            //重複チェック
+            if (LeftTeamRotatiton.Value.DistinctBy(x=>x).Count() != 6)
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.LeftTeam.Name.Value}の選手が重複しています。\n";
+            }
+            if (RightTeamRotatiton.Value.DistinctBy(x => x).Count() != 6)
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.RightTeam.Name.Value}の選手が重複しています。\n";
+            }
+
+            foreach (var item in LeftTeamRotatiton.Value)
+            {
+                if (!_game.LeftTeam.Players.Any(x => x.Id == item))
+                {
+                    errorMessageFlag = true;
+                    errorMessage += $"{_game.LeftTeam.Name.Value}の{item}番は登録されていません。\n";
+                }
+            }
+
+            foreach (var item in RightTeamRotatiton.Value)
+            {
+                if (!_game.RightTeam.Players.Any(x => x.Id == item))
+                {
+                    errorMessageFlag = true;
+                    errorMessage += $"{_game.RightTeam.Name.Value}の{item}番は登録されていません。\n";
+                }
+            }
+
+            ////未登録チェック
+            //for (int i = 0; i < LeftTeamRotatiton.Value.Length; i++)
+            //{
+            //    var register = false;
+            //    foreach (var item in _game.LeftTeam.Players.Where(x => x.IsLibero==false))
+            //    {
+            //        if (LeftTeamRotatiton.Value[i] == item.Id)
+            //        {
+            //            register = true;
+            //            break;
+            //        }
+            //    }
+            //    if (!register)
+            //    {
+            //        unregisteredFlag = true;
+            //        unregisteredErrorSentence += $"{LeftSideTeamName.Value} の {LeftTeamRotatiton.Value[i]} は登録されていません。\n";
+            //    }
+            //}
+
+            ////未登録チェック
+            //for (int i = 0; i < RightTeamRotatiton.Value.Length; i++)
+            //{
+            //    var register = false;
+            //    foreach (var item in _game.RightTeam.Players.Where(x=>x.IsLibero==false))
+            //    {
+            //        if (RightTeamRotatiton.Value[i] == item.Id)
+            //        {
+            //            register = true;
+            //            break;
+            //        }
+
+            //    }
+            //    if (!register)
+            //    {
+            //        unregisteredFlag = true;
+            //        unregisteredErrorSentence += $"{RightSideTeamName.Value} の {RightTeamRotatiton.Value[i]} は登録されていません。\n";
+            //    }
+            //}
+
+
+
+            if (errorMessageFlag)
             {
                 _dialogService.ShowDialog(
                      "NotificationDialog",
                      new DialogParameters
                      {
-                         { "Title", "Alert" },
-                         { "Message", unregisteredErrorSentence},
+                         { "Title", "警告" },
+                         { "Message", errorMessage},
                          { "ButtonText", "OK" }
                      }, res =>
                      {
