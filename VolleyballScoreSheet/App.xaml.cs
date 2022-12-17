@@ -28,8 +28,7 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterForNavigation<MainWindow>();
 
             containerRegistry.RegisterForNavigation<MatchInfo>();
-            containerRegistry.RegisterForNavigation<RosterA>();
-            containerRegistry.RegisterForNavigation<RosterB>();
+            containerRegistry.RegisterForNavigation<Roster>();
             containerRegistry.RegisterForNavigation<CoinToss>();
             containerRegistry.RegisterForNavigation<BeforeMatch>();
             containerRegistry.RegisterForNavigation<Gaming>();

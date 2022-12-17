@@ -18,9 +18,9 @@ namespace VolleyballScoreSheet.Views
     /// <summary>
     /// ViewB.xaml の相互作用ロジック
     /// </summary>
-    public partial class RosterB : UserControl
+    public partial class Roster : UserControl
     {
-        public RosterB()
+        public Roster()
         {
             InitializeComponent();
         }
