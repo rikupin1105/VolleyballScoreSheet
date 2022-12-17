@@ -248,6 +248,7 @@
                     Grid.Row="1"
                     Margin="2.5,5,2.5,5"
                     AutoGenerateColumns="False"
+                    CanUserReorderColumns="False"
                     CanUserResizeRows="False"
                     IsReadOnly="True"
                     ItemsSource="{Binding Sanctions.Value}"
