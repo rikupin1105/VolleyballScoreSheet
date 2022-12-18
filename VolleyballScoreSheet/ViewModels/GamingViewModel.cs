@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -19,8 +20,6 @@ namespace VolleyballScoreSheet.ViewModels
         {
             _game = game;
             _dialogService = dialogService;
-
-
 
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
             BTeam = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value);
@@ -339,7 +338,7 @@ namespace VolleyballScoreSheet.ViewModels
                         {
                             isA=true;
                         }
-                        else if(team =='B')
+                        else if (team =='B')
                         {
                             isA=false;
                         }
@@ -347,7 +346,7 @@ namespace VolleyballScoreSheet.ViewModels
                         {
                             throw new Exception();
                         }
-                        
+
                         _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters
                         {
                             {"Message","交代する選手を選択してください。" },
@@ -359,6 +358,96 @@ namespace VolleyballScoreSheet.ViewModels
                             {
                                 var outMember = int.Parse(mark);
 
+                                //正規の選手交代ができる場合は正規の選手交代を行う
+                                Team team;
+                                if (isA)
+                                {
+                                    team = _game.ATeam.Value;
+                                }
+                                else
+                                {
+                                    team = _game.BTeam.Value;
+                                }
+
+                                //正規の選手交代が可能か？
+                                var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
+                                var 選手交代で下がれる人リスト = team.Sets[^1].Rotation.Value.Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
+                                
+                                if (team.Sets[^1].Substitutions.Value < 6 && 選手交代で下がれる人リスト.Contains(outMember))
+                                {
+                                    //正規の選手交代をする。
+                                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
+                                    {
+                                        {"Title","注意" },
+                                        { "Message",$"正規の選手交代が可能です。\n通常の選手交代を行ってください。"},
+                                        {"ButtonText","OK" }
+                                    }, res =>
+                                    {
+                                        if(res.Result == ButtonResult.OK)
+                                        {
+                                            string side;
+                                            if (isA)
+                                            {
+                                                if (_game.isATeamLeft.Value)
+                                                {
+                                                    side="Left";
+                                                }
+                                                else
+                                                {
+                                                    side="Right";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (_game.isATeamLeft.Value)
+                                                {
+                                                    side="Right";
+                                                }
+                                                else
+                                                {
+                                                    side="Left";
+                                                }
+                                            }
+                                            //選手交代を表示
+                                            _dialogService.ShowDialog("Substitution", new DialogParameters
+                                            {
+                                                {"Side",side},
+                                                {"OutPlayer",outMember}
+                                            }, res =>
+                                            {
+
+                                            }, "AlertWindow");
+                                        }
+                                    });
+                                }
+                                else //例外的な選手交代をする
+                                {
+                                    //コート外選手
+                                    //リベロ除く
+                                    //退場選手除く
+                                    //失格選手除く
+                                    //例外的な選手交代をしたことある人を除く
+                                    var コート外の選手 = team.Players.Select(x => x.Id).Except(team.Sets[^1].Rotation.Value).ToArray();
+                                    var リベロ除く = コート外の選手.Except(team.Players.Where(x => x.IsLibero == true).Select(x => x.Id).ToList()).ToArray();
+                                    var 退場選手除く = リベロ除く.Except(team.Players.Where(x => x.IsExplusion[_game.Set.Value]).Select(x => x.Id).ToList()).ToArray();
+                                    var 失格選手除く = 退場選手除く.Except(team.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList()).ToArray();
+                                    var 例外的な選手交代をしたことある人を除く = 失格選手除く.Except(team.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList()).ToArray();
+
+                                    _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters()
+                                    {
+                                        {"isA", isA},
+                                        {"Players", 例外的な選手交代をしたことある人を除く.ToList()}
+                                    }, res =>
+                                    {
+                                        if(res.Result == ButtonResult.OK)
+                                        {
+                                            if(res.Parameters.TryGetValue("Mark",out string mark))
+                                            {
+                                                _game.ExceptionalSubstitution(isA, int.Parse(mark), outMember);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         }, "AlertWindow");
                     }

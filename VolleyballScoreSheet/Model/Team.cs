@@ -122,6 +122,20 @@ namespace VolleyballScoreSheet.Model
             MedamaRefresh();
             Refresh();
         }
+        public void ExceptionalSubstitution(int In,int Out, int Point, int OpponentPoint)
+        {
+            Sets[^1].SubstitutionDetails.Add(new()
+            {
+                ExceptionalSubstitution = true,
+                In = In,
+                Out = Out,
+                Point = Point,
+                OpponentPoint = OpponentPoint
+            }); ;
+
+            Sets[^1].Rotation.Value[Array.IndexOf(Sets[^1].Rotation.Value, Out)] = In;
+            Refresh();
+        }
 
         //現在の状況
         public ReactivePropertySlim<int> Points { get; } = new();

@@ -23,5 +23,8 @@ namespace VolleyballScoreSheet.Model
         public string? Name { get; set; }
         public bool IsLibero { get; set; }
         public bool IsCaptain { get; set; }
+        public bool IsDisqualified { get; set; } = false;
+        public bool IsExceptionalSubstituted { get; set; } = false;
+        public bool[] IsExplusion { get; set; } = new bool[20];
     }
 }

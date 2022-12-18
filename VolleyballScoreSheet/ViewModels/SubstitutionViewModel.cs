@@ -238,18 +238,22 @@ namespace VolleyballScoreSheet.ViewModels
                 }
                 var リベロ = team.Players.Where(x => x.IsLibero);
 
+                var 例外的な選手交代で入った人リスト = team.Sets[^1].SubstitutionDetails.Where(x => x.ExceptionalSubstitution == true).Select(x => x.In);
+
                 var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
                 var 選手交代で入ったことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
 
                 var 選手交代で下がれる人リスト = team.Sets[^1].Rotation.Value
-                    .Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
+                    .Except(選手交代で出たことある人リスト)
+                    .Except(例外的な選手交代で入った人リスト)
+                    .OrderBy(x => x).ToArray();
 
                 var コート外の選手 = team.Players.Select(x => x.Id)
                     .Except(team.Sets[^1].Rotation.Value).ToArray();
 
                 var 選手交代で入れる人リスト = コート外の選手
                     .Except(選手交代で入ったことある人リスト)
-                    .Except(リベロ.Select(x=>x.Id))
+                    .Except(リベロ.Select(x => x.Id))
                     .ToArray();
 
                 OnCourtMemberItem.Value = 選手交代で下がれる人リスト
@@ -264,6 +268,12 @@ namespace VolleyballScoreSheet.ViewModels
                     .Select(x => x.Name)
                     .First())
                     .ToArray();
+                
+                if (parameters.TryGetValue("OutPlayer", out int outPlayer))
+                {
+                    OutMember.Value = outPlayer+" "+team.Players.Where(x => x.Id==outPlayer).Select(x => x.Name).First();
+                    OutMemberSelectionChanged();
+                }
             }
         }
 
@@ -292,12 +302,12 @@ namespace VolleyballScoreSheet.ViewModels
             {
                 team = _game.BTeam.Value;
             }
-            
+
             var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
             var 選手交代で入ったことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
 
             var 選手交代で入れる人リスト = team.Players
-                .Where(x=>!x.IsLibero)
+                .Where(x => !x.IsLibero)
                 .Select(x => x.Id)
                 .Except(team.Sets[^1].Rotation.Value)
                 .Except(選手交代で入ったことある人リスト)
@@ -313,7 +323,7 @@ namespace VolleyballScoreSheet.ViewModels
                     .Select(x => x.Out)
                     .Select(x => x+" "+team.Players
                     .Where(y => y.Id == x)
-                    .Select(x=>x.Name)
+                    .Select(x => x.Name)
                     .First())
                     .ToArray();
             }
