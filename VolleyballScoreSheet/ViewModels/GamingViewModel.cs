@@ -21,8 +21,14 @@ namespace VolleyballScoreSheet.ViewModels
             _game = game;
             _dialogService = dialogService;
 
+
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
             BTeam = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value);
+
+            ScoresheetCommand.Subscribe(_ =>
+            {
+                new Views.ScoreSheet.ScoreSheetWindow().Show();
+            });
 
             ATeam.Value.Points.Subscribe(x =>
             {
@@ -469,6 +475,7 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveCommand UndoCommand { get; set; } = new();
         public ReactiveCommand CardCommand { get; set; } = new();
         public ReactiveCommand ExceptionalSubstitutionCommand { get; set; } = new();
+        public ReactiveCommand ScoresheetCommand { get; set; } = new();
 
         public ReactiveProperty<bool> UndoEnable { get; set; }
         public ReactiveProperty<bool> IsEnablePoint { get; set; }
