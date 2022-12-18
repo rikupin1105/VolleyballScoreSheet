@@ -19,6 +19,7 @@ namespace VolleyballScoreSheet
     }
     public class SubstitutionDetail
     {
+        public bool ExceptionalSubstitution { get; set; } = false;
         public int In { get; set; }
         public int Out { get; set; }
         public int Point { get; set; }

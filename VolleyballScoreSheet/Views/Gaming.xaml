@@ -772,6 +772,13 @@
                     Command="{Binding CardCommand}"
                     Content="罰則"
                     Style="{StaticResource LightButton}" />
+
+                <Button
+                    Margin="5"
+                    Padding="40,10"
+                    Command="{Binding ScoresheetCommand}"
+                    Content="スコアシート"
+                    Style="{StaticResource LightButton}" />
             </StackPanel>
         </StackPanel>
 

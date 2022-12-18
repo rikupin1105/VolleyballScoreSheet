@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Asset\3SET.png" />
 	  <None Remove="Asset\DelayPenalty.png" />
 	  <None Remove="Asset\DelayWarning.png" />
 	  <None Remove="Asset\Disqualification.png" />
@@ -22,6 +23,7 @@
 		<PackageReference Include="WPF-UI" Version="2.0.3" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="Asset\3SET.png" />
 	  <Resource Include="Asset\DelayPenalty.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>

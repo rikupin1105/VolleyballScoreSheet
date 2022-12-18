@@ -24,7 +24,7 @@ namespace VolleyballScoreSheet
             {
                 if (x.Count>1) UndoEnable.Value = true;
                 else UndoEnable.Value = false;
-                Debug.Value = string.Join("\n", x.Select(x =>x.DateTime.ToString("HH:mm:ss:FF")+" "+ x.Command1 + x.Command2));
+                Debug.Value = string.Join("\n", x.Select(x => x.DateTime.ToString("HH:mm:ss:FF")+" "+ x.Command1 + x.Command2));
             });
 
             ATeam.Value.CreateSet();
@@ -58,6 +58,7 @@ namespace VolleyballScoreSheet
         public ReactivePropertySlim<List<Sanction>> Sanctions { get; set; } = new(new());
 
         public ReactivePropertySlim<string> Debug { get; set; } = new();
+        public List<string> Remarks { get; set; } = new();
 
         public void DisplayMain(string s)
         {
@@ -194,13 +195,13 @@ namespace VolleyballScoreSheet
             if (c=="PointA")
             {
                 History.HistoryRemove();
-                    PointRemove(true);
+                PointRemove(true);
                 return;
             }
-            else if(c=="PointB")
+            else if (c=="PointB")
             {
                 History.HistoryRemove();
-                    PointRemove(false);
+                PointRemove(false);
                 return;
             }
             else if (c=="SubstitutionA")
@@ -331,6 +332,26 @@ namespace VolleyballScoreSheet
                     .Where(x => x.Penalty == c2).Last();
                 Sanctions.Value.Remove(s);
                 Undo();
+                return;
+            }
+            else if (c=="ExceptionalSubstitutionA")
+            {
+                History.HistoryRemove();
+                var In = int.Parse(c2.Split(',')[0]);
+                var Out = int.Parse(c2.Split(',')[1]);
+
+                ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                ATeam.Value.Refresh();
+                return;
+            }
+            else if (c=="ExceptionalSubstitutionB")
+            {
+                History.HistoryRemove();
+                var In = int.Parse(c2.Split(',')[0]);
+                var Out = int.Parse(c2.Split(',')[1]);
+
+                BTeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(BTeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                BTeam.Value.Refresh();
                 return;
             }
 
@@ -767,7 +788,7 @@ namespace VolleyballScoreSheet
             if (isAteam)
             {
                 ATeam.Value.Substitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
-                History.HistoryAdd($"SubstitutionA",$"{In},{Out}");
+                History.HistoryAdd($"SubstitutionA", $"{In},{Out}");
 
 
                 if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
@@ -792,6 +813,24 @@ namespace VolleyballScoreSheet
                 {
                     SubstitutionCountNotifyCommand.Execute(6);
                 }
+            }
+        }
+        public void ExceptionalSubstitution(bool isAteam, int In, int Out)
+        {
+            if (isAteam)
+            {
+                ATeam.Value.Players[ATeam.Value.Players.IndexOf(ATeam.Value.Players.First(x => x.Id==Out))].IsExceptionalSubstituted = true;
+                History.HistoryAdd($"ExceptionalSubstitutionA", $"{In},{Out}");
+                ATeam.Value.ExceptionalSubstitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
+
+                Remarks.Add($"例外的な選手交代 TEAM A SET{Set.Value} No.{Out}→No.{In}");
+            }
+            else
+            {
+                BTeam.Value.Players[BTeam.Value.Players.IndexOf(BTeam.Value.Players.First(x => x.Id==Out))].IsExceptionalSubstituted = true;
+                History.HistoryAdd($"ExceptionalSubstitutionB", $"{In},{Out}");
+                BTeam.Value.ExceptionalSubstitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
+                Remarks.Add($"例外的な選手交代 TEAM B SET{Set.Value} No.{Out}→No.{In}");
             }
         }
 

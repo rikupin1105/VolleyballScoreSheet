@@ -112,16 +112,28 @@ namespace VolleyballScoreSheet.ViewModels.Card
             }
             else if (parameters.TryGetValue("isA", out bool isA))
             {
-                if (isA)
+                if (parameters.TryGetValue("Players", out List<int> players))
                 {
-                    AAA(selectEnum, _game.ATeam.Value);
+                    if (isA)
+                    {
+                        PlayerAndStaff.AddRange(players.Select(x => x+" "+_game.ATeam.Value.Players.Where(y=>x==y.Id).Select(x=>x.Name).First()));
+                    }
+                    else
+                    {
+                        PlayerAndStaff.AddRange(players.Select(x => x+" "+_game.BTeam.Value.Players.Where(y=>x==y.Id).Select(x=>x.Name).First()));
+                    }
                 }
                 else
                 {
-                    AAA(selectEnum, _game.BTeam.Value);
+                    if (isA)
+                    {
+                        AAA(selectEnum, _game.ATeam.Value);
+                    }
+                    else
+                    {
+                        AAA(selectEnum, _game.BTeam.Value);
+                    }
                 }
-
-                
             }
         }
     }
