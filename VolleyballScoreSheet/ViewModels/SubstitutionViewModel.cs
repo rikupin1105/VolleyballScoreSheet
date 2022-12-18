@@ -326,6 +326,8 @@ namespace VolleyballScoreSheet.ViewModels
                     .Select(x => x.Name)
                     .First())
                     .ToArray();
+
+                InMember.Value = OutCourtMemberItem.Value.First();
             }
             else
             {

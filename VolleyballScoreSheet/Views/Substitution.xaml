@@ -52,7 +52,7 @@
                 Margin="0,5,0,20"
                 FontSize="20"
                 ItemsSource="{Binding OutCourtMemberItem.Value}"
-                SelectedValue="{Binding InMember.Value, Mode=OneWayToSource}" />
+                SelectedItem="{Binding InMember.Value}" />
 
             <Grid>
                 <Grid.ColumnDefinitions>

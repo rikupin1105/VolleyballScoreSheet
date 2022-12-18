@@ -16,10 +16,7 @@ namespace VolleyballScoreSheet.Model
             IsLibero=isLibero;
             IsCaptain=isCaptain;
         }
-        private int _id;
-        [Required]
-        [Range(0, 99)]
-        public int Id { get => _id; set => SetProperty(ref _id, value); }
+        public int Id { get; set;}
         public string? Name { get; set; }
         public bool IsLibero { get; set; }
         public bool IsCaptain { get; set; }
