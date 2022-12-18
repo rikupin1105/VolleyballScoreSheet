@@ -58,6 +58,7 @@ namespace VolleyballScoreSheet
         public ReactivePropertySlim<List<Sanction>> Sanctions { get; set; } = new(new());
 
         public ReactivePropertySlim<string> Debug { get; set; } = new();
+        public List<string> Remarks { get; set; } = new();
 
         public void DisplayMain(string s)
         {
@@ -821,12 +822,15 @@ namespace VolleyballScoreSheet
                 ATeam.Value.Players[ATeam.Value.Players.IndexOf(ATeam.Value.Players.First(x => x.Id==Out))].IsExceptionalSubstituted = true;
                 History.HistoryAdd($"ExceptionalSubstitutionA", $"{In},{Out}");
                 ATeam.Value.ExceptionalSubstitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
+
+                Remarks.Add($"例外的な選手交代 TEAM A SET{Set.Value} No.{Out}→No.{In}");
             }
             else
             {
                 BTeam.Value.Players[BTeam.Value.Players.IndexOf(BTeam.Value.Players.First(x => x.Id==Out))].IsExceptionalSubstituted = true;
                 History.HistoryAdd($"ExceptionalSubstitutionB", $"{In},{Out}");
                 BTeam.Value.ExceptionalSubstitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
+                Remarks.Add($"例外的な選手交代 TEAM B SET{Set.Value} No.{Out}→No.{In}");
             }
         }
 
