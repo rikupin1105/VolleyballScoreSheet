@@ -27,5 +27,6 @@
         <local:Remark Margin="0,139,43,0" />
         <local:Player Margin="0,232,43,0" />
         <local:MatchResult Margin="0,0,43,31" />
+        <local:Sanctions Margin="0,139,289,0" />
     </Grid>
 </UserControl>

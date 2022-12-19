@@ -1,0 +1,192 @@
+﻿<UserControl
+    x:Class="VolleyballScoreSheet.Views.ScoreSheet.Sanctions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="207"
+    Height="210"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Top"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="2">
+            <Grid>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="罰      則" />
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="9"
+                        Text="不当な要求" />
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="9"
+                        Text="チームA : チームB" />
+
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1" />
+                </Grid>
+
+                <DataGrid
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Width="205"
+                    Height="145"
+                    AutoGenerateColumns="False"
+                    Background="Transparent"
+                    BorderThickness="0,0,0,0"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="Black"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding Sanctions.Value}"
+                    RowHeaderWidth="0"
+                    RowHeight="14.2"
+                    VerticalGridLinesBrush="Black"
+                    VerticalScrollBarVisibility="Hidden">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}" TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="MinHeight" Value="0" />
+                            <Setter Property="Height" Value="18" />
+                            <Setter Property="FontSize" Value="8" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Warning}"
+                            CanUserResize="False"
+                            Header="警告">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Penalty}"
+                            CanUserResize="False"
+                            Header="反則">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Explusion}"
+                            CanUserResize="False"
+                            Header="退場">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Disqualification}"
+                            CanUserResize="False"
+                            Header="失格">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Team}"
+                            CanUserResize="False"
+                            Header="A・B">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="25.375"
+                            Binding="{Binding Set}"
+                            CanUserResize="False"
+                            Header="セット">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="FontSize" Value="10" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Width="51.3"
+                            Binding="{Binding Score}"
+                            Header="スコア">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="FontSize" Value="10" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Border BorderBrush="Black" BorderThickness="0,0,1,0" />
+                <Border
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1,0,0,0" />
+                <Border
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,2" />
+                <Border
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,2,0,0" />
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="27" />
+                    <RowDefinition />
+                    <RowDefinition Height="34" />
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
