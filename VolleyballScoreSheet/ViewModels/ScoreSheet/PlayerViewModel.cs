@@ -45,7 +45,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     IsLibero = item.IsLibero
                 });
             }
-
             for (int i = 0; i < 14 - BTeamPlayer.Count; i++)
             {
                 BTeamPlayer.Add(new()
@@ -65,7 +64,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     IsLibero = item.IsLibero
                 });
             }
-
             for (int i = 0; i < 2 - ATeamLibero.Count; i++)
             {
                 ATeamPlayer.Add(new()
@@ -94,13 +92,30 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     IsLibero = null
                 });
             }
+
+            if (_game.CoinToss is not null)
+            {
+                if (_game.CoinToss.ATeamLeftSide)
+                {
+                    ATeamA = 'A';
+                    BTeamA = 'B';
+                }
+                else
+                {
+                    ATeamA = 'B';
+                    BTeamA = 'A';
+                }
+            }
         }
+        public char ATeamA { get; set; }
+        public char BTeamA { get; set; }
         public string ATeamName { get; set; }
         public string BTeamName { get; set; }
         public List<PlayerForScoresheet> ATeamPlayer { get; set; } = new();
         public List<PlayerForScoresheet> BTeamPlayer { get; set; } = new();
         public List<PlayerForScoresheet> ATeamLibero { get; set; } = new();
         public List<PlayerForScoresheet> BTeamLibero { get; set; } = new();
+
     }
     public class PlayerForScoresheet
     {

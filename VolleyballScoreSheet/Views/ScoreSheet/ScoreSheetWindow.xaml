@@ -5,10 +5,11 @@
     xmlns:local="clr-namespace:VolleyballScoreSheet.Views.ScoreSheet"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="Gray"
     SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
-            <local:ScoreSheet />
+            <local:ScoreSheet Margin="20" Background="White" />
             <Button Command="{Binding PrintCommand}" Content="印刷" />
         </StackPanel>
     </Grid>

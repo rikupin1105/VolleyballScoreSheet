@@ -35,6 +35,32 @@
                     FontSize="8"
                     Text="チーム名" />
 
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Text="○" />
+                <TextBlock
+                    Margin="7,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="{Binding ATeamA}" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,4,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="{Binding BTeamA}" />
+
                 <Viewbox Grid.Column="0" Margin="26,0,20,0">
                     <TextBlock Text="{Binding ATeamName}" />
                 </Viewbox>

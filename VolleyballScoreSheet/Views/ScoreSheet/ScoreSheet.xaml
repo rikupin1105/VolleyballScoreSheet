@@ -28,5 +28,8 @@
         <local:Player Margin="0,232,43,0" />
         <local:MatchResult Margin="0,0,43,31" />
         <local:Sanctions Margin="0,139,289,0" />
+        <local:RefereeAndSignature Margin="0,352,289,0" />
+        <local:FirstSet Margin="123,139,289,0" />
+        <local:Explanation Margin="43,166,289,0" />
     </Grid>
 </UserControl>

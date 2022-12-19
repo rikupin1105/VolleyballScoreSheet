@@ -40,6 +40,14 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+
+                    <Viewbox Margin="30,0,30,0">
+                        <TextBlock FontSize="8" Text="{Binding ATeamName}" />
+                    </Viewbox>
+                    <Viewbox Grid.Column="2" Margin="30,0,30,0">
+                        <TextBlock FontSize="8" Text="{Binding BTeamName}" />
+                    </Viewbox>
+
                     <TextBlock
                         Margin="5"
                         HorizontalAlignment="Left"
