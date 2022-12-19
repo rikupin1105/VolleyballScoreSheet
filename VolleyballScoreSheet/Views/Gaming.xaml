@@ -14,8 +14,6 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
-        <cv:HiddenOrVissible x:Key="HiddenOrVissible" />
-        <cv:BoolToThickness x:Key="BoolToThickness" />
     </UserControl.Resources>
 
     <Grid>
