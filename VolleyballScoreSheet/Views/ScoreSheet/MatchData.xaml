@@ -144,6 +144,41 @@
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Text="男子" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding IsMen, Converter={StaticResource HiddenOrVissible}}"
+                                X1="41"
+                                X2="59"
+                                Y1="6.4"
+                                Y2="19.2" />
+
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding IsMen, Converter={StaticResource HiddenOrVissible}}"
+                                X1="41"
+                                X2="59"
+                                Y1="19.2"
+                                Y2="6.4" />
+
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding IsWoMen, Converter={StaticResource HiddenOrVissible}}"
+                                X1="78"
+                                X2="96"
+                                Y1="6.4"
+                                Y2="19.2" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding IsWoMen, Converter={StaticResource HiddenOrVissible}}"
+                                X1="78"
+                                X2="96"
+                                Y1="19.2"
+                                Y2="6.4" />
+
                             <Rectangle
                                 Width="20"
                                 Height="15"

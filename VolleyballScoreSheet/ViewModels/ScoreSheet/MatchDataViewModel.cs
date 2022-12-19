@@ -19,6 +19,11 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             MatchNumber = _game.MatchNumber;
             Date = _game.Date.ToString("yyyy年MM月dd日");
             Team = _game.ATeam.Value.Name+" 対 "+_game.BTeam.Value.Name;
+
+            if (_game.Sex == Model.Sex.Men)
+                IsMen = true;
+            else if (_game.Sex == Model.Sex.Women)
+                IsWoMen = true;
         }
 
         public string MatchName { get; set; }
@@ -27,5 +32,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public string? MatchNumber { get; set; }
         public string Date { get; set; }
         public string Team { get; set; }
+        public bool IsMen { get; set; }
+        public bool IsWoMen { get; set; }
     }
 }

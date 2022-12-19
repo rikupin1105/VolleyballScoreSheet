@@ -43,6 +43,8 @@ namespace VolleyballScoreSheet.ViewModels
             ToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.ToWinPoint);
             FinalSetToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetToWinPoint);
             FinalSetCourtChangePoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetCourtChangePoint);
+
+            SexSelectValue.Value = (int)_game.Sex;
         }
         public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
         public ReactiveProperty<string> MatchName { get; }
@@ -52,6 +54,7 @@ namespace VolleyballScoreSheet.ViewModels
         public ReactiveProperty<string> Hall { get; }
         public ReactiveProperty<string> MatchNumber { get; }
         public ReactiveProperty<DateTime> Date { get; }
+        public ReactiveProperty<int> SexSelectValue { get; } = new();
 
         public ReactiveProperty<Referee> FirstReferee { get; }
         public ReactiveProperty<Referee> SecondReferee { get; }
@@ -102,6 +105,7 @@ namespace VolleyballScoreSheet.ViewModels
             ATeamName.Subscribe(x => { _game.ATeam.Value.Name.Value = x; });
             BTeamName.Subscribe(x => { _game.BTeam.Value.Name.Value = x; });
 
+            _game.Sex = (Sex)Enum.ToObject(typeof(Sex), SexSelectValue.Value);
 
             Navigate("Roster");
         }

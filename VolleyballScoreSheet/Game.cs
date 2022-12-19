@@ -928,7 +928,7 @@ namespace VolleyballScoreSheet
         public string? Hall { get; set; } = "沖縄アリーナ";
         public string? MatchNumber { get; set; } = "";
         public DateTime Date { get; set; } = DateTime.Parse("2022/07/30");
-
+        public Sex Sex { get; set; } = Sex.Men;
 
 
         public Referees Referees { get; set; } = new();
