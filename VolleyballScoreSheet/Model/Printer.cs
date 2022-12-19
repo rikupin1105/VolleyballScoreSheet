@@ -21,7 +21,6 @@ namespace VolleyballScoreSheet.Model
         public static void Print(ScoreSheetViewModel viewModel)
         {
             var fixedDoc = new FixedDocument();
-
             var objReportToPrint = new ScoreSheet();
 
             var ReportToPrint = objReportToPrint as UserControl;
@@ -39,19 +38,24 @@ namespace VolleyballScoreSheet.Model
         }
         private static void SendFixedDocumentToPrinter(FixedDocument fixedDocument)
         {
-            //こちらのオーバーロードだと、プリンタ選択ダイアログが出る。
-            LocalPrintServer lps = new LocalPrintServer();
-            PrintQueue queue = lps.DefaultPrintQueue;
-            XpsDocumentWriter xpsdw = PrintQueue.CreateXpsDocumentWriter(queue);
+            XpsDocumentWriter xpsdw;
 
-            PrintTicket ticket = queue.DefaultPrintTicket;
-            ticket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA3);
-            ticket.PageOrientation = PageOrientation.Landscape;
+            PrintDocumentImageableArea imgArea = null;
+            //こちらのオーバーロードだと、プリンタ選択ダイアログが出る。
+            xpsdw = PrintQueue.CreateXpsDocumentWriter(ref imgArea);
+
             //var ps = new LocalPrintServer();
             //var pq = ps.DefaultPrintQueue; 
             //こちらのオーバーロードだと、プリンタ選択ダイアログを飛ばして既定のプリンタにスプールされる
             //xpsdw = PrintQueue.CreateXpsDocumentWriter(pq);
-            xpsdw.Write(fixedDocument,ticket);
+            try
+            {
+                xpsdw.Write(fixedDocument);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
