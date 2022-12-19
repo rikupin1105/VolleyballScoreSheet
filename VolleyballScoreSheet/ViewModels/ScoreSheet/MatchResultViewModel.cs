@@ -44,6 +44,12 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     Points = item.Points.Value,
                 });
             }
+
+            if (!_game.CoinToss.ATeamLeftSide)
+            {
+                (ATeamName, BTeamName) = (BTeamName, ATeamName);
+                (ASet, BSet) = (BSet, ASet);
+            }
         }
 
         public string ATeamName { get; set; }
