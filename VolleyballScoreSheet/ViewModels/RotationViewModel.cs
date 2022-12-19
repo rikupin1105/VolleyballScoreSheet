@@ -8,7 +8,6 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using System.Windows;
 using System.Data;
-using VolleyballScoreSheet;
 using Reactive.Bindings.Extensions;
 using System.Reactive.Linq;
 using VolleyballScoreSheet.Model;
@@ -21,10 +20,8 @@ namespace VolleyballScoreSheet.ViewModels
         public string Title => "";
         public event Action<IDialogResult>? RequestClose;
         public bool CanCloseDialog() => true;
-        public void OnDialogClosed()
-        {
+        public void OnDialogClosed() { }
 
-        }
         public void OnDialogOpened(IDialogParameters parameters) { }
 
         private readonly IDialogService _dialogService;
@@ -38,11 +35,11 @@ namespace VolleyballScoreSheet.ViewModels
 
             NextCommand.Subscribe(_ => Next());
 
-            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x=>x.IsLibero));
+            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x => x.IsLibero));
             RightPlayer.AddRange(_game.RightTeam.Players.OrderBy(x => x.IsLibero));
 
-            _game.LeftTeam.Name.Subscribe(x => {LeftSideTeamName.Value=x;});
-            _game.RightTeam.Name.Subscribe(x => {RightSideTeamName.Value=x;});
+            _game.LeftTeam.Name.Subscribe(x => { LeftSideTeamName.Value = x; });
+            _game.RightTeam.Name.Subscribe(x => { RightSideTeamName.Value = x; });
         }
         public ReactiveCommand NextCommand { get; } = new ReactiveCommand();
         public ReactiveProperty<string> ATeamName { get; }
@@ -73,7 +70,7 @@ namespace VolleyballScoreSheet.ViewModels
             }
 
             //リベロチェック
-            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x=>x.Id).ToList().Contains((int)x)).Count() != 0)
+            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Count() != 0)
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}にリベロが含まれています。\n";
@@ -85,7 +82,7 @@ namespace VolleyballScoreSheet.ViewModels
             }
 
             //重複チェック
-            if (LeftTeamRotatiton.Value.DistinctBy(x=>x).Count() != 6)
+            if (LeftTeamRotatiton.Value.DistinctBy(x => x).Count() != 6)
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}の選手が重複しています。\n";
@@ -182,7 +179,7 @@ namespace VolleyballScoreSheet.ViewModels
                 { "RightTeamRotation", RightTeamRotatiton.Value.Select(x=>x!.Value).ToArray() }
             };
 
-            RequestClose.Invoke(new DialogResult(ButtonResult.OK, param));
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK, param));
         }
         private void Navigate(string navigatePath)
         {

@@ -202,8 +202,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="24"
-                            MinWidth="0"
-                            Binding="{Binding Id}">
+                            Binding="{Binding Id}"
+                            CanUserResize="False">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Center" />

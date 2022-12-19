@@ -8,10 +8,7 @@
     SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
-            <Viewbox>
-
-                <local:ScoreSheet />
-            </Viewbox>
+            <local:ScoreSheet />
             <Button Command="{Binding PrintCommand}" Content="印刷" />
         </StackPanel>
     </Grid>
