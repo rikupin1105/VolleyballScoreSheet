@@ -148,7 +148,7 @@ namespace VolleyballScoreSheet.ViewModels.Card
                             team.DelayPenalties.Add(dp);
 
                             _game.Sanctions.Value.Add(new(AorB, dp));
-                            _game.PointAdd(isLeft);
+                            _game.PointAdd(!isLeft);
                             _game.History.HistoryAdd($"DelayPenalty{AorB}");
 
                         }
