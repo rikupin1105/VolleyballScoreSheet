@@ -931,7 +931,7 @@ namespace VolleyballScoreSheet
         public Sex Sex { get; set; } = Sex.Men;
 
 
-        public Referees Referees { get; set; } = new();
+        public Model.Referees Referees { get; set; } = new();
         public Model.CoinToss? CoinToss { get; set; } = new();
         public Model.CoinToss? FinalSetCoinToss { get; set; } = new();
         public Rule Rule { get; set; } = new();

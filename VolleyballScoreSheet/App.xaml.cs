@@ -42,6 +42,7 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterDialog<SelectTeam>();
             containerRegistry.RegisterDialog<ConfirmDialog>();
             containerRegistry.RegisterDialog<SelectPlayerAndStaff>();
+            containerRegistry.RegisterDialog<Referees>();
             containerRegistry.RegisterDialog<EditPlayer>();
 
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");
