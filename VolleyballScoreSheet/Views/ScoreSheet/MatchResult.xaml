@@ -21,17 +21,11 @@
 
 
     <StackPanel>
-        <Border
-            Height="190"
-            BorderBrush="Black"
-            BorderThickness="2">
+        <Border Height="190" BorderBrush="Black" BorderThickness="2">
             <StackPanel>
                 <Grid Height="12">
 
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontSize="9"
-                        Text="試 合 結 果" />
+                    <TextBlock HorizontalAlignment="Center" FontSize="9" Text="試 合 結 果" />
                     <Border BorderBrush="Black" BorderThickness="0,0,0,1" />
                 </Grid>
 
@@ -48,47 +42,17 @@
                         <TextBlock FontSize="8" Text="{Binding BTeamName}" />
                     </Viewbox>
 
-                    <TextBlock
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        FontSize="8"
-                        Text="チーム" />
-                    <TextBlock
-                        Grid.Column="2"
-                        Margin="5"
-                        HorizontalAlignment="Right"
-                        FontSize="8"
-                        Text="チーム" />
+                    <TextBlock Margin="5" HorizontalAlignment="Left" FontSize="8" Text="チーム" />
+                    <TextBlock Grid.Column="2" Margin="5" HorizontalAlignment="Right" FontSize="8" Text="チーム" />
 
 
-                    <TextBlock
-                        Grid.Column="0"
-                        Margin="0,0,9,0"
-                        HorizontalAlignment="Right"
-                        FontSize="15"
-                        Text="A" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Right"
-                        FontSize="25"
-                        Text="○" />
+                    <TextBlock Grid.Column="0" Margin="0,0,9,0" HorizontalAlignment="Right" FontSize="15" Text="A" />
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Right" FontSize="25" Text="○" />
 
-                    <TextBlock
-                        Grid.Column="1"
-                        Margin="9,0,0,0"
-                        HorizontalAlignment="Left"
-                        FontSize="15"
-                        Text="B" />
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Left"
-                        FontSize="25"
-                        Text="○" />
+                    <TextBlock Grid.Column="1" Margin="9,0,0,0" HorizontalAlignment="Left" FontSize="15" Text="B" />
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontSize="25" Text="○" />
 
-                    <Border
-                        Grid.ColumnSpan="2"
-                        BorderBrush="Black"
-                        BorderThickness="0,0,0,0.5" />
+                    <Border Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,0,0.5" />
                     <Border BorderBrush="Black" BorderThickness="0,0,0.5,0" />
                 </Grid>
                 <Grid Height="102">
@@ -110,178 +74,55 @@
                         <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
-                    <Border
-                        Grid.Row="1"
-                        Grid.ColumnSpan="9"
-                        BorderBrush="Black"
-                        BorderThickness="0,0.5" />
-                    <Border
-                        Grid.Row="3"
-                        Grid.ColumnSpan="9"
-                        BorderBrush="Black"
-                        BorderThickness="0,0.5" />
+                    <Border Grid.Row="1" Grid.ColumnSpan="9" BorderBrush="Black" BorderThickness="0,0.5" />
+                    <Border Grid.Row="3" Grid.ColumnSpan="9" BorderBrush="Black" BorderThickness="0,0.5" />
 
-                    <Border
-                        Grid.RowSpan="5"
-                        Grid.Column="1"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0" />
-                    <Border
-                        Grid.RowSpan="5"
-                        Grid.Column="3"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0" />
-                    <Border
-                        Grid.RowSpan="5"
-                        Grid.Column="5"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0" />
-                    <Border
-                        Grid.RowSpan="5"
-                        Grid.Column="7"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="3" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="5" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="7" BorderBrush="Black" BorderThickness="0.5,0" />
 
-                    <TextBlock
-                        Grid.Column="0"
-                        FontSize="6"
-                        Text="タイム&#10;アウト" />
-                    <TextBlock
-                        Grid.Column="1"
-                        FontSize="6"
-                        Text="選手&#10;交代" />
-                    <TextBlock
-                        Grid.Column="2"
-                        FontSize="6"
-                        Text="勝" />
-                    <TextBlock
-                        Grid.Column="3"
-                        FontSize="6"
-                        Text="得点" />
-                    <TextBlock
-                        Grid.Column="4"
-                        FontSize="6"
-                        Text="セット(時間)" />
-                    <TextBlock
-                        Grid.Column="5"
-                        FontSize="6"
-                        Text="得点" />
-                    <TextBlock
-                        Grid.Column="6"
-                        FontSize="6"
-                        Text="勝" />
-                    <TextBlock
-                        Grid.Column="7"
-                        FontSize="6"
-                        Text="選手&#10;交代" />
-                    <TextBlock
-                        Grid.Column="8"
-                        FontSize="6"
-                        Text="タイム&#10;アウト" />
+                    <TextBlock Grid.Column="0" FontSize="6" Text="タイム&#10;アウト" />
+                    <TextBlock Grid.Column="1" FontSize="6" Text="選手&#10;交代" />
+                    <TextBlock Grid.Column="2" FontSize="6" Text="勝" />
+                    <TextBlock Grid.Column="3" FontSize="6" Text="得点" />
+                    <TextBlock Grid.Column="4" FontSize="6" Text="セット(時間)" />
+                    <TextBlock Grid.Column="5" FontSize="6" Text="得点" />
+                    <TextBlock Grid.Column="6" FontSize="6" Text="勝" />
+                    <TextBlock Grid.Column="7" FontSize="6" Text="選手&#10;交代" />
+                    <TextBlock Grid.Column="8" FontSize="6" Text="タイム&#10;アウト" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="{Binding ASet[0].Timeouts}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Text="{Binding ASet[1].Timeouts}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Text="{Binding ASet[2].Timeouts}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding ASet[0].Timeouts}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding ASet[1].Timeouts}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding ASet[2].Timeouts}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding ASet[0].Substitutions}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="{Binding ASet[1].Substitutions}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Text="{Binding ASet[2].Substitutions}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ASet[0].Substitutions}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ASet[1].Substitutions}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ASet[2].Substitutions}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Text="{Binding ASet[0].Win}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Text="{Binding ASet[1].Win}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Text="{Binding ASet[2].Win}" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ASet[0].Win}" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ASet[1].Win}" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ASet[2].Win}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="3"
-                        Text="{Binding ASet[0].Points}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="3"
-                        Text="{Binding ASet[1].Points}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="3"
-                        Text="{Binding ASet[2].Points}" />
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding ASet[0].Points}" />
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding ASet[1].Points}" />
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding ASet[2].Points}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="5"
-                        Text="{Binding BSet[0].Points}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="5"
-                        Text="{Binding BSet[1].Points}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="5"
-                        Text="{Binding BSet[2].Points}" />
+                    <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding BSet[0].Points}" />
+                    <TextBlock Grid.Row="2" Grid.Column="5" Text="{Binding BSet[1].Points}" />
+                    <TextBlock Grid.Row="3" Grid.Column="5" Text="{Binding BSet[2].Points}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="6"
-                        Text="{Binding BSet[0].Win}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="6"
-                        Text="{Binding BSet[1].Win}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="6"
-                        Text="{Binding BSet[2].Win}" />
+                    <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding BSet[0].Win}" />
+                    <TextBlock Grid.Row="2" Grid.Column="6" Text="{Binding BSet[1].Win}" />
+                    <TextBlock Grid.Row="3" Grid.Column="6" Text="{Binding BSet[2].Win}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="7"
-                        Text="{Binding BSet[0].Substitutions}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="7"
-                        Text="{Binding BSet[1].Substitutions}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="7"
-                        Text="{Binding BSet[2].Substitutions}" />
+                    <TextBlock Grid.Row="1" Grid.Column="7" Text="{Binding BSet[0].Substitutions}" />
+                    <TextBlock Grid.Row="2" Grid.Column="7" Text="{Binding BSet[1].Substitutions}" />
+                    <TextBlock Grid.Row="3" Grid.Column="7" Text="{Binding BSet[2].Substitutions}" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="8"
-                        Text="{Binding BSet[0].Timeouts}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="8"
-                        Text="{Binding BSet[1].Timeouts}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="8"
-                        Text="{Binding BSet[2].Timeouts}" />
+                    <TextBlock Grid.Row="1" Grid.Column="8" Text="{Binding BSet[0].Timeouts}" />
+                    <TextBlock Grid.Row="2" Grid.Column="8" Text="{Binding BSet[1].Timeouts}" />
+                    <TextBlock Grid.Row="3" Grid.Column="8" Text="{Binding BSet[2].Timeouts}" />
 
                 </Grid>
                 <Grid Height="49">
@@ -295,27 +136,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border
-                        Grid.Row="0"
-                        Grid.ColumnSpan="3"
-                        BorderBrush="Black"
-                        BorderThickness="0,0.5" />
-                    <Border
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0,0.5,0" />
-                    <Border
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        BorderBrush="Black"
-                        BorderThickness="0.5,0,0,0" />
+                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0,0.5" />
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0" />
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0,0" />
 
                     <TextBlock Grid.Row="1" Text="勝利チーム" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Text="2 :" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="2 :" />
                 </Grid>
             </StackPanel>
         </Border>
