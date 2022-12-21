@@ -97,7 +97,12 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     //最後の位置に丸をつける
                     LeftFinalPoint[0] = ((int)Math.Ceiling(LeftPoints.Count / 6.0) - 1) % 4;
                     LeftFinalPoint[1] = ((int)Math.Ceiling(LeftPoints.Count % 6.0)-1)*2;
+
+                    RightFinalPoint[1] = ((int)Math.Ceiling(RightPoints.Count % 6.0)-1)*2;
+                    RightFinalPoint[0]= ((int)Math.Ceiling(RightPoints.Count / 6.0) - 1) % 4;
+
                     if (LeftPoints.Count > 24) { LeftFinalPoint[1] += 1; }
+                    if (RightPoints.Count > 24) { RightFinalPoint[1] += 1; }
 
                     break;
                 }
