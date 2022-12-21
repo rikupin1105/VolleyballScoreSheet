@@ -8,14 +8,26 @@
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </UserControl.Resources>
+
+
+
+
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="2">
+        <Border BorderThickness="2">
 
             <Grid>
-                <Border
-                    Grid.RowSpan="2"
-                    BorderBrush="Black"
-                    BorderThickness="0,0,2,0">
+                <Border Grid.RowSpan="2" BorderThickness="0,0,2,0">
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -26,7 +38,6 @@
                     Grid.Column="1"
                     Width="51"
                     HorizontalAlignment="Left"
-                    BorderBrush="Black"
                     BorderThickness="0,0,2,0">
                     <TextBlock VerticalAlignment="Center" Text="開始" />
                 </Border>
@@ -34,7 +45,6 @@
                     Grid.Column="3"
                     Width="51"
                     HorizontalAlignment="Right"
-                    BorderBrush="Black"
                     BorderThickness="2,0,0,0">
                     <TextBlock VerticalAlignment="Center" Text="終了" />
                 </Border>
@@ -179,6 +189,1765 @@
                     Y1="24"
                     Y2="16" />
 
+                <!--#region 左の内容-->
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.RowSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <!--#region サービス順のローマ数字-->
+                        <TextBlock
+                            Grid.Column="0"
+                            FontSize="10"
+                            Text="Ⅰ" />
+                        <TextBlock
+                            Grid.Column="1"
+                            FontSize="10"
+                            Text="Ⅱ" />
+                        <TextBlock
+                            Grid.Column="2"
+                            FontSize="10"
+                            Text="Ⅲ" />
+                        <TextBlock
+                            Grid.Column="3"
+                            FontSize="10"
+                            Text="Ⅳ" />
+                        <TextBlock
+                            Grid.Column="4"
+                            FontSize="10"
+                            Text="Ⅴ" />
+                        <TextBlock
+                            Grid.Column="5"
+                            FontSize="10"
+                            Text="Ⅵ" />
+                        <!--#endregion-->
+
+                        <!--#region 線-->
+                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,2" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="6"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="0"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            BorderThickness="0,0,1,0" />
+
+                        <!--#endregion-->
+
+                        <!--#region 交代選手番号-->
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[0], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[0]}" />
+                        </Border>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[1], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[1]}" />
+                        </Border>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[2], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[2]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[3], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[3]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[4], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[4]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="5"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[5], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding LeftTeamSubstitutioned[5]}" />
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region スターティングプレーヤー順-->
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[0]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[1]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[2]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[3]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[4]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="5"
+                            FontSize="15"
+                            Text="{Binding LeftTeamStartingLineUp[5]}" />
+                        <!--#endregion-->
+
+                        <!--#region 交代時の得点-->
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[0]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[1]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[2]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[3]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[4]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[5]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[6]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[7]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[8]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[9]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="5"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[10]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="5"
+                            FontSize="8"
+                            Text="{Binding LeftSubstitutionPoint[11]}" />
+                        <!--#endregion-->
+
+                    </Grid>
+
+                    <!--#region  サービスのチェック欄-->
+                    <Grid Grid.Row="5" Grid.RowSpan="4">
+                        <Grid>
+                            <TextBlock
+                                Grid.Row="{Binding LeftFinalPoint[0]}"
+                                Grid.Column="{Binding LeftFinalPoint[1]}"
+                                FontSize="17"
+                                Text="○"
+                                Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="15"
+                                Y1="0"
+                                Y2="20" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="14.4"
+                                Y1="19"
+                                Y2="0" />
+
+                            <!--#region 点数-->
+                            <TextBlock Grid.Column="0" Text="{Binding LeftPoints[0]}" />
+                            <TextBlock Grid.Column="2" Text="{Binding LeftPoints[1]}" />
+                            <TextBlock Grid.Column="4" Text="{Binding LeftPoints[2]}" />
+                            <TextBlock Grid.Column="6" Text="{Binding LeftPoints[3]}" />
+                            <TextBlock Grid.Column="8" Text="{Binding LeftPoints[4]}" />
+                            <TextBlock Grid.Column="10" Text="{Binding LeftPoints[5]}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="{Binding LeftPoints[6]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Text="{Binding LeftPoints[7]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                Text="{Binding LeftPoints[8]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="6"
+                                Text="{Binding LeftPoints[9]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="8"
+                                Text="{Binding LeftPoints[10]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="10"
+                                Text="{Binding LeftPoints[11]}" />
+
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="{Binding LeftPoints[12]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Text="{Binding LeftPoints[13]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Text="{Binding LeftPoints[14]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="6"
+                                Text="{Binding LeftPoints[15]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="8"
+                                Text="{Binding LeftPoints[16]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="10"
+                                Text="{Binding LeftPoints[17]}" />
+
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Text="{Binding LeftPoints[18]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Text="{Binding LeftPoints[19]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="4"
+                                Text="{Binding LeftPoints[20]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="6"
+                                Text="{Binding LeftPoints[21]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="8"
+                                Text="{Binding LeftPoints[22]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="10"
+                                Text="{Binding LeftPoints[23]}" />
+
+                            <TextBlock Grid.Column="1" Text="{Binding LeftPoints[24]}" />
+                            <TextBlock Grid.Column="3" Text="{Binding LeftPoints[25]}" />
+                            <TextBlock Grid.Column="5" Text="{Binding LeftPoints[26]}" />
+                            <TextBlock Grid.Column="7" Text="{Binding LeftPoints[27]}" />
+                            <TextBlock Grid.Column="9" Text="{Binding LeftPoints[28]}" />
+                            <TextBlock Grid.Column="11" Text="{Binding LeftPoints[29]}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding LeftPoints[30]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Text="{Binding LeftPoints[31]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                Text="{Binding LeftPoints[32]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="7"
+                                Text="{Binding LeftPoints[33]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="9"
+                                Text="{Binding LeftPoints[34]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="11"
+                                Text="{Binding LeftPoints[35]}" />
+
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding LeftPoints[36]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Text="{Binding LeftPoints[37]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Text="{Binding LeftPoints[38]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="7"
+                                Text="{Binding LeftPoints[39]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="9"
+                                Text="{Binding LeftPoints[40]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="11"
+                                Text="{Binding LeftPoints[41]}" />
+
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding LeftPoints[41]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="3"
+                                Text="{Binding LeftPoints[42]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="5"
+                                Text="{Binding LeftPoints[43]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="7"
+                                Text="{Binding LeftPoints[44]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="9"
+                                Text="{Binding LeftPoints[45]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="11"
+                                Text="{Binding LeftPoints[46]}" />
+                            <!--#endregion-->
+                            <!--#region 線-->
+                            <Border Grid.RowSpan="4" BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="1"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="2"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="3"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="4"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="5"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="6"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="7"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="8"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="9"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="10"
+                                BorderThickness="0,0,1,0" />
+
+                            <Border Grid.ColumnSpan="12" BorderThickness="0,0,0,0.5" />
+                            <Border
+                                Grid.Row="1"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0.5" />
+                            <Border
+                                Grid.Row="2"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0.5" />
+                            <Border
+                                Grid.Row="3"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0" />
+                            <!--#endregion-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+                <!--#endregion-->
+                <!--#region 右の内容-->
+                <Grid Grid.Row="1" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.RowSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <!--#region サービス順のローマ数字-->
+                        <TextBlock
+                            Grid.Column="0"
+                            FontSize="10"
+                            Text="Ⅰ" />
+                        <TextBlock
+                            Grid.Column="1"
+                            FontSize="10"
+                            Text="Ⅱ" />
+                        <TextBlock
+                            Grid.Column="2"
+                            FontSize="10"
+                            Text="Ⅲ" />
+                        <TextBlock
+                            Grid.Column="3"
+                            FontSize="10"
+                            Text="Ⅳ" />
+                        <TextBlock
+                            Grid.Column="4"
+                            FontSize="10"
+                            Text="Ⅴ" />
+                        <TextBlock
+                            Grid.Column="5"
+                            FontSize="10"
+                            Text="Ⅵ" />
+                        <!--#endregion-->
+
+                        <!--#region 線-->
+
+                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,2" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="6"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0,0,1" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="0"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            BorderThickness="0,0,1,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            BorderThickness="0,0,1,0" />
+
+                        <!--#endregion-->
+
+                        <!--#region 交代選手番号-->
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[0], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[0]}" />
+                        </Border>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[1], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[1]}" />
+                        </Border>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[2], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[2]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[3], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[3]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[4], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[4]}" />
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="5"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[5], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
+
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="15"
+                                Text="{Binding RightTeamSubstitutioned[5]}" />
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region スターティングプレーヤー順-->
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[0]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[1]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[2]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[3]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[4]}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="5"
+                            FontSize="15"
+                            Text="{Binding RightTeamStartingLineUp[5]}" />
+                        <!--#endregion-->
+
+                        <!--#region 交代時の得点-->
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[0]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[1]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[2]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[3]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[4]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[5]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[6]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[7]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[8]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[9]}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="5"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[10]}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="5"
+                            FontSize="8"
+                            Text="{Binding RightSubstitutionPoint[11]}" />
+                        <!--#endregion-->
+
+                    </Grid>
+
+                    <!--#region  サービスのチェック欄-->
+                    <Grid Grid.Row="5" Grid.RowSpan="4">
+                        <Grid>
+                            <TextBlock
+                                Grid.Row="{Binding RightFinalPoint[0]}"
+                                Grid.Column="{Binding RightFinalPoint[1]}"
+                                FontSize="17"
+                                Text="○"
+                                Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding RightTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="15"
+                                Y1="0"
+                                Y2="20" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding RightTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="14.4"
+                                Y1="19"
+                                Y2="0" />
+
+                            <!--#region 点数-->
+                            <TextBlock Grid.Column="0" Text="{Binding RightPoints[0]}" />
+                            <TextBlock Grid.Column="2" Text="{Binding RightPoints[1]}" />
+                            <TextBlock Grid.Column="4" Text="{Binding RightPoints[2]}" />
+                            <TextBlock Grid.Column="6" Text="{Binding RightPoints[3]}" />
+                            <TextBlock Grid.Column="8" Text="{Binding RightPoints[4]}" />
+                            <TextBlock Grid.Column="10" Text="{Binding RightPoints[5]}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="{Binding RightPoints[6]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Text="{Binding RightPoints[7]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                Text="{Binding RightPoints[8]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="6"
+                                Text="{Binding RightPoints[9]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="8"
+                                Text="{Binding RightPoints[10]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="10"
+                                Text="{Binding RightPoints[11]}" />
+
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="{Binding RightPoints[12]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Text="{Binding RightPoints[13]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Text="{Binding RightPoints[14]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="6"
+                                Text="{Binding RightPoints[15]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="8"
+                                Text="{Binding RightPoints[16]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="10"
+                                Text="{Binding RightPoints[17]}" />
+
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Text="{Binding RightPoints[18]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Text="{Binding RightPoints[19]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="4"
+                                Text="{Binding RightPoints[20]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="6"
+                                Text="{Binding RightPoints[21]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="8"
+                                Text="{Binding RightPoints[22]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="10"
+                                Text="{Binding RightPoints[23]}" />
+
+                            <TextBlock Grid.Column="1" Text="{Binding RightPoints[24]}" />
+                            <TextBlock Grid.Column="3" Text="{Binding RightPoints[25]}" />
+                            <TextBlock Grid.Column="5" Text="{Binding RightPoints[26]}" />
+                            <TextBlock Grid.Column="7" Text="{Binding RightPoints[27]}" />
+                            <TextBlock Grid.Column="9" Text="{Binding RightPoints[28]}" />
+                            <TextBlock Grid.Column="11" Text="{Binding RightPoints[29]}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding RightPoints[30]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Text="{Binding RightPoints[31]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                Text="{Binding RightPoints[32]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="7"
+                                Text="{Binding RightPoints[33]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="9"
+                                Text="{Binding RightPoints[34]}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="11"
+                                Text="{Binding RightPoints[35]}" />
+
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding RightPoints[36]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Text="{Binding RightPoints[37]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Text="{Binding RightPoints[38]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="7"
+                                Text="{Binding RightPoints[39]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="9"
+                                Text="{Binding RightPoints[40]}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="11"
+                                Text="{Binding RightPoints[41]}" />
+
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding RightPoints[41]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="3"
+                                Text="{Binding RightPoints[42]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="5"
+                                Text="{Binding RightPoints[43]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="7"
+                                Text="{Binding RightPoints[44]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="9"
+                                Text="{Binding RightPoints[45]}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="11"
+                                Text="{Binding RightPoints[46]}" />
+                            <!--#endregion-->
+                            <!--#region 線-->
+                            <Border Grid.RowSpan="4" BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="1"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="2"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="3"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="4"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="5"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="6"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="7"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="8"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="9"
+                                BorderThickness="0,0,1,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="10"
+                                BorderThickness="0,0,1,0" />
+
+                            <Border Grid.ColumnSpan="12" BorderThickness="0,0,0,0.5" />
+                            <Border
+                                Grid.Row="1"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0.5" />
+                            <Border
+                                Grid.Row="2"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0.5" />
+                            <Border
+                                Grid.Row="3"
+                                Grid.ColumnSpan="12"
+                                BorderThickness="0,0.5,0,0" />
+                            <!--#endregion-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+                <!--#endregion-->
+
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <!--#region 得点-->
+                    <Grid Grid.RowSpan="6" Margin="1.5,0,1.5,0">
+
+                        <TextBlock Margin="2" Text="／" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="2"
+                            Text="／" />
+                        <TextBlock
+                            Grid.Row="1"
+                            FontSize="10"
+                            Text="○" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="8"
+                            Text="1" />
+                        <TextBlock
+                            Grid.Row="1"
+                            FontSize="8"
+                            Text="2" />
+                        <TextBlock
+                            Grid.Row="2"
+                            FontSize="8"
+                            Text="3" />
+                        <TextBlock
+                            Grid.Row="3"
+                            FontSize="8"
+                            Text="4" />
+                        <TextBlock
+                            Grid.Row="4"
+                            FontSize="8"
+                            Text="5" />
+                        <TextBlock
+                            Grid.Row="5"
+                            FontSize="8"
+                            Text="6" />
+                        <TextBlock
+                            Grid.Row="6"
+                            FontSize="8"
+                            Text="7" />
+                        <TextBlock
+                            Grid.Row="7"
+                            FontSize="8"
+                            Text="8" />
+                        <TextBlock
+                            Grid.Row="8"
+                            FontSize="8"
+                            Text="9" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="10" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="11" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="12" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="13" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="14" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="15" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="16" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="17" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="18" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="19" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="20" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="21" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="22" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="23" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="24" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="25" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="26" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="27" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="28" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="29" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="30" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="31" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="32" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="33" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="34" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="35" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="36" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="37" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="38" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="39" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="40" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="41" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="42" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="43" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="44" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="45" />
+
+                        <!--#region 線-->
+                        <Border Grid.RowSpan="9" BorderThickness="0,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            BorderThickness="0.5,0,0,0" />
+                        <!--#endregion-->
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region タイムアウト-->
+                    <TextBlock
+                        Grid.Row="6"
+                        FontSize="8"
+                        Text="タイムアウト" />
+                    <TextBlock
+                        Grid.Row="7"
+                        FontSize="8"
+                        Text="{Binding LeftTimeouts[0]}" />
+                    <TextBlock
+                        Grid.Row="8"
+                        FontSize="8"
+                        Text="{Binding LeftTimeouts[1]}" />
+                    <!--#region 線-->
+                    <Border Grid.Row="5" BorderThickness="0,0,0,0.5" />
+                    <Border Grid.Row="6" BorderThickness="0,0.5,0,0.5" />
+                    <Border Grid.Row="7" BorderThickness="0,0.5,0,0.5" />
+                    <Border Grid.Row="8" BorderThickness="0,0.5,0,0" />
+                    <!--#endregion-->
+                    <!--#endregion-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="4">
+                    <!--#region 得点-->
+                    <Grid Grid.RowSpan="6" Margin="1.5,0,1.5,0">
+
+                        <TextBlock Margin="2" Text="／" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="2"
+                            Text="／" />
+                        <TextBlock
+                            Grid.Row="1"
+                            FontSize="10"
+                            Text="○" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="8"
+                            Text="1" />
+                        <TextBlock
+                            Grid.Row="1"
+                            FontSize="8"
+                            Text="2" />
+                        <TextBlock
+                            Grid.Row="2"
+                            FontSize="8"
+                            Text="3" />
+                        <TextBlock
+                            Grid.Row="3"
+                            FontSize="8"
+                            Text="4" />
+                        <TextBlock
+                            Grid.Row="4"
+                            FontSize="8"
+                            Text="5" />
+                        <TextBlock
+                            Grid.Row="5"
+                            FontSize="8"
+                            Text="6" />
+                        <TextBlock
+                            Grid.Row="6"
+                            FontSize="8"
+                            Text="7" />
+                        <TextBlock
+                            Grid.Row="7"
+                            FontSize="8"
+                            Text="8" />
+                        <TextBlock
+                            Grid.Row="8"
+                            FontSize="8"
+                            Text="9" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="10" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="11" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="12" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="13" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="14" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="15" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="16" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="17" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            FontSize="8"
+                            Text="18" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="19" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="20" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="21" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="22" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="23" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="24" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="25" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="26" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="2"
+                            FontSize="8"
+                            Text="27" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="28" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="29" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="30" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="31" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="32" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="33" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="34" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="35" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="3"
+                            FontSize="8"
+                            Text="36" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="37" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="38" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="39" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="40" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="41" />
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="42" />
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="43" />
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="44" />
+                        <TextBlock
+                            Grid.Row="8"
+                            Grid.Column="4"
+                            FontSize="8"
+                            Text="45" />
+
+                        <!--#region 線-->
+                        <Border Grid.RowSpan="9" BorderThickness="0,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            BorderThickness="0.5,0,0,0" />
+                        <!--#endregion-->
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region タイムアウト-->
+                    <TextBlock
+                        Grid.Row="6"
+                        FontSize="8"
+                        Text="タイムアウト" />
+                    <TextBlock
+                        Grid.Row="7"
+                        FontSize="8"
+                        Text="{Binding RightTimeouts[0]}" />
+                    <TextBlock
+                        Grid.Row="8"
+                        FontSize="8"
+                        Text="{Binding RightTimeouts[1]}" />
+                    <!--#region 線-->
+                    <Border Grid.Row="5" BorderThickness="0,0,0,0.5" />
+                    <Border Grid.Row="6" BorderThickness="0,0.5,0,0.5" />
+                    <Border Grid.Row="7" BorderThickness="0,0.5,0,0.5" />
+                    <Border Grid.Row="8" BorderThickness="0,0.5,0,0" />
+                    <!--#endregion-->
+                    <!--#endregion-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                </Grid>
+
                 <TextBlock
                     Grid.Column="3"
                     Margin="13,0,0,5"
@@ -225,19 +1994,15 @@
                 <Border
                     Grid.Column="1"
                     Grid.ColumnSpan="4"
-                    BorderBrush="Black"
                     BorderThickness="0,0,0,2" />
                 <Border
                     Grid.RowSpan="2"
                     Grid.Column="2"
-                    BorderBrush="Black"
                     BorderThickness="2,0,2,0" />
                 <Border
                     Grid.RowSpan="2"
                     Grid.Column="4"
-                    BorderBrush="Black"
                     BorderThickness="2,0,0,0" />
-
 
                 <TextBlock
                     Grid.Column="2"
