@@ -284,6 +284,14 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     }
                 }
             }
+            for (int i = 0; i < apoint; i++)
+            {
+                LeftPointSlash[i] = true;
+            }
+            for (int i = 0; i < bpoint; i++)
+            {
+                RightPointSlash[i] = true;
+            }
         }
 
         public string StartTime { get; set; }
@@ -295,6 +303,9 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public bool isEndSet { get; set; } = false;
         public int[] LeftFinalPoint { get; set; } = new int[2];
         public int[] RightFinalPoint { get; set; } = new int[2];
+
+        public bool[] LeftPointSlash { get; set; } = new bool[45];
+        public bool[] RightPointSlash { get; set; } = new bool[45];
 
         //サーブのところ
         public List<int?> LeftPoints { get; set; } = new();
