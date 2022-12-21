@@ -39,14 +39,36 @@
                     Width="51"
                     HorizontalAlignment="Left"
                     BorderThickness="0,0,2,0">
-                    <TextBlock VerticalAlignment="Center" Text="開始" />
+                    <Grid>
+                        <TextBlock
+                            Margin="1,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="9"
+                            Text="開始" />
+                        <TextBlock
+                            Margin="0,0,1,0"
+                            HorizontalAlignment="Right"
+                            Text="{Binding StartTime}" />
+                    </Grid>
                 </Border>
                 <Border
                     Grid.Column="3"
                     Width="51"
                     HorizontalAlignment="Right"
                     BorderThickness="2,0,0,0">
-                    <TextBlock VerticalAlignment="Center" Text="終了" />
+                    <Grid>
+                        <TextBlock
+                            Margin="0,0,1,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="9"
+                            Text="終了" />
+                        <TextBlock
+                            Margin="1,0,0,0"
+                            HorizontalAlignment="Left"
+                            Text="{Binding EndTime}" />
+                    </Grid>
                 </Border>
 
                 <TextBlock

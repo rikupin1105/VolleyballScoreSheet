@@ -75,9 +75,13 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 if (_game.History.Histories.Value[i].Command1 == "S1")
                 {
                     leftfrag = true;
+
+                    StartTime = _game.History.Histories.Value[i].DateTime.ToString("HH:mm");
                 }
                 if (leftfrag == true && _game.History.Histories.Value[i].Command1 == "WSA")
                 {
+                    EndTime = _game.History.Histories.Value[i].DateTime.ToString("HH:mm");
+
                     isEndSet = true;
                     //セット終了
                     if (LeftPoints[^1] != apoint)
