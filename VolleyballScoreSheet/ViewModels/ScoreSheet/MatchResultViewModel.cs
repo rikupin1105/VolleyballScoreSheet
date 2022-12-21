@@ -5,6 +5,7 @@ using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls.Ribbon;
 using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.Views;
 using Wpf.Ui.Interop.WinDef;
@@ -27,7 +28,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     ASet.Add(new()
                     {
                         Timeouts= item.TimeOuts.Value,
-                        Substitutions = item.Substitutions.Value,
+                        Substitutions = item.Substitutions.Value + item.SubstitutionDetails.Where(x => x.ExceptionalSubstitution == true).Count(),
 
                         Points = item.Points.Value,
                     });
@@ -39,7 +40,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 BSet.Add(new()
                 {
                     Timeouts= item.TimeOuts.Value,
-                    Substitutions = item.Substitutions.Value,
+                    Substitutions = item.Substitutions.Value + item.SubstitutionDetails.Where(x=>x.ExceptionalSubstitution == true).Count(),
 
                     Points = item.Points.Value,
                 });
