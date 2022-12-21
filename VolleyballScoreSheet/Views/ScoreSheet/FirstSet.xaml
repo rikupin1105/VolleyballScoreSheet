@@ -270,57 +270,60 @@
                         <!--#endregion-->
 
                         <!--#region 線-->
-                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,2" />
-                        <Border
-                            Grid.Row="2"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="3"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="4"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="5"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="6"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="7"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-
+                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,1" />
                         <Border
                             Grid.Row="1"
                             Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
+                            BorderThickness="0,1,0,0.5" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="6"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="0"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="1"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="2"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="3"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="4"
-                            BorderThickness="0,0,1,0" />
-
+                            BorderThickness="0.5,0,0.5,0" />
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="5"
+                            BorderThickness="0.5,0,0,0" />
                         <!--#endregion-->
 
                         <!--#region 交代選手番号-->
@@ -702,49 +705,53 @@
                                 Text="{Binding LeftPoints[46]}" />
                             <!--#endregion-->
                             <!--#region 線-->
-                            <Border Grid.RowSpan="4" BorderThickness="0,0,1,0" />
+                            <Border Grid.RowSpan="4" BorderThickness="0,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="1"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="2"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="3"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="4"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="5"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="6"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="7"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="8"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="9"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="10"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="11"
+                                BorderThickness="0.5,0,0,0" />
 
-                            <Border Grid.ColumnSpan="12" BorderThickness="0,0,0,0.5" />
+                            <Border Grid.ColumnSpan="12" BorderThickness="0,0.5,0,0.5" />
                             <Border
                                 Grid.Row="1"
                                 Grid.ColumnSpan="12"
@@ -841,58 +848,61 @@
                         <!--#endregion-->
 
                         <!--#region 線-->
-
-                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,2" />
-                        <Border
-                            Grid.Row="2"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="3"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="4"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="5"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="6"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-                        <Border
-                            Grid.Row="7"
-                            Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
-
+                        <Border Grid.ColumnSpan="6" BorderThickness="0,0,0,1" />
                         <Border
                             Grid.Row="1"
                             Grid.ColumnSpan="6"
-                            BorderThickness="0,0,0,1" />
+                            BorderThickness="0,1,0,0.5" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="6"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.ColumnSpan="6"
+                            BorderThickness="0,0.5,0,0.5" />
+
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="0"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="1"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="2"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="3"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
                         <Border
                             Grid.RowSpan="9"
                             Grid.Column="4"
-                            BorderThickness="0,0,1,0" />
+                            BorderThickness="0.5,0,0.5,0" />
 
+                        <Border
+                            Grid.RowSpan="9"
+                            Grid.Column="5"
+                            BorderThickness="0.5,0,0,0" />
                         <!--#endregion-->
 
                         <!--#region 交代選手番号-->
@@ -1108,6 +1118,14 @@
                                 Y1="19"
                                 Y2="0" />
 
+                            <!--#region 小さい数字-->
+                            <TextBlock
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <!--#endregion-->
                             <!--#region 点数-->
                             <TextBlock Grid.Column="0" Text="{Binding RightPoints[0]}" />
                             <TextBlock Grid.Column="2" Text="{Binding RightPoints[1]}" />
@@ -1274,49 +1292,53 @@
                                 Text="{Binding RightPoints[46]}" />
                             <!--#endregion-->
                             <!--#region 線-->
-                            <Border Grid.RowSpan="4" BorderThickness="0,0,1,0" />
+                            <Border Grid.RowSpan="4" BorderThickness="0,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="1"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="2"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="3"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="4"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="5"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="6"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="7"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="8"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="9"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
                             <Border
                                 Grid.RowSpan="4"
                                 Grid.Column="10"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0.5,0,0.5,0" />
+                            <Border
+                                Grid.RowSpan="4"
+                                Grid.Column="11"
+                                BorderThickness="0.5,0,0,0" />
 
-                            <Border Grid.ColumnSpan="12" BorderThickness="0,0,0,0.5" />
+                            <Border Grid.ColumnSpan="12" BorderThickness="0,0.5,0,0.5" />
                             <Border
                                 Grid.Row="1"
                                 Grid.ColumnSpan="12"
