@@ -14,7 +14,7 @@ namespace VolleyballScoreSheet.Converter
         {
             if ((bool)value == true)
             {
-                return 2;
+                return 1;
             }
             else
             {
@@ -25,7 +25,7 @@ namespace VolleyballScoreSheet.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((int)value == 2)
+            if ((int)value == 1)
             {
                 return true;
             }
