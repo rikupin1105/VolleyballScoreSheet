@@ -52,6 +52,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Margin="55,0,0,0"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontSize="8"
                     Text="チーム" />
