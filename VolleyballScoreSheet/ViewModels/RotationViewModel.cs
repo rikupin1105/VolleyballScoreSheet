@@ -35,24 +35,30 @@ namespace VolleyballScoreSheet.ViewModels
 
             NextCommand.Subscribe(_ => Next());
 
-            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x=>x.Id).OrderBy(x => x.IsLibero));
-            RightPlayer.AddRange(_game.RightTeam.Players.OrderBy(x => x.Id).OrderBy(x => x.IsLibero));
+            LeftPlayer.AddRange(_game.LeftTeam.Players
+                .Where(x => x.IsDisqualified != true)
+                .Where(x => x.IsLibero != true)
+                .Where(x => x.IsExceptionalSubstituted != true)
+                .OrderBy(x => x.Id));
 
-            _game.LeftTeam.Name.Subscribe(x => { LeftSideTeamName.Value = x; });
-            _game.RightTeam.Name.Subscribe(x => { RightSideTeamName.Value = x; });
+            RightPlayer.AddRange(_game.RightTeam.Players
+                .Where(x => x.IsDisqualified != true)
+                .Where(x => x.IsLibero != true)
+                .Where(x => x.IsExceptionalSubstituted != true)
+                .OrderBy(x => x.Id));
+
+            LeftSideTeamName =  _game.LeftTeam.Name.Value;
+            RightSideTeamName =  _game.RightTeam.Name.Value;
         }
         public ReactiveCommand NextCommand { get; } = new ReactiveCommand();
-        public ReactiveProperty<string> ATeamName { get; }
-        public ReactiveProperty<string> BTeamName { get; }
 
-        public ReactiveProperty<int?[]> LeftTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
-        public ReactiveProperty<int?[]> RightTeamRotatiton { get; } = new ReactiveProperty<int?[]>(new int?[6]);
-        public ReactiveCollection<Player> LeftPlayer { get; set; } = new ReactiveCollection<Player>();
-        public ReactiveCollection<Player> RightPlayer { get; set; } = new ReactiveCollection<Player>();
-        public ReactiveProperty<string> LeftSideTeamName { get; set; } = new();
-        public ReactiveProperty<string> RightSideTeamName { get; set; } = new();
+        public int?[] LeftTeamRotatiton { get; } = new int?[6];
+        public int?[] RightTeamRotatiton { get; } = new int?[6];
+        public List<Player> LeftPlayer { get; set; } = new();
+        public List<Player> RightPlayer { get; set; } = new();
 
-
+        public string LeftSideTeamName { get; set; }
+        public string RightSideTeamName { get; set; }
 
         private void Next()
         {
@@ -60,64 +66,64 @@ namespace VolleyballScoreSheet.ViewModels
             var errorMessage = string.Empty;
 
             //未入力
-            if (LeftTeamRotatiton.Value.Any(x => x == null))
+            if (LeftTeamRotatiton.Any(x => x == null))
             {
                 return;
             }
-            if (RightTeamRotatiton.Value.Any(x => x == null))
+            if (RightTeamRotatiton.Any(x => x == null))
             {
                 return;
             }
 
             //リベロチェック
-            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if (LeftTeamRotatiton.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}にリベロが含まれています。\n";
             }
-            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if (RightTeamRotatiton.Where(x => _game.RightTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.RightTeam.Name.Value}にリベロが含まれています。\n";
             }
 
             //例外的な選手交代をした選手
-            if(LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if(LeftTeamRotatiton.Where(x => _game.LeftTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}に例外的な選手交代をした選手が含まれています。\n";
             }
-            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if (RightTeamRotatiton.Where(x => _game.RightTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.RightTeam.Name.Value}に例外的な選手交代をした選手が含まれています。\n";
             }
 
             //失格になった選手
-            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if (LeftTeamRotatiton.Where(x => _game.LeftTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}に失格になった選手が含まれています。\n";
             }
-            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            if (RightTeamRotatiton.Where(x => _game.RightTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.RightTeam.Name.Value}に失格になった選手が含まれています。\n";
             }
 
             //重複チェック
-            if (LeftTeamRotatiton.Value.DistinctBy(x => x).Count() != 6)
+            if (LeftTeamRotatiton.DistinctBy(x => x).Count() != 6)
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}の選手が重複しています。\n";
             }
-            if (RightTeamRotatiton.Value.DistinctBy(x => x).Count() != 6)
+            if (RightTeamRotatiton.DistinctBy(x => x).Count() != 6)
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.RightTeam.Name.Value}の選手が重複しています。\n";
             }
 
-            foreach (var item in LeftTeamRotatiton.Value)
+            foreach (var item in LeftTeamRotatiton)
             {
                 if (!_game.LeftTeam.Players.Any(x => x.Id == item))
                 {
@@ -126,7 +132,7 @@ namespace VolleyballScoreSheet.ViewModels
                 }
             }
 
-            foreach (var item in RightTeamRotatiton.Value)
+            foreach (var item in RightTeamRotatiton)
             {
                 if (!_game.RightTeam.Players.Any(x => x.Id == item))
                 {
@@ -152,15 +158,15 @@ namespace VolleyballScoreSheet.ViewModels
                 return;
             }
 
-            _game.LeftTeam.Sets[^1].StartingLineUp.Value = LeftTeamRotatiton.Value.Select(x => x!.Value).ToArray();
+            _game.LeftTeam.Sets[^1].StartingLineUp.Value = LeftTeamRotatiton.Select(x => x!.Value).ToArray();
             _game.LeftTeam.StartingLineUp.Value = _game.LeftTeam.Sets[^1].StartingLineUp.Value;
-            _game.RightTeam.Sets[^1].StartingLineUp.Value = RightTeamRotatiton.Value.Select(x => x!.Value).ToArray();
+            _game.RightTeam.Sets[^1].StartingLineUp.Value = RightTeamRotatiton.Select(x => x!.Value).ToArray();
             _game.RightTeam.StartingLineUp.Value = _game.RightTeam.Sets[^1].StartingLineUp.Value;
 
             var param = new DialogParameters
             {
-                { "LeftTeamRotation", LeftTeamRotatiton.Value.Select(x=>x!.Value).ToArray() },
-                { "RightTeamRotation", RightTeamRotatiton.Value.Select(x=>x!.Value).ToArray() }
+                { "LeftTeamRotation", LeftTeamRotatiton.Select(x=>x!.Value).ToArray() },
+                { "RightTeamRotation", RightTeamRotatiton.Select(x=>x!.Value).ToArray() }
             };
 
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, param));
