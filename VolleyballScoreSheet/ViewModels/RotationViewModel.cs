@@ -35,8 +35,8 @@ namespace VolleyballScoreSheet.ViewModels
 
             NextCommand.Subscribe(_ => Next());
 
-            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x => x.IsLibero));
-            RightPlayer.AddRange(_game.RightTeam.Players.OrderBy(x => x.IsLibero));
+            LeftPlayer.AddRange(_game.LeftTeam.Players.OrderBy(x=>x.Id).OrderBy(x => x.IsLibero));
+            RightPlayer.AddRange(_game.RightTeam.Players.OrderBy(x => x.Id).OrderBy(x => x.IsLibero));
 
             _game.LeftTeam.Name.Subscribe(x => { LeftSideTeamName.Value = x; });
             _game.RightTeam.Name.Subscribe(x => { RightSideTeamName.Value = x; });
@@ -70,15 +70,39 @@ namespace VolleyballScoreSheet.ViewModels
             }
 
             //リベロチェック
-            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Count() != 0)
+            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.LeftTeam.Name.Value}にリベロが含まれています。\n";
             }
-            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Count() != 0)
+            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsLibero).Select(x => x.Id).ToList().Contains((int)x)).Any())
             {
                 errorMessageFlag = true;
                 errorMessage += $"{_game.RightTeam.Name.Value}にリベロが含まれています。\n";
+            }
+
+            //例外的な選手交代をした選手
+            if(LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.LeftTeam.Name.Value}に例外的な選手交代をした選手が含まれています。\n";
+            }
+            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.RightTeam.Name.Value}に例外的な選手交代をした選手が含まれています。\n";
+            }
+
+            //失格になった選手
+            if (LeftTeamRotatiton.Value.Where(x => _game.LeftTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.LeftTeam.Name.Value}に失格になった選手が含まれています。\n";
+            }
+            if (RightTeamRotatiton.Value.Where(x => _game.RightTeam.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList().Contains((int)x)).Any())
+            {
+                errorMessageFlag = true;
+                errorMessage += $"{_game.RightTeam.Name.Value}に失格になった選手が含まれています。\n";
             }
 
             //重複チェック
@@ -110,46 +134,6 @@ namespace VolleyballScoreSheet.ViewModels
                     errorMessage += $"{_game.RightTeam.Name.Value}の{item}番は登録されていません。\n";
                 }
             }
-
-            ////未登録チェック
-            //for (int i = 0; i < LeftTeamRotatiton.Value.Length; i++)
-            //{
-            //    var register = false;
-            //    foreach (var item in _game.LeftTeam.Players.Where(x => x.IsLibero==false))
-            //    {
-            //        if (LeftTeamRotatiton.Value[i] == item.Id)
-            //        {
-            //            register = true;
-            //            break;
-            //        }
-            //    }
-            //    if (!register)
-            //    {
-            //        unregisteredFlag = true;
-            //        unregisteredErrorSentence += $"{LeftSideTeamName.Value} の {LeftTeamRotatiton.Value[i]} は登録されていません。\n";
-            //    }
-            //}
-
-            ////未登録チェック
-            //for (int i = 0; i < RightTeamRotatiton.Value.Length; i++)
-            //{
-            //    var register = false;
-            //    foreach (var item in _game.RightTeam.Players.Where(x=>x.IsLibero==false))
-            //    {
-            //        if (RightTeamRotatiton.Value[i] == item.Id)
-            //        {
-            //            register = true;
-            //            break;
-            //        }
-
-            //    }
-            //    if (!register)
-            //    {
-            //        unregisteredFlag = true;
-            //        unregisteredErrorSentence += $"{RightSideTeamName.Value} の {RightTeamRotatiton.Value[i]} は登録されていません。\n";
-            //    }
-            //}
-
 
 
             if (errorMessageFlag)
