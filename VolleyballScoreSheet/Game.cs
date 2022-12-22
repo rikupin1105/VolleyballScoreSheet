@@ -20,6 +20,7 @@ namespace VolleyballScoreSheet
     {
         public Game()
         {
+            History.HistoryAdd("S");
             History.Histories.Subscribe(x =>
             {
                 if (x.Count>1) UndoEnable.Value = true;
@@ -185,7 +186,7 @@ namespace VolleyballScoreSheet
 
             if (History.Histories.Value.Count == 1)
             {
-                return;
+                //return;
             }
 
             var c = History.Histories.Value[^1].Command1;
@@ -341,6 +342,9 @@ namespace VolleyballScoreSheet
                 var Out = int.Parse(c2.Split(',')[1]);
 
                 ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                ATeam.Value.Players.First(x=>x.Id == Out).IsExceptionalSubstituted = false;
+                ATeam.Value.Sets[^1].SubstitutionDetails.RemoveAt(ATeam.Value.Sets[^1].SubstitutionDetails.Count()-1);
+                Remarks.RemoveAt(Remarks.Count-1);
                 ATeam.Value.Refresh();
                 return;
             }
@@ -351,6 +355,9 @@ namespace VolleyballScoreSheet
                 var Out = int.Parse(c2.Split(',')[1]);
 
                 BTeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(BTeam.Value.Sets[^1].Rotation.Value, In)] = Out;
+                BTeam.Value.Players.First(x => x.Id == Out).IsExceptionalSubstituted = false;
+                BTeam.Value.Sets[^1].SubstitutionDetails.RemoveAt(BTeam.Value.Sets[^1].SubstitutionDetails.Count()-1);
+                Remarks.RemoveAt(Remarks.Count-1);
                 BTeam.Value.Refresh();
                 return;
             }
@@ -369,7 +376,13 @@ namespace VolleyballScoreSheet
                 Undo();
                 return;
             }
-
+            else if (c=="S1")
+            {
+                History.HistoryRemove();
+                DisplayMain("CoinToss");
+                LockControl();
+                return;
+            }
             else if (c[0]=='S')
             {
                 var set = int.Parse(c[1].ToString());
@@ -823,14 +836,29 @@ namespace VolleyballScoreSheet
                 History.HistoryAdd($"ExceptionalSubstitutionA", $"{In},{Out}");
                 ATeam.Value.ExceptionalSubstitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
 
-                Remarks.Add($"例外的な選手交代 TEAM A SET{Set.Value} No.{Out}→No.{In}");
+                if (CoinToss.ATeamLeftSide)
+                {
+                    Remarks.Add($"例外的な選手交代 / A / {Set.Value} ({ATeam.Value.Sets[^1].Points}:{BTeam.Value.Sets[^1].Points}) No.{Out}→No.{In}");
+                }
+                else
+                {
+                    Remarks.Add($"例外的な選手交代 / B / {Set.Value} ({ATeam.Value.Sets[^1].Points}:{BTeam.Value.Sets[^1].Points}) No.{Out}→No.{In}");
+                }
             }
             else
             {
                 BTeam.Value.Players[BTeam.Value.Players.IndexOf(BTeam.Value.Players.First(x => x.Id==Out))].IsExceptionalSubstituted = true;
                 History.HistoryAdd($"ExceptionalSubstitutionB", $"{In},{Out}");
                 BTeam.Value.ExceptionalSubstitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
-                Remarks.Add($"例外的な選手交代 TEAM B SET{Set.Value} No.{Out}→No.{In}");
+
+                if (CoinToss.ATeamLeftSide)
+                {
+                    Remarks.Add($"例外的な選手交代 / A / {Set.Value} ({ATeam.Value.Sets[^1].Points}:{BTeam.Value.Sets[^1].Points}) No.{Out}→No.{In}");
+                }
+                else
+                {
+                    Remarks.Add($"例外的な選手交代 / B / {Set.Value} ({ATeam.Value.Sets[^1].Points}:{BTeam.Value.Sets[^1].Points}) No.{Out}→No.{In}");
+                }
             }
         }
 

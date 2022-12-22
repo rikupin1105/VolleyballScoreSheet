@@ -21,64 +21,35 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         }
         public void Refresh()
         {
-            if (_game.CoinToss.ATeamLeftSide)
-            {
-                LeftTeamName = _game.ATeam.Value.Name.Value;
-                RightTeamName = _game.BTeam.Value.Name.Value;
-            }
-            else
-            {
-                LeftTeamName = _game.BTeam.Value.Name.Value;
-                RightTeamName = _game.ATeam.Value.Name.Value;
-            }
+            LeftTeamName = _game.ATeam.Value.Name.Value;
+            RightTeamName = _game.BTeam.Value.Name.Value;
+
 
             if (_game.CoinToss.ATeamServer)
             {
-                if (_game.CoinToss.ATeamLeftSide)
-                {
-                    LeftTeamServe = true;
-                    LeftTeamReception = false;
-                    LeftServeCheckList.Add(true);
-                    RightServeCheckList.Add(false);
-                    RightPointList.Add(null);
-                }
-                else
-                {
-                    LeftTeamServe = false;
-                    LeftTeamReception = true;
-                    LeftServeCheckList.Add(false);
-                    RightServeCheckList.Add(true);
-                    LeftPointList.Add(null);
-                }
+                LeftTeamServe = true;
+                LeftTeamReception = false;
+                LeftServeCheckList.Add(true);
+                RightServeCheckList.Add(false);
+                RightPointList.Add(null);
             }
             else
             {
-                if (_game.CoinToss.ATeamLeftSide)
-                {
-                    LeftTeamServe = false;
-                    LeftTeamReception = true;
-                    LeftServeCheckList.Add(false);
-                    RightServeCheckList.Add(true);
-                    LeftPointList.Add(null);
-                }
-                else
-                {
-                    LeftTeamServe = true;
-                    LeftTeamReception = false;
-                    LeftServeCheckList.Add(true);
-                    RightServeCheckList.Add(false);
-                    RightPointList.Add(null);
-                }
+                LeftTeamServe = false;
+                LeftTeamReception = true;
+                LeftServeCheckList.Add(false);
+                RightServeCheckList.Add(true);
+                LeftPointList.Add(null);
             }
 
-            LeftTeamStartingLineUp = _game.LeftTeam.StartingLineUp.Value;
-            RightTeamStartingLineUp = _game.RightTeam.StartingLineUp.Value;
+            LeftTeamStartingLineUp = _game.ATeam.Value.StartingLineUp.Value;
+            RightTeamStartingLineUp = _game.BTeam.Value.StartingLineUp.Value;
 
-            LeftTeamSubstitutioned = _game.LeftTeam.Substitutioned.Value;
-            RightTeamSubstitutioned = _game.RightTeam.Substitutioned.Value;
+            LeftTeamSubstitutioned = _game.ATeam.Value.Substitutioned.Value;
+            RightTeamSubstitutioned = _game.BTeam.Value.Substitutioned.Value;
 
-            LeftTeamIsReturn = _game.LeftTeam.isReturn.Value;
-            RightTeamIsReturn = _game.RightTeam.isReturn.Value;
+            LeftTeamIsReturn = _game.ATeam.Value.isReturn.Value;
+            RightTeamIsReturn = _game.BTeam.Value.isReturn.Value;
 
             var leftfrag = false;
             var apoint = 0;
@@ -97,7 +68,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
                     if (_game.History.Histories.Value[i].Command1 == "WSA")
                     {
-                        for (int k = i - 2 ; 0 < i; k--)
+                        for (int k = i - 2; 0 < i; k--)
                         {
                             if (_game.History.Histories.Value[k].Command1 == "PointA")
                             {
@@ -152,180 +123,82 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 {
                     if (_game.History.Histories.Value[i].Command1 == "PointA")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
+                        apoint++;
+
+                        if (RightPointList.Count == 0)
                         {
-                            apoint++;
-
-                            if (RightPointList.Count == 0)
-                            {
-                                RightPointList.Add(bpoint);
-                                LeftServeCheckList.Add(true);
-                            }
-                            else if (RightPointList[^1] == null && bpoint == 0)
-                            {
-
-                            }
-                            else if (RightPointList[^1] != bpoint)
-                            {
-                                RightPointList.Add(bpoint);
-                                LeftServeCheckList.Add(true);
-                            }
+                            RightPointList.Add(bpoint);
+                            LeftServeCheckList.Add(true);
                         }
-                        else
+                        else if (RightPointList[^1] == null && bpoint == 0)
                         {
-                            bpoint++;
 
-                            if (LeftPointList.Count == 0)
-                            {
-                                LeftPointList.Add(apoint);
-                                RightServeCheckList.Add(true);
-                            }
-                            else if (LeftPointList[^1] == null && apoint == 0)
-                            {
-
-                            }
-                            else if (LeftPointList[^1] != apoint)
-                            {
-                                LeftPointList.Add(apoint);
-                                RightServeCheckList.Add(true);
-                            }
+                        }
+                        else if (RightPointList[^1] != bpoint)
+                        {
+                            RightPointList.Add(bpoint);
+                            LeftServeCheckList.Add(true);
                         }
                     }
                     else if (_game.History.Histories.Value[i].Command1 == "PointB")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
+                        bpoint++;
+
+                        if (LeftPointList.Count == 0)
                         {
-                            bpoint++;
-
-                            if (LeftPointList.Count == 0)
-                            {
-                                LeftPointList.Add(apoint);
-                                RightServeCheckList.Add(true);
-                            }
-                            else if (LeftPointList[^1] == null && apoint == 0)
-                            {
-
-                            }
-                            else if (LeftPointList[^1] != apoint)
-                            {
-                                LeftPointList.Add(apoint);
-                                RightServeCheckList.Add(true);
-                            }
+                            LeftPointList.Add(apoint);
+                            RightServeCheckList.Add(true);
+                        }
+                        else if (LeftPointList[^1] == null && apoint == 0)
+                        {
 
                         }
-                        else
+                        else if (LeftPointList[^1] != apoint)
                         {
-                            apoint++;
-
-                            if (RightPointList.Count == 0)
-                            {
-                                RightPointList.Add(bpoint);
-                                LeftServeCheckList.Add(true);
-                            }
-                            else if (RightPointList[^1] == null && bpoint == 0)
-                            {
-
-                            }
-                            else if (RightPointList[^1] != bpoint)
-                            {
-                                RightPointList.Add(bpoint);
-                                LeftServeCheckList.Add(true);
-                            }
+                            LeftPointList.Add(apoint);
+                            RightServeCheckList.Add(true);
                         }
+
                     }
                     else if (_game.History.Histories.Value[i].Command1 == "SubstitutionA")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
+                        var a = _game.History.Histories.Value[i].Command2.Split(',');
+
+
+                        var index = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[0]));
+                        if (index != -1)
                         {
-                            //0が出る 1が入る
-                            var a = _game.History.Histories.Value[i].Command2.Split(',');
-
-
-                            var index = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[0]));
-                            if (index != -1)
-                            {
-                                LeftSubstitutionPoint[index*2+1] = apoint +" : "+bpoint;
-                            }
-                            var index1 = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[1]));
-                            if (index1 != -1)
-                            {
-                                LeftSubstitutionPoint[index1*2] = apoint +" : "+bpoint;
-                            }
+                            LeftSubstitutionPoint[index*2+1] = apoint +" : "+bpoint;
                         }
-                        else
+                        var index1 = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[1]));
+                        if (index1 != -1)
                         {
-                            var a = _game.History.Histories.Value[i].Command2.Split(',');
-
-
-                            var index = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[0]));
-                            if (index != -1)
-                            {
-                                RightSubstitutionPoint[index*2+1] = bpoint +" : "+apoint;
-                            }
-                            var index1 = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[1]));
-                            if (index1 != -1)
-                            {
-                                RightSubstitutionPoint[index1*2] = bpoint +" : "+apoint;
-                            }
+                            LeftSubstitutionPoint[index1*2] = apoint +" : "+bpoint;
                         }
                     }
                     else if (_game.History.Histories.Value[i].Command1 == "SubstitutionB")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
+                        var a = _game.History.Histories.Value[i].Command2.Split(',');
+
+
+                        var index = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[0]));
+                        if (index != -1)
                         {
-                            var a = _game.History.Histories.Value[i].Command2.Split(',');
-
-
-                            var index = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[0]));
-                            if (index != -1)
-                            {
-                                RightSubstitutionPoint[index*2+1] = bpoint +" : "+apoint;
-                            }
-                            var index1 = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[1]));
-                            if (index1 != -1)
-                            {
-                                RightSubstitutionPoint[index1*2] = bpoint +" : "+apoint;
-                            }
+                            RightSubstitutionPoint[index*2+1] = bpoint +" : "+apoint;
                         }
-                        else
+                        var index1 = Array.IndexOf(RightTeamStartingLineUp, int.Parse(a[1]));
+                        if (index1 != -1)
                         {
-                            //0が出る 1が入る
-                            var a = _game.History.Histories.Value[i].Command2.Split(',');
-
-
-                            var index = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[0]));
-                            if (index != -1)
-                            {
-                                LeftSubstitutionPoint[index*2+1] = apoint +" : "+bpoint;
-                            }
-                            var index1 = Array.IndexOf(LeftTeamStartingLineUp, int.Parse(a[1]));
-                            if (index1 != -1)
-                            {
-                                LeftSubstitutionPoint[index1*2] = apoint +" : "+bpoint;
-                            }
+                            RightSubstitutionPoint[index1*2] = bpoint +" : "+apoint;
                         }
                     }
                     else if (_game.History.Histories.Value[i].Command1 =="TimeOutA")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
-                        {
-                            LeftTimeouts.Add(apoint +" : "+bpoint);
-                        }
-                        else
-                        {
-                            RightTimeouts.Add(bpoint +" : "+apoint);
-                        }
+                        LeftTimeouts.Add(apoint +" : "+bpoint);
                     }
                     else if (_game.History.Histories.Value[i].Command1 =="TimeOutB")
                     {
-                        if (_game.CoinToss.ATeamLeftSide)
-                        {
-                            RightTimeouts.Add(bpoint +" : "+apoint);
-                        }
-                        else
-                        {
-                            LeftTimeouts.Add(apoint +" : "+bpoint);
-                        }
+                        RightTimeouts.Add(bpoint +" : "+apoint);
                     }
                 }
             }
@@ -336,6 +209,26 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             for (int i = 0; i < bpoint; i++)
             {
                 RightPointSlash[i] = true;
+            }
+
+
+            if (!_game.CoinToss.ATeamLeftSide)
+            {
+                (LeftPointList, RightPointList) = (RightPointList, LeftPointList);
+                (LeftTimeouts, RightTimeouts) = (RightTimeouts, LeftTimeouts);
+                (LeftSubstitutionPoint, RightSubstitutionPoint) = (RightSubstitutionPoint, LeftSubstitutionPoint);
+                (LeftPointSlash,RightPointSlash)=(RightPointSlash, LeftPointSlash);
+                (LeftFinalPoint, RightFinalPoint)=(RightFinalPoint, LeftFinalPoint);
+                (LeftServeCheckList, RightServeCheckList) = (RightServeCheckList, LeftServeCheckList);
+                (LeftDeletePoint, RightDeletePoint) = (RightDeletePoint, LeftDeletePoint);
+
+                (LeftTeamName, RightTeamName) = (RightTeamName, LeftTeamName);
+                (LeftTeamStartingLineUp, RightTeamStartingLineUp) = (RightTeamStartingLineUp, LeftTeamStartingLineUp);
+                (LeftTeamSubstitutioned,RightTeamSubstitutioned) = (RightTeamSubstitutioned, LeftTeamSubstitutioned);
+                (LeftTeamIsReturn,RightTeamIsReturn) = (RightTeamIsReturn, LeftTeamIsReturn);
+
+                LeftTeamServe = !LeftTeamServe;
+                LeftTeamReception = !LeftTeamReception;
             }
         }
 
