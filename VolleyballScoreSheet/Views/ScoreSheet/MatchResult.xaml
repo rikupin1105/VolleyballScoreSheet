@@ -108,6 +108,11 @@
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding ASet[1].Points}" />
                     <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding ASet[2].Points}" />
 
+                    <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding SetDuration[0].TotalMinutes}" />
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding SetDuration[1].TotalMinutes}" />
+                    <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding SetDuration[2].TotalMinutes}" />
+
+
                     <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding BSet[0].Points}" />
                     <TextBlock Grid.Row="2" Grid.Column="5" Text="{Binding BSet[1].Points}" />
                     <TextBlock Grid.Row="3" Grid.Column="5" Text="{Binding BSet[2].Points}" />
