@@ -196,6 +196,64 @@
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="15" Y1="0" Y2="20" />
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="14.4" Y1="19" Y2="0" />
 
+                            <!--#region 小さい数字-->
+                            <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+
+                            <TextBlock Grid.Row="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+
+                            <TextBlock Grid.Row="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+
+                            <TextBlock Grid.Row="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+
+                            <TextBlock Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <!--#endregion-->
+                            
                             <!--#region 点数-->
                             <TextBlock Grid.Column="0" Text="{Binding LeftPoints[0]}" />
                             <TextBlock Grid.Column="2" Text="{Binding LeftPoints[1]}" />
@@ -425,6 +483,60 @@
 
                             <!--#region 小さい数字-->
                             <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+
+                            <TextBlock Grid.Row="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+
+                            <TextBlock Grid.Row="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock Grid.Row="2" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+
+                            <TextBlock Grid.Row="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock Grid.Row="3" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+
+                            <TextBlock Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock Grid.Row="1" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock Grid.Row="2" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock Grid.Row="3" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
                             <!--#endregion-->
                             <!--#region 点数-->
                             <TextBlock Grid.Column="0" Text="{Binding RightPoints[0]}" />
