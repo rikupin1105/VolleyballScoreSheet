@@ -688,10 +688,58 @@
                 <Grid Grid.Row="1" Grid.Column="4">
                     <!--#region 得点-->
                     <Grid Grid.RowSpan="6" Margin="1.5,0,-0.5,0">
+                        <!--#region 消し／-->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[0], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[1], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[2], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[3], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[4], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[5], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[6], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[7], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[8], Converter={StaticResource HiddenOrVissible}}" />
 
-                        <TextBlock Margin="2" Text="／" />
-                        <TextBlock Grid.Row="1" Margin="2" Text="／" />
-                        <TextBlock Grid.Row="1" FontSize="10" Text="○" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[9], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[10], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[11], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[12], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[13], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[14], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[15], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[16], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[17], Converter={StaticResource HiddenOrVissible}}" />
+
+                        <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[18], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[19], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[20], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[21], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="4" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[22], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="5" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[23], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="6" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[24], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="7" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[25], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="8" Grid.Column="2" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[26], Converter={StaticResource HiddenOrVissible}}" />
+
+                        <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[27], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[28], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[29], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="3" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[30], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="4" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[31], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="5" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[32], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="6" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[33], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="7" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[34], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="8" Grid.Column="3" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[35], Converter={StaticResource HiddenOrVissible}}" />
+
+                        <TextBlock Grid.Row="0" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[36], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[37], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[38], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[39], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[40], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[41], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[42], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[43], Converter={StaticResource HiddenOrVissible}}" />
+                        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[44], Converter={StaticResource HiddenOrVissible}}" />
+
+                        <!--#endregion-->
 
                         <TextBlock Grid.Row="0" FontSize="8" Text="1" />
                         <TextBlock Grid.Row="1" FontSize="8" Text="2" />
