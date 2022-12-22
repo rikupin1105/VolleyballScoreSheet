@@ -531,6 +531,33 @@
                 <Grid Grid.Row="1" Grid.Column="2">
                     <!--#region 得点-->
                     <Grid Grid.RowSpan="6" Margin="1.5,0,1.5,0">
+                        <!--#region 消し砂時計-->
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[0].Y}" Y2="{Binding LeftDeletePoint[0].Y}" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[0].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[0].Y}" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[1].Y}" Y2="{Binding LeftDeletePoint[1].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[1].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[1].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[2].Y}" Y2="{Binding LeftDeletePoint[2].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[2].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[2].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[3].Y}" Y2="{Binding LeftDeletePoint[3].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[3].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[3].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[4].Y}" Y2="{Binding LeftDeletePoint[4].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[4].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[4].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <!--#endregion-->
+
                         <!--#region 消し／-->
                         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding LeftPointSlash[0], Converter={StaticResource HiddenOrVissible}}" />
                         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding LeftPointSlash[1], Converter={StaticResource HiddenOrVissible}}" />
@@ -688,6 +715,33 @@
                 <Grid Grid.Row="1" Grid.Column="4">
                     <!--#region 得点-->
                     <Grid Grid.RowSpan="6" Margin="1.5,0,-0.5,0">
+                        <!--#region 消し砂時計-->
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[0].Y}" Y2="{Binding RightDeletePoint[0].Y}" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[0].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[0].Y}" />
+                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[1].Y}" Y2="{Binding RightDeletePoint[1].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[1].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[1].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[2].Y}" Y2="{Binding RightDeletePoint[2].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[2].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[2].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[3].Y}" Y2="{Binding RightDeletePoint[3].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[3].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[3].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[4].Y}" Y2="{Binding RightDeletePoint[4].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[4].Y}" Y2="118" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[4].Y}" />
+                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <!--#endregion-->
+
                         <!--#region 消し／-->
                         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[0], Converter={StaticResource HiddenOrVissible}}" />
                         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Slash}" Visibility="{Binding RightPointSlash[1], Converter={StaticResource HiddenOrVissible}}" />

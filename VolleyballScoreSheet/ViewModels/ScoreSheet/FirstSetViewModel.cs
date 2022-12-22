@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.Xml;
+using System.Windows.Media;
 
 namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 {
@@ -16,8 +18,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         {
             _game = game;
             Refresh();
-
-            //_game.History.Histories.Subscribe(_ => Refresh());
         }
         public void Refresh()
         {
@@ -38,13 +38,13 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 {
                     LeftTeamServe = true;
                     LeftTeamReception = false;
-                    RightPoints.Add(null);
+                    RightPointList.Add(null);
                 }
                 else
                 {
                     LeftTeamServe = false;
                     LeftTeamReception = true;
-                    LeftPoints.Add(null);
+                    LeftPointList.Add(null);
                 }
             }
             else
@@ -53,13 +53,13 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 {
                     LeftTeamServe = false;
                     LeftTeamReception = true;
-                    LeftPoints.Add(null);
+                    LeftPointList.Add(null);
                 }
                 else
                 {
                     LeftTeamServe = true;
                     LeftTeamReception = false;
-                    RightPoints.Add(null);
+                    RightPointList.Add(null);
                 }
             }
 
@@ -89,19 +89,23 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
                     isEndSet = true;
                     //セット終了
-                    if (LeftPoints[^1] != apoint)
+                    if (LeftPointList[^1] != apoint)
                     {
-                        LeftPoints.Add(apoint);
+                        LeftPointList.Add(apoint);
                     }
-                    if (RightPoints[^1] != bpoint)
+                    if (RightPointList[^1] != bpoint)
                     {
-                        RightPoints.Add(bpoint);
+                        RightPointList.Add(bpoint);
                     }
 
+
+                    //閉じる
+                    LeftDeletePoint = new DeletePoint().DeletePointCulc(apoint);
+                    RightDeletePoint = new DeletePoint().DeletePointCulc(bpoint);
 
                     //最後の位置に丸をつける
-                    LeftFinalPoint = LastPosition(LeftPoints.Count);
-                    RightFinalPoint = LastPosition(RightPoints.Count);
+                    LeftFinalPoint = LastPosition(LeftPointList.Count);
+                    RightFinalPoint = LastPosition(RightPointList.Count);
 
                     break;
                 }
@@ -113,34 +117,34 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                         {
                             apoint++;
 
-                            if (RightPoints.Count == 0)
+                            if (RightPointList.Count == 0)
                             {
-                                RightPoints.Add(bpoint);
+                                RightPointList.Add(bpoint);
                             }
-                            else if (RightPoints[^1] == null && bpoint == 0)
+                            else if (RightPointList[^1] == null && bpoint == 0)
                             {
 
                             }
-                            else if (RightPoints[^1] != bpoint)
+                            else if (RightPointList[^1] != bpoint)
                             {
-                                RightPoints.Add(bpoint);
+                                RightPointList.Add(bpoint);
                             }
                         }
                         else
                         {
                             bpoint++;
 
-                            if (LeftPoints.Count == 0)
+                            if (LeftPointList.Count == 0)
                             {
-                                LeftPoints.Add(apoint);
+                                LeftPointList.Add(apoint);
                             }
-                            else if (LeftPoints[^1] == null && apoint == 0)
+                            else if (LeftPointList[^1] == null && apoint == 0)
                             {
 
                             }
-                            else if (LeftPoints[^1] != apoint)
+                            else if (LeftPointList[^1] != apoint)
                             {
-                                LeftPoints.Add(apoint);
+                                LeftPointList.Add(apoint);
                             }
                         }
                     }
@@ -150,17 +154,17 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                         {
                             bpoint++;
 
-                            if (LeftPoints.Count == 0)
+                            if (LeftPointList.Count == 0)
                             {
-                                LeftPoints.Add(apoint);
+                                LeftPointList.Add(apoint);
                             }
-                            else if (LeftPoints[^1] == null && apoint == 0)
+                            else if (LeftPointList[^1] == null && apoint == 0)
                             {
 
                             }
-                            else if (LeftPoints[^1] != apoint)
+                            else if (LeftPointList[^1] != apoint)
                             {
-                                LeftPoints.Add(apoint);
+                                LeftPointList.Add(apoint);
                             }
 
                         }
@@ -168,17 +172,17 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                         {
                             apoint++;
 
-                            if (RightPoints.Count == 0)
+                            if (RightPointList.Count == 0)
                             {
-                                RightPoints.Add(bpoint);
+                                RightPointList.Add(bpoint);
                             }
-                            else if (RightPoints[^1] == null && bpoint == 0)
+                            else if (RightPointList[^1] == null && bpoint == 0)
                             {
 
                             }
-                            else if (RightPoints[^1] != bpoint)
+                            else if (RightPointList[^1] != bpoint)
                             {
-                                RightPoints.Add(bpoint);
+                                RightPointList.Add(bpoint);
                             }
                         }
                     }
@@ -312,8 +316,38 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public bool[] RightPointSlash { get; set; } = new bool[45];
 
         //サーブのところ
-        public List<int?> LeftPoints { get; set; } = new();
-        public List<int?> RightPoints { get; set; } = new();
+        private List<int?> LeftPointList { get; set; } = new();
+        private List<int?> RightPointList { get; set; } = new();
+
+        public int?[] LeftPoints
+        {
+            get
+            {
+                var array = new int?[48];
+
+                for (int i = 0; i<LeftPointList.Count; i++)
+                {
+                    array[i] = LeftPointList[i];
+                }
+
+                return array;
+            }
+        }
+        public int?[] RightPoints
+        {
+            get
+            {
+                var array = new int?[48];
+
+                for (int i = 0; i < RightPointList.Count; i++)
+                {
+                    array[i] = RightPointList[i];
+                }
+
+                return array;
+            }
+        }
+
 
         //タイムアウト
         public List<string> LeftTimeouts { get; set; } = new();
@@ -333,5 +367,95 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public bool[] LeftTeamIsReturn { get; set; } = new bool[6];
         public bool[] RightTeamIsReturn { get; set; } = new bool[6];
 
+        public DeletePoint[] LeftDeletePoint { get; set; } = new DeletePoint[5] { new DeletePoint(), new DeletePoint(), new DeletePoint(), new DeletePoint(), new DeletePoint() };
+        public DeletePoint[] RightDeletePoint { get; set; } = new DeletePoint[5] { new DeletePoint(), new DeletePoint(), new DeletePoint(), new DeletePoint(), new DeletePoint() };
+
+        public class DeletePoint
+        {
+            public DeletePoint() { }
+            public DeletePoint[] DeletePointCulc(int point) 
+            {
+                var array = new DeletePoint[5]
+                {
+                    new DeletePoint(),
+                    new DeletePoint(),
+                    new DeletePoint(),
+                    new DeletePoint(),
+                    new DeletePoint()
+                };
+
+                if(point <= 36)
+                {
+                    array[4] = new DeletePoint()
+                    {
+                        Visible = true
+                    };
+                    array[3] = new DeletePoint()
+                    {
+                        Visible = true,
+                        StartRow = point - 27
+                    };
+                }
+                if (point <= 27)
+                {
+                    array[3] = new DeletePoint()
+                    {
+                        Visible = true
+                    };
+                    array[2] = new DeletePoint()
+                    {
+                        Visible = true,
+                        StartRow = point - 18
+                    };
+                }
+                if (point <= 18)
+                {
+                    array[2] = new DeletePoint()
+                    {
+                        Visible = true
+                    };
+                    array[1] = new DeletePoint()
+                    {
+                        Visible = true,
+                        StartRow = point - 9
+                    };
+                }
+                if (point <= 9)
+                {
+                    array[1] = new DeletePoint()
+                    {
+                        Visible = true
+                    };
+
+                    array[0] = new DeletePoint()
+                    {
+                        Visible = true,
+                        StartRow = point
+                    };
+                }
+
+                return array;
+            }
+            public bool Visible { get; set; } = false;
+            public int StartRow { get; set; } = 0;
+            public int EndRow { get; set; } = 9;
+
+            public int Y
+            { 
+                get
+                {
+                    if (StartRow == 0) return 1;
+                    if (StartRow == 1) return 14;
+                    if (StartRow == 2) return 28;
+                    if (StartRow == 3) return 41;
+                    if (StartRow == 4) return 54;
+                    if (StartRow == 5) return 67;
+                    if (StartRow == 6) return 80;
+                    if (StartRow == 7) return 94;
+                    if (StartRow == 8) return 107;
+                    return 0;
+                } 
+            }
+        }
     }
 }
