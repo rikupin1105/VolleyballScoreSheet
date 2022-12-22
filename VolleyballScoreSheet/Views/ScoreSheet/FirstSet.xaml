@@ -16,6 +16,13 @@
             <Setter Property="Text" Value="／" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        <Style x:Key="Check" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="5" />
+            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Text" Value="✓" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
     </UserControl.Resources>
 
 
@@ -196,6 +203,65 @@
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="15" Y1="0" Y2="20" />
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="14.4" Y1="19" Y2="0" />
 
+                            <!--#region サーバーチェック-->
+                            <TextBlock Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[0], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[1], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[2], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[3], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[4], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[5], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="1" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[6], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[7], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[8], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[9], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[10], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[11], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="2" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[12], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[13], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[14], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[15], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[16], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[17], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="3" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[18], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[19], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[20], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[21], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[22], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[23], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[24], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[25], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[26], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[27], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[28], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[29], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[30], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[31], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[32], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[33], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[34], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[35], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[36], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[37], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[38], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[39], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[40], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[41], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[42], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[43], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[44], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[45], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[46], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[47], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <!--#endregion-->
+
                             <!--#region 小さい数字-->
                             <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
                             <TextBlock Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
@@ -253,7 +319,7 @@
                             <TextBlock Grid.Row="3" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
                             <TextBlock Grid.Row="3" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
                             <!--#endregion-->
-                            
+
                             <!--#region 点数-->
                             <TextBlock Grid.Column="0" Text="{Binding LeftPoints[0]}" />
                             <TextBlock Grid.Column="2" Text="{Binding LeftPoints[1]}" />
@@ -480,6 +546,65 @@
                             <TextBlock Grid.Row="{Binding RightFinalPoint[0]}" Grid.Column="{Binding RightFinalPoint[1]}" FontSize="17" Text="○" Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="15" Y1="0" Y2="20" />
                             <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="14.4" Y1="19" Y2="0" />
+
+                            <!--#region サーバーチェック-->
+                            <TextBlock Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[0], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[1], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[2], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[3], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[4], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[5], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="1" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[6], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[7], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[8], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[9], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[10], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[11], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="2" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[12], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[13], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[14], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[15], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[16], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[17], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="3" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[18], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[19], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[20], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="6" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[21], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="8" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[22], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="10" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[23], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[24], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[25], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[26], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[27], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[28], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[29], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[30], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[31], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[32], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[33], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[34], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="1" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[35], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[36], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[37], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[38], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[39], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[40], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[41], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[42], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="3" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[43], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="5" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[44], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="7" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[45], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="9" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[46], Converter={StaticResource HiddenOrVissible}}" />
+                            <TextBlock Grid.Row="3" Grid.Column="11" Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[47], Converter={StaticResource HiddenOrVissible}}" />
+
+                            <!--#endregion-->
 
                             <!--#region 小さい数字-->
                             <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />

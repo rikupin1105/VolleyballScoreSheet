@@ -12,6 +12,10 @@ namespace VolleyballScoreSheet.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if(value == null)
+            {
+                return "Hidden";
+            }
             if ((bool)value == true)
             {
                 return "Visible";

@@ -38,12 +38,16 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 {
                     LeftTeamServe = true;
                     LeftTeamReception = false;
+                    LeftServeCheckList.Add(true);
+                    RightServeCheckList.Add(false);
                     RightPointList.Add(null);
                 }
                 else
                 {
                     LeftTeamServe = false;
                     LeftTeamReception = true;
+                    LeftServeCheckList.Add(false);
+                    RightServeCheckList.Add(true);
                     LeftPointList.Add(null);
                 }
             }
@@ -53,12 +57,16 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 {
                     LeftTeamServe = false;
                     LeftTeamReception = true;
+                    LeftServeCheckList.Add(false);
+                    RightServeCheckList.Add(true);
                     LeftPointList.Add(null);
                 }
                 else
                 {
                     LeftTeamServe = true;
                     LeftTeamReception = false;
+                    LeftServeCheckList.Add(true);
+                    RightServeCheckList.Add(false);
                     RightPointList.Add(null);
                 }
             }
@@ -86,6 +94,37 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 if (leftfrag == true && _game.History.Histories.Value[i].Command1 == "WSA" || _game.History.Histories.Value[i].Command1 == "WSB")
                 {
                     EndTime = _game.History.Histories.Value[i].DateTime.ToString("HH:mm");
+
+                    if (_game.History.Histories.Value[i].Command1 == "WSA")
+                    {
+                        for (int k = i - 2 ; 0 < i; k--)
+                        {
+                            if (_game.History.Histories.Value[k].Command1 == "PointA")
+                            {
+                                break;
+                            }
+                            else if (_game.History.Histories.Value[k].Command1 == "PointB")
+                            {
+                                LeftServeCheckList.RemoveAt(LeftServeCheckList.Count-1);
+                                break;
+                            }
+                        }
+                    }
+                    if (_game.History.Histories.Value[i].Command1 == "WSB")
+                    {
+                        for (int k = i - 2; 0 < i; k--)
+                        {
+                            if (_game.History.Histories.Value[k].Command1 == "PointA")
+                            {
+                                RightServeCheckList.RemoveAt(LeftServeCheckList.Count-1);
+                                break;
+                            }
+                            else if (_game.History.Histories.Value[k].Command1 == "PointB")
+                            {
+                                break;
+                            }
+                        }
+                    }
 
                     isEndSet = true;
                     //セット終了
@@ -120,6 +159,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             if (RightPointList.Count == 0)
                             {
                                 RightPointList.Add(bpoint);
+                                LeftServeCheckList.Add(true);
                             }
                             else if (RightPointList[^1] == null && bpoint == 0)
                             {
@@ -128,6 +168,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             else if (RightPointList[^1] != bpoint)
                             {
                                 RightPointList.Add(bpoint);
+                                LeftServeCheckList.Add(true);
                             }
                         }
                         else
@@ -137,6 +178,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             if (LeftPointList.Count == 0)
                             {
                                 LeftPointList.Add(apoint);
+                                RightServeCheckList.Add(true);
                             }
                             else if (LeftPointList[^1] == null && apoint == 0)
                             {
@@ -145,6 +187,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             else if (LeftPointList[^1] != apoint)
                             {
                                 LeftPointList.Add(apoint);
+                                RightServeCheckList.Add(true);
                             }
                         }
                     }
@@ -157,6 +200,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             if (LeftPointList.Count == 0)
                             {
                                 LeftPointList.Add(apoint);
+                                RightServeCheckList.Add(true);
                             }
                             else if (LeftPointList[^1] == null && apoint == 0)
                             {
@@ -165,6 +209,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             else if (LeftPointList[^1] != apoint)
                             {
                                 LeftPointList.Add(apoint);
+                                RightServeCheckList.Add(true);
                             }
 
                         }
@@ -175,6 +220,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             if (RightPointList.Count == 0)
                             {
                                 RightPointList.Add(bpoint);
+                                LeftServeCheckList.Add(true);
                             }
                             else if (RightPointList[^1] == null && bpoint == 0)
                             {
@@ -183,6 +229,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                             else if (RightPointList[^1] != bpoint)
                             {
                                 RightPointList.Add(bpoint);
+                                LeftServeCheckList.Add(true);
                             }
                         }
                     }
@@ -315,10 +362,40 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public bool[] LeftPointSlash { get; set; } = new bool[45];
         public bool[] RightPointSlash { get; set; } = new bool[45];
 
+        private List<bool> LeftServeCheckList { get; set; } = new();
+        private List<bool> RightServeCheckList { get; set; } = new();
+        public bool?[] LeftServeCheck
+        {
+            get
+            {
+                var array = new bool?[48];
+
+                for (int i = 0; i<LeftServeCheckList.Count; i++)
+                {
+                    array[i] = LeftServeCheckList[i];
+                }
+
+                return array;
+            }
+        }
+        public bool?[] RightServeCheck
+        {
+            get
+            {
+                var array = new bool?[48];
+
+                for (int i = 0; i<RightServeCheckList.Count; i++)
+                {
+                    array[i] = RightServeCheckList[i];
+                }
+
+                return array;
+            }
+        }
+
         //サーブのところ
         private List<int?> LeftPointList { get; set; } = new();
         private List<int?> RightPointList { get; set; } = new();
-
         public int?[] LeftPoints
         {
             get
@@ -373,7 +450,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public class DeletePoint
         {
             public DeletePoint() { }
-            public DeletePoint[] DeletePointCulc(int point) 
+            public DeletePoint[] DeletePointCulc(int point)
             {
                 var array = new DeletePoint[5]
                 {
@@ -384,7 +461,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     new DeletePoint()
                 };
 
-                if(point <= 36)
+                if (point <= 36)
                 {
                     array[4] = new DeletePoint()
                     {
@@ -441,7 +518,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             public int EndRow { get; set; } = 9;
 
             public int Y
-            { 
+            {
                 get
                 {
                     if (StartRow == 0) return 1;
@@ -454,7 +531,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                     if (StartRow == 7) return 94;
                     if (StartRow == 8) return 107;
                     return 0;
-                } 
+                }
             }
         }
     }
