@@ -83,7 +83,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
                     StartTime = _game.History.Histories.Value[i].DateTime.ToString("HH:mm");
                 }
-                if (leftfrag == true && _game.History.Histories.Value[i].Command1 == "WSA")
+                if (leftfrag == true && _game.History.Histories.Value[i].Command1 == "WSA" || _game.History.Histories.Value[i].Command1 == "WSB")
                 {
                     EndTime = _game.History.Histories.Value[i].DateTime.ToString("HH:mm");
 
@@ -100,14 +100,8 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
 
                     //最後の位置に丸をつける
-                    LeftFinalPoint[0] = ((int)Math.Ceiling(LeftPoints.Count / 6.0) - 1) % 4;
-                    LeftFinalPoint[1] = ((int)Math.Ceiling(LeftPoints.Count % 6.0)-1)*2;
-
-                    RightFinalPoint[1] = ((int)Math.Ceiling(RightPoints.Count % 6.0)-1)*2;
-                    RightFinalPoint[0]= ((int)Math.Ceiling(RightPoints.Count / 6.0) - 1) % 4;
-
-                    if (LeftPoints.Count > 24) { LeftFinalPoint[1] += 1; }
-                    if (RightPoints.Count > 24) { RightFinalPoint[1] += 1; }
+                    LeftFinalPoint = LastPosition(LeftPoints.Count);
+                    RightFinalPoint = LastPosition(RightPoints.Count);
 
                     break;
                 }
@@ -292,6 +286,16 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             {
                 RightPointSlash[i] = true;
             }
+        }
+
+        public int[] LastPosition(int x)
+        {
+            var array = new int[2];
+            array[0] = ((int)Math.Ceiling(x / 6.0) - 1) % 4;
+            array[1] = (x % 6 - 1) * 2;
+            if (x%6==0) array[1] = 10;
+            if (x>24) array[1]+=1;
+            return array;
         }
 
         public string StartTime { get; set; }
