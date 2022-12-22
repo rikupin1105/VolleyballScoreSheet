@@ -951,12 +951,7 @@ namespace VolleyballScoreSheet
         public ReactiveProperty<Team> BTeam { get; set; } = new(new Team("BTeam", "#0146ae"));
 
 
-        public string? MatchName { get; set; } = "2022男子バレーボール世界選手権壮行試合 日本代表紅白戦 in 沖縄";
-        public string? City { get; set; } = "沖縄県";
-        public string? Hall { get; set; } = "沖縄アリーナ";
-        public string? MatchNumber { get; set; } = "";
-        public DateTime Date { get; set; } = DateTime.Parse("2022/07/30");
-        public Sex Sex { get; set; } = Sex.Men;
+        public Model.MatchInfo MatchInfo { get; set; }
 
 
         public Model.Referees Referees { get; set; } = new();

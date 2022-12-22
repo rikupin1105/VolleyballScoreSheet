@@ -13,16 +13,16 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         {
             _game = game;
 
-            MatchName = _game.MatchName;
-            City = _game.City;
-            Hall = _game.Hall;
-            MatchNumber = _game.MatchNumber;
-            Date = _game.Date.ToString("yyyy年MM月dd日");
+            MatchName = _game.MatchInfo.MatchName;
+            City = _game.MatchInfo.City;
+            Hall = _game.MatchInfo.Hall;
+            MatchNumber = _game.MatchInfo.MatchNumber;
+            Date = _game.MatchInfo.Date.ToString("yyyy年MM月dd日");
             Team = _game.ATeam.Value.Name+" 対 "+_game.BTeam.Value.Name;
 
-            if (_game.Sex == Model.Sex.Men)
+            if (_game.MatchInfo.Sex == Model.Sex.Men)
                 IsMen = true;
-            else if (_game.Sex == Model.Sex.Women)
+            else if (_game.MatchInfo.Sex == Model.Sex.Women)
                 IsWoMen = true;
         }
 

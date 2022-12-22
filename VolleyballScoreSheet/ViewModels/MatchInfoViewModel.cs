@@ -18,57 +18,28 @@ namespace VolleyballScoreSheet.ViewModels
         private readonly Game _game;
         public MatchInfoViewModel(Game game, IRegionManager regionManager, IDialogService dialogService)
         {
+            MatchInfo = new MatchInfo();
+            Referees = new Referees();
+            Rule = new Rule();
+
             _game = game;
             _regionManager = regionManager;
             _dialogService = dialogService;
             NextCommand.Subscribe(_ => Next());
 
-            MatchName = _game.ToReactivePropertyAsSynchronized(x => x.MatchName)!;
             ATeamName = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value.Name.Value);
             BTeamName = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
-            City = _game.ToReactivePropertyAsSynchronized(x => x.City)!;
-            Hall = _game.ToReactivePropertyAsSynchronized(x => x.Hall)!;
-            MatchNumber = _game.ToReactivePropertyAsSynchronized(x => x.MatchNumber)!;
-            Date = _game.ToReactivePropertyAsSynchronized(x => x.Date)!;
-            FirstReferee = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FirstReferee)!;
-            SecondReferee = _game.ToReactivePropertyAsSynchronized(x => x.Referees.SecondReferee)!;
-            Scorer = _game.ToReactivePropertyAsSynchronized(x => x.Referees.Scorer)!;
-            AssistantScorer = _game.ToReactivePropertyAsSynchronized(x => x.Referees.AssistantScorer)!;
-            FirstLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FirstLineJudge)!;
-            SecondLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.SecondLineJudge)!;
-            ThirdLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.ThirdLineJudge)!;
-            FourthLineJudge = _game.ToReactivePropertyAsSynchronized(x => x.Referees.FourthLineJudge)!;
 
-            SetCount = _game.ToReactivePropertyAsSynchronized(x => x.Rule.SetCount);
-            ToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.ToWinPoint);
-            FinalSetToWinPoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetToWinPoint);
-            FinalSetCourtChangePoint = _game.ToReactivePropertyAsSynchronized(x => x.Rule.FinalSetCourtChangePoint);
-
-            SexSelectValue.Value = (int)_game.Sex;
+            SexSelectValue = (int)MatchInfo.Sex;
         }
         public ReactiveCommand NextCommand { get; set; } = new ReactiveCommand();
-        public ReactiveProperty<string> MatchName { get; }
-        public ReactiveProperty<string> ATeamName { get; }
-        public ReactiveProperty<string> BTeamName { get; }
-        public ReactiveProperty<string> City { get; } 
-        public ReactiveProperty<string> Hall { get; }
-        public ReactiveProperty<string> MatchNumber { get; }
-        public ReactiveProperty<DateTime> Date { get; }
-        public ReactiveProperty<int> SexSelectValue { get; } = new();
+        public ReactiveProperty<string> ATeamName { get; set;}
+        public ReactiveProperty<string> BTeamName { get; set;}
 
-        public ReactiveProperty<Referee> FirstReferee { get; }
-        public ReactiveProperty<Referee> SecondReferee { get; }
-        public ReactiveProperty<Referee> Scorer { get; }
-        public ReactiveProperty<Referee> AssistantScorer { get; }
-        public ReactiveProperty<Referee> FirstLineJudge { get; } 
-        public ReactiveProperty<Referee> SecondLineJudge { get; }
-        public ReactiveProperty<Referee> ThirdLineJudge { get; } 
-        public ReactiveProperty<Referee> FourthLineJudge { get; }
-
-        public ReactiveProperty<int> SetCount { get; }
-        public ReactiveProperty<int> ToWinPoint { get; }
-        public ReactiveProperty<int> FinalSetToWinPoint { get; }
-        public ReactiveProperty<int> FinalSetCourtChangePoint { get; }
+        public int SexSelectValue { get; set;}
+        public MatchInfo MatchInfo { get; set; }
+        public Referees Referees { get; set;}
+        public Rule Rule { get; set; }
 
         private readonly IDialogService _dialogService;
         
@@ -99,13 +70,9 @@ namespace VolleyballScoreSheet.ViewModels
                 return;
             }
 
-
-
-            MatchName.Subscribe(x => { _game.MatchName = x; });
-            ATeamName.Subscribe(x => { _game.ATeam.Value.Name.Value = x; });
-            BTeamName.Subscribe(x => { _game.BTeam.Value.Name.Value = x; });
-
-            _game.Sex = (Sex)Enum.ToObject(typeof(Sex), SexSelectValue.Value);
+            _game.MatchInfo = MatchInfo;
+            _game.Referees = Referees;
+            _game.Rule = Rule;
 
             Navigate("Roster");
         }

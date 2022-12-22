@@ -1,12 +1,4 @@
-﻿<UserControl
-    x:Class="VolleyballScoreSheet.Views.MatchInfo"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
-    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-    prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl x:Class="VolleyballScoreSheet.Views.MatchInfo" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VolleyballScoreSheet.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:prism="http://prismlibrary.com/" xmlns:scoresheet="clr-namespace:VolleyballScoreSheet.ViewModels.ScoreSheet" xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml" prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <Style TargetType="Label">
@@ -15,8 +7,8 @@
     </UserControl.Resources>
     <StackPanel>
         <StackPanel Margin="20">
-            <Label Margin="5,0,5,0">試合名</Label>
-            <TextBox Margin="5,0,5,0" Text="{Binding MatchName.Value}" />
+            <Label Margin="5,0,5,0" Content="試合名" />
+            <TextBox Margin="5,0,5,0" Text="{Binding MatchInfo.MatchName}" />
 
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -28,29 +20,11 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    チーム
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding ATeamName.Value}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="チーム" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding ATeamName}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    チーム
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding BTeamName.Value}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="チーム" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding BTeamName}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -63,53 +37,17 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    開催地
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding City.Value}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="開催地" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding MatchInfo.City}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    会場名
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding Hall.Value}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="会場名" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding MatchInfo.Hall}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="5,0,5,0">
-                    試合番号
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Text="{Binding MatchNumber.Value}" />
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="試合番号" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding MatchInfo.MatchNumber}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Margin="5,0,5,0">
-                    性別
-                </Label>
-                <ComboBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="5,0,5,0"
-                    SelectedIndex="{Binding SexSelectValue.Value}">
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="性別" />
+                <ComboBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" SelectedIndex="{Binding SexSelectValue}">
                     <ComboBoxItem Content="未選択" />
                     <ComboBoxItem Content="男子" />
                     <ComboBoxItem Content="女子" />
@@ -125,24 +63,9 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    試合日
-                </Label>
-                <DatePicker
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    IsTodayHighlighted="True"
-                    Text="{Binding Date.Value}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    試合設定時間
-                </Label>
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="試合日" />
+                <DatePicker Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" IsTodayHighlighted="True" Text="{Binding MatchInfo.Date}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="試合設定時間" />
             </Grid>
 
             <Grid Margin="0,10,0,0">
@@ -157,52 +80,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    1st 審判
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding FirstReferee.Value.Name}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="1st 審判" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstReferee.Name}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    都市
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding FirstReferee.Value.City}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="5,0,5,0">
-                    2nd 審判
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Text="{Binding SecondReferee.Value.Name}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="都市" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding FirstReferee.City}" />
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="2nd 審判" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding SecondReferee.Name}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Margin="5,0,5,0">
-                    都市
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="5,0,5,0"
-                    Text="{Binding SecondReferee.Value.City}" />
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="都市" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding SecondReferee.City}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -216,52 +103,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    スコアラー
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding Scorer.Value.Name}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="スコアラー" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Scorer.Name}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    都市
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding Scorer.Value.City}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="5,0,5,0">
-                    アシスタントスコアラー
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Text="{Binding AssistantScorer.Value.Name}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="都市" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Scorer.City}" />
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="アシスタントスコアラー" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding AssistantScorer.Name}" />
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Margin="5,0,5,0">
-                    都市
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="5,0,5,0"
-                    Text="{Binding AssistantScorer.Value.City}" />
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="都市" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding AssistantScorer.City}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -275,50 +126,14 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    ラインジャッジ1
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding FirstLineJudge.Value.Name}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    ラインジャッジ2
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding SecondLineJudge.Value.Name}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="5,0,5,0">
-                    ラインジャッジ3
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Text="{Binding ThirdLineJudge.Value.Name}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Margin="5,0,5,0">
-                    ラインジャッジ4
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="5,0,5,0"
-                    Text="{Binding FourthLineJudge.Value.Name}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="ラインジャッジ1" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstLineJudge.Name}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="ラインジャッジ2" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding SecondLineJudge.Name}" />
+                <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="ラインジャッジ3" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding ThirdLineJudge.Name}" />
+                <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="ラインジャッジ4" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding FourthLineJudge.Name}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -330,28 +145,10 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    セット数
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding SetCount.Value}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    勝利にポイント
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5,0,5,0"
-                    Text="{Binding ToWinPoint.Value}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="セット数" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding SetCount}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="勝利にポイント" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding ToWinPoint}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -363,30 +160,12 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,5,0">
-                    最終セットの必要ポイント
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5,0,5,0"
-                    Text="{Binding FinalSetToWinPoint.Value}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="5,0,5,0">
-                    最終セットのコートチェンジポイント
-                </Label>
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Text="{Binding FinalSetCourtChangePoint.Value}" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="最終セットの必要ポイント" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FinalSetToWinPoint}" />
+                <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="最終セットのコートチェンジポイント" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding FinalSetCourtChangePoint}" />
             </Grid>
-            <Label Margin="5,10,5,0">コートチェンジ for COVID-19</Label>
+            <Label Margin="5,10,5,0" Content="コートチェンジ for COVID-19" />
             <ComboBox Margin="5,0,5,0">
                 <ComboBoxItem>コートチェンジを行う</ComboBoxItem>
                 <ComboBoxItem>コートチェンジを行わない</ComboBoxItem>
