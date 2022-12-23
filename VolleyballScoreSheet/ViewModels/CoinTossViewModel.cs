@@ -132,6 +132,7 @@ namespace VolleyballScoreSheet.ViewModels
                     _game.NextServeTeam(true);
                 }
             }
+            _game.CoinToss.CoinTossCompleted = true;
             _game.DisplayMain("BeforeMatch");
         }
     }
