@@ -93,7 +93,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
                 });
             }
 
-            if (_game.CoinToss is not null)
+            if (_game.CoinToss.CoinTossCompleted)
             {
                 if (_game.CoinToss.ATeamLeftSide)
                 {

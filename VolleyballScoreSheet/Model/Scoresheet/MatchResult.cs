@@ -13,6 +13,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
         {
             _game = game;
 
+            if (!game.CoinToss.CoinTossCompleted) return;
+
             ATeamName = _game.ATeam.Value.Name.Value;
             BTeamName = _game.BTeam.Value.Name.Value;
 

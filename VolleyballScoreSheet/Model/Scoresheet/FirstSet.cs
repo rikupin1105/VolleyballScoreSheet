@@ -10,6 +10,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
     {
         public FirstSet(Game game)
         {
+            if (!game.CoinToss.CoinTossCompleted) return;
+
             LeftTeamName = game.ATeam.Value.Name.Value;
             RightTeamName = game.BTeam.Value.Name.Value;
 
