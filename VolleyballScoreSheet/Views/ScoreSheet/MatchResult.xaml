@@ -72,6 +72,7 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
+                        <RowDefinition Height="22" />
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="1" Grid.ColumnSpan="9" BorderBrush="Black" BorderThickness="0,0.5" />
@@ -95,18 +96,22 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding ASet[0].Timeouts}" />
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding ASet[1].Timeouts}" />
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding ASet[2].Timeouts}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding ATotal.Timeouts}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ASet[0].Substitutions}" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ASet[1].Substitutions}" />
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ASet[2].Substitutions}" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ATotal.Substitutions}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ASet[0].Win}" />
                     <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ASet[1].Win}" />
                     <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ASet[2].Win}" />
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ATotal.Win}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding ASet[0].Points}" />
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding ASet[1].Points}" />
                     <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding ASet[2].Points}" />
+                    <TextBlock Grid.Row="4" Grid.Column="3" Text="{Binding ATotal.Points}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding SetDuration[0].TotalMinutes}" />
                     <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding SetDuration[1].TotalMinutes}" />
@@ -116,18 +121,22 @@
                     <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding BSet[0].Points}" />
                     <TextBlock Grid.Row="2" Grid.Column="5" Text="{Binding BSet[1].Points}" />
                     <TextBlock Grid.Row="3" Grid.Column="5" Text="{Binding BSet[2].Points}" />
+                    <TextBlock Grid.Row="4" Grid.Column="5" Text="{Binding BTotal.Points}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding BSet[0].Win}" />
                     <TextBlock Grid.Row="2" Grid.Column="6" Text="{Binding BSet[1].Win}" />
                     <TextBlock Grid.Row="3" Grid.Column="6" Text="{Binding BSet[2].Win}" />
+                    <TextBlock Grid.Row="4" Grid.Column="6" Text="{Binding BTotal.Win}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="7" Text="{Binding BSet[0].Substitutions}" />
                     <TextBlock Grid.Row="2" Grid.Column="7" Text="{Binding BSet[1].Substitutions}" />
                     <TextBlock Grid.Row="3" Grid.Column="7" Text="{Binding BSet[2].Substitutions}" />
+                    <TextBlock Grid.Row="4" Grid.Column="7" Text="{Binding BTotal.Substitutions}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="8" Text="{Binding BSet[0].Timeouts}" />
                     <TextBlock Grid.Row="2" Grid.Column="8" Text="{Binding BSet[1].Timeouts}" />
                     <TextBlock Grid.Row="3" Grid.Column="8" Text="{Binding BSet[2].Timeouts}" />
+                    <TextBlock Grid.Row="4" Grid.Column="8" Text="{Binding BTotal.Timeouts}" />
 
                 </Grid>
                 <Grid Height="49">
