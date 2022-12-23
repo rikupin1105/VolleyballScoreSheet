@@ -49,7 +49,7 @@ namespace VolleyballScoreSheet.ViewModels
                     "NotificationDialog",
                     new DialogParameters
                     {
-                        { "Title", "Alert" },
+                        { "Title", "注意" },
                         { "Message", message },
                         { "ButtonText", "OK" }
                     }, res =>

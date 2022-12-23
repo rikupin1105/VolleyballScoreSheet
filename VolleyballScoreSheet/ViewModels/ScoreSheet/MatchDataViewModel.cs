@@ -20,10 +20,8 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             Date = _game.MatchInfo.Date.ToString("yyyy年MM月dd日");
             Team = _game.ATeam.Value.Name+" 対 "+_game.BTeam.Value.Name;
 
-            if (_game.MatchInfo.Sex == Model.Sex.Men)
-                IsMen = true;
-            else if (_game.MatchInfo.Sex == Model.Sex.Women)
-                IsWoMen = true;
+            if (_game.MatchInfo.Sex == Model.Sex.Men) IsMen = true;
+            else if (_game.MatchInfo.Sex == Model.Sex.Women) IsWoMen = true;
         }
 
         public string MatchName { get; set; }
