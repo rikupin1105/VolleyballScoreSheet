@@ -20,15 +20,15 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
     {
         public MatchResultViewModel(Game game)
         {
-            var scoresheet = new MatchResult(game);
+            var matchResult = new MatchResult(game);
 
-            ATeamName = scoresheet.ATeamName;
-            BTeamName = scoresheet.BTeamName;
+            ATeamName = matchResult.ATeamName;
+            BTeamName = matchResult.BTeamName;
 
-            ASet = scoresheet.ASet;
-            BSet = scoresheet.BSet;
+            ASet = matchResult.ASet;
+            BSet = matchResult.BSet;
 
-            SetDuration = scoresheet.SetDuration;
+            SetDuration = matchResult.SetDuration;
         }
 
         public string ATeamName { get; set; }
