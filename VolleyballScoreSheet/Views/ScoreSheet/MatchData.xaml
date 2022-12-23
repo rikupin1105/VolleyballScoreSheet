@@ -82,9 +82,15 @@
                         <Grid>
 
                             <TextBlock Margin="1" FontSize="10" Text="対戦チーム" />
-                            <Viewbox Width="200">
+                            <Viewbox Margin="83,0,38,0">
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Team}" />
                             </Viewbox>
+                            <Border Width="20" Height="20" Margin="45,0,0,0" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" CornerRadius="20">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding LeftTeamAB}" />
+                            </Border>
+                            <Border Width="20" Height="20" Margin="0,0,1,0" HorizontalAlignment="Right" BorderBrush="Black" BorderThickness="1" CornerRadius="20">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding RightTeamAB}" />
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>
