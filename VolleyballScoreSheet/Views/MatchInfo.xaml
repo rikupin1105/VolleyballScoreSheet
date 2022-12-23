@@ -81,15 +81,15 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="1st 審判" />
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstReferee.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Referees.FirstReferee.Name}" />
 
                 <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="都市" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding FirstReferee.City}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Referees.FirstReferee.City}" />
                 <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="2nd 審判" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding SecondReferee.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding Referees.SecondReferee.Name}" />
 
                 <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="都市" />
-                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding SecondReferee.City}" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding Referees.SecondReferee.City}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -104,15 +104,15 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="スコアラー" />
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Scorer.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Referees.Scorer.Name}" />
 
                 <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="都市" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Scorer.City}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Referees.Scorer.City}" />
                 <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="アシスタントスコアラー" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding AssistantScorer.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding Referees.AssistantScorer.Name}" />
 
                 <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="都市" />
-                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding AssistantScorer.City}" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding Referees.AssistantScorer.City}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -127,13 +127,13 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="ラインジャッジ1" />
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FirstLineJudge.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Referees.FirstLineJudge.Name}" />
                 <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="ラインジャッジ2" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding SecondLineJudge.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Referees.SecondLineJudge.Name}" />
                 <Label Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" Content="ラインジャッジ3" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding ThirdLineJudge.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding Referees.ThirdLineJudge.Name}" />
                 <Label Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" Content="ラインジャッジ4" />
-                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding FourthLineJudge.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" Text="{Binding Referees.FourthLineJudge.Name}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -146,9 +146,9 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="セット数" />
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding SetCount}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Rule.SetCount}" />
                 <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="勝利にポイント" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding ToWinPoint}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Rule.ToWinPoint}" />
             </Grid>
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -161,9 +161,9 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" Content="最終セットの必要ポイント" />
-                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding FinalSetToWinPoint}" />
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" Text="{Binding Rule.FinalSetToWinPoint}" />
                 <Label Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Content="最終セットのコートチェンジポイント" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding FinalSetCourtChangePoint}" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" Text="{Binding Rule.FinalSetCourtChangePoint}" />
             </Grid>
             <Label Margin="5,10,5,0" Content="コートチェンジ for COVID-19" />
             <ComboBox Margin="5,0,5,0">
