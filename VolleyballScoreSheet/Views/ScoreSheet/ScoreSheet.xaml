@@ -11,25 +11,17 @@
     Height="790"
     prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid Width="1122" Height="790">
-        <Image
-            Margin="-1,-3,1,3"
-            Source="/Asset/3SET.png"
-            Visibility="Hidden" />
+        <Image Margin="-1,-3,1,3" Source="/Asset/3SET.png" Visibility="Hidden" />
         <local:MatchData Margin="42,39,0,0" />
-        <Border
-            Width="238"
-            Height="96"
-            Margin="0,39,43,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            BorderBrush="Black"
-            BorderThickness="2" />
+        <Border Width="238" Height="96" Margin="0,39,43,0" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" />
         <local:Remark Margin="0,139,43,0" />
         <local:Player Margin="0,232,43,0" />
         <local:MatchResult Margin="0,0,43,31" />
         <local:Sanctions Margin="0,139,289,0" />
-        <local:RefereeAndSignature Margin="0,352,289,0" />
+        <local:RefereeAndSignature Margin="0,354,289,0" />
         <local:FirstSet Margin="123,139,289,0" />
+        <local:SecondSet Margin="123,354,289,0" />
         <local:Explanation Margin="43,166,289,0" />
+        <local:Explanation Margin="43,381,294,0" />
     </Grid>
 </UserControl>
