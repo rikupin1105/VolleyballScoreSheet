@@ -7,6 +7,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using Unity.Policy;
 using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.ViewModels.Card;
 
@@ -268,56 +269,12 @@ namespace VolleyballScoreSheet.ViewModels
 
             LeftSubstitutionCommand.Subscribe(_ =>
             {
-                if (_game.LeftTeam.Sets[^1].Substitutions.Value >= 6)
-                {
-                    //回数超え
-                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                    {
-                        {"Title","警告" },
-                        { "Message",$"選手交代回数が6回を超えています。\nセカンドレフェリーに確認してください。"},
-                        {"ButtonText","OK" }
-                    }, res =>
-                    {
-
-                    }, "AlertWindow");
-                }
-                else
-                {
-                    _dialogService.ShowDialog("Substitution", new DialogParameters
-                    {
-                        {"Side","Left"}
-                    }, res =>
-                    {
-
-                    }, "AlertWindow");
-                }
+                new Substitution(_game, _dialogService).LegallySubstitution(true);
             });
 
             RightSubstitutionCommand.Subscribe(_ =>
             {
-                if (_game.RightTeam.Sets[^1].Substitutions.Value >= 6)
-                {
-                    //回数超え
-                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                    {
-                        {"Title","警告" },
-                        { "Message",$"選手交代回数が6回を超えています。\nセカンドレフェリーに確認してください。"},
-                        {"ButtonText","OK" }
-                    }, res =>
-                    {
-
-                    }, "AlertWindow");
-                }
-                else
-                {
-                    _dialogService.ShowDialog("Substitution", new DialogParameters
-                    {
-                        {"Side","Right"}
-                    }, res =>
-                    {
-
-                    }, "AlertWindow");
-                }
+                new Substitution(_game, _dialogService).LegallySubstitution(false);
             });
             CardCommand.Subscribe(_ =>
             {
@@ -332,134 +289,107 @@ namespace VolleyballScoreSheet.ViewModels
 
             ExceptionalSubstitutionCommand.Subscribe(_ =>
             {
+                bool isA = false;
+                Team team = new Team("", "");
+                Substitution sub = new(_game, _dialogService);
+                Player outPlayer = new(0, "");
+
                 _dialogService.ShowDialog("SelectTeam", new DialogParameters
                 {
                     { "ExceptionalSubstitution", true}
                 }, res =>
                 {
-                    if (res.Parameters.TryGetValue("Team", out char team))
+                    res.Parameters.TryGetValue("isA", out bool IsA);
+
+                    isA = IsA;
+                    if (isA)
                     {
-                        bool isA;
-                        if (team == 'A')
-                        {
-                            isA=true;
-                        }
-                        else if (team =='B')
-                        {
-                            isA=false;
-                        }
-                        else
-                        {
-                            throw new Exception();
-                        }
-
-                        _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters
-                        {
-                            {"Message","交代する選手を選択してください。" },
-                            {"isA" , isA },
-                            {"SelectEnum",SelectEnum.OnCourtPlayer }
-                        }, res =>
-                        {
-                            if (res.Parameters.TryGetValue("Mark", out string mark))
-                            {
-                                var outMember = int.Parse(mark);
-
-                                //正規の選手交代ができる場合は正規の選手交代を行う
-                                Team team;
-                                if (isA)
-                                {
-                                    team = _game.ATeam.Value;
-                                }
-                                else
-                                {
-                                    team = _game.BTeam.Value;
-                                }
-
-                                //正規の選手交代が可能か？
-                                var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                                var 選手交代で下がれる人リスト = team.Sets[^1].Rotation.Value.Except(選手交代で出たことある人リスト).OrderBy(x => x).ToArray();
-                                
-                                if (team.Sets[^1].Substitutions.Value < 6 && 選手交代で下がれる人リスト.Contains(outMember))
-                                {
-                                    //正規の選手交代をする。
-                                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
-                                    {
-                                        {"Title","注意" },
-                                        { "Message",$"正規の選手交代が可能です。\n通常の選手交代を行ってください。"},
-                                        {"ButtonText","OK" }
-                                    }, res =>
-                                    {
-                                        if(res.Result == ButtonResult.OK)
-                                        {
-                                            string side;
-                                            if (isA)
-                                            {
-                                                if (_game.isATeamLeft.Value)
-                                                {
-                                                    side="Left";
-                                                }
-                                                else
-                                                {
-                                                    side="Right";
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (_game.isATeamLeft.Value)
-                                                {
-                                                    side="Right";
-                                                }
-                                                else
-                                                {
-                                                    side="Left";
-                                                }
-                                            }
-                                            //選手交代を表示
-                                            _dialogService.ShowDialog("Substitution", new DialogParameters
-                                            {
-                                                {"Side",side},
-                                                {"OutPlayer",outMember}
-                                            }, res =>
-                                            {
-
-                                            }, "AlertWindow");
-                                        }
-                                    });
-                                }
-                                else //例外的な選手交代をする
-                                {
-                                    //コート外選手
-                                    //リベロ除く
-                                    //退場選手除く
-                                    //失格選手除く
-                                    //例外的な選手交代をしたことある人を除く
-                                    var コート外の選手 = team.Players.Select(x => x.Id).Except(team.Sets[^1].Rotation.Value).ToArray();
-                                    var リベロ除く = コート外の選手.Except(team.Players.Where(x => x.IsLibero == true).Select(x => x.Id).ToList()).ToArray();
-                                    var 退場選手除く = リベロ除く.Except(team.Players.Where(x => x.IsExplusion[_game.Set.Value]).Select(x => x.Id).ToList()).ToArray();
-                                    var 失格選手除く = 退場選手除く.Except(team.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList()).ToArray();
-                                    var 例外的な選手交代をしたことある人を除く = 失格選手除く.Except(team.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList()).ToArray();
-
-                                    _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters()
-                                    {
-                                        {"isA", isA},
-                                        {"Players", 例外的な選手交代をしたことある人を除く.ToList()}
-                                    }, res =>
-                                    {
-                                        if(res.Result == ButtonResult.OK)
-                                        {
-                                            if(res.Parameters.TryGetValue("Mark",out string mark))
-                                            {
-                                                _game.ExceptionalSubstitution(isA, int.Parse(mark), outMember);
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        }, "AlertWindow");
+                        team = _game.ATeam.Value;
+                    }
+                    else
+                    {
+                        team =_game.BTeam.Value;
                     }
 
                 }, "AlertWindow");
 
+                _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters
+                {
+                    {"Message","交代する選手を選択してください。" },
+                    {"isA" , isA },
+                    {"SelectEnum", SelectEnum.OnCourtPlayer }
+                }, res =>
+                {
+                    res.Parameters.TryGetValue("Mark", out string mark);
+
+                    outPlayer = team.Players.First(x => x.Id == int.Parse(mark));
+
+                    //sub.ExceptionalSubstitution(isA, outMember);
+
+                }, "AlertWindow");
+
+                if (sub.CanSubstitutedLegally(isA, outPlayer))
+                {
+                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
+                    {
+                        {"Title","注意" },
+                        { "Message",$"正規の選手交代が可能です。\n通常の選手交代を行ってください。"},
+                        {"ButtonText","OK" }
+                    }, res =>
+                    {
+                        if (res.Result == ButtonResult.OK)
+                        {
+                            //選手交代を表示
+                            _dialogService.ShowDialog("Substitution", new DialogParameters
+                            {
+                                {"isA", isA},
+                                {"OutPlayer", outPlayer.Id}
+                            }, res =>
+                            {
+
+                            }, "AlertWindow");
+                        }
+                    });
+                }
+                else
+                {
+                    if (sub.CanExceptionalSubstitution(isA))
+                    {
+                        var コート外の選手 = team.Players.Select(x => x.Id).Except(team.Sets[^1].Rotation.Value).ToArray();
+                        var リベロ除く = コート外の選手.Except(team.Players.Where(x => x.IsLibero == true).Select(x => x.Id).ToList()).ToArray();
+                        var 退場選手除く = リベロ除く.Except(team.Players.Where(x => x.IsExplusion[_game.Set.Value]).Select(x => x.Id).ToList()).ToArray();
+                        var 失格選手除く = 退場選手除く.Except(team.Players.Where(x => x.IsDisqualified).Select(x => x.Id).ToList()).ToArray();
+                        var 例外的な選手交代をしたことある人を除く = 失格選手除く.Except(team.Players.Where(x => x.IsExceptionalSubstituted).Select(x => x.Id).ToList()).ToArray();
+
+
+                        _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters()
+                        {
+                            {"isA", isA},
+                            {"Players", 例外的な選手交代をしたことある人を除く.ToList()}
+                        }, res =>
+                        {
+                            if (res.Result == ButtonResult.OK)
+                            {
+                                if (res.Parameters.TryGetValue("Mark", out string mark))
+                                {
+                                    _game.ExceptionalSubstitution(isA, int.Parse(mark), outPlayer.Id);
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
+                        {
+                            {"Title","通知" },
+                            { "Message",$"例外的な選手交代を行うことが出来ません。\n3分間の回復のための時間を与えてください。"},
+                            {"ButtonText","OK" }
+                        }, res =>
+                        {
+
+                        });
+                    }
+                }
 
             });
 
