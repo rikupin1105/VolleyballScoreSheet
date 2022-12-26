@@ -342,7 +342,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                     new DeletePoint()
                 };
 
-                if (point <= 36)
+                if (point < 36)
                 {
                     array[4] = new DeletePoint()
                     {
@@ -354,7 +354,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                         StartRow = point - 27
                     };
                 }
-                if (point <= 27)
+                if (point < 27)
                 {
                     array[3] = new DeletePoint()
                     {
@@ -366,7 +366,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                         StartRow = point - 18
                     };
                 }
-                if (point <= 18)
+                if (point < 18)
                 {
                     array[2] = new DeletePoint()
                     {
@@ -378,7 +378,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                         StartRow = point - 9
                     };
                 }
-                if (point <= 9)
+                if (point < 9)
                 {
                     array[1] = new DeletePoint()
                     {
