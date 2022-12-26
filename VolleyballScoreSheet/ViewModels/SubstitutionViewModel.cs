@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using VolleyballScoreSheet.Model;
+using VolleyballScoreSheet.Views;
 
 namespace VolleyballScoreSheet.ViewModels
 {
@@ -13,10 +15,13 @@ namespace VolleyballScoreSheet.ViewModels
     {
         private readonly IDialogService _dialogService;
         private readonly Game _game;
+        private Model.Substitution _substitution;
         public SubstitutionViewModel(Game game, IDialogService dialogService)
         {
             _game = game;
             _dialogService = dialogService;
+            _substitution = new Model.Substitution(game);
+
             CancelCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel)));
             SubstitutionCommand.Subscribe(_ => Substitution());
             OutSelectionChangedCommand.Subscribe(_ => OutMemberSelectionChanged());
@@ -28,8 +33,8 @@ namespace VolleyballScoreSheet.ViewModels
 
             if (OutMember.Value is not null && InMember.Value is not null)
             {
-                var outMember = int.Parse(OutMember.Value.Split(' ')[0]);
-                var inMember = int.Parse(InMember.Value.Split(' ')[0]);
+                var outMember = OutMember.Value.Id;
+                var inMember = InMember.Value.Id;
 
                 Model.Team team;
                 Model.Team opponentTeam;
@@ -204,8 +209,10 @@ namespace VolleyballScoreSheet.ViewModels
             }
 
         }
-        public ReactiveProperty<string> OutMember { get; set; } = new();
-        public ReactiveProperty<string> InMember { get; set; } = new();
+        public ReactiveProperty<Player> OutMember { get; set; } = new();
+        public ReactiveProperty<Player> InMember { get; set; } = new();
+        public ReactiveProperty<string> TeamName { get; set; } = new();
+        private bool IsLeft { get; set; }
         public void Dialog(string message)
         {
             _dialogService.ShowDialog(
@@ -223,58 +230,54 @@ namespace VolleyballScoreSheet.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            if (parameters.TryGetValue("Side", out string side))
+            if (parameters.TryGetValue("Side", out bool isLeft))
             {
-                Team team;
-                if (side=="Left")
+                if (isLeft)
                 {
-                    team = _game.LeftTeam;
-                    TeamName.Value  = _game.LeftTeam.Name.Value;
+                    TeamName.Value = _game.LeftTeam.Name.Value;
                 }
                 else
                 {
-                    team = _game.RightTeam;
-                    TeamName.Value  = _game.RightTeam.Name.Value;
+                    TeamName.Value = _game.RightTeam.Name.Value;
                 }
-                var リベロ = team.Players.Where(x => x.IsLibero);
-
-                var 例外的な選手交代で入った人リスト = team.Sets[^1].SubstitutionDetails.Where(x => x.ExceptionalSubstitution == true).Select(x => x.In);
-
-                var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-                var 選手交代で入ったことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
-
-                var 選手交代で下がれる人リスト = team.Sets[^1].Rotation.Value
-                    .Except(選手交代で出たことある人リスト)
-                    .Except(例外的な選手交代で入った人リスト)
-                    .OrderBy(x => x).ToArray();
-
-                var コート外の選手 = team.Players.Select(x => x.Id)
-                    .Except(team.Sets[^1].Rotation.Value).ToArray();
-
-                var 選手交代で入れる人リスト = コート外の選手
-                    .Except(選手交代で入ったことある人リスト)
-                    .Except(リベロ.Select(x => x.Id))
-                    .ToArray();
-
-                OnCourtMemberItem.Value = 選手交代で下がれる人リスト
-                    .Select(x => x+" "+team.Players
-                    .Where(y => y.Id == x)
-                    .Select(x => x.Name).First())
-                    .ToArray();
-
-                OutCourtMemberItem.Value = 選手交代で入れる人リスト
-                    .Select(x => x+" "+team.Players
-                    .Where(y => y.Id == x)
-                    .Select(x => x.Name)
-                    .First())
-                    .ToArray();
-                
-                if (parameters.TryGetValue("OutPlayer", out int outPlayer))
+                IsLeft = isLeft;
+            }
+            if (parameters.TryGetValue("isA", out bool isA))
+            {
+                if (isA)
                 {
-                    OutMember.Value = outPlayer+" "+team.Players.Where(x => x.Id==outPlayer).Select(x => x.Name).First();
-                    OutMemberSelectionChanged();
+                    TeamName.Value = _game.ATeam.Value.Name.Value;
+                    isLeft = _game.isATeamLeft.Value;
+                }
+                else
+                {
+                    TeamName.Value = _game.BTeam.Value.Name.Value;
+                    isLeft = !_game.isATeamLeft.Value;
                 }
             }
+
+
+            if (parameters.TryGetValue("OutPlayer", out int outPlayer))
+            {
+
+                _substitution = _substitution.SubstitutionOpenDialog(isLeft, outPlayer);
+
+                OnCourtMemberItem.Value = _substitution.OncourtMember;
+                OutMember.Value = _substitution.OutMember;
+
+                _substitution = _substitution.OutMemberSelectionChanged(isLeft, _substitution.OutMember.Id);
+
+                OutCourtMemberItem.Value = _substitution.OffCourtMember;
+                InMember.Value = _substitution.InMember;
+            }
+            else
+            {
+                _substitution = _substitution.SubstitutionOpenDialog(isLeft);
+
+                OnCourtMemberItem.Value = _substitution.OncourtMember;
+                OutCourtMemberItem.Value = _substitution.OffCourtMember;
+            }
+
         }
 
         public string SanctionToJapanese(SanctionEnum sanction)
@@ -293,57 +296,18 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void OutMemberSelectionChanged()
         {
-            Team team;
-            if (TeamName.Value == _game.ATeam.Value.Name.Value)
-            {
-                team = _game.ATeam.Value;
-            }
-            else
-            {
-                team = _game.BTeam.Value;
-            }
-
-            var 選手交代で出たことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.Out).ToList();
-            var 選手交代で入ったことある人リスト = team.Sets[^1].SubstitutionDetails.Select(x => x.In).ToList();
-
-            var 選手交代で入れる人リスト = team.Players
-                .Where(x => !x.IsLibero)
-                .Select(x => x.Id)
-                .Except(team.Sets[^1].Rotation.Value)
-                .Except(選手交代で入ったことある人リスト)
-                .OrderBy(x => x)
-                .ToArray();
+            _substitution = _substitution.OutMemberSelectionChanged(IsLeft, OutMember.Value.Id);
 
 
-            if (選手交代で入ったことある人リスト.Contains(int.Parse(OutMember.Value.Split(' ')[0])))
-            {
-                //再入場
-                OutCourtMemberItem.Value = (string[])team.Sets[^1].SubstitutionDetails
-                    .Where(x => x.In==int.Parse(OutMember.Value.Split(' ')[0]))
-                    .Select(x => x.Out)
-                    .Select(x => x+" "+team.Players
-                    .Where(y => y.Id == x)
-                    .Select(x => x.Name)
-                    .First())
-                    .ToArray();
-
-                InMember.Value = OutCourtMemberItem.Value.First();
-            }
-            else
-            {
-                OutCourtMemberItem.Value = (string[])選手交代で入れる人リスト.Except(選手交代で出たことある人リスト).ToArray()
-                    .Select(x => x+" "+team.Players
-                    .Where(y => y.Id == x)
-                    .Select(x => x.Name).First())
-                    .ToArray();
-            }
+            InMember.Value = _substitution.InMember;
+            OnCourtMemberItem.Value = _substitution.OncourtMember;
+            OutCourtMemberItem.Value = _substitution.OffCourtMember;
         }
         public ReactiveCommand OutSelectionChangedCommand { get; } = new();
         public ReactiveCommand CancelCommand { get; } = new();
         public ReactiveCommand SubstitutionCommand { get; } = new();
-        public ReactiveProperty<string> TeamName { get; set; } = new();
-        public ReactiveProperty<string[]> OnCourtMemberItem { get; set; } = new();
-        public ReactiveProperty<string[]> OutCourtMemberItem { get; set; } = new();
+        public ReactiveProperty<List<Player>> OnCourtMemberItem { get; set; } = new();
+        public ReactiveProperty<List<Player>> OutCourtMemberItem { get; set; } = new();
         public string Title => "メンバーチェンジ";
         public event Action<IDialogResult>? RequestClose;
         public bool CanCloseDialog() => true;
