@@ -293,22 +293,22 @@ namespace VolleyballScoreSheet.ViewModels.Card
             {
                 if (_game.isATeamLeft.Value)
                 {
-                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "A" } }));
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "isA", true } }));
                 }
                 else
                 {
-                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "B" } }));
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "isA", false } }));
                 }
             }
             else
             {
                 if (_game.isATeamLeft.Value)
                 {
-                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "B" } }));
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "isA", false } }));
                 }
                 else
                 {
-                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "Team", "A" } }));
+                    RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters() { { "isA", true } }));
                 }
             }
         }
