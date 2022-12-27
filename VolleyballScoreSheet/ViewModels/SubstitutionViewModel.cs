@@ -260,19 +260,16 @@ namespace VolleyballScoreSheet.ViewModels
             if (parameters.TryGetValue("OutPlayer", out int outPlayer))
             {
 
-                _substitution = _substitution.SubstitutionOpenDialog(isLeft, outPlayer);
+                _substitution.SubstitutionOpenDialog(isLeft, outPlayer);
 
                 OnCourtMemberItem.Value = _substitution.OncourtMember;
                 OutMember.Value = _substitution.OutMember;
 
-                _substitution = _substitution.OutMemberSelectionChanged(isLeft, _substitution.OutMember.Id);
-
-                OutCourtMemberItem.Value = _substitution.OffCourtMember;
-                InMember.Value = _substitution.InMember;
+                OutMemberSelectionChanged();
             }
             else
             {
-                _substitution = _substitution.SubstitutionOpenDialog(isLeft);
+                _substitution.SubstitutionOpenDialog(isLeft);
 
                 OnCourtMemberItem.Value = _substitution.OncourtMember;
                 OutCourtMemberItem.Value = _substitution.OffCourtMember;
@@ -296,7 +293,7 @@ namespace VolleyballScoreSheet.ViewModels
         }
         public void OutMemberSelectionChanged()
         {
-            _substitution = _substitution.OutMemberSelectionChanged(IsLeft, OutMember.Value.Id);
+            _substitution.OutMemberSelectionChanged(IsLeft, OutMember.Value.Id);
 
 
             InMember.Value = _substitution.InMember;

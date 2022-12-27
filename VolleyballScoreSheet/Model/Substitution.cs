@@ -26,10 +26,8 @@ namespace VolleyballScoreSheet.Model
             _game = game;
             _dialogService = dialogService;
         }
-        public Substitution OutMemberSelectionChanged(bool isLeft, int Player)
+        public void OutMemberSelectionChanged(bool isLeft, int player)
         {
-            var sub = new Substitution(_game);
-
             Team team;
             if (isLeft)
             {
@@ -40,7 +38,7 @@ namespace VolleyballScoreSheet.Model
                 team = _game.RightTeam;
             }
 
-            OutMember = team.Players.First(x => x.Id==Player);
+            OutMember = team.Players.First(x => x.Id==player);
 
             var 選手交代で出たことある人リスト = team.Players.Where(x => team.Sets[^1].SubstitutionDetails.Select(x => x.Out).Contains(x.Id));
             var 選手交代で入ったことある人リスト = team.Players.Where(x => team.Sets[^1].SubstitutionDetails.Select(x => x.In).Contains(x.Id));
@@ -70,10 +68,6 @@ namespace VolleyballScoreSheet.Model
                .OrderBy(x => x.Id).ToList();
 
 
-            if (!選手交代で入れる人リスト.Any())
-            {
-                return sub;
-            }
 
             if (選手交代で入ったことある人リスト.Contains(OutMember))
             {
@@ -82,24 +76,25 @@ namespace VolleyballScoreSheet.Model
                 var a = team.Sets[^1].SubstitutionDetails
                     .Where(x => x.In == OutMember.Id)
                     .Select(x => x.Out);
-                sub.OffCourtMember = team.Players.Where(x => a.Contains(x.Id)).ToList();
+                OffCourtMember = team.Players.Where(x => a.Contains(x.Id)).ToList();
 
-                sub.InMember = sub.OffCourtMember.First();
+                InMember = OffCourtMember.First();
+            }
+            else if (!選手交代で入れる人リスト.Any())
+            {
+                OffCourtMember = new();
+                return;
             }
             else
             {
-                sub.OffCourtMember = 選手交代で入れる人リスト
+                OffCourtMember = 選手交代で入れる人リスト
                      .Except(選手交代で出たことある人リスト).ToList();
             }
 
-            sub.OncourtMember = 選手交代で下がれる人リスト;
-
-            return sub;
+            OncourtMember = 選手交代で下がれる人リスト;
         }
-        public Substitution SubstitutionOpenDialog(bool isLeft, int? outPlayer = null)
+        public void SubstitutionOpenDialog(bool isLeft, int? outPlayer = null)
         {
-            var sub = new Substitution(_game);
-
             Team team;
             if (isLeft)
             {
@@ -143,15 +138,13 @@ namespace VolleyballScoreSheet.Model
                 .Except(team.Sets[^1].Rotation.Value).ToArray();
 
 
-            sub.OncourtMember = 選手交代で下がれる人リスト;
-            sub.OffCourtMember = 選手交代で入れる人リスト;
+            OncourtMember = 選手交代で下がれる人リスト;
+            OffCourtMember = 選手交代で入れる人リスト;
 
             if (outPlayer is not null)
             {
-                sub.OutMember = team.Players.First(x => x.Id == (int)outPlayer);
+                OutMember = team.Players.First(x => x.Id == (int)outPlayer);
             }
-
-            return sub;
         }
 
         public bool CanSubstitutedLegally(bool isA, Player OutPlayer)
