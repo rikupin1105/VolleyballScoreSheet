@@ -11,6 +11,17 @@ namespace VolleyballScoreSheet.Model.Scoresheet
         public SecondSet(Game game)
         {
             if (!game.CoinToss.CoinTossCompleted) return;
+            if (game.Set.Value >= 2)
+            {
+                LeftTeamStartingLineUp = game.ATeam.Value.Sets[1].StartingLineUp.Value;
+                RightTeamStartingLineUp = game.BTeam.Value.Sets[1].StartingLineUp.Value;
+
+                LeftTeamSubstitutioned = game.ATeam.Value.Sets[1].Substitutioned.Value;
+                RightTeamSubstitutioned = game.BTeam.Value.Sets[1].Substitutioned.Value;
+
+                LeftTeamIsReturn = game.ATeam.Value.Sets[1].isReturn.Value;
+                RightTeamIsReturn = game.BTeam.Value.Sets[1].isReturn.Value;
+            }
 
             LeftTeamName = game.ATeam.Value.Name.Value;
             RightTeamName = game.BTeam.Value.Name.Value;
@@ -33,14 +44,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                 RightPointList.Add(null);
             }
 
-            LeftTeamStartingLineUp = game.ATeam.Value.StartingLineUp.Value;
-            RightTeamStartingLineUp = game.BTeam.Value.StartingLineUp.Value;
-
-            LeftTeamSubstitutioned = game.ATeam.Value.Substitutioned.Value;
-            RightTeamSubstitutioned = game.BTeam.Value.Substitutioned.Value;
-
-            LeftTeamIsReturn = game.ATeam.Value.isReturn.Value;
-            RightTeamIsReturn = game.BTeam.Value.isReturn.Value;
+            
 
             var leftfrag = false;
             var apoint = 0;
