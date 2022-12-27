@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using Prism.Services.Dialogs;
+using Reactive.Bindings;
+using Reactive.Bindings.ObjectExtensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,13 +20,55 @@ namespace VolleyballScoreSheet.Model
         public Player InMember;
         public string TeamName;
         public bool isATeam;
-
+        public ReactiveCommand SubstitutionCountNotifyCommand { get; } = new();
+        public ReactiveCommand SubstitutionOverSixTimeCommand { get; } = new();
+        public ReactiveCommand SubstitutionCommand { get; } = new();
         private readonly Game _game;
-        private readonly IDialogService? _dialogService;
-        public Substitution(Game game, IDialogService? dialogService = null)
+        public Substitution(Game game)
         {
             _game = game;
-            _dialogService = dialogService;
+        }
+        public void DoSubstitution(bool isLeft, Player OutPlayer, Player InPlayer)
+        {
+            bool isA;
+            if (isLeft)
+            {
+                isA = _game.isATeamLeft.Value;
+            }
+            else
+            {
+                isA = !_game.isATeamLeft.Value;
+            }
+
+            if (isA)
+            {
+                _game.ATeam.Value.Substitution(InPlayer.Id, OutPlayer.Id, _game.ATeam.Value.Sets[^1].Points.Value, _game.BTeam.Value.Sets[^1].Points.Value);
+                _game.History.HistoryAdd($"SubstitutionA", $"{InPlayer.Id},{OutPlayer.Id}");
+
+
+                if (_game.ATeam.Value.Sets[^1].Substitutions.Value == 5)
+                {
+                    SubstitutionCountNotifyCommand.Execute(5);
+                }
+                else if (_game.ATeam.Value.Sets[^1].Substitutions.Value == 6)
+                {
+                    SubstitutionCountNotifyCommand.Execute(6);
+                }
+
+            }
+            else
+            {
+                _game.BTeam.Value.Substitution(InPlayer.Id, OutPlayer.Id, _game.BTeam.Value.Sets[^1].Points.Value, _game.ATeam.Value.Sets[^1].Points.Value);
+                _game.History.HistoryAdd($"SubstitutionB", $"{InPlayer.Id},{OutPlayer.Id}");
+                if (_game.BTeam.Value.Sets[^1].Substitutions.Value == 5)
+                {
+                    SubstitutionCountNotifyCommand.Execute(5);
+                }
+                else if (_game.BTeam.Value.Sets[^1].Substitutions.Value == 6)
+                {
+                    SubstitutionCountNotifyCommand.Execute(6);
+                }
+            }
         }
         public void OutMemberSelectionChanged(bool isLeft, int player)
         {
@@ -251,25 +295,11 @@ namespace VolleyballScoreSheet.Model
             if (team.Sets[^1].Substitutions.Value == 6)
             {
                 //回数超え
-                _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                {
-                    {"Title","警告" },
-                    { "Message",$"選手交代回数が6回を超えています。\nセカンドレフェリーに確認してください。"},
-                    {"ButtonText","OK" }
-                }, res =>
-                {
-
-                }, "AlertWindow");
+                SubstitutionOverSixTimeCommand.Execute();
             }
             else
             {
-                _dialogService.ShowDialog("Substitution", new DialogParameters
-                {
-                    {"Side" , isLeft}
-                }, res =>
-                {
-
-                }, "AlertWindow");
+                SubstitutionCommand.Execute(isLeft);
             }
         }
     }

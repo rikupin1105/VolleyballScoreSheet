@@ -17,11 +17,12 @@ namespace VolleyballScoreSheet.ViewModels
     {
         private readonly Game _game;
         private readonly IDialogService _dialogService;
+        private Substitution _substitution;
         public GamingViewModel(Game game, IDialogService dialogService)
         {
             _game = game;
             _dialogService = dialogService;
-
+            _substitution = new Substitution(game);
 
             ATeam = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value);
             BTeam = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value);
@@ -254,28 +255,26 @@ namespace VolleyballScoreSheet.ViewModels
                 }, "AlertWindow");
             });
 
-            _game.SubstitutionCountNotifyCommand.Subscribe(x =>
-            {
-                _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                {
-                    {"Title","通知" },
-                    { "Message",$"{x}回目の選手交代です。\nセカンドレフェリーに伝えてください。"},
-                    {"ButtonText","OK" }
-                }, res =>
-                {
-
-                }, "AlertWindow");
-            });
-
             LeftSubstitutionCommand.Subscribe(_ =>
             {
-                new Substitution(_game, _dialogService).LegallySubstitution(true);
+                _substitution.LegallySubstitution(true);
             });
 
             RightSubstitutionCommand.Subscribe(_ =>
             {
-                new Substitution(_game, _dialogService).LegallySubstitution(false);
+                _substitution.LegallySubstitution(false);
             });
+
+            _substitution.SubstitutionCommand.Subscribe(isLeft =>
+            {
+                _dialogService.ShowDialog("Substitution", new DialogParameters
+                {
+                    {"Side",isLeft}
+                }, res => { });
+            });
+
+            
+
             CardCommand.Subscribe(_ =>
             {
                 _dialogService.ShowDialog("Card", new DialogParameters
@@ -291,7 +290,7 @@ namespace VolleyballScoreSheet.ViewModels
             {
                 bool isA = false;
                 Team team = new Team("", "");
-                Substitution sub = new(_game, _dialogService);
+                Substitution sub = new(_game);
                 Player outPlayer = new(0, "");
 
                 _dialogService.ShowDialog("SelectTeam", new DialogParameters

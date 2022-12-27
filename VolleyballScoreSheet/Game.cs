@@ -795,39 +795,7 @@ namespace VolleyballScoreSheet
 
 
         public ReactiveCommand SubstitutionCountNotifyCommand { get; } = new();
-        public void Substitution(bool isAteam, int In, int Out)
-        {
-            //Feature
-            if (isAteam)
-            {
-                ATeam.Value.Substitution(In, Out, ATeam.Value.Sets[^1].Points.Value, BTeam.Value.Sets[^1].Points.Value);
-                History.HistoryAdd($"SubstitutionA", $"{In},{Out}");
 
-
-                if (ATeam.Value.Sets[^1].Substitutions.Value == 5)
-                {
-                    SubstitutionCountNotifyCommand.Execute(5);
-                }
-                else if (ATeam.Value.Sets[^1].Substitutions.Value == 6)
-                {
-                    SubstitutionCountNotifyCommand.Execute(6);
-                }
-
-            }
-            else
-            {
-                BTeam.Value.Substitution(In, Out, BTeam.Value.Sets[^1].Points.Value, ATeam.Value.Sets[^1].Points.Value);
-                History.HistoryAdd($"SubstitutionB", $"{In},{Out}");
-                if (BTeam.Value.Sets[^1].Substitutions.Value == 5)
-                {
-                    SubstitutionCountNotifyCommand.Execute(5);
-                }
-                else if (BTeam.Value.Sets[^1].Substitutions.Value == 6)
-                {
-                    SubstitutionCountNotifyCommand.Execute(6);
-                }
-            }
-        }
         public void ExceptionalSubstitution(bool isAteam, int In, int Out)
         {
             if (isAteam)
