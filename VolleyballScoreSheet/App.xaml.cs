@@ -10,6 +10,7 @@ using Wpf.Ui.Mvvm.Contracts;
 using VolleyballScoreSheet.Views.Card;
 using VolleyballScoreSheet.Views.Dialog;
 using VolleyballScoreSheet.ViewModels.Card;
+using CommonDialogLib;
 
 namespace VolleyballScoreSheet
 {
@@ -48,6 +49,7 @@ namespace VolleyballScoreSheet
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");
             containerRegistry.RegisterDialogWindow<AlertWindow>("AlertWindow");
 
+            containerRegistry.RegisterSingleton<ICommonDialogService, CommonDialogService>();
             containerRegistry.RegisterSingleton<Game>();
         }
     }
