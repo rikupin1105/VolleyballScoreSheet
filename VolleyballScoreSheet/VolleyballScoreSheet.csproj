@@ -23,6 +23,9 @@
 		<PackageReference Include="WPF-UI" Version="2.0.3" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\CommonDialogLib\CommonDialogLib.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Resource Include="Asset\3SET.png" />
 	  <Resource Include="Asset\DelayPenalty.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
