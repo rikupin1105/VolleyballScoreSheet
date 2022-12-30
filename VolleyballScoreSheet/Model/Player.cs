@@ -4,11 +4,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace VolleyballScoreSheet.Model
 {
     public class Player : BinableBase
     {
+        public Player(Roaster.Player player)
+        {
+            if(player.Id is null) throw new NullReferenceException("player.Id");
+
+            Id = (int)player.Id!;
+            Name=player.Name;
+            IsLibero=player.IsLibero;
+            IsCaptain= player.IsCaptain;
+        }
         public Player(int id, string? name, bool isLibero = false, bool isCaptain = false)
         {
             Id=id;
@@ -16,7 +26,8 @@ namespace VolleyballScoreSheet.Model
             IsLibero=isLibero;
             IsCaptain=isCaptain;
         }
-        public int Id { get; set;}
+        public Player() { }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public bool IsLibero { get; set; }
         public bool IsCaptain { get; set; }

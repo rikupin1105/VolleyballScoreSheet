@@ -384,7 +384,17 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 Message.Value = "例外的な選手交代をするチームを選択してください。";
                 Title.Value = "例外的な選手交代";
             }
+            else
+            {
+                parameters.TryGetValue("Message", out string message);
+                Message.Value = message;
 
+                parameters.TryGetValue("Title", out string title);
+                Title.Value = title;
+
+                LeftCommand.Subscribe(_ => ChooseTeam(true));
+                RightCommand.Subscribe(_ => ChooseTeam(false));
+            }
         }
     }
 }

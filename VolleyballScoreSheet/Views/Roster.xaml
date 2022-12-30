@@ -19,10 +19,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
-            <TextBlock
-                Margin="5,0,5,10"
-                FontSize="30"
-                Text="{Binding ATeamName.Value}" />
+            <TextBlock Margin="5,0,5,10" FontSize="30" Text="{Binding ATeamName.Value}" />
             <DataGrid
                 Margin="5,0,5,10"
                 AutoGenerateColumns="False"
@@ -34,15 +31,12 @@
                 RowHeaderWidth="0">
                 <DataGrid.ColumnHeaderStyle>
                     <Style BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}" TargetType="DataGridColumnHeader">
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
                         <Setter Property="FontSize" Value="15" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="1*"
-                        Binding="{Binding Id}"
-                        Header="番号">
+                    <DataGridTextColumn Width="1*" Binding="{Binding Id}" Header="番号">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -50,10 +44,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="2*"
-                        Binding="{Binding Name}"
-                        Header="名前">
+                    <DataGridTextColumn Width="2*" Binding="{Binding Name}" Header="名前">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -61,28 +52,21 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn
-                        Width="1*"
-                        Binding="{Binding IsLibero}"
-                        Header="リベロ">
+                    <DataGridCheckBoxColumn Width="1*" Binding="{Binding IsLibero}" Header="リベロ">
                         <DataGridCheckBoxColumn.ElementStyle>
                             <Style BasedOn="{StaticResource DefaultCheckBoxStyle}" TargetType="CheckBox">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
                                 <Setter Property="IsHitTestVisible" Value="False" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn
-                        Width="1*"
-                        Binding="{Binding IsCaptain}"
-                        Header="キャプテン"
-                        IsReadOnly="True">
+                    <DataGridCheckBoxColumn Width="1*" Binding="{Binding IsCaptain}" Header="キャプテン" IsReadOnly="True">
                         <DataGridCheckBoxColumn.ElementStyle>
                             <Style BasedOn="{StaticResource DefaultCheckBoxStyle}" TargetType="CheckBox">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
                                 <Setter Property="IsHitTestVisible" Value="False" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
@@ -103,11 +87,7 @@
 
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBlock
-                Margin="5,0,5,10"
-                HorizontalAlignment="Right"
-                FontSize="30"
-                Text="{Binding BTeamName.Value}" />
+            <TextBlock Margin="5,0,5,10" HorizontalAlignment="Right" FontSize="30" Text="{Binding BTeamName.Value}" />
             <DataGrid
                 Margin="5,0,5,10"
                 AutoGenerateColumns="False"
@@ -119,15 +99,12 @@
                 RowHeaderWidth="0">
                 <DataGrid.ColumnHeaderStyle>
                     <Style BasedOn="{StaticResource DefaultDataGridColumnHeaderStyle}" TargetType="DataGridColumnHeader">
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
                         <Setter Property="FontSize" Value="15" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="1*"
-                        Binding="{Binding Id}"
-                        Header="番号">
+                    <DataGridTextColumn Width="1*" Binding="{Binding Id}" Header="番号">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -135,10 +112,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="2*"
-                        Binding="{Binding Name}"
-                        Header="名前">
+                    <DataGridTextColumn Width="2*" Binding="{Binding Name}" Header="名前">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -146,28 +120,21 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn
-                        Width="1*"
-                        Binding="{Binding IsLibero}"
-                        Header="リベロ">
+                    <DataGridCheckBoxColumn Width="1*" Binding="{Binding IsLibero}" Header="リベロ">
                         <DataGridCheckBoxColumn.ElementStyle>
                             <Style BasedOn="{StaticResource DefaultCheckBoxStyle}" TargetType="CheckBox">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
                                 <Setter Property="IsHitTestVisible" Value="False" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn
-                        Width="1*"
-                        Binding="{Binding IsCaptain}"
-                        Header="キャプテン"
-                        IsReadOnly="True">
+                    <DataGridCheckBoxColumn Width="1*" Binding="{Binding IsCaptain}" Header="キャプテン" IsReadOnly="True">
                         <DataGridCheckBoxColumn.ElementStyle>
                             <Style BasedOn="{StaticResource DefaultCheckBoxStyle}" TargetType="CheckBox">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
                                 <Setter Property="IsHitTestVisible" Value="False" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
@@ -204,7 +171,7 @@
                 Margin="0,0,2.5,0"
                 ClearButtonEnabled="False"
                 PlaceholderText="番号"
-                Text="{Binding IdA.Value}" />
+                Text="{Binding InputPlayerA.Value.Id}" />
 
             <wpfui:TextBox
                 Grid.Row="0"
@@ -213,18 +180,12 @@
                 Margin="2.5,0,0,0"
                 ClearButtonEnabled="False"
                 PlaceholderText="名前"
-                Text="{Binding PlayerNameA.Value}" />
+                Text="{Binding InputPlayerA.Value.Name}" />
 
-            <CheckBox
-                Grid.Row="1"
-                Grid.Column="0"
-                IsChecked="{Binding IsLiberoA.Value}">
+            <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerA.Value.IsLibero}">
                 <TextBlock Text="リベロ" />
             </CheckBox>
-            <CheckBox
-                Grid.Row="1"
-                Grid.Column="1"
-                IsChecked="{Binding IsCaptainA.Value}">
+            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerA.Value.IsCaptain}">
                 <TextBlock Text="キャプテン" />
             </CheckBox>
             <Button
@@ -234,14 +195,11 @@
                 Padding="0,5"
                 VerticalAlignment="Center"
                 Command="{Binding PlayerAddCommandA}"
-                Style="{StaticResource LightButton}">
-                追加
-            </Button>
+                CommandParameter="true"
+                Content="追加"
+                Style="{StaticResource LightButton}" />
         </Grid>
-        <Grid
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="5">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="2*" />
@@ -258,7 +216,7 @@
                 Margin="0,0,2.5,0"
                 ClearButtonEnabled="False"
                 PlaceholderText="番号"
-                Text="{Binding IdB.Value}" />
+                Text="{Binding InputPlayerB.Value.Id}" />
 
             <wpfui:TextBox
                 Grid.Row="0"
@@ -267,18 +225,12 @@
                 Margin="2.5,0,0,0"
                 ClearButtonEnabled="False"
                 PlaceholderText="名前"
-                Text="{Binding PlayerNameB.Value}" />
+                Text="{Binding InputPlayerB.Value.Name}" />
 
-            <CheckBox
-                Grid.Row="1"
-                Grid.Column="0"
-                IsChecked="{Binding IsLiberoB.Value}">
+            <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerB.Value.IsLibero}">
                 <TextBlock Text="リベロ" />
             </CheckBox>
-            <CheckBox
-                Grid.Row="1"
-                Grid.Column="1"
-                IsChecked="{Binding IsCaptainB.Value}">
+            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerB.Value.IsCaptain}">
                 <TextBlock Text="キャプテン" />
             </CheckBox>
             <Button
@@ -288,21 +240,31 @@
                 Padding="0,5"
                 VerticalAlignment="Center"
                 Command="{Binding PlayerAddCommandB}"
-                Style="{StaticResource LightButton}">
-                追加
-            </Button>
+                CommandParameter="false"
+                Content="追加"
+                Style="{StaticResource LightButton}" />
         </Grid>
 
 
-
-        <Button
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Margin="2.5,5,2.5,2.5"
-            Padding="0,15"
-            Command="{Binding NextCommand}"
-            Style="{StaticResource LightButton}">
-            次へ
-        </Button>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Margin="2.5,5,2.5,2.5"
+                Padding="100,15"
+                Command="{Binding NextCommand}"
+                Content="次へ"
+                Style="{StaticResource LightButton}" />
+            <Button
+                Grid.Column="1"
+                Margin="2.5,5,2.5,2.5"
+                Padding="20,15"
+                Command="{Binding OpenFileCommand}"
+                Content="ファイル読み込み"
+                Style="{StaticResource LightButton}" />
+        </Grid>
     </Grid>
 </UserControl>

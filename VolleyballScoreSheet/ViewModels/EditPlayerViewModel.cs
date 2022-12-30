@@ -35,7 +35,7 @@ namespace VolleyballScoreSheet.ViewModels
             {
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK, new DialogParameters()
                 {
-                    { "Player", new Player(Id.Value,Name.Value,isLibero.Value,isCaptain.Value) }
+                    { "Player", new Roaster.Player(Id.Value,Name.Value,isLibero.Value,isCaptain.Value) }
                 }));
             });
         }
@@ -59,9 +59,9 @@ namespace VolleyballScoreSheet.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            if (parameters.TryGetValue("Player", out Player player))
+            if (parameters.TryGetValue("Player", out Roaster.Player player))
             {
-                Id.Value = player.Id;
+                Id.Value = (int)player.Id!;
                 Name.Value = player.Name;
                 isLibero.Value = player.IsLibero;
                 isCaptain.Value = player.IsCaptain;

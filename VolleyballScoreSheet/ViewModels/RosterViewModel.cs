@@ -14,6 +14,8 @@ using System.Reactive.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using CommonDialogLib;
+using System.Security.Cryptography.Xml;
 
 namespace VolleyballScoreSheet.ViewModels
 {
@@ -21,331 +23,136 @@ namespace VolleyballScoreSheet.ViewModels
     {
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
+        private readonly ICommonDialogService _commonDialogService;
         private readonly Game _game;
-        public RosterViewModel(Game game, IRegionManager regionManager, IDialogService dialogService)
+        private readonly Roaster _roaster;
+        public RosterViewModel(Game game, IRegionManager regionManager, ICommonDialogService commonDialogService, IDialogService dialogService)
         {
             _game = game;
             _dialogService = dialogService;
+            _commonDialogService = commonDialogService;
             _regionManager = regionManager;
+            _roaster = new Roaster(game);
+
 
             PlayerAddCommandA.Subscribe(_ => PlayerAdd(true));
             PlayerAddCommandB.Subscribe(_ => PlayerAdd(false));
             NextCommand.Subscribe(_ => Next());
 
-            APlayers.AddRange(new List<Player>
+            APlayers = _roaster.ATeamPlayers.ToReadOnlyReactiveCollection();
+            BPlayers = _roaster.BTeamPlayers;
+
+            _roaster.AlertCommand.Subscribe(message =>
             {
-                new(1, "西田有志"),
-                new(2, "小野寺太志"),
-                new(5, "大塚達宣"),
-                new(7, "高梨健太"),
-                new(8, "関田誠大",isCaptain:true),
-                new(9, "大宅真樹"),
-                new(12, "高橋藍"),
-                new(13, "小川智大", true),
-                new(16, "宮浦健人"),
-                new(20, "山本智大", true),
-                new(23, "佐藤駿一郎"),
-                new(26, "村山豪"),
-                new(43, "デ・アルマスアライン")
+                _dialogService.ShowDialog(
+                   "NotificationDialog",
+                   new DialogParameters
+                   {
+                        { "Title", "警告" },
+                        { "Message", message },
+                        { "ButtonText", "OK" }
+                   }, res =>
+                   {
+                   }, "AlertWindow");
             });
 
-            BPlayers.AddRange(new List<Player>
+
+            OpenFileCommand.Subscribe(_ =>
             {
-                new(3, "深津旭弘",isCaptain:true),
-                new(4, "大竹壱青"),
-                new(11, "富田将馬"),
-                new(18, "仲本賢優"),
-                new(21, "永露元稀"),
-                new(22, "樋口裕希"),
-                new(24, "高橋和幸",true),
-                new(29, "藤中颯志",true),
-                new(30, "エバダデンラリー"),
-                new(37, "藤中謙也"),
-                new(38, "小野遥輝"),
-                new(39, "小澤宙輝"),
-                new(40, "難波尭弘"),
-                new(41, "山田大悟")
+                bool isATeam = true;
+                _dialogService.ShowDialog("SelectTeam", new DialogParameters() 
+                {
+                    {"Title","プレイヤー読み込み" },
+                    {"Message","プレイヤーを読み込むチームを選択してください" }
+                }, res =>
+                {
+                    if(res.Parameters.TryGetValue("isA", out bool isA))
+                    {
+                        isATeam = isA;
+                    }
+                });
+
+                var setting = new OpenFileDialogSettings()
+                {
+                    Filter = "プレイヤーファイル(*.vpf)|*.vpf",
+                    Title = "プレイヤーファイル読み込み"
+                };
+
+                if (_commonDialogService.ShowDialog(setting))
+                {
+                    _roaster.PlayerLoad(isATeam, setting.FileName);
+                }
             });
 
             EditCommandA.Subscribe(x =>
             {
-                Edit(true, (int)x);
+                Edit(true, (int)x!);
             });
             EditCommandB.Subscribe(x =>
             {
 
-                Edit(false, (int)x);
+                Edit(false, (int)x!);
             });
 
             ATeamName = _game.ToReactivePropertyAsSynchronized(x => x.ATeam.Value.Name.Value);
             BTeamName = _game.ToReactivePropertyAsSynchronized(x => x.BTeam.Value.Name.Value);
+
+            InputPlayerA = _roaster.ToReactivePropertyAsSynchronized(x => x.InputPlayerA.Value);
+            InputPlayerB = _roaster.ToReactivePropertyAsSynchronized(x => x.InputPlayerB.Value);
         }
-        private void Edit(bool isA, int x)
+        private void Edit(bool isATeam, int x)
         {
-            ReactiveCollection<Player> dataTable;
-            if (isA)
-                dataTable = APlayers;
-            else
-                dataTable = BPlayers;
+            Roaster.Player player;
+            if (isATeam) player = _roaster.ATeamPlayers.First(p => p.Id ==x);
+            else player = _roaster.BTeamPlayers.First(p => p.Id==x);
+
 
             _dialogService.ShowDialog("EditPlayer", new DialogParameters()
             {
-                {"Player",dataTable.First(y=>y.Id==(int)x!) }
+                {"Player",player }
             }, res =>
             {
                 if (res.Result == ButtonResult.Abort)
                 {
                     //削除
-                    dataTable.Remove(dataTable.First(y => y.Id==(int)x));
+                    _roaster.PlayerDelete(isATeam, player);
                 }
                 else if (res.Result==ButtonResult.OK)
                 {
-                    //修正
-                    if (res.Parameters.TryGetValue("Player", out Player player))
+                    if (res.Parameters.TryGetValue("Player", out Roaster.Player editedPlayer))
                     {
-                        //番号が一緒
-                        if (player.Id == (int)x)
-                        {
-                            dataTable[dataTable.IndexOf(dataTable.First(y => y.Id==player.Id))] = player;
-                        }
-                        else
-                        {
-                            //番号が変更
-                            if (dataTable.Select(x => x.Id).Contains(player.Id))
-                            {
-                                //番号重複
-                                _dialogService.ShowDialog("NotificationDialog", new DialogParameters()
-                                {
-                                    {"Title","注意" },
-                                    { "Message",$"すでに{player.Id}番は登録されています。"},
-                                    {"ButtonText","OK" }
-                                }, res =>
-                                {
-
-                                });
-                            }
-                            else
-                            {
-                                dataTable.Remove(dataTable.First(y => y.Id==(int)x));
-                                dataTable.Add(player);
-                            }
-                        }
+                        _roaster.PlayerEdit(isATeam, editedPlayer, (int)player.Id!);
                     }
                 }
             });
-
-            if (isA)
-                APlayers = dataTable;
-            else
-                BPlayers = dataTable;
         }
         public ReactiveProperty<string> ATeamName { get; }
         public ReactiveProperty<string> BTeamName { get; }
-        public ReactiveCollection<Player> APlayers { get; set; } = new ReactiveCollection<Player>();
-        public ReactiveCollection<Player> BPlayers { get; set; } = new ReactiveCollection<Player>();
+        public ReadOnlyReactiveCollection<Roaster.Player> APlayers { get; set; }
+        public ObservableCollection<Roaster.Player> BPlayers { get; set; }
         public ReactiveCommand PlayerAddCommandA { get; } = new ReactiveCommand();
         public ReactiveCommand PlayerAddCommandB { get; } = new ReactiveCommand();
-        public ReactiveProperty<int?> IdA { get; set; } = new ReactiveProperty<int?>();
-        public ReactiveProperty<int?> IdB { get; set; } = new ReactiveProperty<int?>();
-        public ReactiveProperty<bool> IsLiberoA { get; set; } = new ReactiveProperty<bool>();
-        public ReactiveProperty<bool> IsLiberoB { get; set; } = new ReactiveProperty<bool>();
-        public ReactiveProperty<bool> IsCaptainA { get; set; } = new ReactiveProperty<bool>();
-        public ReactiveProperty<bool> IsCaptainB { get; set; } = new ReactiveProperty<bool>();
 
-        public ReactiveProperty<string> PlayerNameA { get; set; } = new ReactiveProperty<string>();
-        public ReactiveProperty<string> PlayerNameB { get; set; } = new ReactiveProperty<string>();
-        public void PlayerAdd(bool isA)
+        public ReactiveProperty<Roaster.Player> InputPlayerA { get; set; }
+        public ReactiveProperty<Roaster.Player> InputPlayerB { get; set; }
+
+        public void PlayerAdd(bool isATeam)
         {
-            ReactiveCollection<Player> dataTable;
-            int? Id;
-            string Name;
-            bool isLibero;
-            bool isCaptain;
-
-            if (isA)
-            {
-                Id = IdA.Value;
-                Name = PlayerNameA.Value;
-                isLibero = IsLiberoA.Value;
-                isCaptain = IsCaptainA.Value;
-                dataTable = APlayers;
-            }
-            else
-            {
-                Id = IdB.Value;
-                Name = PlayerNameB.Value;
-                isLibero = IsLiberoB.Value;
-                isCaptain = IsCaptainB.Value;
-                dataTable = BPlayers;
-            }
-
-            if (dataTable.Count>=14)
-            {
-                _dialogService.ShowDialog(
-                   "NotificationDialog",
-                   new DialogParameters
-                   {
-                        { "Title", "Alert" },
-                        { "Message", "14人以上は登録できません。" },
-                        { "ButtonText", "OK" }
-                   }, res =>
-                   {
-                   }, "AlertWindow");
-                return;
-            }
-            var distincted = dataTable.DistinctBy(x => x.Id).Count();
-            if (distincted != dataTable.Count)
-            {
-                _dialogService.ShowDialog(
-                   "NotificationDialog",
-                   new DialogParameters
-                   {
-                        { "Title", "Alert" },
-                        { "Message", $"{string.Join(' ', dataTable.Except(dataTable.DistinctBy(x => x.Id)))}番号が重複しています。" },
-                        { "ButtonText", "OK" }
-                   }, res =>
-                   {
-                   }, "AlertWindow");
-            }
-
-            if (Id != null)
-            {
-                //人数オーバチェック
-                if (dataTable.Count > 14)
-                {
-                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                   {
-                        { "Title", "Alert" },
-                        { "Message", $"14人以上は登録できません" },
-                        { "ButtonText", "OK" }
-                   }, res =>
-                   {
-                   }, "AlertWindow");
-                    return;
-                }
-
-                //重複チェック
-                var player = new Player((int)Id, Name,isLibero,isCaptain);
-
-                if (dataTable.Select(x => x.Id).ToList().Contains(player.Id))
-                {
-                    _dialogService.ShowDialog("NotificationDialog", new DialogParameters
-                   {
-                        { "Title", "Alert" },
-                        { "Message", $"番号が重複しています。" },
-                        { "ButtonText", "OK" }
-                   }, res =>
-                   {
-                   }, "AlertWindow");
-                    return;
-                };
-
-                dataTable.Add(player);
-                Id = null;
-                Name = string.Empty;
-                isLibero = false;
-                isCaptain = false;
-            }
-            else
-            {
-            }
-
-            if (isA)
-            {
-                IsLiberoA.Value = isLibero;
-                IsCaptainA.Value = isCaptain;
-                IdA.Value = Id;
-                PlayerNameA.Value=Name;
-            }
-            else
-            {
-                IsLiberoB.Value = isLibero;
-                IsCaptainB.Value = isCaptain;
-                IdB.Value = Id;
-                PlayerNameB.Value = Name;
-            }
-        }
-        public int PlayerOrganize(bool isA)
-        {
-            ReactiveCollection<Player> dataTable;
-            int? Id;
-            string Name;
-            if (isA)
-            {
-                Id = IdA.Value;
-                Name = PlayerNameB.Value;
-                dataTable = APlayers;
-            }
-            else
-            {
-                Id = IdB.Value;
-                Name = PlayerNameB.Value;
-                dataTable = BPlayers;
-            }
-
-            var deleteList = new List<int>();
-            for (int i = 0; i < dataTable.Count; i++)
-            {
-                int id = dataTable[i].Id;
-
-                deleteList.Add(i);
-
-                if (id == Id)
-                {
-                    Id = null;
-                    Name = string.Empty;
-                }
-            }
-
-            foreach (var item in deleteList)
-            {
-                //dataTable.Rows.RemoveAt(item);
-            }
-
-            if (isA)
-            {
-                IdA.Value = Id;
-                PlayerNameA.Value=Name;
-            }
-            else
-            {
-                IdB.Value = Id;
-                PlayerNameB.Value = Name;
-            }
-            return dataTable.Count;
+            _roaster.PlayerAdd(isATeam);
         }
         public void Next()
         {
-            if (PlayerOrganize(true) >= 6 && PlayerOrganize(false)>=6)
+            _roaster.Validate();
+            if (!_roaster.IsError)
             {
-                //画面遷移
-
-                _game.ATeam.Value.Players.AddRange(APlayers);
-                _game.BTeam.Value.Players.AddRange(BPlayers);
-
                 Navigate("Gaming");
-            }
-            else
-            {
-                _dialogService.ShowDialog(
-                   "NotificationDialog",
-                   new DialogParameters
-                   {
-                        { "Title", "Alert" },
-                        { "Message", "6人以上登録してください。" },
-                        { "ButtonText", "OK" }
-                   }, res =>
-                   {
-
-                   }, "AlertWindow");
             }
         }
 
         public ReactiveCommand NextCommand { get; set; } = new();
         public ReactiveCommand EditCommandA { get; set; } = new();
         public ReactiveCommand EditCommandB { get; set; } = new();
-
-
+        public ReactiveCommand OpenFileCommand { get; } = new();
 
         private void Navigate(string navigatePath)
         {
