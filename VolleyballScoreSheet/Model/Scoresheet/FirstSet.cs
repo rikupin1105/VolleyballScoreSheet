@@ -90,11 +90,20 @@ namespace VolleyballScoreSheet.Model.Scoresheet
 
                     isEndSet = true;
                     //セット終了
-                    if (LeftPointList[^1] != apoint)
+                    if (LeftPointList.Count == 0)
                     {
                         LeftPointList.Add(apoint);
                     }
-                    if (RightPointList[^1] != bpoint)
+                    else if (LeftPointList[^1] != apoint)
+                    {
+                        LeftPointList.Add(apoint);
+                    }
+                    
+                    if(RightPointList.Count == 0)
+                    {
+                        RightPointList.Add(bpoint);                             
+                    }
+                    else if (RightPointList[^1] != bpoint)
                     {
                         RightPointList.Add(bpoint);
                     }
