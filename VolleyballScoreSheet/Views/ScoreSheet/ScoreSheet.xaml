@@ -21,7 +21,10 @@
         <local:RefereeAndSignature Margin="0,354,289,0" />
         <local:FirstSet Margin="123,139,289,0" />
         <local:SecondSet Margin="123,354,289,0" />
+        <local:ThirdSet Margin="123,569,289,0"></local:ThirdSet>
         <local:Explanation Margin="43,166,289,0" />
         <local:Explanation Margin="43,381,294,0" />
+        <local:Explanation Margin="43,576,294,0" />
+
     </Grid>
 </UserControl>
