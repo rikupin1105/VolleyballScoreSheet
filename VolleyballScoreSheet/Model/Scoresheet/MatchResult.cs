@@ -36,6 +36,16 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                     Points = _game.BTeam.Value.Sets[i].Points.Value,
                 };
             }
+            ASet[3] = new();
+            BSet[3] = new();
+
+            ASet[3].Points = _game.ATeam.Value.Sets.Sum(x => x.Points.Value);
+            ASet[3].Substitutions = _game.ATeam.Value.Sets.Sum(x => x.Substitutions.Value);
+            ASet[3].Timeouts = _game.ATeam.Value.Sets.Sum(x => x.TimeOuts.Value);
+
+            BSet[3].Points = _game.BTeam.Value.Sets.Sum(x => x.Points.Value);
+            BSet[3].Substitutions = _game.BTeam.Value.Sets.Sum(x => x.Substitutions.Value);
+            BSet[3].Timeouts = _game.BTeam.Value.Sets.Sum(x => x.TimeOuts.Value);
 
             SetDuration[0] = Duration(_game.History.Histories.Value.Where(x => x.Command1 == "WSA" || x.Command1 == "WSB").Select(x => x.DateTime).FirstOrDefault()
                 , _game.History.Histories.Value.FirstOrDefault(x => x.Command1 == "S1"));
@@ -45,14 +55,17 @@ namespace VolleyballScoreSheet.Model.Scoresheet
 
             SetDuration[2] = Duration(_game.History.Histories.Value.Where(x => x.Command1 == "WSA" || x.Command1 == "WSB").Select(x => x.DateTime).Skip(2).FirstOrDefault()
                 , _game.History.Histories.Value.FirstOrDefault(x => x.Command1 == "S3"));
+
+            SetDuration[3] = Duration(_game.History.Histories.Value.Where(x => x.Command1 == "WSA" || x.Command1 == "WSB").Select(x => x.DateTime).Skip(2).FirstOrDefault()
+                , _game.History.Histories.Value.FirstOrDefault(x => x.Command1 == "S1"));
         }
         public string ATeamName { get; set; }
         public string BTeamName { get; set; }
-        public MatchResultSet[] ASet { get; set; } = new MatchResultSet[3];
-        public MatchResultSet[] BSet { get; set; } = new MatchResultSet[3];
+        public MatchResultSet[] ASet { get; set; } = new MatchResultSet[4];
+        public MatchResultSet[] BSet { get; set; } = new MatchResultSet[4];
         public MatchResultSet ATotal { get; set; } = new();
         public MatchResultSet BTotal { get; set; } = new();
-        public TimeSpan?[] SetDuration { get; set; } = new TimeSpan?[3];
+        public TimeSpan?[] SetDuration { get; set; } = new TimeSpan?[4];
 
         private static TimeSpan? Duration(DateTime dt1, History? history)
         {
