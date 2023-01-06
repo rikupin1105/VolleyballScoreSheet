@@ -383,6 +383,13 @@ namespace VolleyballScoreSheet
                 LockControl();
                 return;
             }
+            else if (c==$"S{Rule.SetCount}")
+            {
+                History.HistoryRemove();
+                DisplayMain("CoinToss");
+                LockControl();
+                return;
+            }
             else if (c[0]=='S')
             {
                 var set = int.Parse(c[1].ToString());
@@ -414,13 +421,18 @@ namespace VolleyballScoreSheet
                     NextServeTeam(false);
                 }
 
-                if (Rule.CourtChangeEnable)
+                if(Set.Value == Rule.SetCount - 1)
+                {
+
+                }
+                else if (Rule.CourtChangeEnable)
                 {
                     CourtChange();
                 }
 
                 ATeam.Value.MedamaRefresh();
                 BTeam.Value.MedamaRefresh();
+                LockControl();
                 return;
             }
 
@@ -676,7 +688,7 @@ namespace VolleyballScoreSheet
                     }
                     else if (History.Histories.Value[i].Command1[0]=='S')
                     {
-                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount)
+                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount.ToString()[0])
                         {
                             if (FinalSetCoinToss.ATeamServer)
                             {
@@ -685,6 +697,7 @@ namespace VolleyballScoreSheet
                             else
                             {
                                 NextServeTeam(false);
+                                ATeam.Value.RotateReverse();
                             }
                             return;
                         }
@@ -749,16 +762,16 @@ namespace VolleyballScoreSheet
                     }
                     else if (History.Histories.Value[i].Command1[0]=='S')
                     {
-                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount)
+                        if (History.Histories.Value[i].Command1[1] == Rule.SetCount.ToString()[0])
                         {
-                            if (FinalSetCoinToss.ATeamServer)
-                            {
-                                NextServeTeam(false);
-                            }
-                            else
+                            if (FinalSetCoinToss!.ATeamServer)
                             {
                                 BTeam.Value.RotateReverse();
                                 NextServeTeam(true);
+                            }
+                            else
+                            {
+                                NextServeTeam(false);
                             }
                             return;
                         }
