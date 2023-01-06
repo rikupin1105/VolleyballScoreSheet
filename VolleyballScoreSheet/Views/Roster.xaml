@@ -154,97 +154,107 @@
             </DataGrid>
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Margin="5" Background="White" CornerRadius="10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <wpfui:TextBox
-                Grid.Row="0"
-                Margin="0,0,2.5,0"
-                ClearButtonEnabled="False"
-                PlaceholderText="番号"
-                Text="{Binding InputPlayerA.Value.Id}" />
 
-            <wpfui:TextBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="2.5,0,0,0"
-                ClearButtonEnabled="False"
-                PlaceholderText="名前"
-                Text="{Binding InputPlayerA.Value.Name}" />
+                <wpfui:TextBox
+                    Grid.Row="0"
+                    Margin="0,0,2.5,0"
+                    ClearButtonEnabled="False"
+                    PlaceholderText="番号"
+                    Text="{Binding InputPlayerA.Value.Id}" />
 
-            <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerA.Value.IsLibero}">
-                <TextBlock Text="リベロ" />
-            </CheckBox>
-            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerA.Value.IsCaptain}">
-                <TextBlock Text="キャプテン" />
-            </CheckBox>
-            <Button
-                Grid.Row="1"
-                Grid.Column="4"
-                Margin="0,2.5,0,0"
-                Padding="0,5"
-                VerticalAlignment="Center"
-                Command="{Binding PlayerAddCommandA}"
-                CommandParameter="true"
-                Content="追加"
-                Style="{StaticResource LightButton}" />
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+                <wpfui:TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="2.5,0,0,0"
+                    ClearButtonEnabled="False"
+                    PlaceholderText="名前"
+                    Text="{Binding InputPlayerA.Value.Name}" />
 
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+                <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerA.Value.IsLibero}">
+                    <TextBlock Text="リベロ" />
+                </CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerA.Value.IsCaptain}">
+                    <TextBlock Text="キャプテン" />
+                </CheckBox>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Margin="0,2.5,0,0"
+                    Padding="0,5"
+                    VerticalAlignment="Center"
+                    Command="{Binding PlayerAddCommandA}"
+                    CommandParameter="true"
+                    Content="追加"
+                    Style="{StaticResource LightButton}" />
+            </Grid>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="5"
+            Background="White"
+            CornerRadius="10">
 
-            <wpfui:TextBox
-                Grid.Row="0"
-                Margin="0,0,2.5,0"
-                ClearButtonEnabled="False"
-                PlaceholderText="番号"
-                Text="{Binding InputPlayerB.Value.Id}" />
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-            <wpfui:TextBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="2.5,0,0,0"
-                ClearButtonEnabled="False"
-                PlaceholderText="名前"
-                Text="{Binding InputPlayerB.Value.Name}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerB.Value.IsLibero}">
-                <TextBlock Text="リベロ" />
-            </CheckBox>
-            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerB.Value.IsCaptain}">
-                <TextBlock Text="キャプテン" />
-            </CheckBox>
-            <Button
-                Grid.Row="1"
-                Grid.Column="4"
-                Margin="0,2.5,0,0"
-                Padding="0,5"
-                VerticalAlignment="Center"
-                Command="{Binding PlayerAddCommandB}"
-                CommandParameter="false"
-                Content="追加"
-                Style="{StaticResource LightButton}" />
-        </Grid>
+                <wpfui:TextBox
+                    Grid.Row="0"
+                    Margin="0,0,2.5,0"
+                    ClearButtonEnabled="False"
+                    PlaceholderText="番号"
+                    Text="{Binding InputPlayerB.Value.Id}" />
 
+                <wpfui:TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="2.5,0,0,0"
+                    ClearButtonEnabled="False"
+                    PlaceholderText="名前"
+                    Text="{Binding InputPlayerB.Value.Name}" />
+
+                <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding InputPlayerB.Value.IsLibero}">
+                    <TextBlock Text="リベロ" />
+                </CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InputPlayerB.Value.IsCaptain}">
+                    <TextBlock Text="キャプテン" />
+                </CheckBox>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Margin="0,2.5,0,0"
+                    Padding="0,5"
+                    VerticalAlignment="Center"
+                    Command="{Binding PlayerAddCommandB}"
+                    CommandParameter="false"
+                    Content="追加"
+                    Style="{StaticResource LightButton}" />
+            </Grid>
+        </Border>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
