@@ -33,14 +33,14 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                 LeftPointList.Add(null);
             }
 
-            LeftTeamStartingLineUp = game.ATeam.Value.StartingLineUp.Value;
-            RightTeamStartingLineUp = game.BTeam.Value.StartingLineUp.Value;
+            LeftTeamStartingLineUp = game.ATeam.Value.Sets[0].StartingLineUp.Value;
+            RightTeamStartingLineUp = game.BTeam.Value.Sets[0].StartingLineUp.Value;
 
-            LeftTeamSubstitutioned = game.ATeam.Value.Substitutioned.Value;
-            RightTeamSubstitutioned = game.BTeam.Value.Substitutioned.Value;
+            LeftTeamSubstitutioned = game.ATeam.Value.Sets[0].Substitutioned.Value;
+            RightTeamSubstitutioned = game.BTeam.Value.Sets[0].Substitutioned.Value;
 
-            LeftTeamIsReturn = game.ATeam.Value.isReturn.Value;
-            RightTeamIsReturn = game.BTeam.Value.isReturn.Value;
+            LeftTeamIsReturn = game.ATeam.Value.Sets[0].isReturn.Value;
+            RightTeamIsReturn = game.BTeam.Value.Sets[0].isReturn.Value;
 
             var leftfrag = false;
             var apoint = 0;
@@ -53,7 +53,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
 
                     StartTime = game.History.Histories.Value[i].DateTime.ToString("HH:mm");
                 }
-                if (leftfrag == true && game.History.Histories.Value[i].Command1 == "WSA" || game.History.Histories.Value[i].Command1 == "WSB")
+                if (leftfrag == true && (game.History.Histories.Value[i].Command1 == "WSA" || game.History.Histories.Value[i].Command1 == "WSB"))
                 {
                     EndTime = game.History.Histories.Value[i].DateTime.ToString("HH:mm");
 

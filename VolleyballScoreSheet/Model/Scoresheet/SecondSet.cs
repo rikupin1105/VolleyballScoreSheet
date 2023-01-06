@@ -57,7 +57,7 @@ namespace VolleyballScoreSheet.Model.Scoresheet
 
                     StartTime = game.History.Histories.Value[i].DateTime.ToString("HH:mm");
                 }
-                if (leftfrag == true && game.History.Histories.Value[i].Command1 == "WSA" || game.History.Histories.Value[i].Command1 == "WSB")
+                if (leftfrag == true && (game.History.Histories.Value[i].Command1 == "WSA" || game.History.Histories.Value[i].Command1 == "WSB"))
                 {
                     EndTime = game.History.Histories.Value[i].DateTime.ToString("HH:mm");
 
