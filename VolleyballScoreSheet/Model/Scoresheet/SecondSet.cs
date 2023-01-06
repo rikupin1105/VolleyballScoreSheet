@@ -239,8 +239,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
         public string? EndTime;
         public bool isEndSet;
 
-        public string[] LeftSubstitutionPoint;
-        public string[] RightSubstitutionPoint;
+        public string[] LeftSubstitutionPoint = new string[12];
+        public string[] RightSubstitutionPoint = new string[12];
 
         public int[] LeftFinalPoint = new int[2];
         public int[] RightFinalPoint = new int[2];
