@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Windows.Media;
 using VolleyballScoreSheet.Model.Scoresheet;
+using VolleyballScoreSheet.Views.ScoreSheet;
 
 namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 {
@@ -19,7 +20,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         {
             _game = game;
 
-            var firstSet = new FirstSet(game);
+            var firstSet = new Model.Scoresheet.FirstSet(game);
 
             StartTime = firstSet.StartTime;
             EndTime = firstSet.EndTime;
@@ -33,9 +34,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
             LeftPointSlash = firstSet.LeftPointSlash;
             RightPointSlash = firstSet.RightPointSlash;
-
-            LeftTimeouts = firstSet.LeftTimeouts;
-            RightTimeouts = firstSet.RightTimeouts;
 
             LeftTeamServe = firstSet.LeftTeamServe;
             LeftTeamReception = firstSet.LeftTeamReception;
@@ -57,9 +55,19 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
             LeftServeCheck = firstSet.LeftServeCheck;
             RightServeCheck = firstSet.RightServeCheck;
+
+            for (int i = 0; i <  firstSet.LeftTimeouts.Count; i++)
+            {
+                LeftTimeouts[i] =  firstSet.LeftTimeouts[i];
+            }
+
+            for (int i = 0; i <  firstSet.RightTimeouts.Count; i++)
+            {
+                RightTimeouts[i] =  firstSet.RightTimeouts[i];
+            }
         }
 
-        
+
 
         public string? StartTime { get; set; }
         public string? EndTime { get; set; }
@@ -83,8 +91,8 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
 
         //タイムアウト
-        public List<string> LeftTimeouts { get; set; }
-        public List<string> RightTimeouts { get; set; }
+        public string?[] LeftTimeouts { get; set; } = new string[2];
+        public string?[] RightTimeouts { get; set; } = new string[2];
 
         public bool LeftTeamServe { get; set; }
         public bool LeftTeamReception { get; set; }
@@ -100,9 +108,9 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public bool[] LeftTeamIsReturn { get; set; } = new bool[6];
         public bool[] RightTeamIsReturn { get; set; } = new bool[6];
 
-        public FirstSet.DeletePoint[] LeftDeletePoint { get; set; }
-        public FirstSet.DeletePoint[] RightDeletePoint { get; set; }
+        public Model.Scoresheet.FirstSet.DeletePoint[] LeftDeletePoint { get; set; }
+        public Model.Scoresheet.FirstSet.DeletePoint[] RightDeletePoint { get; set; }
 
-        
+
     }
 }
