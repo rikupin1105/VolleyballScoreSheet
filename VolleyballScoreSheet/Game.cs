@@ -423,7 +423,10 @@ namespace VolleyballScoreSheet
 
                 if(Set.Value == Rule.SetCount - 1)
                 {
-
+                    if (Rule.CourtChangeEnable)
+                    {
+                        isATeamLeft.Value = !CoinToss.ATeamLeftSide;
+                    }
                 }
                 else if (Rule.CourtChangeEnable)
                 {
