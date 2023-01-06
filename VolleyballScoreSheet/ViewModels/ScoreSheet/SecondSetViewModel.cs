@@ -29,9 +29,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             LeftPointSlash = secondSet.LeftPointSlash;
             RightPointSlash = secondSet.RightPointSlash;
 
-            LeftTimeouts = secondSet.LeftTimeouts;
-            RightTimeouts = secondSet.RightTimeouts;
-
             LeftTeamServe = secondSet.LeftTeamServe;
             LeftTeamReception = secondSet.LeftTeamReception;
             LeftTeamName = secondSet.LeftTeamName;
@@ -52,6 +49,16 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
             LeftServeCheck = secondSet.LeftServeCheck;
             RightServeCheck = secondSet.RightServeCheck;
+
+            for (int i = 0; i <  secondSet.LeftTimeouts.Count; i++)
+            {
+                LeftTimeouts[i] =  secondSet.LeftTimeouts[i];
+            }
+
+            for (int i = 0; i <  secondSet.RightTimeouts.Count; i++)
+            {
+                RightTimeouts[i] =  secondSet.RightTimeouts[i];
+            }
         }
 
         public string? StartTime { get; set; }
@@ -76,8 +83,8 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
 
         //タイムアウト
-        public List<string> LeftTimeouts { get; set; }
-        public List<string> RightTimeouts { get; set; }
+        public string?[] LeftTimeouts { get; set; } = new string[2];
+        public string?[] RightTimeouts { get; set; }=new string[2];
 
         public bool LeftTeamServe { get; set; }
         public bool LeftTeamReception { get; set; }
