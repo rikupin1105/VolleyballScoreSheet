@@ -1,4 +1,13 @@
-﻿<UserControl x:Class="VolleyballScoreSheet.Views.ScoreSheet.SecondSet" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:prism="http://prismlibrary.com/" Width="495" Height="210" HorizontalAlignment="Left" VerticalAlignment="Top" prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl
+    x:Class="VolleyballScoreSheet.Views.ScoreSheet.SecondSet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="495"
+    Height="210"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top"
+    prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
@@ -38,45 +47,167 @@
 
                 <Border Grid.Column="1" Width="51" HorizontalAlignment="Left" BorderThickness="0,0,2,0">
                     <Grid>
-                        <TextBlock Margin="1,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="9" Text="開始" />
+                        <TextBlock
+                            Margin="1,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="9"
+                            Text="開始" />
                         <TextBlock Margin="0,0,1,0" HorizontalAlignment="Right" Text="{Binding StartTime}" />
                     </Grid>
                 </Border>
                 <Border Grid.Column="3" Width="51" HorizontalAlignment="Right" BorderThickness="2,0,0,0">
                     <Grid>
-                        <TextBlock Margin="0,0,1,0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="9" Text="終了" />
+                        <TextBlock
+                            Margin="0,0,1,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="9"
+                            Text="終了" />
                         <TextBlock Margin="1,0,0,0" HorizontalAlignment="Left" Text="{Binding EndTime}" />
                     </Grid>
                 </Border>
 
-                <TextBlock Grid.Column="1" Margin="55,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="8" Text="チーム" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="55,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="8"
+                    Text="チーム" />
                 <Viewbox Grid.Column="1" Margin="75,0,32,0">
                     <TextBlock Text="{Binding LeftTeamName}" />
                 </Viewbox>
 
-                <TextBlock Grid.Column="3" Margin="0,0,55,0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="8" Text="チーム" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="0,0,55,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="8"
+                    Text="チーム" />
                 <Viewbox Grid.Column="3" Margin="32,0,75,0">
                     <TextBlock Text="{Binding RightTeamName}" />
                 </Viewbox>
 
-                <TextBlock Grid.Column="1" Margin="0,0,13,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Text="B" />
-                <TextBlock Grid.Column="1" Margin="0,0,7,3" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Text="○" />
-                <TextBlock Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="10" Text="○" />
-                <TextBlock Grid.Column="1" Margin="0,1.5,3.3,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="6" Text="S" />
-                <TextBlock Grid.Column="1" Margin="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="10" Text="○" />
-                <TextBlock Grid.Column="1" Margin="0,0,3.3,4" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="6" Text="R" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,13,5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="B" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,7,3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,-1,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    FontSize="10"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,1.5,3.3,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    FontSize="6"
+                    Text="S" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,0,1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="10"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="0,0,3.3,4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="6"
+                    Text="R" />
 
-                <Line Grid.Column="1" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="173" X2="181" Y1="2" Y2="10" />
-                <Line Grid.Column="1" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="181" X2="173" Y1="2" Y2="10" />
+                <Line
+                    Grid.Column="1"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                    X1="173"
+                    X2="181"
+                    Y1="2"
+                    Y2="10" />
+                <Line
+                    Grid.Column="1"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                    X1="181"
+                    X2="173"
+                    Y1="2"
+                    Y2="10" />
 
-                <Line Grid.Column="1" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="173" X2="181" Y1="16" Y2="24" />
-                <Line Grid.Column="1" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="181" X2="173" Y1="16" Y2="24" />
+                <Line
+                    Grid.Column="1"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                    X1="173"
+                    X2="181"
+                    Y1="16"
+                    Y2="24" />
+                <Line
+                    Grid.Column="1"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                    X1="181"
+                    X2="173"
+                    Y1="16"
+                    Y2="24" />
 
-                <Line Grid.Column="3" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="2" Y2="10" />
-                <Line Grid.Column="3" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="2" Y2="10" />
+                <Line
+                    Grid.Column="3"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                    X1="1"
+                    X2="9"
+                    Y1="2"
+                    Y2="10" />
+                <Line
+                    Grid.Column="3"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                    X1="9"
+                    X2="1"
+                    Y1="2"
+                    Y2="10" />
 
-                <Line Grid.Column="3" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="16" Y2="24" />
-                <Line Grid.Column="3" Stroke="Black" StrokeThickness="0.5" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="24" Y2="16" />
+                <Line
+                    Grid.Column="3"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                    X1="1"
+                    X2="9"
+                    Y1="16"
+                    Y2="24" />
+                <Line
+                    Grid.Column="3"
+                    Stroke="Black"
+                    StrokeThickness="0.5"
+                    Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                    X1="1"
+                    X2="9"
+                    Y1="24"
+                    Y2="16" />
 
                 <!--#region 左の内容-->
                 <Grid Grid.Row="1" Grid.Column="1">
@@ -136,30 +267,66 @@
                         <!--#endregion-->
 
                         <!--#region 交代選手番号-->
-                        <Border Grid.Row="2" Grid.Column="0" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[0], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[0], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[0]}" />
                         </Border>
-                        <Border Grid.Row="2" Grid.Column="1" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[1], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[1], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[1]}" />
                         </Border>
-                        <Border Grid.Row="2" Grid.Column="2" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[2], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[2], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[2]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="3" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[3], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[3], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[3]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="4" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[4], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[4], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[4]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="5" Width="20" Height="20" BorderThickness="{Binding LeftTeamIsReturn[5], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="5"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding LeftTeamIsReturn[5], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding LeftTeamSubstitutioned[5]}" />
                         </Border>
@@ -199,9 +366,28 @@
                     <!--#region  サービスのチェック欄-->
                     <Grid Grid.Row="5" Grid.RowSpan="4">
                         <Grid>
-                            <TextBlock Grid.Row="{Binding LeftFinalPoint[0]}" Grid.Column="{Binding LeftFinalPoint[1]}" FontSize="17" Text="○" Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
-                            <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="15" Y1="0" Y2="20" />
-                            <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="14.4" Y1="19" Y2="0" />
+                            <TextBlock
+                                Grid.Row="{Binding LeftFinalPoint[0]}"
+                                Grid.Column="{Binding LeftFinalPoint[1]}"
+                                FontSize="17"
+                                Text="○"
+                                Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="15"
+                                Y1="0"
+                                Y2="20" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamReception, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="14.4"
+                                Y1="19"
+                                Y2="0" />
 
                             <!--#region サーバーチェック-->
                             <TextBlock Style="{StaticResource Check}" Visibility="{Binding LeftServeCheck[0], Converter={StaticResource HiddenOrVissible}}" />
@@ -263,61 +449,381 @@
                             <!--#endregion-->
 
                             <!--#region 小さい数字-->
-                            <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
 
-                            <TextBlock Grid.Row="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
 
-                            <TextBlock Grid.Row="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
 
-                            <TextBlock Grid.Row="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
 
-                            <TextBlock Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
 
-                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
 
-                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
                             <!--#endregion-->
 
                             <!--#region 点数-->
@@ -480,30 +986,66 @@
                         <!--#endregion-->
 
                         <!--#region 交代選手番号-->
-                        <Border Grid.Row="2" Grid.Column="0" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[0], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[0], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[0]}" />
                         </Border>
-                        <Border Grid.Row="2" Grid.Column="1" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[1], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[1], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[1]}" />
                         </Border>
-                        <Border Grid.Row="2" Grid.Column="2" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[2], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[2], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[2]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="3" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[3], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[3], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[3]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="4" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[4], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[4], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[4]}" />
                         </Border>
 
-                        <Border Grid.Row="2" Grid.Column="5" Width="20" Height="20" BorderThickness="{Binding RightTeamIsReturn[5], Converter={StaticResource BoolToThickness}}" CornerRadius="15">
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="5"
+                            Width="20"
+                            Height="20"
+                            BorderThickness="{Binding RightTeamIsReturn[5], Converter={StaticResource BoolToThickness}}"
+                            CornerRadius="15">
 
                             <TextBlock Grid.Column="0" FontSize="15" Text="{Binding RightTeamSubstitutioned[5]}" />
                         </Border>
@@ -543,9 +1085,28 @@
                     <!--#region  サービスのチェック欄-->
                     <Grid Grid.Row="5" Grid.RowSpan="4">
                         <Grid>
-                            <TextBlock Grid.Row="{Binding RightFinalPoint[0]}" Grid.Column="{Binding RightFinalPoint[1]}" FontSize="17" Text="○" Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
-                            <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="15" Y1="0" Y2="20" />
-                            <Line Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}" X1="0" X2="14.4" Y1="19" Y2="0" />
+                            <TextBlock
+                                Grid.Row="{Binding RightFinalPoint[0]}"
+                                Grid.Column="{Binding RightFinalPoint[1]}"
+                                FontSize="17"
+                                Text="○"
+                                Visibility="{Binding isEndSet, Converter={StaticResource HiddenOrVissible}}" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="15"
+                                Y1="0"
+                                Y2="20" />
+                            <Line
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Visibility="{Binding LeftTeamServe, Converter={StaticResource HiddenOrVissible}}"
+                                X1="0"
+                                X2="14.4"
+                                Y1="19"
+                                Y2="0" />
 
                             <!--#region サーバーチェック-->
                             <TextBlock Style="{StaticResource Check}" Visibility="{Binding RightServeCheck[0], Converter={StaticResource HiddenOrVissible}}" />
@@ -607,61 +1168,381 @@
                             <!--#endregion-->
 
                             <!--#region 小さい数字-->
-                            <TextBlock Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
-                            <TextBlock Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="1" />
+                            <TextBlock
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
+                            <TextBlock
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="1" />
 
-                            <TextBlock Grid.Row="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
-                            <TextBlock Grid.Row="1" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="2" />
 
-                            <TextBlock Grid.Row="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
-                            <TextBlock Grid.Row="2" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="3" />
 
-                            <TextBlock Grid.Row="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="4" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="6" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="8" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
-                            <TextBlock Grid.Row="3" Grid.Column="10" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="4"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="6"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="8"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="10"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="4" />
 
-                            <TextBlock Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
-                            <TextBlock Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="5" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
+                            <TextBlock
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="5" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
-                            <TextBlock Grid.Row="1" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="6" />
 
-                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
-                            <TextBlock Grid.Row="2" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="7" />
 
-                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="3" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="5" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="7" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="9" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
-                            <TextBlock Grid.Row="3" Grid.Column="11" Margin="0,0.5,1,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="3" Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="3"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="5"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="7"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="9"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="11"
+                                Margin="0,0.5,1,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="3"
+                                Text="8" />
                             <!--#endregion-->
                             <!--#region 点数-->
                             <TextBlock Grid.Column="0" Text="{Binding RightPoints[0]}" />
@@ -769,30 +1650,206 @@
                     <!--#region 得点-->
                     <Grid Grid.RowSpan="6" Margin="1.5,0,1.5,0">
                         <!--#region 消し砂時計-->
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[0].Y}" Y2="{Binding LeftDeletePoint[0].Y}" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[0].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[0].Y}" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[0].Y}"
+                            Y2="{Binding LeftDeletePoint[0].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[0].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding LeftDeletePoint[0].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[1].Y}" Y2="{Binding LeftDeletePoint[1].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[1].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[1].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[1].Y}"
+                            Y2="{Binding LeftDeletePoint[1].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[1].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding LeftDeletePoint[1].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[2].Y}" Y2="{Binding LeftDeletePoint[2].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[2].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[2].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[2].Y}"
+                            Y2="{Binding LeftDeletePoint[2].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[2].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding LeftDeletePoint[2].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[3].Y}" Y2="{Binding LeftDeletePoint[3].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[3].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[3].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[3].Y}"
+                            Y2="{Binding LeftDeletePoint[3].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[3].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding LeftDeletePoint[3].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[4].Y}" Y2="{Binding LeftDeletePoint[4].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding LeftDeletePoint[4].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding LeftDeletePoint[4].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[4].Y}"
+                            Y2="{Binding LeftDeletePoint[4].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding LeftDeletePoint[4].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding LeftDeletePoint[4].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding LeftDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
                         <!--#endregion-->
 
                         <!--#region 消し／-->
@@ -953,30 +2010,206 @@
                     <!--#region 得点-->
                     <Grid Grid.RowSpan="6" Margin="1.5,0,-0.5,0">
                         <!--#region 消し砂時計-->
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[0].Y}" Y2="{Binding RightDeletePoint[0].Y}" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[0].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[0].Y}" />
-                        <Line Grid.RowSpan="9" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[0].Y}"
+                            Y2="{Binding RightDeletePoint[0].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[0].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding RightDeletePoint[0].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[1].Y}" Y2="{Binding RightDeletePoint[1].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[1].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[1].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="1" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[1].Y}"
+                            Y2="{Binding RightDeletePoint[1].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[1].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding RightDeletePoint[1].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="1"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[2].Y}" Y2="{Binding RightDeletePoint[2].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[2].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[2].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="2" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[2].Y}"
+                            Y2="{Binding RightDeletePoint[2].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[2].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding RightDeletePoint[2].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[3].Y}" Y2="{Binding RightDeletePoint[3].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[3].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[3].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="3" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[3].Y}"
+                            Y2="{Binding RightDeletePoint[3].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[3].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding RightDeletePoint[3].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="3"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
 
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[4].Y}" Y2="{Binding RightDeletePoint[4].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="{Binding RightDeletePoint[4].Y}" Y2="118" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="1" X2="9" Y1="118" Y2="{Binding RightDeletePoint[4].Y}" />
-                        <Line Grid.RowSpan="9" Grid.Column="4" Stroke="Black" StrokeThickness="1" Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}" X1="9" X2="1" Y1="118" Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[4].Y}"
+                            Y2="{Binding RightDeletePoint[4].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="{Binding RightDeletePoint[4].Y}"
+                            Y2="118" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="1"
+                            X2="9"
+                            Y1="118"
+                            Y2="{Binding RightDeletePoint[4].Y}" />
+                        <Line
+                            Grid.RowSpan="9"
+                            Grid.Column="4"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            Visibility="{Binding RightDeletePoint[4].Visible, Converter={StaticResource HiddenOrVissible}}"
+                            X1="9"
+                            X2="1"
+                            Y1="118"
+                            Y2="118" />
                         <!--#endregion-->
 
                         <!--#region 消し／-->
@@ -1134,12 +2367,48 @@
                     </Grid.RowDefinitions>
                 </Grid>
 
-                <TextBlock Grid.Column="3" Margin="13,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="A" />
-                <TextBlock Grid.Column="3" Margin="7,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Text="○" />
-                <TextBlock Grid.Column="3" Margin="0,-1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Text="○" />
-                <TextBlock Grid.Column="3" Margin="3.3,1.5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="6" Text="S" />
-                <TextBlock Grid.Column="3" Margin="0,0,0,1" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="10" Text="○" />
-                <TextBlock Grid.Column="3" Margin="3.3,0,0,4" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="6" Text="R" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="13,0,0,5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="A" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="7,0,0,3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="0,-1,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="10"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="3.3,1.5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="6"
+                    Text="S" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="0,0,0,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="10"
+                    Text="○" />
+                <TextBlock
+                    Grid.Column="3"
+                    Margin="3.3,0,0,4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="6"
+                    Text="R" />
 
                 <Border Grid.Column="1" Grid.ColumnSpan="4" BorderThickness="0,0,0,2" />
                 <Border Grid.RowSpan="2" Grid.Column="2" BorderThickness="2,0,2,0" />
