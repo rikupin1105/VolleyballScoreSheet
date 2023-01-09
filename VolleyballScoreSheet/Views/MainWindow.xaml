@@ -8,7 +8,6 @@
     xmlns:rp="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Title"
-    Width="1200"
     prism:ViewModelLocator.AutoWireViewModel="True"
     SizeToContent="Height"
     Style="{StaticResource UiWindow}"
@@ -20,10 +19,8 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <StackPanel>
-        <wpfui:TitleBar />
-        <DockPanel LastChildFill="True">
-            <ContentControl Margin="5" prism:RegionManager.RegionName="ContentRegion" />
-        </DockPanel>
-    </StackPanel>
+    <DockPanel>
+        <wpfui:TitleBar DockPanel.Dock="Top" />
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" DockPanel.Dock="Bottom" />
+    </DockPanel>
 </Window>
