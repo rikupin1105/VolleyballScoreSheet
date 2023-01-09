@@ -11,8 +11,8 @@
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
 
@@ -37,26 +37,16 @@
                 </Grid.RowDefinitions>
 
                 <!--  チームの得点  -->
-                <Border
-                    Grid.Column="0"
-                    Background="White"
-                    CornerRadius="5">
+                <Border Grid.Column="0" Background="White" CornerRadius="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
 
-                        <Rectangle
-                            Width="20"
-                            HorizontalAlignment="Left"
-                            Fill="{Binding LeftTeamColor.Value}" />
+                        <Rectangle Width="20" HorizontalAlignment="Left" Fill="{Binding LeftTeamColor.Value}" />
 
-                        <Rectangle
-                            Grid.Column="1"
-                            Width="1"
-                            HorizontalAlignment="Left"
-                            Fill="#dddddd" />
+                        <Rectangle Grid.Column="1" Width="1" HorizontalAlignment="Left" Fill="#dddddd" />
 
                         <Grid Grid.Column="0" Margin="30,0,0,0">
 
@@ -79,21 +69,11 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel
-                                    Grid.ColumnSpan="3"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
+                                <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Left" Orientation="Horizontal">
                                     <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
-                                        <TextBlock
-                                            Padding="10,0"
-                                            FontSize="15"
-                                            FontWeight="Bold"
-                                            Text="Timeouts" />
+                                        <TextBlock Padding="10,0" FontSize="15" FontWeight="Bold" Text="Timeouts" />
                                     </Border>
-                                    <Border
-                                        Margin="0,0,10,0"
-                                        Background="#303030"
-                                        CornerRadius="0,5,5,0">
+                                    <Border Margin="0,0,10,0" Background="#303030" CornerRadius="0,5,5,0">
                                         <TextBlock
                                             Margin="10,0"
                                             FontSize="15"
@@ -103,11 +83,7 @@
                                     </Border>
 
                                     <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
-                                        <TextBlock
-                                            Padding="10,0"
-                                            FontSize="15"
-                                            FontWeight="Bold"
-                                            Text="Substitution" />
+                                        <TextBlock Padding="10,0" FontSize="15" FontWeight="Bold" Text="Substitution" />
                                     </Border>
                                     <Border Background="#303030" CornerRadius="0,5,5,0">
                                         <TextBlock
@@ -121,40 +97,22 @@
                             </Grid>
 
                         </Grid>
-                        <TextBlock
-                            Grid.Column="1"
-                            FontSize="50"
-                            FontWeight="Black"
-                            Text="{Binding LeftSidePoints.Value}" />
+                        <TextBlock Grid.Column="1" FontSize="50" FontWeight="Black" Text="{Binding LeftSidePoints.Value}" />
 
                     </Grid>
                 </Border>
-                <Border
-                    Grid.Column="3"
-                    Background="white"
-                    CornerRadius="5">
+                <Border Grid.Column="3" Background="white" CornerRadius="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
 
-                        <Rectangle
-                            Grid.Column="1"
-                            Width="20"
-                            HorizontalAlignment="Right"
-                            Fill="{Binding RightTeamColor.Value}" />
+                        <Rectangle Grid.Column="1" Width="20" HorizontalAlignment="Right" Fill="{Binding RightTeamColor.Value}" />
 
-                        <Rectangle
-                            Grid.Column="1"
-                            Width="1"
-                            HorizontalAlignment="Left"
-                            Fill="#dddddd" />
+                        <Rectangle Grid.Column="1" Width="1" HorizontalAlignment="Left" Fill="#dddddd" />
 
-                        <TextBlock
-                            FontSize="50"
-                            FontWeight="Black"
-                            Text="{Binding RightSidePoints.Value}" />
+                        <TextBlock FontSize="50" FontWeight="Black" Text="{Binding RightSidePoints.Value}" />
 
                         <Grid Grid.Column="1" Margin="0,0,30,0">
 
@@ -178,21 +136,11 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel
-                                    Grid.ColumnSpan="3"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
+                                <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
                                     <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
-                                        <TextBlock
-                                            Padding="10,0"
-                                            FontSize="15"
-                                            FontWeight="Bold"
-                                            Text="Substitution" />
+                                        <TextBlock Padding="10,0" FontSize="15" FontWeight="Bold" Text="Substitution" />
                                     </Border>
-                                    <Border
-                                        Margin="0,0,10,0"
-                                        Background="#303030"
-                                        CornerRadius="0,5,5,0">
+                                    <Border Margin="0,0,10,0" Background="#303030" CornerRadius="0,5,5,0">
                                         <TextBlock
                                             Margin="10,5"
                                             FontSize="15"
@@ -202,11 +150,7 @@
                                     </Border>
 
                                     <Border Background="#f5f5f5" CornerRadius="5,0,0,5">
-                                        <TextBlock
-                                            Padding="10,0"
-                                            FontSize="15"
-                                            FontWeight="Bold"
-                                            Text="Timeouts" />
+                                        <TextBlock Padding="10,0" FontSize="15" FontWeight="Bold" Text="Timeouts" />
                                     </Border>
                                     <Border Background="#303030" CornerRadius="0,5,5,0">
                                         <TextBlock
@@ -294,65 +238,20 @@
                                 <RowDefinition Height="40" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Column="0"
-                                FontSize="20"
-                                Text="Ⅰ" />
-                            <TextBlock
-                                Grid.Column="1"
-                                FontSize="20"
-                                Text="Ⅱ" />
-                            <TextBlock
-                                Grid.Column="2"
-                                FontSize="20"
-                                Text="Ⅲ" />
-                            <TextBlock
-                                Grid.Column="3"
-                                FontSize="20"
-                                Text="Ⅳ" />
-                            <TextBlock
-                                Grid.Column="4"
-                                FontSize="20"
-                                Text="Ⅴ" />
-                            <TextBlock
-                                Grid.Column="5"
-                                FontSize="20"
-                                Text="Ⅵ" />
+                            <TextBlock Grid.Column="0" FontSize="20" Text="Ⅰ" />
+                            <TextBlock Grid.Column="1" FontSize="20" Text="Ⅱ" />
+                            <TextBlock Grid.Column="2" FontSize="20" Text="Ⅲ" />
+                            <TextBlock Grid.Column="3" FontSize="20" Text="Ⅳ" />
+                            <TextBlock Grid.Column="4" FontSize="20" Text="Ⅴ" />
+                            <TextBlock Grid.Column="5" FontSize="20" Text="Ⅵ" />
 
-                            <Border
-                                Grid.ColumnSpan="6"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,0,2" />
-                            <Border
-                                Grid.Row="1"
-                                Grid.ColumnSpan="6"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,0,2" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="0"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="1"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="2"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="3"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="4"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
+                            <Border Grid.ColumnSpan="6" BorderBrush="#303030" BorderThickness="0,0,0,2" />
+                            <Border Grid.Row="1" Grid.ColumnSpan="6" BorderBrush="#303030" BorderThickness="0,0,0,2" />
+                            <Border Grid.RowSpan="3" Grid.Column="0" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="1" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="2" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="3" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="4" BorderBrush="#303030" BorderThickness="0,0,2,0" />
 
                             <Border
                                 Grid.Row="2"
@@ -362,10 +261,7 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[0], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[0]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[0]}" />
                             </Border>
                             <Border
                                 Grid.Row="2"
@@ -375,10 +271,7 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[1], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[1]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[1]}" />
                             </Border>
                             <Border
                                 Grid.Row="2"
@@ -388,10 +281,7 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[2], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[2]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[2]}" />
                             </Border>
 
                             <Border
@@ -402,10 +292,7 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[3], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[3]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[3]}" />
                             </Border>
 
                             <Border
@@ -416,10 +303,7 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[4], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[4]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[4]}" />
                             </Border>
 
                             <Border
@@ -430,42 +314,15 @@
                                 BorderThickness="{Binding LeftTeamIsReturn.Value[5], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding LeftTeamSubstitutioned.Value[5]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding LeftTeamSubstitutioned.Value[5]}" />
                             </Border>
 
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[0]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[1]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[2]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="3"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[3]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="4"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[4]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="5"
-                                FontSize="20"
-                                Text="{Binding LeftTeamStartingLineUp.Value[5]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[0]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[1]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[2]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[3]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[4]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="20" Text="{Binding LeftTeamStartingLineUp.Value[5]}" />
                         </Grid>
                     </Border>
                 </Viewbox>
@@ -493,65 +350,20 @@
                                 <RowDefinition Height="40" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Column="0"
-                                FontSize="20"
-                                Text="Ⅰ" />
-                            <TextBlock
-                                Grid.Column="1"
-                                FontSize="20"
-                                Text="Ⅱ" />
-                            <TextBlock
-                                Grid.Column="2"
-                                FontSize="20"
-                                Text="Ⅲ" />
-                            <TextBlock
-                                Grid.Column="3"
-                                FontSize="20"
-                                Text="Ⅳ" />
-                            <TextBlock
-                                Grid.Column="4"
-                                FontSize="20"
-                                Text="Ⅴ" />
-                            <TextBlock
-                                Grid.Column="5"
-                                FontSize="20"
-                                Text="Ⅵ" />
+                            <TextBlock Grid.Column="0" FontSize="20" Text="Ⅰ" />
+                            <TextBlock Grid.Column="1" FontSize="20" Text="Ⅱ" />
+                            <TextBlock Grid.Column="2" FontSize="20" Text="Ⅲ" />
+                            <TextBlock Grid.Column="3" FontSize="20" Text="Ⅳ" />
+                            <TextBlock Grid.Column="4" FontSize="20" Text="Ⅴ" />
+                            <TextBlock Grid.Column="5" FontSize="20" Text="Ⅵ" />
 
-                            <Border
-                                Grid.ColumnSpan="6"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,0,2" />
-                            <Border
-                                Grid.Row="1"
-                                Grid.ColumnSpan="6"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,0,2" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="0"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="1"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="2"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="3"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
-                            <Border
-                                Grid.RowSpan="3"
-                                Grid.Column="4"
-                                BorderBrush="#303030"
-                                BorderThickness="0,0,2,0" />
+                            <Border Grid.ColumnSpan="6" BorderBrush="#303030" BorderThickness="0,0,0,2" />
+                            <Border Grid.Row="1" Grid.ColumnSpan="6" BorderBrush="#303030" BorderThickness="0,0,0,2" />
+                            <Border Grid.RowSpan="3" Grid.Column="0" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="1" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="2" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="3" BorderBrush="#303030" BorderThickness="0,0,2,0" />
+                            <Border Grid.RowSpan="3" Grid.Column="4" BorderBrush="#303030" BorderThickness="0,0,2,0" />
 
                             <Border
                                 Grid.Row="2"
@@ -561,10 +373,7 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[0], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[0]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[0]}" />
                             </Border>
                             <Border
                                 Grid.Row="2"
@@ -574,10 +383,7 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[1], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[1]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[1]}" />
                             </Border>
                             <Border
                                 Grid.Row="2"
@@ -587,10 +393,7 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[2], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[2]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[2]}" />
                             </Border>
 
                             <Border
@@ -601,10 +404,7 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[3], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[3]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[3]}" />
                             </Border>
 
                             <Border
@@ -615,10 +415,7 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[4], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[4]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[4]}" />
                             </Border>
 
                             <Border
@@ -629,42 +426,15 @@
                                 BorderThickness="{Binding RightTeamIsReturn.Value[5], Converter={StaticResource BoolToThickness}}"
                                 CornerRadius="20">
 
-                                <TextBlock
-                                    Grid.Column="0"
-                                    FontSize="20"
-                                    Text="{Binding RightTeamSubstitutioned.Value[5]}" />
+                                <TextBlock Grid.Column="0" FontSize="20" Text="{Binding RightTeamSubstitutioned.Value[5]}" />
                             </Border>
 
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[0]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[1]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[2]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="3"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[3]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="4"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[4]}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="5"
-                                FontSize="20"
-                                Text="{Binding RightTeamStartingLineUp.Value[5]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[0]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[1]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[2]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[3]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[4]}" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="20" Text="{Binding RightTeamStartingLineUp.Value[5]}" />
                         </Grid>
                     </Border>
                 </Viewbox>
@@ -682,26 +452,14 @@
                     ItemsSource="{Binding RightTeamPlayer}" />
 
                 <!--  コート  -->
-                <local:Court
-                    Grid.RowSpan="3"
-                    Grid.Column="1"
-                    Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:Court Grid.RowSpan="3" Grid.Column="1" Visibility="{Binding DisplayRotation.Value, Converter={StaticResource HiddenOrVissible}}" />
 
                 <!--  タイムアウトリクエスト  -->
-                <local:RequestTimeOut
-                    Grid.RowSpan="3"
-                    Grid.Column="1"
-                    Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:RequestTimeOut Grid.RowSpan="3" Grid.Column="1" Visibility="{Binding DisplayRequestTimeOut.Value, Converter={StaticResource HiddenOrVissible}}" />
 
-                <local:BeforeMatch
-                    Grid.RowSpan="3"
-                    Grid.Column="1"
-                    Visibility="{Binding DisplayBeforeMatch.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:BeforeMatch Grid.RowSpan="3" Grid.Column="1" Visibility="{Binding DisplayBeforeMatch.Value, Converter={StaticResource HiddenOrVissible}}" />
 
-                <local:CoinToss
-                    Grid.RowSpan="3"
-                    Grid.Column="1"
-                    Visibility="{Binding DisplayCoinToss.Value, Converter={StaticResource HiddenOrVissible}}" />
+                <local:CoinToss Grid.RowSpan="3" Grid.Column="1" Visibility="{Binding DisplayCoinToss.Value, Converter={StaticResource HiddenOrVissible}}" />
 
             </Grid>
 
@@ -787,15 +545,16 @@
             </StackPanel>
         </StackPanel>
 
-        <!--  ランニングスコア  -->
-        <ScrollViewer Grid.Column="1">
 
-            <Grid Grid.Column="1" Margin="10">
+        <!--  ランニングスコア  -->
+        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible">
+            <StackPanel>
                 <TextBlock TextWrapping="Wrap">
                     <Run Text="デバッグ用" />
                     <LineBreak />
                     <Run Text="{Binding DebugMessage.Value}" />
                 </TextBlock>
+                <TextBlock Text="sss" />
                 <!--<Border Background="#eeeeee" CornerRadius="10">
                 <StackPanel>
                     <TextBlock
@@ -855,7 +614,7 @@
                     </Grid>
                 </StackPanel>
             </Border>-->
-            </Grid>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
