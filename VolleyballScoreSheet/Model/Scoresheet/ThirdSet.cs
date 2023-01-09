@@ -42,8 +42,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                 }
                 else
                 {
-                    LeftTeamName = game.BTeam.Value.Name.Value;
-                    RightTeamName = game.ATeam.Value.Name.Value;
+                    LeftTeamName = game.ATeam.Value.Name.Value;
+                    RightTeamName = game.BTeam.Value.Name.Value;
 
                     LeftTeamServe = false;
                     LeftTeamReception = true;
@@ -52,13 +52,13 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                     RightServeCheckList.Add(true);
                     LeftPointList.Add(null);
 
-                    LeftTeamStartingLineUp = game.BTeam.Value.Sets[2].StartingLineUp.Value;
-                    LeftTeamSubstitutioned = game.BTeam.Value.Sets[2].Substitutioned.Value;
-                    LeftTeamIsReturn = game.BTeam.Value.Sets[2].isReturn.Value;
+                    LeftTeamStartingLineUp = game.ATeam.Value.Sets[2].StartingLineUp.Value;
+                    LeftTeamSubstitutioned = game.ATeam.Value.Sets[2].Substitutioned.Value;
+                    LeftTeamIsReturn = game.ATeam.Value.Sets[2].isReturn.Value;
 
-                    RightTeamStartingLineUp = game.ATeam.Value.Sets[2].StartingLineUp.Value;
-                    RightTeamSubstitutioned = game.ATeam.Value.Sets[2].Substitutioned.Value;
-                    RightTeamIsReturn = game.ATeam.Value.Sets[2].isReturn.Value;
+                    RightTeamStartingLineUp = game.BTeam.Value.Sets[2].StartingLineUp.Value;
+                    RightTeamSubstitutioned = game.BTeam.Value.Sets[2].Substitutioned.Value;
+                    RightTeamIsReturn = game.BTeam.Value.Sets[2].isReturn.Value;
                 }
             }
             else
@@ -85,8 +85,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                 }
                 else
                 {
-                    LeftTeamName = game.ATeam.Value.Name.Value;
-                    RightTeamName = game.BTeam.Value.Name.Value;
+                    LeftTeamName = game.BTeam.Value.Name.Value;
+                    RightTeamName = game.ATeam.Value.Name.Value;
 
                     LeftTeamServe = true;
                     LeftTeamReception = false;
@@ -95,13 +95,13 @@ namespace VolleyballScoreSheet.Model.Scoresheet
                     RightServeCheckList.Add(false);
                     RightPointList.Add(null);
 
-                    LeftTeamStartingLineUp = game.ATeam.Value.Sets[2].StartingLineUp.Value;
-                    LeftTeamSubstitutioned = game.ATeam.Value.Sets[2].Substitutioned.Value;
-                    LeftTeamIsReturn = game.ATeam.Value.Sets[2].isReturn.Value;
+                    LeftTeamStartingLineUp = game.BTeam.Value.Sets[2].StartingLineUp.Value;
+                    LeftTeamSubstitutioned = game.BTeam.Value.Sets[2].Substitutioned.Value;
+                    LeftTeamIsReturn = game.BTeam.Value.Sets[2].isReturn.Value;
 
-                    RightTeamStartingLineUp = game.BTeam.Value.Sets[2].StartingLineUp.Value;
-                    RightTeamSubstitutioned = game.BTeam.Value.Sets[2].Substitutioned.Value;
-                    RightTeamIsReturn = game.BTeam.Value.Sets[2].isReturn.Value;
+                    RightTeamStartingLineUp = game.ATeam.Value.Sets[2].StartingLineUp.Value;
+                    RightTeamSubstitutioned = game.ATeam.Value.Sets[2].Substitutioned.Value;
+                    RightTeamIsReturn = game.ATeam.Value.Sets[2].isReturn.Value;
                 }
             }
 
