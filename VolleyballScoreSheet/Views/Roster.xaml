@@ -14,12 +14,12 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
-            <TextBlock Margin="5,0,5,10" FontSize="30" Text="{Binding ATeamName.Value}" />
+            <TextBlock Margin="20,0,5,10" FontSize="30" Text="{Binding ATeamName.Value}" />
             <DataGrid
                 Margin="5,0,5,10"
                 AutoGenerateColumns="False"
@@ -87,7 +87,7 @@
 
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBlock Margin="5,0,5,10" HorizontalAlignment="Right" FontSize="30" Text="{Binding BTeamName.Value}" />
+            <TextBlock Margin="5,0,20,10" HorizontalAlignment="Right" FontSize="30" Text="{Binding BTeamName.Value}" />
             <DataGrid
                 Margin="5,0,5,10"
                 AutoGenerateColumns="False"
@@ -202,6 +202,7 @@
                     Style="{StaticResource LightButton}" />
             </Grid>
         </Border>
+
         <Border
             Grid.Row="1"
             Grid.Column="2"
