@@ -56,8 +56,13 @@ namespace VolleyballScoreSheet.Model.Scoresheet
             SetDuration[2] = Duration(_game.History.Histories.Value.Where(x => x.Command1 == "WSA" || x.Command1 == "WSB").Select(x => x.DateTime).Skip(2).FirstOrDefault()
                 , _game.History.Histories.Value.FirstOrDefault(x => x.Command1 == "S3"));
 
-            SetDuration[3] = Duration(_game.History.Histories.Value.Where(x => x.Command1 == "WSA" || x.Command1 == "WSB").Select(x => x.DateTime).Skip(2).FirstOrDefault()
-                , _game.History.Histories.Value.FirstOrDefault(x => x.Command1 == "S1"));
+            for (int i = 0; i < 3; i++)
+            {
+                if (SetDuration[i] is not null)
+                {
+                    TotalTime += (int)SetDuration[i].Value.TotalMinutes;
+                }
+            }
         }
         public string ATeamName { get; set; }
         public string BTeamName { get; set; }
@@ -65,7 +70,8 @@ namespace VolleyballScoreSheet.Model.Scoresheet
         public MatchResultSet[] BSet { get; set; } = new MatchResultSet[4];
         public MatchResultSet ATotal { get; set; } = new();
         public MatchResultSet BTotal { get; set; } = new();
-        public TimeSpan?[] SetDuration { get; set; } = new TimeSpan?[4];
+        public int TotalTime { get; set; } = 0;
+        public TimeSpan?[] SetDuration { get; set; } = new TimeSpan?[3];
 
         private static TimeSpan? Duration(DateTime dt1, History? history)
         {
