@@ -13,71 +13,33 @@ namespace VolleyballScoreSheet.ViewModels.Card
     {
         private readonly Game _game;
         private readonly DialogService _dialogService;
+        private readonly SelectTeam _selectTeam;
+
+        private Team LeftTeam;
+        private Team RightTeam;
         public SelectTeamViewModel(Game game, DialogService dialogService)
         {
             _game = game;
             _dialogService=dialogService;
+            _selectTeam = new SelectTeam(game);
 
             LeftTeamName = _game.LeftTeam.Name.Value;
             RightTeamName = _game.RightTeam.Name.Value;
             LeftTeamColor = _game.LeftTeam.Color.Value;
             RightTeamColor = _game.RightTeam.Color.Value;
+            LeftTeam = _game.LeftTeam;
+            RightTeam = _game.RightTeam;
 
             CancelCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel)));
         }
 
-        private Team team;
-        private Team opponentTeam;
-        private char AorB;
-        private void AAA(bool isLeft)
-        {
-            if (isLeft)
-            {
-                team = _game.LeftTeam;
-                opponentTeam = _game.RightTeam;
-                if (_game.isATeamLeft.Value)
-                {
-                    AorB = 'A';
-
-                }
-                else
-                {
-                    AorB = 'B';
-                }
-            }
-            else
-            {
-                team = _game.RightTeam;
-                opponentTeam = _game.LeftTeam;
-                if (_game.isATeamLeft.Value)
-                {
-                    AorB = 'B';
-                }
-                else
-                {
-                    AorB = 'A';
-                }
-            }
-        }
-        private void BBB(bool isLeft)
-        {
-            if (isLeft)
-            {
-                _game.LeftTeam = team;
-                _game.RightTeam = opponentTeam;
-            }
-            else
-            {
-                _game.RightTeam = team;
-                _game.LeftTeam = opponentTeam;
-            }
-        }
 
         private void RedCard(bool isLeft)
         {
-            AAA(isLeft);
+            Team team;
+            if (isLeft) team = LeftTeam;
+            else team = RightTeam;
 
-            //人選択へ
             _dialogService.ShowDialog("SelectPlayerAndStaff", new DialogParameters()
             {
                 { "isLeft" , isLeft },
@@ -86,18 +48,18 @@ namespace VolleyballScoreSheet.ViewModels.Card
             {
                 if (res.Parameters.TryGetValue("Mark", out string mark))
                 {
-                    _game.Sanctions.Value.Add(new Model.Sanction { Set = _game.Set.Value, Penalty= mark, Point=team.Sets[^1].Points.Value, OpponentPoint = opponentTeam.Sets[^1].Points.Value, Team=AorB });
-                    _game.PointAdd(!isLeft);
-                    _game.History.HistoryAdd($"RedCard{AorB}", mark);
-
+                    _selectTeam.IsLeft(isLeft);
+                    _selectTeam.RedCard(mark);
                 }
+
                 RequestClose?.Invoke(new DialogResult(res.Result));
             });
         }
         private void DelayPenalty(bool isLeft)
         {
-            AAA(isLeft);
-
+            Team team;
+            if (isLeft) team = LeftTeam;
+            else team = RightTeam;
 
             if (team.DelayWarning is null)
             {
@@ -138,18 +100,8 @@ namespace VolleyballScoreSheet.ViewModels.Card
                     {
                         if (res.Result == ButtonResult.OK)
                         {
-                            var dp = new Model.DelayPenalty()
-                            {
-                                Point = _game.LeftTeam.Sets[^1].Points.Value,
-                                OpponentPoint = _game.RightTeam.Sets[^1].Points.Value,
-                                Set = _game.Set.Value
-                            };
-
-                            team.DelayPenalties.Add(dp);
-
-                            _game.Sanctions.Value.Add(new(AorB, dp));
-                            _game.PointAdd(!isLeft);
-                            _game.History.HistoryAdd($"DelayPenalty{AorB}");
+                            _selectTeam.IsLeft(isLeft);
+                            _selectTeam.DelayPenalty();
 
                         }
                         RequestClose?.Invoke(new DialogResult(res.Result));
@@ -157,12 +109,12 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 }
 
             }
-
-            BBB(isLeft);
         }
         private void DelayWarning(bool isLeft)
         {
-            AAA(isLeft);
+            Team team;
+            if (isLeft) team = LeftTeam;
+            else team = RightTeam;
 
             if (team.DelayWarning is not null)
             {
@@ -188,29 +140,25 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 {
                     if (res.Result == ButtonResult.OK)
                     {
-                        var dw = new Model.DelayWarning()
-                        {
-                            Point = team.Sets[^1].Points.Value,
-                            OpponentPoint = opponentTeam.Sets[^1].Points.Value,
-                            Set = _game.Set.Value
-                        };
-                        team.DelayWarning = dw;
-
-                        _game.Sanctions.Value.Add(new(AorB, dw));
-                        _game.History.HistoryAdd($"DelayWarning{AorB}");
+                        _selectTeam.IsLeft(isLeft);
+                        _selectTeam.DelayWarning();
                     }
                     RequestClose?.Invoke(new DialogResult(res.Result));
                 });
             }
-
-            BBB(isLeft);
         }
         private void YellowCard(bool isLeft)
         {
-            AAA(isLeft);
+            Team team;
+            if (isLeft) team = LeftTeam;
+            else team = RightTeam;
+
+            char AorB;
+            if (isLeft == _game.isATeamLeft.Value) AorB = 'A';
+            else AorB = 'B';
 
             if (_game.Sanctions.Value
-                .Where(x => x.Team==AorB)
+                .Where(x => x.Team == AorB)
                 .Where(x => x.Warning is not "D")
                 .Where(x => x.Warning is not null)
                 .Any())
@@ -234,9 +182,8 @@ namespace VolleyballScoreSheet.ViewModels.Card
                 {
                     if (res.Parameters.TryGetValue("Mark", out string mark))
                     {
-                        _game.Sanctions.Value.Add(new Model.Sanction { Set = _game.Set.Value, Warning= mark, Point=team.Sets[^1].Points.Value, OpponentPoint = opponentTeam.Sets[^1].Points.Value, Team=AorB });
-                        _game.History.HistoryAdd($"YellowCard{AorB}", mark);
-
+                        _selectTeam.IsLeft(isLeft);
+                        _selectTeam.YelloCard(mark);
                     }
                     RequestClose?.Invoke(new DialogResult(res.Result));
                 });
@@ -245,7 +192,9 @@ namespace VolleyballScoreSheet.ViewModels.Card
         }
         public void ImproperRequests(bool isLeft)
         {
-            AAA(isLeft);
+            Team team;
+            if (isLeft) team = LeftTeam;
+            else team = RightTeam;
 
             if (team.ImproperRequests.Value == true)
             {
@@ -284,8 +233,6 @@ namespace VolleyballScoreSheet.ViewModels.Card
                     RequestClose?.Invoke(new DialogResult(res.Result));
                 });
             }
-
-            BBB(isLeft);
         }
         private void ChooseTeam(bool isLeft)
         {
