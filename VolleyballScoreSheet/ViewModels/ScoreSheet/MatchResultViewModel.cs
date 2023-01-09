@@ -29,6 +29,7 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
             BSet = matchResult.BSet;
 
             SetDuration = matchResult.SetDuration;
+            TotalTime = matchResult.TotalTime;
         }
 
         public string ATeamName { get; set; }
@@ -38,5 +39,6 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
         public MatchResultSet ATotal { get; set; } = new();
         public MatchResultSet BTotal { get; set; } = new();
         public TimeSpan?[] SetDuration { get; set; }
+        public int TotalTime { get; set; }
     }
 }
