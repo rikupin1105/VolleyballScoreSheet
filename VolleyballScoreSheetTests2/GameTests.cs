@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using VolleyballScoreSheet.Views;
+using VolleyballScoreSheet.Shared;
 
 namespace VolleyballScoreSheet.Tests
 {
@@ -23,7 +24,7 @@ namespace VolleyballScoreSheet.Tests
             game.BTeam.Value = new Model.Team("BTeam", "black");
 
             //game.ATeam.Value.Players 
-            game.ATeam.Value.Players = new List<Model.Player>
+            game.ATeam.Value.Players = new List<Player>
             {
                 new Model.Player() { Id = 1 },
                 new Model.Player() { Id = 2 },
@@ -39,7 +40,7 @@ namespace VolleyballScoreSheet.Tests
                 new Model.Player() { Id = 12 }
             };
 
-            game.BTeam.Value.Players = new List<Model.Player>
+            game.BTeam.Value.Players = new List<Player>
             {
                 new Model.Player() { Id = 1 },
                 new Model.Player() { Id = 2 },

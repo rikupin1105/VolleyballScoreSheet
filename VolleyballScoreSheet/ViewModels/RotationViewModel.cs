@@ -10,7 +10,6 @@ using System.Windows;
 using System.Data;
 using Reactive.Bindings.Extensions;
 using System.Reactive.Linq;
-using VolleyballScoreSheet.Model;
 using System.Collections.ObjectModel;
 
 namespace VolleyballScoreSheet.ViewModels

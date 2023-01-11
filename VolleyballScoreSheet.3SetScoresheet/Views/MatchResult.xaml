@@ -1,0 +1,222 @@
+﻿<UserControl
+    x:Class="VolleyballScoreSheet._3SetScoresheet.Views.MatchResult"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Width="238"
+    Height="190"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Bottom"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <StackPanel>
+        <Border Height="190" BorderBrush="Black" BorderThickness="2">
+            <StackPanel>
+                <Grid Height="12">
+
+                    <TextBlock HorizontalAlignment="Center" FontSize="9" Text="試 合 結 果" />
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1" />
+                </Grid>
+
+                <Grid Height="26">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Viewbox Margin="30,0,30,0">
+                        <TextBlock FontSize="8" Text="{Binding ATeamName}" />
+                    </Viewbox>
+                    <Viewbox Grid.Column="2" Margin="30,0,30,0">
+                        <TextBlock FontSize="8" Text="{Binding BTeamName}" />
+                    </Viewbox>
+
+                    <TextBlock Margin="5" HorizontalAlignment="Left" FontSize="8" Text="チーム" />
+                    <TextBlock
+                        Grid.Column="2"
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        FontSize="8"
+                        Text="チーム" />
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="0,0,9,0"
+                        HorizontalAlignment="Right"
+                        FontSize="15"
+                        Text="A" />
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Right" FontSize="25" Text="○" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="9,0,0,0"
+                        HorizontalAlignment="Left"
+                        FontSize="15"
+                        Text="B" />
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontSize="25" Text="○" />
+
+                    <Border Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,0,0.5" />
+                    <Border BorderBrush="Black" BorderThickness="0,0,0.5,0" />
+                </Grid>
+                <Grid Height="102">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="26" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="26" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="22" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="1" Grid.ColumnSpan="9" BorderBrush="Black" BorderThickness="0,0.5" />
+                    <Border Grid.Row="3" Grid.ColumnSpan="9" BorderBrush="Black" BorderThickness="0,0.5" />
+
+                    <Border Grid.RowSpan="5" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="3" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="5" BorderBrush="Black" BorderThickness="0.5,0" />
+                    <Border Grid.RowSpan="5" Grid.Column="7" BorderBrush="Black" BorderThickness="0.5,0" />
+
+                    <TextBlock Grid.Column="0" FontSize="6" Text="タイム&#10;アウト" />
+                    <TextBlock Grid.Column="1" FontSize="6" Text="選手&#10;交代" />
+                    <TextBlock Grid.Column="2" FontSize="6" Text="勝" />
+                    <TextBlock Grid.Column="3" FontSize="6" Text="得点" />
+                    <TextBlock Grid.Column="4" FontSize="6" Text="セット(時間)" />
+                    <TextBlock Grid.Column="5" FontSize="6" Text="得点" />
+                    <TextBlock Grid.Column="6" FontSize="6" Text="勝" />
+                    <TextBlock Grid.Column="7" FontSize="6" Text="選手&#10;交代" />
+                    <TextBlock Grid.Column="8" FontSize="6" Text="タイム&#10;アウト" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding ASet[0].Timeouts}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding ASet[1].Timeouts}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding ASet[2].Timeouts}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding ASet[3].Timeouts}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ASet[0].Substitutions}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ASet[1].Substitutions}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ASet[2].Substitutions}" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ASet[3].Substitutions}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ASet[0].Win}" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ASet[1].Win}" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding ASet[2].Win}" />
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ASet[3].Win}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding ASet[0].Points}" />
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding ASet[1].Points}" />
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding ASet[2].Points}" />
+                    <TextBlock Grid.Row="4" Grid.Column="3" Text="{Binding ASet[3].Points}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding SetDuration[0].TotalMinutes}" />
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding SetDuration[1].TotalMinutes}" />
+                    <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding SetDuration[2].TotalMinutes}" />
+                    <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding TotalTime}" />
+
+
+                    <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding BSet[0].Points}" />
+                    <TextBlock Grid.Row="2" Grid.Column="5" Text="{Binding BSet[1].Points}" />
+                    <TextBlock Grid.Row="3" Grid.Column="5" Text="{Binding BSet[2].Points}" />
+                    <TextBlock Grid.Row="4" Grid.Column="5" Text="{Binding BSet[3].Points}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding BSet[0].Win}" />
+                    <TextBlock Grid.Row="2" Grid.Column="6" Text="{Binding BSet[1].Win}" />
+                    <TextBlock Grid.Row="3" Grid.Column="6" Text="{Binding BSet[2].Win}" />
+                    <TextBlock Grid.Row="4" Grid.Column="6" Text="{Binding BSet[3].Win}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="7" Text="{Binding BSet[0].Substitutions}" />
+                    <TextBlock Grid.Row="2" Grid.Column="7" Text="{Binding BSet[1].Substitutions}" />
+                    <TextBlock Grid.Row="3" Grid.Column="7" Text="{Binding BSet[2].Substitutions}" />
+                    <TextBlock Grid.Row="4" Grid.Column="7" Text="{Binding BSet[3].Substitutions}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="8" Text="{Binding BSet[0].Timeouts}" />
+                    <TextBlock Grid.Row="2" Grid.Column="8" Text="{Binding BSet[1].Timeouts}" />
+                    <TextBlock Grid.Row="3" Grid.Column="8" Text="{Binding BSet[2].Timeouts}" />
+                    <TextBlock Grid.Row="4" Grid.Column="8" Text="{Binding BSet[3].Timeouts}" />
+
+                </Grid>
+                <Grid Height="49">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合開始時刻" />
+                    <TextBlock>
+                        <Run Text="{Binding MatchStartingTime.Hour, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding MatchStartingTime.Minute, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+                    <!--<TextBlock Text="{Binding MatchStartingTime}"></TextBlock>-->
+
+                    <TextBlock
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合終了時刻" />
+                    <TextBlock Grid.Column="1">
+                        <Run Text="{Binding MatchEndingTime.Hour, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding MatchEndingTime.Minute, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+
+                    <TextBlock
+                        Grid.Column="2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合所要時間" />
+                    <TextBlock Grid.Column="2">
+                        <Run Text="{Binding TotalMatchDuration.Hours, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding TotalMatchDuration.Minutes, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+
+                    <Border Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0,0.5" />
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0" />
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0,0" />
+
+                    <TextBlock Grid.Row="1" Text="勝利チーム" />
+                    <Viewbox Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="{Binding WinTeamName}" />
+                    </Viewbox>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LoseTeamGotSet, StringFormat=2 : {0}}" />
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

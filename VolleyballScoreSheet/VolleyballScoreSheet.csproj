@@ -24,6 +24,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\CommonDialogLib\CommonDialogLib.csproj" />
+	  <ProjectReference Include="..\VolleyballScoreSheet.3SetScoresheet\VolleyballScoreSheet.3SetScoresheet.csproj" />
+	  <ProjectReference Include="..\VolleyballScoreSheet.Shared\VolleyballScoreSheet.Shared.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Asset\3SET.png" />
@@ -45,6 +47,14 @@
 	  <Resource Include="Asset\Yellow.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\ScoreSheetWindow.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Model\" />
 	</ItemGroup>
 	<!--<ItemGroup>
 	  <Compile Update="Views\RosterA.xaml.cs">

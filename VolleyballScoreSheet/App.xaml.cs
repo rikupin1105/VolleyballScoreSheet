@@ -9,7 +9,6 @@ using Prism.Modularity;
 using Wpf.Ui.Mvvm.Contracts;
 using VolleyballScoreSheet.Views.Card;
 using VolleyballScoreSheet.Views.Dialog;
-using VolleyballScoreSheet.ViewModels.Card;
 using CommonDialogLib;
 
 namespace VolleyballScoreSheet
@@ -28,22 +27,22 @@ namespace VolleyballScoreSheet
         {
             containerRegistry.RegisterForNavigation<MainWindow>();
 
-            containerRegistry.RegisterForNavigation<MatchInfo>();
+            containerRegistry.RegisterForNavigation<Views.MatchInfo>();
             containerRegistry.RegisterForNavigation<Roster>();
-            containerRegistry.RegisterForNavigation<CoinToss>();
+            containerRegistry.RegisterForNavigation<Views.CoinToss>();
             containerRegistry.RegisterForNavigation<BeforeMatch>();
             containerRegistry.RegisterForNavigation<Gaming>();
 
             containerRegistry.RegisterDialog<Rotation>();
             containerRegistry.RegisterDialog<NotificationDialog>();
-            containerRegistry.RegisterDialog<Substitution>();
+            containerRegistry.RegisterDialog<Views.Substitution>();
             containerRegistry.RegisterDialog<ExceptionalSubstitution>();
             containerRegistry.RegisterDialog<SameInterruptionSubstitution>();
             containerRegistry.RegisterDialog<Card>();
-            containerRegistry.RegisterDialog<SelectTeam>();
+            containerRegistry.RegisterDialog<Views.Card.SelectTeam>();
             containerRegistry.RegisterDialog<ConfirmDialog>();
             containerRegistry.RegisterDialog<SelectPlayerAndStaff>();
-            containerRegistry.RegisterDialog<Referees>();
+            containerRegistry.RegisterDialog<Views.Referees>();
             containerRegistry.RegisterDialog<EditPlayer>();
 
             containerRegistry.RegisterDialogWindow<DialogWindow>("DialogWindow");

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Prism.Regions;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using VolleyballScoreSheet.Model;
 
 namespace VolleyballScoreSheet.ViewModels
 {

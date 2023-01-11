@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using VolleyballScoreSheet.ViewModels;
+using VolleyballScoreSheet.Shared;
 
 namespace VolleyballScoreSheet.Model.Scoresheet.Tests
 {

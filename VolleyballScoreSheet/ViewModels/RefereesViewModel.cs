@@ -11,7 +11,7 @@ namespace VolleyballScoreSheet.ViewModels
     public class RefereesViewModel : BindableBase , IDialogAware
     {
         private readonly Game _game;
-        public Model.Referees Referees { get; set; }
+        public Referees Referees { get; set; }
         public ReactiveCommand SaveAndCloseCommand { get; set; } = new();
         public RefereesViewModel(Game game)
         {
