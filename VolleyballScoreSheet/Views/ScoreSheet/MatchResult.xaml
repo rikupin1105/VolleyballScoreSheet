@@ -131,7 +131,7 @@
                     <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding SetDuration[0].TotalMinutes}" />
                     <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding SetDuration[1].TotalMinutes}" />
                     <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding SetDuration[2].TotalMinutes}" />
-                    <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding SetDuration[2].TotalMinutes}" />
+                    <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding TotalTime}" />
 
 
                     <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding BSet[0].Points}" />
@@ -166,12 +166,55 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合開始時刻" />
+                    <TextBlock>
+                        <Run Text="{Binding MatchStartingTime.Hour, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding MatchStartingTime.Minute, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+                    <!--<TextBlock Text="{Binding MatchStartingTime}"></TextBlock>-->
+
+                    <TextBlock
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合終了時刻" />
+                    <TextBlock Grid.Column="1">
+                        <Run Text="{Binding MatchEndingTime.Hour, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding MatchEndingTime.Minute, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+
+                    <TextBlock
+                        Grid.Column="2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="6"
+                        Text="試合所要時間" />
+                    <TextBlock Grid.Column="2">
+                        <Run Text="{Binding TotalMatchDuration.Hours, Mode=OneTime}" />
+                        <Run FontSize="6" Text=" h " />
+                        <Run Text="{Binding TotalMatchDuration.Minutes, Mode=OneTime, StringFormat={}{0:D2}}" />
+                        <Run FontSize="6" Text=" min" />
+                    </TextBlock>
+
                     <Border Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0,0.5" />
                     <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0" />
                     <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5,0,0,0" />
 
                     <TextBlock Grid.Row="1" Text="勝利チーム" />
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="2 :" />
+                    <Viewbox Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="{Binding WinTeamName}" />
+                    </Viewbox>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LoseTeamGotSet, StringFormat=2 : {0}}" />
                 </Grid>
             </StackPanel>
         </Border>

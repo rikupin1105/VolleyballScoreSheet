@@ -27,18 +27,33 @@ namespace VolleyballScoreSheet.ViewModels.ScoreSheet
 
             ASet = matchResult.ASet;
             BSet = matchResult.BSet;
+            WinTeamName = matchResult.WinTeamName;
 
             SetDuration = matchResult.SetDuration;
-            TotalTime = matchResult.TotalTime;
+            TotalTime = matchResult.TotalSetDuration;
+
+            MatchStartingTime = matchResult.MatchStartingTime;
+            MatchEndingTime = matchResult.MatchEndingTime;
+            TotalMatchDuration = matchResult.TotalMatchDuration;
+        
+            if(matchResult.LoseTeamGotSet is not null)
+            {
+                LoseTeamGotSet = matchResult.LoseTeamGotSet.ToString()!;
+            }
         }
 
         public string ATeamName { get; set; }
         public string BTeamName { get; set; }
+        public string WinTeamName { get; set; }
         public MatchResultSet[] ASet { get; set; } = new MatchResultSet[3];
         public MatchResultSet[] BSet { get; set; } = new MatchResultSet[3];
         public MatchResultSet ATotal { get; set; } = new();
         public MatchResultSet BTotal { get; set; } = new();
         public TimeSpan?[] SetDuration { get; set; }
+        public DateTime MatchStartingTime { get; set; }
+        public DateTime MatchEndingTime { get; set; }
+        public string LoseTeamGotSet { get; set; }
         public int TotalTime { get; set; }
+        public TimeSpan? TotalMatchDuration { get; set; }
     }
 }
