@@ -342,7 +342,7 @@ namespace VolleyballScoreSheet
                 var Out = int.Parse(c2.Split(',')[1]);
 
                 ATeam.Value.Sets[^1].Rotation.Value[Array.IndexOf(ATeam.Value.Sets[^1].Rotation.Value, In)] = Out;
-                ATeam.Value.Players.First(x=>x.Id == Out).IsExceptionalSubstituted = false;
+                ATeam.Value.Players.First(x => x.Id == Out).IsExceptionalSubstituted = false;
                 ATeam.Value.Sets[^1].SubstitutionDetails.RemoveAt(ATeam.Value.Sets[^1].SubstitutionDetails.Count()-1);
                 Remarks.RemoveAt(Remarks.Count-1);
                 ATeam.Value.Refresh();
@@ -410,7 +410,7 @@ namespace VolleyballScoreSheet
 
                 Set.Value--;
 
-                if(Set.Value == Rule.SetCount - 1)
+                if (Set.Value == Rule.SetCount - 1)
                 {
                     if (Rule.CourtChangeEnable)
                     {
@@ -435,6 +435,18 @@ namespace VolleyballScoreSheet
                 ATeam.Value.MedamaRefresh();
                 BTeam.Value.MedamaRefresh();
                 LockControl();
+                return;
+            }
+            else if (c=="WinGameA")
+            {
+                History.HistoryRemove();
+                Undo();
+                return;
+            }
+            else if (c=="WinGameB")
+            {
+                History.HistoryRemove();
+                Undo();
                 return;
             }
 
@@ -518,7 +530,7 @@ namespace VolleyballScoreSheet
 
                         CourtChange();
                         NextServeTeam(true);
-                        if (history)  History.HistoryAdd("CCF");
+                        if (history) History.HistoryAdd("CCF");
                         Rule.FinalSetCourtChanged = true;
                     }
 
@@ -529,6 +541,7 @@ namespace VolleyballScoreSheet
                         //操作ロック
                         //END GAME
                         if (history) History.HistoryAdd("WSA");
+                        if (history) History.HistoryAdd("WinGameA");
                         ATeam.Value.WinSets.Value++;
 
                         LockControl();
@@ -542,6 +555,7 @@ namespace VolleyballScoreSheet
                 {
 
                     if (history) History.HistoryAdd("WSA");
+
                     ATeam.Value.WinSets.Value++;
                     LockControl();
 
@@ -549,6 +563,7 @@ namespace VolleyballScoreSheet
                     if (ATeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
                     {
                         //END GAME
+                        if (history) History.HistoryAdd("WinGameA");
                         EndButtonText.Value = "END GAME";
                     }
                     //セット終了
@@ -563,7 +578,7 @@ namespace VolleyballScoreSheet
                     UnlockControl();
                 }
 
-                
+
             }
             else
             {
@@ -577,7 +592,7 @@ namespace VolleyballScoreSheet
                 }
 
                 //ヒストリー追加
-                if (history)History.HistoryAdd("PointB");
+                if (history) History.HistoryAdd("PointB");
 
                 if (Set.Value == Rule.SetCount)
                 {
@@ -591,7 +606,7 @@ namespace VolleyballScoreSheet
 
                         CourtChange();
                         NextServeTeam(false);
-                        if (history)History.HistoryAdd("CCF");
+                        if (history) History.HistoryAdd("CCF");
                         Rule.FinalSetCourtChanged = true;
                     }
 
@@ -605,7 +620,8 @@ namespace VolleyballScoreSheet
 
                         LockControl();
 
-                        if(history)History.HistoryAdd("WSB");
+                        if (history) History.HistoryAdd("WSB");
+                        if (history) History.HistoryAdd("WinGameB");
                         BTeam.Value.WinSets.Value++;
 
                         EndButtonText.Value = "END GAME";
@@ -615,13 +631,14 @@ namespace VolleyballScoreSheet
                 else if (BTeam.Value.Sets[^1].Points.Value >= Rule.ToWinPoint &&
                     BTeam.Value.Sets[^1].Points.Value - ATeam.Value.Sets[^1].Points.Value>=2)
                 {
-                    if(history)History.HistoryAdd("WSB");
+                    if (history) History.HistoryAdd("WSB");
                     BTeam.Value.WinSets.Value++;
                     LockControl();
                     //ゲーム終了
                     if (BTeam.Value.WinSets.Value == Rule.SetCount / 2 + 1)
                     {
                         //END GAME
+                        if (history) History.HistoryAdd("WinGameB");
                         EndButtonText.Value = "END GAME";
                     }
                     //セット終了
@@ -636,7 +653,7 @@ namespace VolleyballScoreSheet
                     UnlockControl();
                 }
 
-                
+
             }
         }
         public void CourtChange()
@@ -644,7 +661,7 @@ namespace VolleyballScoreSheet
             isATeamLeft.Value = !isATeamLeft.Value;
             isLeftServe.Value = !isLeftServe.Value;
         }
-        public void PointAdd(bool isLeftSide,bool history = true)
+        public void PointAdd(bool isLeftSide, bool history = true)
         {
             if (isLeftSide == isATeamLeft.Value)
             {
