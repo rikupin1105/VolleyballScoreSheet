@@ -207,7 +207,7 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
                         if (LeftPointList.Count == 0)
                         {
                             LeftPointList.Add(leftPoint);
-                            LeftServeCheckList.Add(true);
+                            RightServeCheckList.Add(true);
                         }
                         else if (LeftPointList[^1] == null && leftPoint == 0)
                         {
@@ -226,7 +226,7 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
                         if (RightPointList.Count == 0)
                         {
                             RightPointList.Add(rightPoint);
-                            RightServeCheckList.Add(true);
+                            LeftServeCheckList.Add(true);
                         }
                         else if (RightPointList[^1] == null && rightPoint == 0)
                         {
