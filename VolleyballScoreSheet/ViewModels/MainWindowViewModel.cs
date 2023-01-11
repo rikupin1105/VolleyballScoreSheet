@@ -17,7 +17,7 @@ namespace VolleyballScoreSheet.ViewModels
             _regionManager = regionManager;
             NavigateCommand = new DelegateCommand<string>(Navigate);
             //LoadedCommand.Subscribe(() => _regionManager.RequestNavigate("ContentRegion", "MatchInfo"));
-            LoadedCommand.Subscribe(() => _regionManager.RequestNavigate("ContentRegion", "MatchInfo"));
+            LoadedCommand.Subscribe(() => _regionManager.RequestNavigate("ContentRegion", "Start"));
         }
 
         private void Navigate(string navigatePath)

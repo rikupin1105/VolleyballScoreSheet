@@ -1,0 +1,14 @@
+﻿<UserControl
+    x:Class="VolleyballScoreSheet.Views.Start"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="600"
+    Height="400"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Center" FontSize="50" Text="Volleyball ScoreSheet" />
+        <Button HorizontalAlignment="Center" Command="{Binding NewGameCommand}" Content="新規作成" />
+        <Button HorizontalAlignment="Center" Content="読み込み" />
+    </StackPanel>
+</UserControl>
