@@ -2,7 +2,7 @@
     x:Class="VolleyballScoreSheet.Views.Gaming"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cv="clr-namespace:VolleyballScoreSheet.Converter"
+    xmlns:cv="clr-namespace:VolleyballScoreSheet.Shared.Converter"
     xmlns:local="clr-namespace:VolleyballScoreSheet.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"

@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="VolleyballScoreSheet._3SetScoresheet.Views.ScoreSheet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VolleyballScoreSheet._3SetScoresheet.Views"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:VolleyballScoreSheet._3SetScoresheet.ViewModels"
+    Width="1122"
+    Height="790"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid Width="1122" Height="790">
+        <Image Margin="-1,-3,1,3" Source="/Asset/3SET.png" Visibility="Hidden" />
+        <local:MatchData Margin="42,39,0,0" />
+        <Border Width="238" Height="96" Margin="0,39,43,0" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" />
+        <local:Remark Margin="0,139,43,0" />
+        <local:Player Margin="0,232,43,0" />
+        <local:MatchResult Margin="0,0,43,31" />
+        <local:Sanctions Margin="0,139,289,0" />
+        <local:RefereeAndSignature Margin="0,354,289,0" />
+        <local:FirstSet Margin="123,139,289,0" />
+        <local:SecondSet Margin="123,354,289,0" />
+        <local:ThirdSet Margin="123,569,289,0"></local:ThirdSet>
+        <local:Explanation Margin="43,166,289,0" />
+        <local:Explanation Margin="43,381,294,0" />
+        <local:Explanation Margin="43,576,294,0" />
+    </Grid>
+</UserControl>

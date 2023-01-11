@@ -8,7 +8,6 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using Unity.Policy;
-using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.ViewModels.Card;
 
 namespace VolleyballScoreSheet.ViewModels
@@ -29,7 +28,7 @@ namespace VolleyballScoreSheet.ViewModels
 
             ScoresheetCommand.Subscribe(_ =>
             {
-                new Views.ScoreSheet.ScoreSheetWindow().Show();
+                new Views.ScoreSheetWindow().Show();
             });
 
             ATeam.Value.Points.Subscribe(x =>

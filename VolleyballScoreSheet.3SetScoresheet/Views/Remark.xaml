@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="VolleyballScoreSheet._3SetScoresheet.Views.Remark"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="238"
+    Height="89"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Top"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="2">
+
+            <Grid>
+                <TextBlock HorizontalAlignment="Center" Text="【特記事項】" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    FontSize="10"
+                    Text="{Binding RemarkText}" />
+
+                <Border
+                    Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,1" />
+                <Border
+                    Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,1" />
+                <Border
+                    Grid.Row="2"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,1" />
+                <Border
+                    Grid.Row="3"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,1" />
+                <Border
+                    Grid.Row="4"
+                    BorderBrush="Black"
+                    BorderThickness="0,0,0,1" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

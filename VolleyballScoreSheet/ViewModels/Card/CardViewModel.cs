@@ -6,7 +6,6 @@ using Reactive.Bindings.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.Views.Card;
 
 namespace VolleyballScoreSheet.ViewModels.Card

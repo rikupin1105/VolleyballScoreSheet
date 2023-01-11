@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Reactive.Bindings;
 using Prism.Services.Dialogs;
-using VolleyballScoreSheet.Model;
 using System.Data;
 using VolleyballScoreSheet;
 using Reactive.Bindings.Extensions;

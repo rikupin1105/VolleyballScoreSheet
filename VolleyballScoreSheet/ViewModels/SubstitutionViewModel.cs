@@ -7,7 +7,6 @@ using System.Windows.Media.Animation;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Unity.Policy;
-using VolleyballScoreSheet.Model;
 using VolleyballScoreSheet.Views;
 
 namespace VolleyballScoreSheet.ViewModels
@@ -16,12 +15,12 @@ namespace VolleyballScoreSheet.ViewModels
     {
         private readonly IDialogService _dialogService;
         private readonly Game _game;
-        private Model.Substitution _substitution;
+        private Shared.Substitution _substitution;
         public SubstitutionViewModel(Game game, IDialogService dialogService)
         {
             _game = game;
             _dialogService = dialogService;
-            _substitution = new Model.Substitution(game);
+            _substitution = new Shared.Substitution(game);
 
             CancelCommand.Subscribe(_ => RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel)));
             SubstitutionCommand.Subscribe(_ => Substitution());

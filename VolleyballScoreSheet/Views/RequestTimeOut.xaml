@@ -2,7 +2,7 @@
     x:Class="VolleyballScoreSheet.Views.RequestTimeOut"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:VolleyballScoreSheet.Converter"
+    xmlns:local="clr-namespace:VolleyballScoreSheet.Shared.Converter;assembly=VolleyballScoreSheet.Shared"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
@@ -10,11 +10,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <TextBlock
-            HorizontalAlignment="Center"
-            FontSize="40"
-            FontWeight="Black"
-            Text="Request Timeout for" />
+        <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Black" Text="Request Timeout for" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button
                 Margin="10"

@@ -8,7 +8,6 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using Unity;
-using VolleyballScoreSheet.Model;
 
 namespace VolleyballScoreSheet.ViewModels
 {
