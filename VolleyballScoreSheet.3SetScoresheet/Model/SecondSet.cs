@@ -50,6 +50,7 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
             var leftfrag = false;
             var apoint = 0;
             var bpoint = 0;
+           
             for (int i = 0; i < game.History.Histories.Value.Count; i++)
             {
                 if (game.History.Histories.Value[i].Command1 == "S2")
@@ -209,11 +210,11 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
             }
             for (int i = 0; i < apoint; i++)
             {
-                LeftPointSlash[i] = true;
+                LeftPointSlash.Add(true);
             }
             for (int i = 0; i < bpoint; i++)
             {
-                RightPointSlash[i] = true;
+                RightPointSlash.Add(true);
             }
 
 
@@ -246,75 +247,17 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
         public int[] LeftFinalPoint = new int[2];
         public int[] RightFinalPoint = new int[2];
 
-        public bool[] LeftPointSlash = new bool[45];
-        public bool[] RightPointSlash = new bool[45];
+        public List<bool> LeftPointSlash = new();
+        public List<bool> RightPointSlash = new();
 
-        private List<bool> LeftServeCheckList = new();
-        private List<bool> RightServeCheckList = new();
+        public List<bool> LeftServeCheckList = new();
+        public List<bool> RightServeCheckList = new();
 
-        private List<int?> LeftPointList = new();
-        private List<int?> RightPointList = new();
+        public List<int?> LeftPointList = new();
+        public List<int?> RightPointList = new();
 
         public List<string> LeftTimeouts = new();
         public List<string> RightTimeouts = new();
-
-        public int?[] LeftPoints
-        {
-            get
-            {
-                var array = new int?[48];
-
-                for (int i = 0; i < LeftPointList.Count; i++)
-                {
-                    array[i] = LeftPointList[i];
-                }
-
-                return array;
-            }
-        }
-        public int?[] RightPoints
-        {
-            get
-            {
-                var array = new int?[48];
-
-                for (int i = 0; i < RightPointList.Count; i++)
-                {
-                    array[i] = RightPointList[i];
-                }
-
-                return array;
-            }
-        }
-
-        public bool?[] LeftServeCheck
-        {
-            get
-            {
-                var array = new bool?[48];
-
-                for (int i = 0; i < LeftServeCheckList.Count; i++)
-                {
-                    array[i] = LeftServeCheckList[i];
-                }
-
-                return array;
-            }
-        }
-        public bool?[] RightServeCheck
-        {
-            get
-            {
-                var array = new bool?[48];
-
-                for (int i = 0; i < RightServeCheckList.Count; i++)
-                {
-                    array[i] = RightServeCheckList[i];
-                }
-
-                return array;
-            }
-        }
 
         public bool LeftTeamServe;
         public bool LeftTeamReception;

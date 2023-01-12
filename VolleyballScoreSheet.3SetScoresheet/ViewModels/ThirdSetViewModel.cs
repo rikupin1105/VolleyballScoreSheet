@@ -2,8 +2,10 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using VolleyballScoreSheet._3SetScoresheet.Model;
+using VolleyballScoreSheet._3SetScoresheet.Views;
 
 namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
 {
@@ -13,7 +15,7 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
         public ThirdSetViewModel(Game game)
         {
             _game = game;
-            var thirdSet = new ThirdSet(game);
+            var thirdSet = new Model.ThirdSet(game);
 
             StartTime = thirdSet.StartTime;
             EndTime = thirdSet.EndTime;
@@ -26,10 +28,18 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
             LeftFinalPoint = thirdSet.LeftFinalPoint;
             RightFinalPoint = thirdSet.RightFinalPoint;
 
-            LeftPointSlash = thirdSet.LeftPointSlash;
-            RightPointSlash = thirdSet.RightPointSlash;
-
-            OldLeftPointSlash = thirdSet.OldLeftPointSlash;
+            for (int i = 0; i < Math.Min(13, thirdSet.LeftPointSlash.Count); i++)
+            {
+                LeftPointSlash[i] = thirdSet.LeftPointSlash[i];
+            }
+            for (int i = 0; i < Math.Min(32, thirdSet.RightPointSlash.Count); i++)
+            {
+                RightPointSlash[i] = thirdSet.RightPointSlash[i];
+            }
+            for (int i = 0; i < Math.Min(32 - (int)PointOfCourtChange!, thirdSet.OldLeftPointSlash.Count); i++)
+            {
+                OldLeftPointSlash[i + (int)PointOfCourtChange!] = thirdSet.OldLeftPointSlash[i];
+            }
 
 
             LeftTeamServe = thirdSet.LeftTeamServe;
@@ -49,11 +59,23 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
             OldLeftDeletePoint = thirdSet.OldLeftDeletePoint;
 
 
-            LeftPoints = thirdSet.LeftPoints;
-            RightPoints = thirdSet.RightPoints;
+            for (int i = 0; i < Math.Min(36, thirdSet.LeftPointList.Count); i++)
+            {
+                LeftPoints[i] = thirdSet.LeftPointList[i];
+            }
+            for (int i = 0; i < Math.Min(36, thirdSet.RightPointList.Count); i++)
+            {
+                RightPoints[i] = thirdSet.RightPointList[i];
+            }
 
-            LeftServeCheck = thirdSet.LeftServeCheck;
-            RightServeCheck = thirdSet.RightServeCheck;
+            for (int i = 0; i < Math.Min(36, thirdSet.LeftServeCheckList.Count); i++)
+            {
+                LeftServeCheck[i] = thirdSet.LeftServeCheckList[i];
+            }
+            for (int i = 0; i < Math.Min(36, thirdSet.RightServeCheckList.Count); i++)
+            {
+                RightServeCheck[i] = thirdSet.RightServeCheckList[i];
+            }
 
             InvertedT = thirdSet.invertedT;
 
@@ -99,16 +121,16 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
         public int[] LeftFinalPoint { get; set; }
         public int[] RightFinalPoint { get; set; }
 
-        public bool[] LeftPointSlash { get; set; }
-        public bool[] RightPointSlash { get; set; }
-        public bool[] OldLeftPointSlash { get; set; }
+        public bool[] LeftPointSlash { get; set; } = new bool[13];
+        public bool[] RightPointSlash { get; set; } = new bool[32];
+        public bool[] OldLeftPointSlash { get; set; } = new bool[32];
 
-        public bool?[] LeftServeCheck { get; set; }
-        public bool?[] RightServeCheck { get; set; }
+        public bool?[] LeftServeCheck { get; set; } = new bool?[36];
+        public bool?[] RightServeCheck { get; set; } = new bool?[36];
 
         //サーブのところ
-        public int?[] LeftPoints { get; set; }
-        public int?[] RightPoints { get; set; }
+        public int?[] LeftPoints { get; set; } = new int?[36];
+        public int?[] RightPoints { get; set; } = new int?[36];
 
 
         //タイムアウト
@@ -130,10 +152,10 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
         public bool[] LeftTeamIsReturn { get; set; } = new bool[6];
         public bool[] RightTeamIsReturn { get; set; } = new bool[6];
 
-        public ThirdSet.InvertedT[] InvertedT { get; set; }
-        public ThirdSet.DeletePoint[] LeftDeletePoint { get; set; }
-        public ThirdSet.DeletePoint[] RightDeletePoint { get; set; }
-        public ThirdSet.DeletePoint[] OldLeftDeletePoint { get; set; }
+        public Model.ThirdSet.InvertedT[] InvertedT { get; set; }
+        public Model.ThirdSet.DeletePoint[] LeftDeletePoint { get; set; }
+        public Model.ThirdSet.DeletePoint[] RightDeletePoint { get; set; }
+        public Model.ThirdSet.DeletePoint[] OldLeftDeletePoint { get; set; }
     }
 }
 

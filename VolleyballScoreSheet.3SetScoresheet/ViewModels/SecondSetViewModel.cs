@@ -24,8 +24,14 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
             LeftFinalPoint = secondSet.LeftFinalPoint;
             RightFinalPoint = secondSet.RightFinalPoint;
 
-            LeftPointSlash = secondSet.LeftPointSlash;
-            RightPointSlash = secondSet.RightPointSlash;
+            for (int i = 0; i < Math.Min(45, secondSet.LeftPointSlash.Count); i++)
+            {
+                LeftPointSlash[i] = secondSet.LeftPointSlash[i];
+            }
+            for (int i = 0; i < Math.Min(45, secondSet.RightPointSlash.Count); i++)
+            {
+                RightPointSlash[i] = secondSet.RightPointSlash[i];
+            }
 
             LeftTeamServe = secondSet.LeftTeamServe;
             LeftTeamReception = secondSet.LeftTeamReception;
@@ -42,11 +48,23 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
             LeftDeletePoint = secondSet.LeftDeletePoint;
             RightDeletePoint = secondSet.RightDeletePoint;
 
-            LeftPoints = secondSet.LeftPoints;
-            RightPoints = secondSet.RightPoints;
+            for (int i = 0; i < Math.Min(48, secondSet.LeftPointList.Count); i++)
+            {
+                LeftPoints[i] = secondSet.LeftPointList[i];
+            }
+            for (int i = 0; i < Math.Min(48, secondSet.RightPointList.Count); i++)
+            {
+                RightPoints[i] = secondSet.RightPointList[i];
+            }
 
-            LeftServeCheck = secondSet.LeftServeCheck;
-            RightServeCheck = secondSet.RightServeCheck;
+            for (int i = 0; i < Math.Min(48, secondSet.LeftServeCheckList.Count); i++)
+            {
+                LeftServeCheck[i] = secondSet.LeftServeCheckList[i];
+            }
+            for (int i = 0; i < Math.Min(48, secondSet.RightServeCheckList.Count); i++)
+            {
+                RightServeCheck[i] = secondSet.RightServeCheckList[i];
+            }
 
             for (int i = 0; i < secondSet.LeftTimeouts.Count; i++)
             {
@@ -69,15 +87,15 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
         public int[] LeftFinalPoint { get; set; }
         public int[] RightFinalPoint { get; set; }
 
-        public bool[] LeftPointSlash { get; set; }
-        public bool[] RightPointSlash { get; set; }
+        public bool[] LeftPointSlash { get; set; } = new bool[45];
+        public bool[] RightPointSlash { get; set; } = new bool[45];
 
-        public bool?[] LeftServeCheck { get; set; }
-        public bool?[] RightServeCheck { get; set; }
+        public bool?[] LeftServeCheck { get; set; } = new bool?[48];
+        public bool?[] RightServeCheck { get; set; } = new bool?[48];
 
         //サーブのところ
-        public int?[] LeftPoints { get; set; }
-        public int?[] RightPoints { get; set; }
+        public int?[] LeftPoints { get; set; } = new int?[48];
+        public int?[] RightPoints { get; set; } = new int?[48];
 
 
         //タイムアウト
