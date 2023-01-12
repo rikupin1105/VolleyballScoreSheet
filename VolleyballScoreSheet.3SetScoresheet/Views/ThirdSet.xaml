@@ -2037,7 +2037,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding RightDeletePoint[0].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Stroke="Black"
@@ -2045,7 +2045,7 @@
                             Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding RightDeletePoint[0].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2054,8 +2054,8 @@
                             Visibility="{Binding RightDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2076,7 +2076,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding RightDeletePoint[1].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="1"
@@ -2085,7 +2085,7 @@
                             Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding RightDeletePoint[1].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2095,8 +2095,8 @@
                             Visibility="{Binding RightDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2117,7 +2117,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding RightDeletePoint[2].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="2"
@@ -2126,7 +2126,7 @@
                             Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding RightDeletePoint[2].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2136,8 +2136,8 @@
                             Visibility="{Binding RightDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2158,7 +2158,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding RightDeletePoint[3].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="3"
@@ -2167,7 +2167,7 @@
                             Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding RightDeletePoint[3].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2177,8 +2177,8 @@
                             Visibility="{Binding RightDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
                         <!--#endregion-->
 
                         <!--#region 消し-->
@@ -2354,7 +2354,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding OldLeftDeletePoint[0].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Stroke="Black"
@@ -2362,7 +2362,7 @@
                             Visibility="{Binding OldLeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding OldLeftDeletePoint[0].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2371,8 +2371,8 @@
                             Visibility="{Binding OldLeftDeletePoint[0].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2393,7 +2393,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding OldLeftDeletePoint[1].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="1"
@@ -2402,7 +2402,7 @@
                             Visibility="{Binding OldLeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding OldLeftDeletePoint[1].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2412,8 +2412,8 @@
                             Visibility="{Binding OldLeftDeletePoint[1].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2434,7 +2434,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding OldLeftDeletePoint[2].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="2"
@@ -2443,7 +2443,7 @@
                             Visibility="{Binding OldLeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding OldLeftDeletePoint[2].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2453,8 +2453,8 @@
                             Visibility="{Binding OldLeftDeletePoint[2].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
 
                         <Line
                             Grid.RowSpan="9"
@@ -2475,7 +2475,7 @@
                             X1="1"
                             X2="9"
                             Y1="{Binding OldLeftDeletePoint[3].Y}"
-                            Y2="106" />
+                            Y2="104" />
                         <Line
                             Grid.RowSpan="9"
                             Grid.Column="3"
@@ -2484,7 +2484,7 @@
                             Visibility="{Binding OldLeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="1"
                             X2="9"
-                            Y1="106"
+                            Y1="104"
                             Y2="{Binding OldLeftDeletePoint[3].Y}" />
                         <Line
                             Grid.RowSpan="9"
@@ -2494,8 +2494,8 @@
                             Visibility="{Binding OldLeftDeletePoint[3].Visible, Converter={StaticResource HiddenOrVissible}}"
                             X1="9"
                             X2="1"
-                            Y1="106"
-                            Y2="106" />
+                            Y1="104"
+                            Y2="104" />
                         <!--#endregion-->
 
                         <!--#region 消し-->
