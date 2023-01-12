@@ -48,13 +48,9 @@ namespace VolleyballScoreSheet._3SetScoresheet.Model
             //var pq = ps.DefaultPrintQueue; 
             //こちらのオーバーロードだと、プリンタ選択ダイアログを飛ばして既定のプリンタにスプールされる
             //xpsdw = PrintQueue.CreateXpsDocumentWriter(pq);
-            try
+            if(xpsdw is not null)
             {
                 xpsdw.Write(fixedDocument);
-            }
-            catch (Exception)
-            {
-
             }
         }
     }
