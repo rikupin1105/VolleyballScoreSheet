@@ -36,9 +36,12 @@ namespace VolleyballScoreSheet._3SetScoresheet.ViewModels
             {
                 RightPointSlash[i] = thirdSet.RightPointSlash[i];
             }
-            for (int i = 0; i < Math.Min(32 - (int)PointOfCourtChange!, thirdSet.OldLeftPointSlash.Count); i++)
+            if (PointOfCourtChange is not null)
             {
-                OldLeftPointSlash[i + (int)PointOfCourtChange!] = thirdSet.OldLeftPointSlash[i];
+                for (int i = 0; i < Math.Min(32 - (int)PointOfCourtChange, thirdSet.OldLeftPointSlash.Count); i++)
+                {
+                    OldLeftPointSlash[i + (int)PointOfCourtChange!] = thirdSet.OldLeftPointSlash[i];
+                }
             }
 
 
