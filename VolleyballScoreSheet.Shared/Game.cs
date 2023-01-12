@@ -451,53 +451,62 @@ namespace VolleyballScoreSheet.Shared
         }
         public void EndSet()
         {
-            //ATeam.Value.Sets[^1].Point.ForceNotify();
-
             History.HistoryAdd("GS"+Set.Value);
-            Set.Value++;
 
-            ATeam.Value.CreateSet();
-            BTeam.Value.CreateSet();
-
-            if (Set.Value==Rule.SetCount)
+            //ゲーム終了
+            if (ATeam.Value.WinSets.Value >= Rule.SetCount / 2 + 1 || 
+                BTeam.Value.WinSets.Value >= Rule.SetCount / 2 + 1)
             {
-                //コートチェンジせずにコイントスへ
-                DisplayMain("CoinToss");
-                return;
-            }
-            else if (Rule.CourtChangeEnable)
-            {
-                //コートチェンジ
-                CourtChange();
-            }
 
-
-            if (Set.Value%2==0)
-            {
-                //偶数セット コイントスと逆
-                if (CoinToss.ATeamServer)
-                {
-                    NextServeTeam(false);
-                }
-                else
-                {
-                    NextServeTeam(true);
-                }
             }
             else
             {
-                //コイントス通り
-                if (CoinToss.ATeamServer)
+                Set.Value++;
+
+                ATeam.Value.CreateSet();
+                BTeam.Value.CreateSet();
+
+
+                if (Set.Value==Rule.SetCount)
                 {
-                    NextServeTeam(true);
+                    //コートチェンジせずにコイントスへ
+                    DisplayMain("CoinToss");
+                    return;
+                }
+                else if (Rule.CourtChangeEnable)
+                {
+                    //コートチェンジ
+                    CourtChange();
+                }
+
+
+                if (Set.Value%2==0)
+                {
+                    //偶数セット コイントスと逆
+                    if (CoinToss.ATeamServer)
+                    {
+                        NextServeTeam(false);
+                    }
+                    else
+                    {
+                        NextServeTeam(true);
+                    }
                 }
                 else
                 {
-                    NextServeTeam(false);
+                    //コイントス通り
+                    if (CoinToss.ATeamServer)
+                    {
+                        NextServeTeam(true);
+                    }
+                    else
+                    {
+                        NextServeTeam(false);
+                    }
                 }
-            }
 
-            DisplayMain("BeforeMatch");
+                DisplayMain("BeforeMatch");
+            }
         }
 
         public void Point(bool isATeam, bool history = true)
